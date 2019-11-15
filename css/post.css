@@ -258,12 +258,25 @@ span.el {
   margin-top: 0.2em;
   position: relative;
   text-align: left;
+  overflow-x: scroll;
+  overflow-y: hidden;
   vertical-align: baseline;
   width: 50%; }
   @media only screen and (max-width: 760px) {
     .sidenote,
     .marginnote {
       display: none; } }
+  .sidenote::-webkit-scrollbar,
+  .marginnote::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height: 7px; }
+  .sidenote::-webkit-scrollbar-thumb,
+  .marginnote::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 7px; }
+  .sidenote::-webkit-scrollbar-corner,
+  .marginnote::-webkit-scrollbar-corner {
+    display: none; }
 
 .sidenote-number {
   counter-increment: sidenote-counter;
@@ -701,13 +714,15 @@ section.self-image {
 .post-group p,
 .post-group h2,
 .post-group h3,
-.post-group h4 {
+.post-group h4,
+.post-group .custom-block {
   width: 65%; }
   @media only screen and (max-width: 760px) {
     .post-group p,
     .post-group h2,
     .post-group h3,
-    .post-group h4 {
+    .post-group h4,
+    .post-group .custom-block {
       width: 100%; } }
 
 .title {
