@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+
+<title>
+   Approximation With Interpolating Polynomials  · Ayaz Hafiz
+</title>
+<meta name="description" content="Ayaz Hafiz's public homepage." />
+
+<link
+  rel="canonical"
+  href="https://ayazhafiz.com/articles/19/barycentric-interpolation"
+/>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+></script>
+
+
+
+    <link rel="stylesheet" type="text/css" href="/css/post.css" />
+  </head>
+
+  <style></style>
+
+  <body>
+    <div class="container">
+      <div class="panel">
+        <section class="column-left">
+          <section class="self">
+            <section class="self-image">
+  <div class="self-clip"></div>
+  <div class="other-clip"></div>
+</section>
+
+
+            <section class="self-links">
+              
+              <p class="link-container">
+                <small class="link-title">github</small>
+                <a class="git" href="https://github.com/ayazhafiz">ayazhafiz@</a>
+              </p>
+              
+              <p class="link-container">
+                <small class="link-title">email</small>
+                <a class="git" href="mailto:ayaz.hafiz.1@gmail.com?subject=Hi!">ayaz.hafiz.1@gmail</a>
+              </p>
+              
+              <p class="link-container">
+                <small class="link-title">pgp</small>
+                <a class="git" href="/assets/gpg.txt">public key</a>
+              </p>
+              
+              <p class="link-container">
+                <small class="link-title">source code</small>
+                <a class="git" href="https://github.com/ayazhafiz/gww">gww</a>
+              </p>
+              
+            </section>
+          </section>
+        </section>
+
+        <div class="column-right">
+          <section class="nav">
+  <a class="nav-link" href="/index">home</a>
+  <a class="nav-link" href="/cc">cc</a>
+  <a class="nav-link" href="/info">info</a>
+</section>
+ <article class="post-group">
+  <h1 class="title">Approximation With Interpolating Polynomials</h1>
+  <p class="byline">November 15, 2019</p>
+
+  <h2 id="lagrange-form">Lagrange Form</h2>
+
+<p>Say you want to find an function approximating a set of data points<label for="points" class="margin-toggle sidenote-number"></label><input type="checkbox" id="points" class="margin-toggle"><span class="sidenote">$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$ </span>. One way to do this is to find a
+polynomial $p_n \in \mathbb{P}_n$ satisfying the interpolation property</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+p_n(x_i) = f_i\qquad i \in [0, n]
+</script></div>
+
+<p>Playing around a bit, we find that this polynomial can be written as</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align*}
+p_n(x) = &\frac{(x - x_1) * (x - x_2) * \ldots * (x - x_n)}{(x_0 - x_1) * (x_0 - x_2) * \ldots * (x_0 - x_n)} f_0 \\
+       &+ \frac{(x - x_0) * (x - x_2) * \ldots * (x - x_n)}{(x_1 - x_0) * (x_1 - x_2) * \ldots * (x_1 - x_n)} f_1 \\
+       &+ \ldots \\
+       &+ \frac{(x - x_0) * (x - x_1) * \ldots * (x - x_{n-1})}{(x_n - x_0) * (x_n - x_1) * \ldots * (x_n - x_{n-1})} f_n \\
+       = &\sum_{i=0}^n \prod_{j=0\\j\ne i}^n \frac{x-x_j}{x_i-x_j} f_i\qquad j \in [0, n]
+\end{align*}
+</script></div>
+
+<p>This is known as the Lagrange form of an interpolating polynomial, and is more commonly expressed as</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align*}
+p_n(x)    &= \sum_{i=0}^n \ell_i(x)f_i \\
+\ell_i(x) &= \prod_{j=0\\j\ne i}^n \frac{x-x_j}{x_i-x_j}\qquad j \in [0, n]
+\end{align*}
+</script></div>
+
+<div class="custom-block">
+where $\ell_i$ is a <a href="https://en.wikipedia.org/wiki/Lagrange_polynomial">Lagrange
+polynomial</a> of degree $n$.<label for="interpolationproof" class="margin-toggle">⊕</label><input type="checkbox" id="interpolationproof" class="margin-toggle"><div class="marginnote"> To see that $p_n$ interpolates correctly, observe that
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\ell_i(x) = \begin{cases}
+         1 & x = x_i\\
+         0 & x \in \left\{x_0,\ldots,x_n\right\}\setminus \left\{x_i\right\}
+         \end{cases}
+</script></div>
+
+and so $p_n(x_i) = f_i + \sum_{j=0\\j\ne i}^n 0 f_j = f_i$.<br>
+
+It's not difficult to prove that $p_n$ is unique and of at most degree $n$, but we won't do that
+here.
+</div>
+</div>
+
+<h2 id="cost">Cost</h2>
+
+<p>The Lagrange form is not suitable for computation. Its construction requires massive
+multiplication and division, which can be catastrophic for floating point precision.
+The form is also not memoizable; evaluating $p_n(a)$ does not help in any part of the evaluation of
+$p_n(b)$ when $b \ne a$.</p>
+
+<p>With some more play, we can get a computationally-suitable equation known as the <a href="https://en.wikipedia.org/wiki/Lagrange_polynomial#Barycentric_form">Barycentric form</a>
+of an interpolating polynomial, defined as</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+p_n(x) = \frac{\sum_{i=0}^n \frac{\omega_i}{x-x_i} * f_i}{\sum_{i=0}^n \frac{\omega_i}{x-x_i}}
+</script></div>
+
+<p>where $w_i$ is a barycentric weight</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\omega_i(x) = \frac{1}{\prod_{j=0\\j\ne i}^n (x_i - x_j)}
+</script></div>
+
+<p>Because $\omega_i$ relies only on the explicitly-defined nodes $x_0, \ldots, x_n$, it does not need
+to be recomputed for subsequent evaluations of $p_n$.</p>
+
+<h2 id="attempt-1">Attempt 1</h2>
+
+<p>Approximating $f(x) = \sin(4x\cos(8x))$ with various degrees of the Barycentric interpolant, using
+equidistant interpolating nodes, gives</p>
+
+<figure><img src="/assets/img/barycentric_interpolation/equidistant.png"><figcaption></figcaption></figure>
+
+<p>These polynomials definitely interpolate points of $f(x)$, but have the unfortunate tendency to blow up
+around the interval endpoints. Note that the magnitude of the error at the edges grows with the degree of
+the approximation.</p>
+
+<h2 id="runge">Runge</h2>
+
+<p>This behavior is <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon">Runge’s phenomenon</a>, and
+means that increasing the order of an approximating polynomial interpolant may not
+improve its accuracy<label for="wiki" class="margin-toggle sidenote-number"></label><input type="checkbox" id="wiki" class="margin-toggle"><span class="sidenote">Why this occurs is beyond the scope of this post; <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon#Reason">Wikipedia</a> gives a good explanation. </span>.</p>
+
+<p>One way to minimize Runge’s phenomenon is to densify the interpolating points near the endpoints of
+the approximation interval<label for="interval-endpoint" class="margin-toggle sidenote-number"></label><input type="checkbox" id="interval-endpoint" class="margin-toggle"><span class="sidenote">Thereby more accurately fitting the
+parts of the approximation affected by Runge’s phenomenon. </span>. <a href="https://en.wikipedia.org/wiki/Chebyshev_nodes">Chebyshev nodes</a>
+exhibit exactly this kind of edge-heavy density, making them very useful for polynomial interpolation.</p>
+
+<p>Creating a Barycentric interpolant with Chebyshev nodes yields a nice improvement.</p>
+
+<figure><img src="/assets/img/barycentric_interpolation/chebyshev.png"><figcaption></figcaption></figure>
+
+<h2 id="convergence">Convergence</h2>
+
+<p>Plotting the pointwise error of the Barycentric interpolant<label for="cheb-nodes" class="margin-toggle sidenote-number"></label><input type="checkbox" id="cheb-nodes" class="margin-toggle"><span class="sidenote">generated with Chebyshev nodes </span> approximating $f(x) = \sin(4x\cos(8x))$
+suggests the polynomial interpolation is convergent.</p>
+
+<figure><img src="/assets/img/barycentric_interpolation/error.png"><figcaption></figcaption></figure>
+
+<p>Inspection of the error
+$l^2$ norms<label for="norm" class="margin-toggle sidenote-number"></label><input type="checkbox" id="norm" class="margin-toggle"><span class="sidenote">Note that many other norms can be used for convergence analysis as well. </span>
+suggests more:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Order   L2 norm
+16      8.562880126489002
+32      0.4243100460236342
+64      5.324902188796007e-05
+128     8.698460604825334e-14
+</code></pre></div></div>
+
+<p>Clearly, the rate of convergence is pretty fast.</p>
+
+
+  <section>
+    <p class="signoff">
+      <a href="/cc">&lt;&lt; All Posts</a>
+        <img class="emoji" title=":cactus:" alt=":cactus:" src="https://glcdn.githack.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f335.png" height="20" width="20">  
+      <span>​<script type="math/tex">
+          \text{EC on a PP}: (X, Y, 0) = (0, 1, 0)_{/ \sim}
+        </script></span>
+    </p>
+  </section>
+</article>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

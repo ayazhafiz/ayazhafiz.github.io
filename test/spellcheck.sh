@@ -14,8 +14,8 @@ END='\033[0m'
 
 find $POSTS -type f -name "*.md" | while read -r file; do
   output=$(aspell \
-    --home-dir=$dir/spellcheck \
-    --personal=$DICT \
+    --home-dir="$dir/spellcheck" \
+    --personal="$DICT" \
     --encoding=utf-8 \
     --lang=en \
     --mode=tex \
