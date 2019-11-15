@@ -86,7 +86,8 @@
   <h1 class="title">Approximation With Interpolating Polynomials</h1>
   <p class="byline">November 15, 2019</p>
 
-  <h2 id="lagrange-form">Lagrange Form</h2>
+  <h2 id="lagrange-form">
+<a class="header-anchor" href="#lagrange-form">#</a>Lagrange Form</h2>
 
 <p>Say you want to find an function approximating a set of data points<label for="points" class="margin-toggle sidenote-number"></label><input type="checkbox" id="points" class="margin-toggle"><span class="sidenote">$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$ </span>. One way to do this is to find a
 polynomial $p_n \in \mathbb{P}_n$ satisfying the interpolation property</p>
@@ -134,7 +135,8 @@ here.
 </div>
 </div>
 
-<h2 id="cost">Cost</h2>
+<h2 id="cost">
+<a class="header-anchor" href="#cost">#</a>Cost</h2>
 
 <p>The Lagrange form is not suitable for computation. Its construction requires massive
 multiplication and division, which can be catastrophic for floating point precision.
@@ -157,7 +159,8 @@ p_n(x) = \frac{\sum_{i=0}^n \frac{\omega_i}{x-x_i} * f_i}{\sum_{i=0}^n \frac{\om
 <p>Because $\omega_i$ relies only on the explicitly-defined nodes $x_0, \ldots, x_n$, it does not need
 to be recomputed for subsequent evaluations of $p_n$.</p>
 
-<h2 id="attempt-1">Attempt 1</h2>
+<h2 id="attempt-1">
+<a class="header-anchor" href="#attempt-1">#</a>Attempt 1</h2>
 
 <p>Approximating $f(x) = \sin(4x\cos(8x))$ with various degrees of the Barycentric interpolant, using
 equidistant interpolating nodes, gives</p>
@@ -168,7 +171,8 @@ equidistant interpolating nodes, gives</p>
 around the interval endpoints. Note that the magnitude of the error at the edges grows with the degree of
 the approximation.</p>
 
-<h2 id="runge">Runge</h2>
+<h2 id="runge">
+<a class="header-anchor" href="#runge">#</a>Runge</h2>
 
 <p>This behavior is <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon">Runge’s phenomenon</a>, and
 means that increasing the order of an approximating polynomial interpolant may not
@@ -183,7 +187,8 @@ exhibit exactly this kind of edge-heavy density, making them very useful for pol
 
 <figure><img src="/assets/img/barycentric_interpolation/chebyshev.png"><figcaption></figcaption></figure>
 
-<h2 id="convergence">Convergence</h2>
+<h2 id="convergence">
+<a class="header-anchor" href="#convergence">#</a>Convergence</h2>
 
 <p>Plotting the pointwise error of the Barycentric interpolant<label for="cheb-nodes" class="margin-toggle sidenote-number"></label><input type="checkbox" id="cheb-nodes" class="margin-toggle"><span class="sidenote">generated with Chebyshev nodes </span> approximating $f(x) = \sin(4x\cos(8x))$
 suggests the polynomial interpolation is convergent.</p>
