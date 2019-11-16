@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-11-15T21:15:25-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">approximation with interpolating polynomials</title><link href="https://ayazhafiz.com/articles/19/barycentric-interpolation" rel="alternate" type="text/html" title="approximation with interpolating polynomials" /><published>2019-11-15T00:00:00-06:00</published><updated>2019-11-15T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/barycentric-interpolation</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/barycentric-interpolation">&lt;h2 id=&quot;lagrange-form&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#lagrange-form&quot;&gt;#&lt;/a&gt;Lagrange Form&lt;/h2&gt;
+
+&lt;p&gt;Say you want to find an function approximating a set of data points&lt;label for=&quot;points&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;points&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$&lt;/span&gt;
+. One way to do this is to find a
+polynomial $p_n \in \mathbb{P}_n$ satisfying the interpolation property&lt;/p&gt;
+
+&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+p_n(x_i) = f_i\qquad i \in [0, n]
+&lt;/script&gt;&lt;/div&gt;
+
+&lt;p&gt;Playing around a bit, we find that this polynomial can be written as&lt;/p&gt;
+
+&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+\begin{align*}
+p_n(x) = &amp;\frac{(x - x_1) * (x - x_2) * \ldots * (x - x_n)}{(x_0 - x_1) * (x_0 - x_2) * \ldots * (x_0 - x_n)} f_0 \\
+       &amp;+ \frac{(x - x_0) * (x - x_2) * \ldots * (x - x_n)}{(x_1 - x_0) * (x_1 - x_2) * \ldots * (x_1 - x_n)} f_1 \\
+       &amp;+ \ldots \\
+       &amp;+ \frac{(x - x_0) * (x - x_1) * \ldots * (x - x_{n-1})}{(x_n - x_0) * (x_n - x_1) * \ldots * (x_n - x_{n-1})} f_n \\
+       = &amp;\sum_{i=0}^n \prod_{j=0\\j\ne i}^n \frac{x-x_j}{x_i-x_j} f_i\qquad j \in [0, n]
+\end{align*}
+&lt;/script&gt;&lt;/div&gt;
+
+&lt;p&gt;This is known as the Lagrange form of an interpolating polynomial, and is more commonly expressed as&lt;/p&gt;
+
+&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+\begin{align*}
+p_n(x)    &amp;= \sum_{i=0}^n \ell_i(x)f_i \\
+\ell_i(x) &amp;= \prod_{j=0\\j\ne i}^n \frac{x-x_j}{x_i-x_j}\qquad j \in [0, n]
+\end{align*}
+&lt;/script&gt;&lt;/div&gt;
+
+&lt;div class=&quot;custom-block&quot;&gt;
+where $\ell_i$ is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Lagrange_polynomial&quot;&gt;Lagrange
+polynomial&lt;/a&gt; of degree $n$.&lt;label for=&quot;interpolationproof&quot; class=&quot;margin-toggle&quot;&gt;&amp;#8853;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;interpolationproof&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;div class=&quot;marginnote&quot;&gt;
+ To see that $p_n$ interpolates correctly, observe that
+
+&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+\ell_i(x) = \begin{cases}
+         1 &amp; x = x_i\\
+         0 &amp; x \in \left\{x_0,\ldots,x_n\right\}\setminus \left\{x_i\right\}
+         \end{cases}
+&lt;/script&gt;&lt;/div&gt;
+
+and so $p_n(x_i) = f_i + \sum_{j=0\\j\ne i}^n 0 f_j = f_i$.&lt;br /&gt;
+
+It's not difficult to prove that $p_n$ is unique and of at most degree $n$, but we won't do that
+here.
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;cost&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#cost&quot;&gt;#&lt;/a&gt;Cost&lt;/h2&gt;
+
+&lt;p&gt;The Lagrange form is not suitable for computation. Its construction requires massive
+multiplication and division, which can be catastrophic for floating point precision.
+The form is also not memoizable; evaluating $p_n(a)$ does not help in any part of the evaluation of
+$p_n(b)$ when $b \ne a$.&lt;/p&gt;
+
+&lt;p&gt;With some more play, we can get a computationally-suitable equation known as the &lt;a href=&quot;https://en.wikipedia.org/wiki/Lagrange_polynomial#Barycentric_form&quot;&gt;Barycentric form&lt;/a&gt;
+of an interpolating polynomial, defined as&lt;/p&gt;
+
+&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+p_n(x) = \frac{\sum_{i=0}^n \frac{\omega_i}{x-x_i} * f_i}{\sum_{i=0}^n \frac{\omega_i}{x-x_i}}
+&lt;/script&gt;&lt;/div&gt;
+
+&lt;p&gt;where $w_i$ is a barycentric weight&lt;/p&gt;
+
+&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+\omega_i(x) = \frac{1}{\prod_{j=0\\j\ne i}^n (x_i - x_j)}
+&lt;/script&gt;&lt;/div&gt;
+
+&lt;p&gt;Because $\omega_i$ relies only on the explicitly-defined nodes $x_0, \ldots, x_n$, it does not need
+to be recomputed for subsequent evaluations of $p_n$.&lt;/p&gt;
+
+&lt;h2 id=&quot;attempt-1&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#attempt-1&quot;&gt;#&lt;/a&gt;Attempt 1&lt;/h2&gt;
+
+&lt;p&gt;Approximating $f(x) = \sin(4x\cos(8x))$ with various degrees of the Barycentric interpolant, using
+equidistant interpolating nodes, gives&lt;/p&gt;
+
+&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/equidistant.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;These polynomials definitely interpolate points of $f(x)$, but have the unfortunate tendency to blow up
+around the interval endpoints. Note that the magnitude of the error at the edges grows with the degree of
+the approximation.&lt;/p&gt;
+
+&lt;h2 id=&quot;runge&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#runge&quot;&gt;#&lt;/a&gt;Runge&lt;/h2&gt;
+
+&lt;p&gt;This behavior is &lt;a href=&quot;https://en.wikipedia.org/wiki/Runge%27s_phenomenon&quot;&gt;Runge’s phenomenon&lt;/a&gt;, and
+means that increasing the order of an approximating polynomial interpolant may not
+improve its accuracy&lt;label for=&quot;wiki&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;wiki&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Why this occurs is beyond the scope of this post; &lt;a href=&quot;https://en.wikipedia.org/wiki/Runge%27s_phenomenon#Reason&quot;&gt;Wikipedia&lt;/a&gt; gives a good explanation.&lt;/span&gt;
+.&lt;/p&gt;
+
+&lt;p&gt;One way to minimize Runge’s phenomenon is to densify the interpolating points near the endpoints of
+the approximation interval&lt;label for=&quot;interval-endpoint&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;interval-endpoint&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Thereby more accurately fitting the
+parts of the approximation affected by Runge’s phenomenon.&lt;/span&gt;
+. &lt;a href=&quot;https://en.wikipedia.org/wiki/Chebyshev_nodes&quot;&gt;Chebyshev nodes&lt;/a&gt;
+exhibit exactly this kind of edge-heavy density, making them very useful for polynomial interpolation.&lt;/p&gt;
+
+&lt;p&gt;Creating a Barycentric interpolant with Chebyshev nodes yields a nice improvement.&lt;/p&gt;
+
+&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/chebyshev.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;convergence&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#convergence&quot;&gt;#&lt;/a&gt;Convergence&lt;/h2&gt;
+
+&lt;p&gt;Plotting the pointwise error of the Barycentric interpolant&lt;label for=&quot;cheb-nodes&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;cheb-nodes&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+generated with Chebyshev nodes&lt;/span&gt;
+ approximating $f(x) = \sin(4x\cos(8x))$
+suggests the polynomial interpolation is convergent.&lt;/p&gt;
+
+&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/error.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;Inspection of the error
+$l^2$ norms&lt;label for=&quot;norm&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;norm&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Note that many other norms can be used for convergence analysis as well.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;suggests more:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Order   L2 norm
+16      8.562880126489002
+32      0.4243100460236342
+64      5.324902188796007e-05
+128     8.698460604825334e-14
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Clearly, the rate of convergence is pretty fast.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">#Lagrange Form</summary></entry><entry><title type="html">Texas carbon</title><link href="https://ayazhafiz.com/articles/19/texas-carbon" rel="alternate" type="text/html" title="Texas carbon" /><published>2019-10-26T01:00:00-05:00</published><updated>2019-10-26T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/texas-carbon</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/texas-carbon">&lt;p&gt;A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/texas-carbon-examples.png&quot; /&gt;&lt;figcaption&gt;Mistakenly-drawn carbon valencies&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;Colloquially, carbon atoms with five covalent bonds are called &lt;a href=&quot;http://www.chem.ucla.edu/~harding/IGOC/P/pentavalent_carbon.html&quot;&gt;Texas Carbon&lt;/a&gt;s&lt;label for=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/texas-carbon-flag.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;label for=&quot;texas-carbon&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Either because the Texas star has five points or because everything is bigger in Texas.&lt;/span&gt;
+.
+Formally, they are known as pentavalent carbons.&lt;/p&gt;
+
+&lt;p&gt;It turns out that well-formed pentavalent carbons are much more frequent than an organic chemistry
+class may have you believe.&lt;/p&gt;
+
+&lt;h3 id=&quot;super5acids&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#super5acids&quot;&gt;#&lt;/a&gt;Super&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;^5&lt;/script&gt;&lt;/span&gt;Acids&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Superacid&quot;&gt;Superacidic&lt;/a&gt; cationic pentavalent carbons can be formed in
+the presence of very strong acids. The simplest pentavalent carbon, &lt;a href=&quot;https://en.wikipedia.org/wiki/Methanium&quot;&gt;methanium&lt;/a&gt; (&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{CH}_5^+&lt;/script&gt;&lt;/span&gt;),
+can be prepared from methane in the presence of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{SbF}_5 + \text{HF}&lt;/script&gt;&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Ethanium&quot;&gt;Ethanium&lt;/a&gt; (&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{C}_2\text{H}_7^+&lt;/script&gt;&lt;/span&gt;)is a protonated
+ethane derivative, also hosting a pentavalent carbon. Ethanium is interesting in part because it is
+prepared using methanium:&lt;/p&gt;
+
+&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+\text{CH}_5^+ + \text{C}_2\text{H}_6 \to \text{CH}_4 + \text{C}_2\text{H}_7^+
+&lt;/script&gt;&lt;/div&gt;
+
+&lt;p&gt;and because it easily dissociates into ethenium, which also has pentavalent carbons:&lt;/p&gt;
+
+&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+\text{C}_2\text{H}_7^+ \to \text{C}_2\text{H}_5^+ + \text{H}_2
+&lt;/script&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/ethanium-ethenium.png&quot; /&gt;&lt;figcaption&gt;Dissociation of ethanium into ethenium and hydrogen gas&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;Practically, these species are formed as intermediate species and via thermal cracking&lt;label for=&quot;pcformation&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;pcformation&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Per to a DOE &lt;a href=&quot;https://www1.eere.energy.gov/manufacturing/resources/petroleum_refining/pdfs/bandwidth.pdf&quot;&gt;report, page 8&lt;/a&gt;.&lt;/span&gt;
+.&lt;/p&gt;
+
+&lt;h3 id=&quot;both-b-and-c&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#both-b-and-c&quot;&gt;#&lt;/a&gt;Both &lt;strong&gt;B&lt;/strong&gt; and &lt;strong&gt;C&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Yamamotoa’s and Akibab’s 2004 &lt;a href=&quot;https://www.jstage.jst.go.jp/article/yukigoseikyokaishi1943/62/11/62_11_1128/_pdf&quot;&gt;&lt;em&gt;Synthesis of Hypervalent Pentavalent Carbon and Boron Compounds&lt;/em&gt;&lt;/a&gt;
+describes the characteristics of larger pentavalent compounds. Though the authors make no
+substantial claims about the stability of such compounds, it seems (somewhat expectedly) that bonds
+to well-charged, larger-size atoms like those in Group 15 and 16 help stabilize pentavalent carbon
+and boron.&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/pentavalent-cb.png&quot; /&gt;&lt;figcaption&gt;Pentavalent Carbon and Boron Compounds&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;The bond angle of the emphasized &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{O}-\text{C}-\text{O}&lt;/script&gt;&lt;/span&gt; is &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\sim 160^\circ&lt;/script&gt;&lt;/span&gt;, more than the
+&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;144^\circ&lt;/script&gt;&lt;/span&gt; expected for the star shape of a pentavalent carbon, and likely explained by
+the distance of the oxygens.&lt;/p&gt;
+
+&lt;h3 id=&quot;are-there-star-shaped-pentavalencies&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#are-there-star-shaped-pentavalencies&quot;&gt;#&lt;/a&gt;Are there star-shaped pentavalencies?&lt;/h3&gt;
+
+&lt;p&gt;Yes! We have already seen stable methanium, for instance. Another
+is &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{CBe}_5^{4-}&lt;/script&gt;&lt;/span&gt;, which is predicted to be &lt;strong&gt;planar&lt;/strong&gt; and possible to prepare
+experimentally in the gas phase. &lt;a href=&quot;https://pubs.rsc.org/en/content/articlelanding/2015/CP/C4CP05659K#!divAbstract&quot;&gt;Grande-Aztatzi et al., 2015&lt;/a&gt;
+predicts the lithium cluster derivatives &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{CBe}_5{Li}_n^{n-4}, n \in [1, 5]&lt;/script&gt;&lt;/span&gt; to also
+be planar. Both of these form beautiful five-point shapes.&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/cbe5-derivatives.png&quot; /&gt;&lt;figcaption&gt;Star-shaped pentavalent carbon derivatives&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;beyond-the-stars&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#beyond-the-stars&quot;&gt;#&lt;/a&gt;Beyond the stars&lt;/h3&gt;
+
+&lt;p&gt;Pentavalent carbons are one of those ideas most of us won’t deal with very often. But I think
+unique patterns like these are worth knowing, if not just for the sake of knowing.&lt;/p&gt;
+
+&lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry><entry><title type="html">type folding and options</title><link href="https://ayazhafiz.com/articles/19/type-folding-and-options" rel="alternate" type="text/html" title="type folding and options" /><published>2019-10-03T01:00:00-05:00</published><updated>2019-10-03T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/type-folding-and-options</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/type-folding-and-options">&lt;p&gt;Sometimes, I work with TypeScript compiler
+APIs&lt;label for=&quot;tsapi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;tsapi&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+They’re great APIs!&lt;/span&gt;
+. Because the language
+semantics are non-trivial, traversing a TypeScript AST almost always involves
+extensive validation. Here’s a particularly specific traversal we use in the
+&lt;a href=&quot;https://angular.io/guide/language-service&quot;&gt;Angular Language Service&lt;/a&gt;&lt;label for=&quot;ng-ls&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;ng-ls&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+If the Language
+Service is something that interests you and would like to contribute, please let me know! Or nike
+swoosh it :slightly_smiling_face:.&lt;/span&gt;
+:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/e296d213923043d5b33381bc81a5fcd4.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;All validations branch on type checks, so in languages with design ideas like
+&lt;a href=&quot;http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html&quot;&gt;functors and monads&lt;/a&gt;
+we could find great solutions to simplifying the type folding done here. I want
+this to be a quick and (semi-)practical post, so I won’t explain what these words
+mean; instead, here’s an approach that I find simplifies this code.&lt;/p&gt;
+
+&lt;h3 id=&quot;rex&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#rex&quot;&gt;#&lt;/a&gt;rex&lt;/h3&gt;
+
+&lt;p&gt;First, Rust. Rust has an
+&lt;a href=&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;&lt;/a&gt; type
+that can be &lt;code class=&quot;highlighter-rouge&quot;&gt;Some&lt;/code&gt;thing or &lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;thing.
+&lt;a href=&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.map&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/a&gt;ping
+an &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt; applies a predicate to a &lt;code class=&quot;highlighter-rouge&quot;&gt;Some&lt;/code&gt; or propogates a &lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If the TypeScript API had Rust bindings, I would imagine the code above to look
+something like&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/269f25526c492b193a73741a19c82eca.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;My hot take is that is way nicer - declaring the procedure functionally and
+linearly makes it more readable to me.&lt;/p&gt;
+
+&lt;h3 id=&quot;tess&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#tess&quot;&gt;#&lt;/a&gt;tess&lt;/h3&gt;
+
+&lt;p&gt;Okay, so how do we get this in TypeScript? Well, for a variety of good
+reasons&lt;label for=&quot;ynot&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;ynot&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Mainly because TypeScript is focused on supplementing JavaScript with types, not with more
+language features that aren’t in the standard.&lt;/span&gt;
+,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s&lt;label for=&quot;noopt&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;noopt&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+TypeScript does
+provide an &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/Option&quot;&gt;HTML Option&lt;/a&gt;,
+which is distinctly different.&lt;/span&gt;
+ will probably never be in the standard
+library.
+&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining&quot;&gt;Optional chaining&lt;/a&gt;
+will help, but won’t solve type mapping.&lt;/p&gt;
+
+&lt;p&gt;For domains where it is still useful to have &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt; (and other monad-family)
+types, there at least &lt;a href=&quot;https://github.com/shogogg/ts-option&quot;&gt;one library&lt;/a&gt; that
+can be used. If a library is too much, a lightweight &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt; can be written
+very quickly:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/2a42ded6979c988875188f6133639f78.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;Will the Angular Language Service use &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s? Probably not. But it’s a fun
+idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕ They’re great APIs! . Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language Service If the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:. :</summary></entry><entry><title type="html">Equivalence matters</title><link href="https://ayazhafiz.com/articles/19/equivalence-matters" rel="alternate" type="text/html" title="Equivalence matters" /><published>2019-09-02T01:00:00-05:00</published><updated>2019-09-02T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/equivalence-matters</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/equivalence-matters">&lt;p&gt;I recently wrote about
+&lt;a href=&quot;./smart-is-not-a-good-word&quot;&gt;why “smart” is not a good word&lt;/a&gt;. You don’t
+necessarily need to read that post to understand this one; the main idea is that
+“smart” is usually used as a supercategory abstracting and trivializing
+multiple, orthogonal subcategories.&lt;/p&gt;
+
+&lt;p&gt;A natural follow-up to this statement is why “smart” not being a good word
+matters. The reasoning I previously presented is that usage of “smart” at best
+ambiguates the word’s intent, and at worst provides no useful information at
+all. But there are more interesting reasonings.&lt;/p&gt;
+
+&lt;p&gt;In this post, I propose that “smart” not being a good word matters because
+value-categorizing words like “smart” are also &lt;em&gt;bad&lt;/em&gt; words, and that the
+categorizations these words attempt to delineate are dangerous to individuality.&lt;/p&gt;
+
+&lt;h3 id=&quot;0--preconditions&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#0--preconditions&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;0:&lt;/span&gt;  Preconditions&lt;/h3&gt;
+
+&lt;p&gt;First, it’s important to note that this is a discussion about people. And people
+are defined by some practical factors, including &lt;strong&gt;time&lt;/strong&gt; and &lt;strong&gt;philosophy&lt;/strong&gt;.
+There are some people with a lot of time and non-binding philosophies, but I am
+speaking on the scale of all people, and it is not the case that all people have
+infinite time and no philosophies.&lt;/p&gt;
+
+&lt;p&gt;I mention &lt;strong&gt;time&lt;/strong&gt; partly as a concession and partly as a segue. Limited time
+make categories a necessity - considering the nuances of every situation without
+using categorical assumptions results in exponential, and potentially unbounded,
+time investment. For instance, it is much easier to decide whether or not to
+cook pesto pasta given a general like or dislike towards pesto and pasta than it
+is to consider all other ingredients in the dish, its environmental and health
+implications, its monetary investment, etc. That’s not to say these other
+considerations aren’t important; they are, because they introduce nuances that
+may dramatically impact estimations made from categorical assumptions.&lt;/p&gt;
+
+&lt;p&gt;So &lt;strong&gt;philosophy&lt;/strong&gt; also becomes a factor. Individuals will focus their time on
+categories they perceive to be valuable. Of course, these choices are unique.&lt;/p&gt;
+
+&lt;p&gt;I argue that philosophy is not only
+individual&lt;label for=&quot;phi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;phi&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+Certainly, this statement is itself biased by my individual philosophies.&lt;/span&gt;
+ -
+it becomes externally important when individuals use their philosophies to make
+decisions impacting others. In claiming that value categorizations are
+dangerous, there is a precondition of my philosophy on externalities.&lt;/p&gt;
+
+&lt;p&gt;&lt;label for=&quot;my-values&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;my-values&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+I only claim these to be my values, but I see little motivation for
+disagreeing with such values without a philosophy of rational egoism.&lt;/span&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I believe that actions that stifle the opportunities of individuals to make
+personal decisions are dangerous and should not be made.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I believe people should do things that empowers the opportunities and values of
+others. This is hard to always do, but I believe that value categories make it
+nearly impossible.&lt;/p&gt;
+
+&lt;h3 id=&quot;1--equalizing-values&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--equalizing-values&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  Equalizing Values&lt;/h3&gt;
+
+&lt;p&gt;Different people have different perceptions of value. One way to decide what
+decisions empower the opportunities and values of others is to create a
+universal listing of value categorizations. Of course, this is impossible
+because of the near-infinite number of category permutations. An alternative is
+to treat all individuals as computationally equivalent and all individuals’
+values as value-equivalent, or more simply, as value-less. In this model,
+external value assignment becomes obsolete. For instance, a Level 16 CEO and a
+Level 1 employee in a company are
+equivalent&lt;label for=&quot;even-further&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;even-further&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+My philosophy of equivalence goes further; I claim that e.g. a human and a rock have the same complexity and value.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;and of equal value, even if cultural norms claim otherwise.&lt;/p&gt;
+
+&lt;h3 id=&quot;2--dangerous-categories&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--dangerous-categories&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  Dangerous Categories&lt;/h3&gt;
+
+&lt;p&gt;External value assignment is dangerous because it entirely defeats computational
+equivalence, which in turn defeats unambiguous value perception. That’s a long
+sentence to say assigning values on others totally voids their desired
+perception of value.&lt;/p&gt;
+
+&lt;p&gt;Because value categorization &lt;em&gt;is&lt;/em&gt; value assignment, value categorization is
+dangerous.&lt;/p&gt;
+
+&lt;script type=&quot;math/tex&quot;&gt;\tag*{$\blacksquare$}&lt;/script&gt;
+
+&lt;h3 id=&quot;3--int&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--int&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  Int&lt;/h3&gt;
+
+&lt;p&gt;Okay, so that’s my
+proof&lt;label for=&quot;proof&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;proof&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+I mean, this is kind of how I think. Or at least I
+think I do.&lt;/span&gt;
+. Here’s something for intuition.&lt;/p&gt;
+
+&lt;p&gt;Consider some individual working a job that societal norms may generally
+prescribe as prestigious. Others in the same environment as that individual may
+have jobs that societal norms prescribe as less prestigious. Prescribing any
+value to the kind of job that each individual has turns out to be useless for
+each individual’s self-worth and self-valuation because, generally speaking,
+each individual has their own motivations for doing their job. Attempts to
+externally classify the value of another’s work discards the nuances behind that
+individual’s decision to do their work, and furthermore assigns a
+non-self-prescribed value not necessarily representative of how the individual
+chooses to view themselves.&lt;/p&gt;
+
+&lt;p&gt;To me, that’s not a great way to let others live their
+lives&lt;label for=&quot;lorde&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;lorde&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+I recently read Audrey Lorde’s &lt;a href=&quot;https://uk.sagepub.com/sites/default/files/upm-binaries/11881_Chapter_5.pdf&quot;&gt;&lt;em&gt;The Uses of the Erotic&lt;/em&gt;&lt;/a&gt;. It discusses marginalization of the erotic in women, presenting interesting ideas somewhat tangential to this post, and reads in ~thirty minutes.&lt;/span&gt;
+.
+Sure, the individual may have value attributions to what they do, but it’s not
+up to the rest of us to make those attributions. Normative statements can be
+useful, but I think they should be avoided where they marginalize an
+individual’s experience.&lt;/p&gt;
+
+&lt;h4 id=&quot;thoughtthoughts&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#thoughtthoughts&quot;&gt;#&lt;/a&gt;ThoughtThoughts&lt;/h4&gt;
+
+&lt;p&gt;Anyway, those are just some of my thoughts. I may be wrong, but that’s okay. I
+only hope this can provide a perspective.&lt;/p&gt;
+
+&lt;p&gt;If you would like to contact me for any reason, I am best reached
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry><entry><title type="html">what i did summer 2019</title><link href="https://ayazhafiz.com/articles/19/what-i-did-this-summer" rel="alternate" type="text/html" title="what i did summer 2019" /><published>2019-08-10T01:00:00-05:00</published><updated>2019-08-10T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/what-i-did-this-summer</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/what-i-did-this-summer">&lt;p&gt;&lt;label for=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+A &lt;em&gt;What I Did&lt;/em&gt; is my intersection
+between what Julia Evans describes as a
+&lt;a href=&quot;https://www.jvns.ca/blog/brag-documents/&quot;&gt;brag document&lt;/a&gt; and a
+&lt;a href=&quot;https://cc.ayazhafiz.com/articles/18/where-im-going&quot;&gt;Where I’m Going&lt;/a&gt;, applied
+to relatively short time frame.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;This summer I worked with the &lt;a href=&quot;https://angular.io&quot;&gt;Angular Team&lt;/a&gt; at Google in
+Sunnyvale, CA. I feel incredibly fortunate to have had such an experience,
+during which I&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;shipped an Angular indexer for all of Google’s internal codebase,&lt;/li&gt;
+  &lt;li&gt;improved a TypeScript indexer, including adding plugin support,&lt;/li&gt;
+  &lt;li&gt;added a semantic analysis API to the open-source Angular project.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I felt these were interesting things to work on, and the people around me were
+even more interesting. The company’s work environment was one of the first I’ve
+been able to be my whole self in. I have many other thoughts about the
+experience and have been thinking about how I can share and give this experience
+to
+others&lt;label for=&quot;futurecc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;futurecc&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+This will be a &lt;a href=&quot;#share-experience&quot;&gt;future &lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; post.&lt;/a&gt;&lt;/span&gt;
+.
+In the meantime, please
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email me&lt;/a&gt;
+if you’d like to chat!&lt;/p&gt;
+
+&lt;h3 id=&quot;projects&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#projects&quot;&gt;#&lt;/a&gt;Projects&lt;/h3&gt;
+
+&lt;h4 id=&quot;1--angular-indexer&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--angular-indexer&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  Angular Indexer&lt;/h4&gt;
+
+&lt;p&gt;I designed, developed, and shipped an
+indexer for &lt;a href=&quot;https://github.com/angular/angular&quot;&gt;Angular&lt;/a&gt; source code. This was
+a fantastic project with unexpected complexity throughout, even in its very
+early stages. The indexer used the &lt;a href=&quot;https://github.com/kythe/kythe&quot;&gt;Kythe&lt;/a&gt;
+framework, which has a
+&lt;a href=&quot;https://xrefs-dot-kythe-repo.appspot.com/#kythe/cxx/indexer/cxx/marked_source.cc?corpus=kythe&amp;amp;signature&quot;&gt;sample UI&lt;/a&gt;
+demonstrating the kinds of cross-references a Kythe indexer can generate.&lt;/p&gt;
+
+&lt;p&gt;The project was initially scoped out to provide indexing information about
+interpolated properties and methods in templates. For example, given an Angular
+template&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/016102ae4e643ac1731d268c2d86db61.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;and component&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/bddce1d2398cb64ad3070ebd22940077.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;the indexer was to generate cross-references and usage information about the
+class property &lt;code class=&quot;highlighter-rouge&quot;&gt;myProperty&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I showed this was reliably practicable in the first half of my internship, then
+spent the next quarter of my internship adding support for the rest of the Angular
+&lt;a href=&quot;https://angular.io/guide/template-syntax&quot;&gt;template syntax&lt;/a&gt; and rolling out the
+indexer to production on all of Google’s internal
+codebase&lt;label for=&quot;ngmodule&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;ngmodule&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Browsed by more than 45K developers, and consisting of more than 26K Angular modules!&lt;/span&gt;
+.
+The last quarter of my internship I fixed bugs, hacked on some Rust stuff, and
+worked with customers of &lt;a href=&quot;#3--typescript-indexer&quot;&gt;TypeScript indexer plugins&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I gave a talk on developing the Angular indexer:&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth resp-iframe-container&quot;&gt;
+  &lt;iframe class=&quot;resp-iframe&quot; src=&quot;https://docs.google.com/presentation/d/e/2PACX-1vS6faRapIClhDbsSLqn7Zc3Wuqca2J08fnSJaKqFIT4IVtW9JZR4WNXvvFZyMncp8rnzJ1DtxlKb7d5/embed?start=false&amp;amp;loop=false&amp;amp;delayms=3000&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2--angular-indexing-api&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--angular-indexing-api&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  Angular Indexing API&lt;/h4&gt;
+
+&lt;p&gt;As part of my work on the Angular indexer, I needed to extract semantic
+information about an Angular project. To enable this, I created a new semantic
+analysis API called the
+&lt;a href=&quot;https://github.com/angular/angular/tree/master/packages/compiler-cli/src/ngtsc/indexer&quot;&gt;Angular indexing API&lt;/a&gt;
+on the Angular compiler.&lt;/p&gt;
+
+&lt;p&gt;The indexing API is fairly small, TypeScript-compiler-esque, and is very easy to use:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/5689ff6d1a4a4a236d2c7abe04fd5394.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;There are now some thoughts of using this API for an open-source Angular indexer
+and of using it in the Angular language service.&lt;/p&gt;
+
+&lt;p&gt;Near the end of my internship, I gave a talk on what I learned contributing to a
+large open source project like Angular:&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth resp-iframe-container&quot;&gt;
+  &lt;iframe class=&quot;resp-iframe&quot; src=&quot;https://docs.google.com/presentation/d/e/2PACX-1vTDQuGFkUvK7sx4R_wO4PWeEuJMmK0sZLWKK7OVj40hYa5E_O_nal1Aw09XIzIkv32MQefpcFU7hztq/embed?start=false&amp;amp;loop=false&amp;amp;delayms=3000&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h4 id=&quot;3--typescript-indexer&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--typescript-indexer&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  TypeScript Indexer&lt;/h4&gt;
+
+&lt;p&gt;I added many new features to the open-source Kythe
+&lt;a href=&quot;https://github.com/kythe/kythe/tree/master/kythe/typescript&quot;&gt;TypeScript indexer&lt;/a&gt;,
+including&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;new cross-reference features,&lt;/li&gt;
+  &lt;li&gt;information about overridden methods on a class,&lt;/li&gt;
+  &lt;li&gt;a
+&lt;a href=&quot;https://github.com/kythe/kythe/tree/master/kythe/typescript/SCHEMA.md&quot;&gt;schema&lt;/a&gt;
+for entries emitted by the indexer,&lt;/li&gt;
+  &lt;li&gt;a
+&lt;a href=&quot;https://github.com/kythe/kythe/blob/35a252f56067d2f2043a7edb758b6825e35a38f1/kythe/typescript/indexer.ts#L96&quot;&gt;plugin model&lt;/a&gt;
+for adding additional functionality to the indexer.
+    &lt;ul&gt;
+      &lt;li&gt;now used by three separate indexers&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Like the Angular indexer, the TypeScript indexer runs on all of Google’s
+codebase, which consists of thousands of TypeScript projects and is browsed by
+more than 45K developers.&lt;/p&gt;
+
+&lt;h3 id=&quot;collaboration-n-friends&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#collaboration-n-friends&quot;&gt;#&lt;/a&gt;Collaboration ‘n’ Friends&lt;/h3&gt;
+
+&lt;p&gt;My intern host was &lt;a href=&quot;https://github.com/kyliau&quot;&gt;Keen Yee Liau&lt;/a&gt;, an incredible
+individual from whom I learned a tremendous amount (especially about philosophy
+and life). I consider us good friends now, and we will continue to keep
+collaborating.&lt;/p&gt;
+
+&lt;p&gt;I collaborated with &lt;a href=&quot;https://github.com/evmar&quot;&gt;Evan Martin&lt;/a&gt;, who built the Kythe
+TypeScript indexer and works on TypeScript at Google. I also worked extensively
+with &lt;a href=&quot;https://github.com/alxhub&quot;&gt;Alex Rickabaugh&lt;/a&gt;, who is the code owner of the
+Angular compiler. I communicated quite often with the
+&lt;a href=&quot;https://github.com/kythe&quot;&gt;Kythe team&lt;/a&gt; and with two other individuals developing
+indexers with TypeScript indexer plugins.&lt;/p&gt;
+
+&lt;p&gt;The entirety of the Angular team was amazing. Each presented me with new ideas
+and helped create a diverse, accepting environment where I could literally let
+my hair down.&lt;/p&gt;
+
+&lt;p&gt;Finally, I lived in a “Hacker Home” with a healthy
+amount&lt;label for=&quot;2324&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;2324&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+23? 24? It was a
+lot.&lt;/span&gt;
+ of other individuals who offered me new perspectives and shared with me
+a joyful summer.&lt;/p&gt;
+
+&lt;p&gt;&lt;label for=&quot;dino&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;dino&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+These names likely mean nothing to you, but the picture only missed Dino and Courtney :cry:&lt;/span&gt;&lt;/p&gt;
+
+&lt;figure&gt;&lt;img src=&quot;/assets/img/hh2019.jpg&quot; /&gt;&lt;figcaption&gt;Mountain View Hacker Home, Summer 2019&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;what-i-learned&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#what-i-learned&quot;&gt;#&lt;/a&gt;What I learned&lt;/h3&gt;
+
+&lt;p&gt;In no particular order,&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;New languages and technologies.
+    &lt;ul&gt;
+      &lt;li&gt;Lots: &lt;a href=&quot;https://github.com/angular/angular&quot;&gt;Angular&lt;/a&gt;,
+&lt;a href=&quot;https://github.com/kythe/kythe&quot;&gt;Kythe&lt;/a&gt;,
+&lt;a href=&quot;https://github.com/bazel/bazel&quot;&gt;Bazel&lt;/a&gt;,
+&lt;a href=&quot;https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API&quot;&gt;TypeScript compiler&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Some: &lt;a href=&quot;https://golang.org&quot;&gt;Go lang&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Programming language and compiler design.
+    &lt;ul&gt;
+      &lt;li&gt;Influenced by the TypeScript and Angular compilers.&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;Design a compiler to support semantic analysis from the start&lt;/em&gt;. This may
+seem cumbersome because the primary goal of a new compiler is to emit code
+quickly and correctly, not have support for language analysis features, but
+designing for language analysis features will decrease cost of work
+substantially down the line. Many compilers face the issue of high cost,
+including Angular’s and Rust’s.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Advanced and idiomatic TypeScript.&lt;/li&gt;
+  &lt;li&gt;How to approach
+&lt;a href=&quot;https://docs.google.com/presentation/d/18FwLIKWiMrvgxkDFUKiaMeHfzn3ScMVf4uq9snX3fGY/edit?usp=sharing&quot;&gt;large codebases and open-source projects&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Meta stuff!
+    &lt;ul&gt;
+      &lt;li&gt;More about who I am as a person.&lt;/li&gt;
+      &lt;li&gt;What I want from a job (right now).
+        &lt;ul&gt;
+          &lt;li&gt;Interesting problems, and preferably impact. Less so money.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://soundcloud.com/dvmvnds/sets/a-something-to-jacky&quot;&gt;How to See the World More and Worry Less&lt;/a&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;where-im-going--next-goals&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#where-im-going--next-goals&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;Where I’m going:&lt;/span&gt;  Next Goals&lt;/h3&gt;
+
+&lt;p&gt;My internship is over, but my work isn’t. In no particular order, my goals for
+the next semester are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Continue contributing to &lt;a href=&quot;https://github.com/angular/angular&quot;&gt;Angular&lt;/a&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;My current focus is on
+&lt;a href=&quot;https://github.com/angular/angular/issues/31898&quot;&gt;fixing inconsistencies and stabilizing&lt;/a&gt;
+the Angular compiler.&lt;/li&gt;
+      &lt;li&gt;I hope to also contribute to the
+&lt;a href=&quot;https://github.com/angular/angular/tree/master/packages/language-service&quot;&gt;Angular language service&lt;/a&gt;,
+expanding on the knowledge I learned building the Angular indexer.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Continue contributing to &lt;a href=&quot;https://github.com/kythe/kythe&quot;&gt;Kythe&lt;/a&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;There is work to be done with
+&lt;a href=&quot;https://github.com/kythe/kythe/pull/3934&quot;&gt;Code Search UI limitations&lt;/a&gt;.&lt;/li&gt;
+      &lt;li&gt;The TypeScript indexer still has interesting places to grow in, including
+some refactorings of the codebase and supporting lower-priority
+cross-reference features.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;span id=&quot;share-experience&quot;&gt;Find ways to share and give my experience to
+others.&lt;/span&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; post coming soon.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Write and Talk.
+    &lt;ul&gt;
+      &lt;li&gt;Write a blog post about my experiences contributing to Angular, based off my
+&lt;a href=&quot;https://docs.google.com/presentation/d/18FwLIKWiMrvgxkDFUKiaMeHfzn3ScMVf4uq9snX3fGY/edit?usp=sharing&quot;&gt;presentation&lt;/a&gt;
+on the same topic.&lt;/li&gt;
+      &lt;li&gt;Find an Angular conference to attend.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Take interesting classes.
+    &lt;ul&gt;
+      &lt;li&gt;In my (hopeful) lineup for the next two semesters are Distributed Systems,
+Algorithms, Compiler Design, Cryptography, Synthetic Chemistry, and Physical
+Chemistry.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Perform an analysis of how various student groups at my university operate.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; post coming after project completion.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Be a good TA for &lt;a href=&quot;https://vuse-cs3251.github.io&quot;&gt;CS3251&lt;/a&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;Develop, spread &lt;a href=&quot;https://github.com/ayazhafiz/patterns&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;patterns&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;(Hopefully) find a job for Summer 2020.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;epi&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#epi&quot;&gt;#&lt;/a&gt;Epi&lt;/h2&gt;
+
+&lt;p&gt;If you got this far, you probably want to talk. Cool, I do too! The best way to
+contact me is via
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕ A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry><entry><title type="html">“Smart” is not a good word</title><link href="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word" rel="alternate" type="text/html" title="&quot;Smart&quot; is not a good word" /><published>2019-07-18T01:00:00-05:00</published><updated>2019-07-18T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/smart-is-not-a-good-word</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word">&lt;blockquote&gt;
+  &lt;p&gt;&lt;small&gt;I’m going to be vulnerable in this post. Regardless of whether you know
+me personally, please treat this discussion primarily as a presentation of
+opinion.&lt;/small&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I grew up not understanding mental illness. Like
+&lt;a href=&quot;https://medium.com/@junwu_46652/the-intelligence-myth-8b5722145180&quot;&gt;Jun Wu&lt;/a&gt;, I
+found studying this domain to be self-actualizing — anxiety and clinical
+depression had not been anomalies, but intrinsic parts of my childhood.&lt;/p&gt;
+
+&lt;p&gt;I’m now somewhere around 20 years old and persistence of least the latter is
+ubiquitous in my daily life.&lt;/p&gt;
+
+&lt;p&gt;My experiences with mental health have been the result of many influences. One
+of the most important influences has been the notion of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;ness. I’ll
+discuss my interpretation of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;, then explain why I think it’s not a good
+word.&lt;label for=&quot;definitely&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;definitely&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+I use the
+word “definitely” frequently in this post, not as an emphasis but as a synonym for “confidently”.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;u--school-rules&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#u--school-rules&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;u:&lt;/span&gt;  School Rules&lt;/h3&gt;
+
+&lt;p&gt;I grew up in an extremely competitive school district. Exemplifications of this
+include&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;some of my friends began competing their SAT scores in the 7&lt;sup&gt;th&lt;/sup&gt;
+grade;&lt;/li&gt;
+  &lt;li&gt;having a 4.0 GPA would not guarantee that you were in the academic top 10% of
+the student body;&lt;/li&gt;
+  &lt;li&gt;student leadership positions were often explicitly granted on a combined
+prestige and quid pro quo basis.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The problem is not always that such an environment exists. The problem is that
+for a student that has spent all of their primary education experience in such
+an environment, it is very likely the only environment they know exists. I still
+sometimes feel that it is the only environment that matters.&lt;/p&gt;
+
+&lt;p&gt;Viewers&lt;label for=&quot;viewers&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;viewers&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+e.g. parents, teachers&lt;/span&gt;
+ would compliment many
+in this environment for their intelligence, and of course, for being &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;.
+Maybe it is already obvious that &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; is not a good word for this - 80 hour
+academic work weeks, at any age, is not necessarily an indication of
+intelligence. It can only definitely be an indication of hard work.&lt;/p&gt;
+
+&lt;p&gt;But also, &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;ness doesn’t have anything to do with intelligence.&lt;/p&gt;
+
+&lt;h3 id=&quot;s--dj-benzi&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#s--dj-benzi&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;s:&lt;/span&gt;  DJ Benzi&lt;/h3&gt;
+
+&lt;p&gt;What does being &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; even mean? In my experience, people use &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; to
+simultaneously describe to someone’s prowess in a certain skill and their
+overall intelligence.&lt;/p&gt;
+
+&lt;p&gt;The problem with this is that knowledge of a particular domain and general
+intelligence have almost nothing to do with each other. The reality is that you
+and I are probably very knowledgeable in respective (but different!) knowledge
+areas, and also probably have nearly-equal intelligences. Lumping the two
+together means that a a listener who hears something about an individual’s
+&lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;s has to either&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;treat &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;ness as a score of both domains, or&lt;/li&gt;
+  &lt;li&gt;ask more questions.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Deference to the latter is least-ambiguous, but the presence of ambiguity at all
+means this usage of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; is already not a good pattern.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://soundcloud.com/benzi&quot;&gt;DJ Benzi&lt;/a&gt; is one of the most clever and
+knowledgeable individuals in their
+field&lt;label for=&quot;dj-benzi&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;dj-benzi&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+From my perspective. There are many other clever and
+knowledgeable individuals in this domain as well. I just wrote this listening to Benzi.&lt;/span&gt;
+.
+From Benzi’s perspective, I imagine there is one domain that he would consider me
+clever and knowledgeable in. I also believe that both of us have equal&lt;label for=&quot;highly-similar&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;highly-similar&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+or at least definitely highly-similar&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;intelligences.&lt;/p&gt;
+
+&lt;p&gt;Maybe someone could say DJ Benzi and I are both smart. What does that tell you?&lt;/p&gt;
+
+&lt;h3 id=&quot;t--computational-equivalence&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#t--computational-equivalence&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;t:&lt;/span&gt;  Computational Equivalence&lt;/h3&gt;
+
+&lt;p&gt;The thing is, I’m pretty sure all entities in the environments around us are
+computationally
+equivalent&lt;label for=&quot;tcomputations&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;tcomputations&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Derived from the theory of computation, itself an idea &lt;a href=&quot;https://www.wolframscience.com/nks/&quot;&gt;popularized&lt;/a&gt; by Stephen Wolfram.&lt;/span&gt;
+,
+which is the idea that structures are identical in their design complexity
+though their functionality may be radically
+different&lt;label for=&quot;opt&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;opt&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+My interpretation of computational equivalence is a very
+optimistic one. It may be the case that this model can be absolutely refuted, but it is the most
+generic appeal to logic I currently have.&lt;/span&gt;
+.&lt;/p&gt;
+
+&lt;p&gt;Treating all entities as computationally equivalent generalizes influences on
+functionality. In this model, &lt;code class=&quot;highlighter-rouge&quot;&gt;intelligence&lt;/code&gt; is as not good of a word as &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;
+is. It becomes easy to show that the only
+differentiators&lt;label for=&quot;this-disc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;this-disc&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+as related to this discussion&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;between any two entities are the knowledge domains they operate in.&lt;/p&gt;
+
+&lt;p&gt;This means the cumulative domain signature an entity operates in must be
+globally unique. Perception of something as “difficult” or “interesting” is an
+artifact of contrasting domain signatures, though in fact every domain is
+equally complex. This is the model I employ for reasoning why different people
+find problems to be “difficult” or “interesting”&lt;label for=&quot;ethnoc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;ethnoc&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+This can be thought of as generalizing a context of
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Ethnocentrism&quot;&gt;ethnocentrism&lt;/a&gt;.&lt;/span&gt;
+.&lt;/p&gt;
+
+&lt;p&gt;“Passion” is also solved by this model. &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s “passion” is an artifact of &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s
+perception of contrasting structural distribution. Structures may be more or
+less rare, but they are still all equivalent in complexity. It’s even possible
+to generalize that &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s passion is &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s computational signature.&lt;/p&gt;
+
+&lt;p&gt;Anyway, that’s an unbound idea. The point is &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; is not a good word. Maybe
+it’s even a bad word.&lt;/p&gt;
+
+&lt;h4 id=&quot;thoughtthoughts&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#thoughtthoughts&quot;&gt;#&lt;/a&gt;ThoughtThoughts&lt;/h4&gt;
+
+&lt;p&gt;I would like to hear your thoughts about my thoughts. The best way to contact me
+is via &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Ideas&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I’m going to be vulnerable in this post. Regardless of whether you know me personally, please treat this discussion primarily as a presentation of opinion.</summary></entry><entry><title type="html">A macOS workspace with a tiling WM</title><link href="https://ayazhafiz.com/articles/19/tiling-wm-macos" rel="alternate" type="text/html" title="A macOS workspace with a tiling WM" /><published>2019-05-05T01:00:00-05:00</published><updated>2019-05-05T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/tiling-wm-macos</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/tiling-wm-macos">&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Update&lt;/em&gt;: Development of &lt;a href=&quot;https://github.com/koekeishiya/chunkwm&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt;&lt;/a&gt;
+has ceased in favor of &lt;a href=&quot;https://github.com/koekeishiya/yabai&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;yabai&lt;/code&gt;&lt;/a&gt;. It’s
+recommended you now use &lt;code class=&quot;highlighter-rouge&quot;&gt;yabai&lt;/code&gt; for your macOS tiling needs.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;0--prelude&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#0--prelude&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;0:&lt;/span&gt;  Prelude&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;I speak for myself&lt;/em&gt;&lt;/strong&gt;: The softwares and configurations I present here work
+great for my workflow but may not necessarily carry over to yours. I encourage
+you to use this article as one perspective to pick-and-choose from in your
+configuration development.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;&lt;em&gt;Learning curve&lt;/em&gt;&lt;/strong&gt;: All the tools I mention here have a learning curve, the
+magnitude of which varies but is largely due to learning keybindings. I will
+say that once one learns to work with &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; effectively, most other
+keyboard-based softwares are fairly easy to pick up, as many have similar
+semantics to &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt;. Tips from personal experience can be found in
+&lt;a href=&quot;#31--vims-learning-curve&quot;&gt;section 3.1&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;01--motivation&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#01--motivation&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;0.1:&lt;/span&gt;  Motivation&lt;/h3&gt;
+
+&lt;p&gt;I work on a 15” 2016 MBP. It’s a really nice machine I was fortunate enough to
+buy with scholarship money a couple years back, and does nicely pretty much
+everything one buys a Mac for.&lt;/p&gt;
+
+&lt;p&gt;As I’ve become more productive, I’ve increasingly turned to power tools like
+&lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt;, &lt;a href=&quot;https://github.com/tmux/tmux&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;&lt;/a&gt;, and most recently,
+&lt;a href=&quot;https://github.com/koekeishiya/chunkwm&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt;&lt;/a&gt;&lt;label for=&quot;chunkwm&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;chunkwm&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+A tiling window manager for macOS&lt;/span&gt;
+.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt; in particular has been a big jump for me in terms of productivity and
+workspace aesthetic. This post discusses my macOS configuration, motivated by my
+setup of &lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;My configuration files are available on GitHub at
+&lt;a href=&quot;https://github.com/ayazhafiz/hmcd&quot;&gt;ayazhafiz/hmcd&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;02--screens&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#02--screens&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;0.2:&lt;/span&gt;  Screens&lt;/h3&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/neovim_start.jpg&quot; /&gt;&lt;figcaption&gt;neovim start screen&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/vim_tmux_chunkwm.jpg&quot; /&gt;&lt;figcaption&gt;neovim in tmux, chunkwm-tiled windows&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/ranger_qutebrowser.jpg&quot; /&gt;&lt;figcaption&gt;ranger in tmux, qutebrowser&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;1--chunkwm-and-skhd-for-tiling-windows&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--chunkwm-and-skhd-for-tiling-windows&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  &lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;skhd&lt;/code&gt; for tiling windows&lt;/h2&gt;
+
+&lt;p&gt;First, a definition - &lt;strong&gt;tiling window managers&lt;/strong&gt; organize windows in
+compartmentalized buffers on a desktop, and often support handling windows on
+multiple desktops and monitors. I find this management useful for multitasking
+because the wm will automatically attempt to place new windows in an optimal
+spot, with the user having to adjust window sizes and locations only ad-hoc. A
+side effect of these managers is the orthogonal aesthetic they provide to one’s
+desktop, though the value of that may vary by taste. I quite like it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/koekeishiya/chunkwm&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt;&lt;/a&gt; is a tiling wm for macOS. On
+its own it’s pretty nice, but its full potential comes out with a hotkey daemon
+like &lt;a href=&quot;https://github.com/koekeishiya/skhd&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;skhd&lt;/code&gt;&lt;/a&gt;, which maps keystrokes to
+arbitrary system actions. &lt;code class=&quot;highlighter-rouge&quot;&gt;skhd&lt;/code&gt; can be used for mapping hotkeys to
+&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkc&lt;/code&gt;&lt;label for=&quot;chunkc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;chunkc&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+the program that sends messages to &lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;commands, enabling window management via just the keyboard.&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/skhd-chunkwm.gif&quot; /&gt;&lt;figcaption&gt;manipulating windows with skhd&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt; provides a configuration file for setting window gaps, border offsets,
+border colors, and other aesthetic features; &lt;code class=&quot;highlighter-rouge&quot;&gt;skhd&lt;/code&gt; has a configuration file for
+hotkey
+bindings&lt;label for=&quot;skhdrc-more&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;skhdrc-more&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+The nice thing about &lt;code class=&quot;highlighter-rouge&quot;&gt;skhd&lt;/code&gt; is keybindings can act on more than just &lt;code class=&quot;highlighter-rouge&quot;&gt;chunkc&lt;/code&gt; - for instance, I have bindings for opening a terminal and web browser.&lt;/span&gt;
+.
+I’ve made public my personal
+&lt;a href=&quot;https://github.com/ayazhafiz/hmcd/blob/master/.chunkwmrc&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.chunkwmrc&lt;/code&gt;&lt;/a&gt; and
+&lt;a href=&quot;https://github.com/ayazhafiz/hmcd/blob/master/.skhdrc&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.skhdrc&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;2--alacritty-as-a-terminal-and-tmux-as-its-multiplexer&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--alacritty-as-a-terminal-and-tmux-as-its-multiplexer&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  &lt;code class=&quot;highlighter-rouge&quot;&gt;alacritty&lt;/code&gt; as a terminal and &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; as its multiplexer&lt;/h2&gt;
+
+&lt;p&gt;Right now I use &lt;a href=&quot;https://github.com/jwilm/alacritty&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;alacritty&lt;/code&gt;&lt;/a&gt; as my terminal
+emulator&lt;label for=&quot;alacritty&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;alacritty&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+For a while I used &lt;a href=&quot;https://hyper.is/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hyper&lt;/code&gt;&lt;/a&gt;, but people are right about the Electron bloat. I’ve heard good things about &lt;a href=&quot;https://github.com/kovidgoyal/kitty&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;kitty&lt;/code&gt;&lt;/a&gt;, but haven’t had the chance to use it.&lt;/span&gt;
+.
+It’s great – fast as hell, not a battery leech, and has nice configuration
+options with extensible keybindings (you can see my configuration
+&lt;a href=&quot;https://github.com/ayazhafiz/hmcd/blob/master/.config/alacritty/alacritty.yml&quot;&gt;here&lt;/a&gt;).
+Especially with a transparent background and color palettes generated by
+&lt;a href=&quot;https://github.com/dylanaraps/pywal&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;wal&lt;/code&gt;&lt;/a&gt;, it’s easily the most beautiful
+application on my machine.&lt;/p&gt;
+
+&lt;p&gt;Why &lt;a href=&quot;https://github.com/tmux/tmux&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;&lt;/a&gt;? It may seem ridiculous to nest
+terminal sessions within windows within a window manager, but I use &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; to
+have just one terminal window open and manage various sessions inside it. &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;
+sessions persist independently of the emulator they are run in, so you can enter
+and exit them anytime you want.&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/tmux.gif&quot; /&gt;&lt;figcaption&gt;working with multiple tmux sessions&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; allows for aesthetic and keybinding configurations via a &lt;code class=&quot;highlighter-rouge&quot;&gt;.tmux.conf&lt;/code&gt;. Of
+course, I’ve made mine
+&lt;a href=&quot;https://github.com/ayazhafiz/hmcd/blob/master/.tmux.conf&quot;&gt;publicly avaliable&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;3--power-tools-vim-and-ranger&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--power-tools-vim-and-ranger&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  Power tools: &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;ranger&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;For a while, I thought &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; was a needlessly cumbersome tool, as I’m sure most
+do initially. Once I began to seriously use it though, I realized my enhancement
+in productivity, and now I use &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; for pretty much
+everything&lt;label for=&quot;neovim&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;neovim&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+More accurately, I use &lt;a href=&quot;https://github.com/neovim/neovim&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;neovim&lt;/code&gt;&lt;/a&gt;.&lt;/span&gt;
+.
+Working with only a keyboard certainly imposed a learning curve, but has paid
+off in a a tremendous speedup for literally everything I do on my machine. In
+fact, the productivity benefits &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; has provided me are the primary reason I
+switched to a key-bound tiling wm and and now do 90% of my work in a terminal
+emulator.&lt;/p&gt;
+
+&lt;p&gt;On a similar note, the &lt;a href=&quot;https://github.com/ranger/ranger&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ranger&lt;/code&gt; filemanager&lt;/a&gt;
+provides &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt;-like key bindings for browsing file systems. This is a boon for
+productivity – at least over &lt;code class=&quot;highlighter-rouge&quot;&gt;Finder&lt;/code&gt;, in my experience.&lt;/p&gt;
+
+&lt;p&gt;If you’re looking for a beautiful, extensible text editor to replace your IDEs
+and speedup your workflow, I cannot recommend &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt;
+enough&lt;label for=&quot;vim&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;vim&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;emacs&lt;/code&gt; is also really nice, if that’s more your thing. Regardless, the advantage of keybindings is undeniable – there’s a reason &lt;code class=&quot;highlighter-rouge&quot;&gt;VS Code&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Atom&lt;/code&gt; have command palettes.&lt;/span&gt;
+.
+And once you get hooked on that, check out &lt;code class=&quot;highlighter-rouge&quot;&gt;ranger&lt;/code&gt;. And if you’re trying to get
+really deep, maybe you even want a command-line email client like
+&lt;a href=&quot;http://www.mutt.org/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mutt&lt;/code&gt;&lt;/a&gt;. There’s an entire world out there for you to
+discover :smile:.&lt;/p&gt;
+
+&lt;h3 id=&quot;31--vims-learning-curve&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#31--vims-learning-curve&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3.1:&lt;/span&gt;  &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt;’s Learning Curve&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt;’s learning curve kinda sucks if you haven’t worked much with key-bound
+applications before. Getting over that hill is a personal journey, but I have
+two tips from personal experience:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vimtutor&lt;/code&gt; is your best friend. Launch it up in your command line and go
+through all of it; the tutorial isn’t very long and will teach you everything
+you need to be functional in &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Actually use &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt;. Make it the exclusive workspace for your next few
+projects, homework assignments, papers, whatever else. At first it might
+really suck and you might want to switch back editors, but soon &lt;em&gt;it’ll click&lt;/em&gt;
+and you’ll begin to experience why it’s raved about so much. Non-toy usage of
+&lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; will also teach you all the tricks &lt;code class=&quot;highlighter-rouge&quot;&gt;vimtutor&lt;/code&gt; doesn’t and force you to
+configure the editor to your liking.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Speaking of configuration,
+&lt;a href=&quot;https://github.com/ayazhafiz/hmcd/blob/master/.vimrc&quot;&gt;here’s my &lt;code class=&quot;highlighter-rouge&quot;&gt;.vimrc&lt;/code&gt;&lt;/a&gt;. Like
+the other configurations I’ve made public, you should use it only to pick and
+choose what you need - my preferences and plugins probably don’t exactly align
+with your needs, and it’s useful to know what the commands you’re including
+actually mean.&lt;/p&gt;
+
+&lt;h2 id=&quot;00--postlude&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#00--postlude&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;00:&lt;/span&gt;  Postlude&lt;/h2&gt;
+
+&lt;p&gt;I hope this article has provided you with an additional perspective on macOS
+configuration options. If you choose to incorporate any of the tools I’ve
+discussed in your own workflow, that’s awesome! Though of course, my
+configuration is by no means is the “right” way to setup a workspace – hell,
+this one constantly evolves as my needs and preferences change.&lt;/p&gt;
+
+&lt;p&gt;If you find my configurations useful, have comments about this discussion, have
+another perspective you’d like share, or anything else related, &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re: Your macOS workspace with a tiling
+wm&quot;&gt;please ping
+me&lt;/a&gt;. I’d love to chat.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Update: Development of chunkwm has ceased in favor of yabai. It’s recommended you now use yabai for your macOS tiling needs.</summary></entry><entry><title type="html">over-engineering a code</title><link href="https://ayazhafiz.com/articles/19/engineering-a-code" rel="alternate" type="text/html" title="over-engineering a code" /><published>2019-02-28T00:00:00-06:00</published><updated>2019-02-28T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/engineering-a-code</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/engineering-a-code">&lt;p&gt;Say you are a software engineer, or developer, or whatever other abstracted
+word for &lt;em&gt;programmer&lt;/em&gt; that has some meaning to you. Say you have also been given
+some scientific computation problem, like estimating the value of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \pi &lt;/script&gt;&lt;/span&gt; with the
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Monte_Carlo_method&quot;&gt;Monte Carlo&lt;/a&gt; method.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Inscribe a circle of radius &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \frac{1}{2} &lt;/script&gt;&lt;/span&gt; in a square of length
+&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; 1 &lt;/script&gt;&lt;/span&gt;. Then the probability a random point generated in the
+square is also inside the circle is equal to the ratio of the circle’s area to the
+square’s, which is &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \frac{\pi}{4} &lt;/script&gt;&lt;/span&gt;.&lt;/p&gt;
+
+  &lt;p&gt;We now have a method for approximating &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \frac{\pi}{4} &lt;/script&gt;&lt;/span&gt; by generating a set of
+random points in the square and finding the ratio those points also inside the circle.
+This value multiplied by 4 gives us an estimate of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \pi &lt;/script&gt;&lt;/span&gt;, which becomes more
+precise with an increasing volume of generated points.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Your friend is an electrical engineer, and knows how to program in JavaScript. She quickly codes a simple, easily-understandable procedure:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/7eea1f8f18000c6ccdc3920cf2fd5076.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;You&lt;label for=&quot;actually-you&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;actually-you&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+perhaps vicariously through another&lt;/span&gt;
+, having already taken on some abstracted title for yourself, chose instead to over-engineer her perfectly good solution to be &lt;em&gt;TheBestCode&lt;/em&gt;™&lt;/p&gt;
+
+&lt;h2 id=&quot;1--everything-functional&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--everything-functional&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  Everything Functional&lt;/h2&gt;
+
+&lt;p&gt;Since the only operations done here are on an array, all the loops can be eliminated in favor of immutable function calls on the original array. Even the instantiation of random points in the array can be sugared into the initializer.&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/40fea356a4e4c0d305db57babac4120d.js&quot;&gt; &lt;/script&gt;
+
+&lt;h2 id=&quot;2--on-incircle&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--on-incircle&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  On &lt;code class=&quot;highlighter-rouge&quot;&gt;inCircle&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;~Idiomatic~&lt;label for=&quot;new-age&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;new-age&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+read: new age&lt;/span&gt;
+ JavaScript calls for arrow notation on small functions, so that’s what we’ll do. We can also allow for a variable circle radius - of course, that’s totally useless for this example, but makes the function more ~scalable~. Finally, there is a marginal cost reduction in comparing the square of the euclidean distance to the square of the radius rather than computing a square root.&lt;/p&gt;
+
+&lt;p&gt;This gives an artisanally-crafted code:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/506d11f17b7b54cd5c027f0df809d013.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;We’re not done yet. If we take a quarter circle of radius 1 inscribed in the square instead, the ratio of quarter-circle-to-square area remains &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; {\pi\over4} &lt;/script&gt;&lt;/span&gt;, but now the center of the circle is at the origin, which eliminates two subtractions in the function call. The code is made even more idiomatic with JavaScript’s exponentiation operator.&lt;/p&gt;
+
+&lt;p&gt;For now, this will be our final form:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/559d68654cf90acf049dd5abdcdb7ad0.js&quot;&gt; &lt;/script&gt;
+
+&lt;h2 id=&quot;3--defining-and-objectifying&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--defining-and-objectifying&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  Defining and Objectifying&lt;/h2&gt;
+
+&lt;p&gt;But what &lt;em&gt;is&lt;/em&gt; a point? In this case, a pair of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; (x, y) &lt;/script&gt;&lt;/span&gt; coordinates. Let’s define the points as named tuples:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/85e4c911e098091730f50e3516fe8047.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;We abstracted &lt;code class=&quot;highlighter-rouge&quot;&gt;inCircle&lt;/code&gt; to be of any radius earlier, but of course that’s kind of useless since the function is specifically designed for measuring &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \pi &lt;/script&gt;&lt;/span&gt;. What we should do is wrap our estimation script into one experimentation procedure that accepts a variable point sample size. This is the &lt;strong&gt;ultimate abstraction&lt;/strong&gt; we could ask for.&lt;/p&gt;
+
+&lt;p&gt;After a multitude of revisions and totally misaligned priorities, we arrive to modular paradise.&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/603d939e1038673380eb5b1892169c2c.js&quot;&gt; &lt;/script&gt;
+
+&lt;h2 id=&quot;4--why&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#4--why&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;4:&lt;/span&gt;  Why?&lt;/h2&gt;
+
+&lt;p&gt;I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A good reason for over-engineering&quot;&gt;let me know&lt;/a&gt;. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Say you are a software engineer, or developer, or whatever other abstracted word for programmer that has some meaning to you. Say you have also been given some scientific computation problem, like estimating the value of ​ with the Monte Carlo method.</summary></entry><entry><title type="html">where i’m going</title><link href="https://ayazhafiz.com/articles/18/where-im-going" rel="alternate" type="text/html" title="where i'm going" /><published>2018-11-23T00:00:00-06:00</published><updated>2018-11-23T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/18/where-im-going</id><content type="html" xml:base="https://ayazhafiz.com/articles/18/where-im-going">&lt;hr /&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:much&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;&amp;#8712;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;months&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;I have not done much in the last 18 months.&lt;/p&gt;
+
+&lt;p&gt;At best, I feel that I have stagnated in my academic and professional endeavors. More realistically, I am losing the drives to complete things I care about. This does not bode well, for I am a maker of things.&lt;/p&gt;
+
+&lt;h2 id=&quot;college&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#college&quot;&gt;#&lt;/a&gt;College&lt;/h2&gt;
+
+&lt;p&gt;When I left High School for College, I exhaled a large breath of burden and stress. This was a great thing! Quickly, however, I realized that I am most ambitious and successful when I am stressed, especially by deadlines I’ve subscribed to. For whatever reason, when I am doing a large amount of work, I find relaxation in focusing on other large commitments. As an example, if I am doing a large problem set, I will use my breaks to fix bugs in side projects.&lt;/p&gt;
+
+&lt;p&gt;Thus, large obligations lead me to pursue more large obligations.&lt;/p&gt;
+
+&lt;p&gt;In college I have found large obligations to be few and far between. Due to what I will call the &lt;strong&gt;Problem of Willfulness Inertia&lt;/strong&gt;, if I am not already committed to a large obligation, I find it difficult to begin another.&lt;/p&gt;
+
+&lt;p&gt;There is a second, simpler problem I have discovered: the &lt;strong&gt;Problem of Passion&lt;/strong&gt;. This one is self-describing. As I will show, both problems are interdependent, and actually the same.&lt;/p&gt;
+
+&lt;h2 id=&quot;willfulness-inertia--equiv--passion&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#willfulness-inertia--equiv--passion&quot;&gt;#&lt;/a&gt;Willfulness Inertia &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \equiv &lt;/script&gt;&lt;/span&gt; Passion&lt;/h2&gt;
+
+&lt;p&gt;I mean, they already kind of sound the same, don’t they?&lt;/p&gt;
+
+&lt;p&gt;I didn’t realize these problems until this semester. In High School, I was already Doing A Lot and did not encounter what I am experiencing today. In the 2017-2018 school year, I was consistently focused on my schoolwork and social relationships, and found those to be compounding obligations. But this semester, I started applying to jobs.&lt;/p&gt;
+
+&lt;p&gt;Applying to jobs sucks. Sure, job interviews are engaging, but the form-filling, credential-giving steps are mundane, long, and tiresome. The really interesting part is that despite the fact that applying to jobs is a large obligation, it does not provide me Willfulness Inertia to work on other large obligations, because I have little Passion for applying to jobs! Actually, job applications should be a micro-section.&lt;/p&gt;
+
+&lt;h3 id=&quot;applying-to-jobs&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#applying-to-jobs&quot;&gt;#&lt;/a&gt;Applying to Jobs&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Jobs on their own are great, but the process to getting one, as I’ve mentioned, leaves me exhausted and undesiring to work on anything else. This is because I consume much of my stimulus energy during the process, but derive little to no intellectual stimulation from it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What has upset me more is my reaction to receiving job offers. The most excited I have been this semester is from receiving a job offer I had highly anticipated. This was definitely a great accomplishment for me, but the excitement and sensations I experienced were those that I have previously experienced for large, contributing accomplishments that I feel are more significant than a job offer. It may be unfair, but I feel that I have lowered my bar for achievement (read: Passion).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A second development that I have found difficult to reconcile is my relationship with Chemistry.&lt;/p&gt;
+
+&lt;h3 id=&quot;chemistry&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#chemistry&quot;&gt;#&lt;/a&gt;Chemistry&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I truly love Chemistry. But I have started to give up on it. With the mentality that I had 18+ months ago, I certainly would have completed the double major I first convinced myself I could do - in this time, I have backed down, under the guise of difficulty and unsustainability. I maintain that it is a fair excuse, but it is also a trivial one in comparison to Passion. Before coming into college, I was certain that my education would lead me to chemical academia. That hasn’t happened, but not because I don’t want it to.&lt;/p&gt;
+
+  &lt;p&gt;Perhaps I have begun to lose my Passion for chemistry, or perhaps I have simply lost the drive to succeed in it. Or perhaps there is no difference.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;As a consequence of what has happened the last 18 months (or the lack thereof), I theorize the following are all true and equivalent:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Work I find little meaning in does not provide me motivation for work I find significant meaning in,&lt;/li&gt;
+  &lt;li&gt;I have a lowered drive for the achievement of work I find significant meaning in,&lt;/li&gt;
+  &lt;li&gt;My standard of achievement has been lowered by work I find little meaning in.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I really shouldn’t be treating this like a standard proof, but it’s helped me show that my Problem of Willfulness Inertia is equivalent to my Problem of Passion. I’ll need this, and the three equivalencies described above, to resolve these issues.&lt;/p&gt;
+
+&lt;h2 id=&quot;wwwwwh&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#wwwwwh&quot;&gt;#&lt;/a&gt;WWWWWH&lt;/h2&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;who:   &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Me&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;what:  &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Two&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Problems&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;where: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Future&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;when:  &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Now&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;why:   &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Better&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Me&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;how:
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;By re-instigating contribution to the projects I have experience in and find a lot of meaning in, I will provide motivation for myself to work on obligations I find meaningful, increase my drive for accomplishing my obligations, and raise my expectations for the success of my commitments.&lt;/p&gt;
+
+&lt;p&gt;This plan is described by five concrete action items: &lt;em&gt;mail&lt;/em&gt;, &lt;em&gt;meetHere&lt;/em&gt;, &lt;em&gt;research&lt;/em&gt;, &lt;em&gt;research2&lt;/em&gt;, &lt;em&gt;store&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;mail-incoming_envelope&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#mail-incoming_envelope&quot;&gt;#&lt;/a&gt;mail :incoming_envelope:&lt;/h3&gt;
+
+&lt;p&gt;Branded as hMail, &lt;a href=&quot;https://ayazhafiz.com/mail&quot;&gt;mail&lt;/a&gt; is a file- and link-sharing platform I’ve created. It’s doing pretty well, but missing a lot - mainly because of poorly-written code I shipped for a hasty release after little work during the 2017-2018 school year. So now, the plan is as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Refactor the entire codebase, with emphasis on the server/API implementation.&lt;/li&gt;
+  &lt;li&gt;Add enhanced security features, ability to remove and forward files, and prevent unsolicited file sending.&lt;/li&gt;
+  &lt;li&gt;Separate the application from my website, purchase an independent domain, and explore a Rust rewrite.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;meethere-round_pushpin&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#meethere-round_pushpin&quot;&gt;#&lt;/a&gt;meetHere :round_pushpin:&lt;/h3&gt;
+
+&lt;p&gt;YAKWTFGO, I’m going to rebuild this bad boy from the ground up. I still get anxiety working on it from my experiences in High School, but I have been making significant progress - many of the algorithms have been rewritten, I have a Trello board set up, and am nearly done with an all-new style guide (with great help from some very talented people :blush:). The plan is to grind it out while I am skiing this winter - I think it will be tremendously useful to be doing two things I love dearly in tandem.&lt;/p&gt;
+
+&lt;h3 id=&quot;research&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#research&quot;&gt;#&lt;/a&gt;research&lt;/h3&gt;
+
+&lt;p&gt;For chemistry. I planned to shadow a chemistry lab this semester, but convinced myself I shouldn’t because I was already involved in another lab. Next semester, however, I will likely be much less involved in my current lab, and because I am truly much more passionate about chemistry, will actively get involved in lab shadow. Hold me to it.&lt;/p&gt;
+
+&lt;h3 id=&quot;research2&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#research2&quot;&gt;#&lt;/a&gt;research2&lt;/h3&gt;
+
+&lt;p&gt;This one is for my job (internship) this summer. I am excited for the product I will be working on, and will be building a plan for its success. For this, I also have a Trello board setup. Significant open-source contribution will be required for this project: I will apply myself to the development of the Crystal compiler, an emerging language I am fond of.&lt;/p&gt;
+
+&lt;h3 id=&quot;store&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#store&quot;&gt;#&lt;/a&gt;store&lt;/h3&gt;
+
+&lt;p&gt;Sell more Harvard shirts&lt;label for=&quot;harvardshirt&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;harvardshirt&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/harvard.jpg&quot; /&gt;&lt;br /&gt;For the uninitiated, my roommate and I made these.&lt;/span&gt;. It’s fun, and I could be putting in more effort, so I’m going to.&lt;/p&gt;
+
+&lt;h2 id=&quot;checkered_flag&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#checkered_flag&quot;&gt;#&lt;/a&gt;:checkered_flag:&lt;/h2&gt;
+
+&lt;p&gt;And with that, my revitalization is in motion (okay, maybe &lt;em&gt;revitalization&lt;/em&gt; is too dramatic). But really, I do anticipate that I will be making Big Contributions in the near future. I am not a relic of The Important Past.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">i =&amp;gt; !done(:much) &amp;#8712; (0..=18).months</summary></entry><entry><title type="html">the case of the missing alcohol proton</title><link href="https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol" rel="alternate" type="text/html" title="the case of the missing alcohol proton" /><published>2018-02-27T00:00:00-06:00</published><updated>2018-02-27T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol</id><content type="html" xml:base="https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol">&lt;p&gt;I recently performed a &lt;a href=&quot;https://pubchem.ncbi.nlm.nih.gov/compound/Sodium_dichromate&quot;&gt;sodium dichromate&lt;/a&gt;
+oxidation of 2-butanol to 2-butanone&lt;label for=&quot;butanoloxd&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;butanoloxd&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/oxidation-2-butanol.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;For reasons soon to be mentioned, I thought my attempt at this reaction had
+failed miserably, and so I decided to accept and forget. But a few days later I
+examined my experimental data - where I expected an alcohol proton in my NMR,
+there was none to be found!&lt;/p&gt;
+
+&lt;h2 id=&quot;h--the-experiment&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#h--the-experiment&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;H:&lt;/span&gt;  The Experiment&lt;/h2&gt;
+
+&lt;p&gt;The oxidation was performed via fractional distillation, with 2-butanone
+expected to distill in the 77-85°C range. I used 2.5mL butanol as my limiting
+reagent, and anticipated a modest ~2mL crude distillate.&lt;/p&gt;
+
+&lt;p&gt;I collected less than 0.5mL. Perhaps my setup was just very low-yielding? I ran
+an IR and submitted an NMR sample. The IR suggested the collected &lt;em&gt;“product”&lt;/em&gt;
+was almost entirely 2-butanol. I decided to run the experiment again,
+double-checking each step of the procedure.&lt;/p&gt;
+
+&lt;p&gt;Again, less than 0.5mL product was collected. I sighed, and st-&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;newthought&quot;&gt;What the hell?&lt;/span&gt; 
+Gas was evolving from my apparatus! Turns out, the distillation head had a small
+hole at the bottom of its thermometer joint&lt;label for=&quot;thrm&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;thrm&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Likely from someone
+attaching a thermometer too violently.&lt;/span&gt;
+. This explained the lack of
+product, but this time I could not run the reaction again - less than an hour
+remained in the lab period, there were no spare distillation heads, and I would
+still have to purify my product and collecting a melting point.&lt;/p&gt;
+
+&lt;p&gt;I cleaned up and headed out, forgetting to retract my bad NMR sample.&lt;/p&gt;
+
+&lt;h2 id=&quot;he--the-data&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#he--the-data&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;He:&lt;/span&gt;  The Data&lt;/h2&gt;
+
+&lt;p&gt;A couple days later, I received the NMR spectra for my submitted product, which
+I knew was actually 2-butanol. And that’s when it got interesting.&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/nmr-2-butanol.png&quot; /&gt;&lt;figcaption&gt;&lt;code&gt;1H NMR (400 MHz, CDCl3) δ ppm:&lt;/code&gt;&lt;br /&gt;&lt;code&gt;2.45 (t, 2H), 2.14 (s, 3H), 1.70 (s, 1H), 1.06(d, 3H)&lt;/code&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;br /&gt;
+Do you see it? Almost every hydrogen is accounted for - the signals at &lt;code class=&quot;highlighter-rouge&quot;&gt;2.14&lt;/code&gt;ppm
+and &lt;code class=&quot;highlighter-rouge&quot;&gt;1.06&lt;/code&gt;ppm correspond to the molecule’s methyl groups, at &lt;code class=&quot;highlighter-rouge&quot;&gt;1.70&lt;/code&gt;ppm is the hydrogen adjacent
+the alcohol&lt;label for=&quot;upfield&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;upfield&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+This proton should actually be further downfield.&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;
+,
+and at &lt;code class=&quot;highlighter-rouge&quot;&gt;2.45&lt;/code&gt;ppm are the protons of the third carbon&lt;label for=&quot;solvent&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;solvent&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;marginnote&quot;&gt;
+The minute rise at &lt;code&gt;7.27&lt;/code&gt; is the solvent, CDCl&lt;sub&gt;3&lt;/sub&gt;.&lt;/span&gt;
+ -
+but the alcohol proton is missing!&lt;/p&gt;
+
+&lt;p&gt;So where did it go? An argument could be made that the NMR sample was
+impure, producing a bad spectra. While this may be true, even in a poor
+spectrum one can expect the protons of the sample to have at least a small
+presence&lt;label for=&quot;goodnmr&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;goodnmr&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/nmr-2-butanol-PURE.png&quot; /&gt;&lt;br /&gt;For completeness, here is a spectrum of pure 2-butanol.&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;In fact, there is a far more interesting solution this puzzle.&lt;/p&gt;
+
+&lt;h2 id=&quot;li--hydrogen-bonding-and--oh-shifts&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#li--hydrogen-bonding-and--oh-shifts&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;Li:&lt;/span&gt;  Hydrogen Bonding and -OH Shifts&lt;/h2&gt;
+
+&lt;p&gt;The alcohol group of 2-butanol is susceptible to hydrogen bonding, but
+hydrogen bonds are dynamic and constantly changing. This produces a fairly large
+variability in electron density around the alcohol proton, leading to a broad
+range of potential chemical shifts&lt;label for=&quot;addit&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;addit&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+This type of behavior
+extends to most functional groups exhibiting hydrogen or other dynamic
+bonding, including amines.&lt;/span&gt;
+ (roughly between 2 and 5 ppm).&lt;/p&gt;
+
+&lt;p&gt;It may seems crazy, but this suggests that the alcohol proton is really just
+hidden amongst the doublet or triplet at &lt;code class=&quot;highlighter-rouge&quot;&gt;2.45&lt;/code&gt;ppm and &lt;code class=&quot;highlighter-rouge&quot;&gt;2.14&lt;/code&gt;ppm, respectively.
+At least, that’s my best theory&lt;label for=&quot;better&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;better&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+If you know of a better
+one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A theory for the missing alcohol&quot;&gt;let me know&lt;/a&gt;!&lt;/span&gt;
+,
+and it absolutely blows my mind.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently performed a sodium dichromate oxidation of 2-butanol to 2-butanone⊕.</summary></entry></feed>
