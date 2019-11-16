@@ -89,7 +89,11 @@
   <h2 id="lagrange-form">
 <a class="header-anchor" href="#lagrange-form">#</a>Lagrange Form</h2>
 
-<p>Say you want to find an function approximating a set of data points<label for="points" class="margin-toggle sidenote-number"></label><input type="checkbox" id="points" class="margin-toggle"><span class="sidenote">$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$ </span>. One way to do this is to find a
+<p>Say you want to find an function approximating a set of data points<label for="points" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="points" class="margin-toggle">
+<span class="sidenote">
+$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$</span>
+. One way to do this is to find a
 polynomial $p_n \in \mathbb{P}_n$ satisfying the interpolation property</p>
 
 <div class="mathblock"><script type="math/tex; mode=display">
@@ -119,7 +123,10 @@ p_n(x)    &= \sum_{i=0}^n \ell_i(x)f_i \\
 
 <div class="custom-block">
 where $\ell_i$ is a <a href="https://en.wikipedia.org/wiki/Lagrange_polynomial">Lagrange
-polynomial</a> of degree $n$.<label for="interpolationproof" class="margin-toggle">⊕</label><input type="checkbox" id="interpolationproof" class="margin-toggle"><div class="marginnote"> To see that $p_n$ interpolates correctly, observe that
+polynomial</a> of degree $n$.<label for="interpolationproof" class="margin-toggle">⊕</label>
+<input type="checkbox" id="interpolationproof" class="margin-toggle">
+<div class="marginnote">
+ To see that $p_n$ interpolates correctly, observe that
 
 <div class="mathblock"><script type="math/tex; mode=display">
 \ell_i(x) = \begin{cases}
@@ -176,11 +183,19 @@ the approximation.</p>
 
 <p>This behavior is <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon">Runge’s phenomenon</a>, and
 means that increasing the order of an approximating polynomial interpolant may not
-improve its accuracy<label for="wiki" class="margin-toggle sidenote-number"></label><input type="checkbox" id="wiki" class="margin-toggle"><span class="sidenote">Why this occurs is beyond the scope of this post; <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon#Reason">Wikipedia</a> gives a good explanation. </span>.</p>
+improve its accuracy<label for="wiki" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="wiki" class="margin-toggle">
+<span class="sidenote">
+Why this occurs is beyond the scope of this post; <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon#Reason">Wikipedia</a> gives a good explanation.</span>
+.</p>
 
 <p>One way to minimize Runge’s phenomenon is to densify the interpolating points near the endpoints of
-the approximation interval<label for="interval-endpoint" class="margin-toggle sidenote-number"></label><input type="checkbox" id="interval-endpoint" class="margin-toggle"><span class="sidenote">Thereby more accurately fitting the
-parts of the approximation affected by Runge’s phenomenon. </span>. <a href="https://en.wikipedia.org/wiki/Chebyshev_nodes">Chebyshev nodes</a>
+the approximation interval<label for="interval-endpoint" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="interval-endpoint" class="margin-toggle">
+<span class="sidenote">
+Thereby more accurately fitting the
+parts of the approximation affected by Runge’s phenomenon.</span>
+. <a href="https://en.wikipedia.org/wiki/Chebyshev_nodes">Chebyshev nodes</a>
 exhibit exactly this kind of edge-heavy density, making them very useful for polynomial interpolation.</p>
 
 <p>Creating a Barycentric interpolant with Chebyshev nodes yields a nice improvement.</p>
@@ -190,14 +205,22 @@ exhibit exactly this kind of edge-heavy density, making them very useful for pol
 <h2 id="convergence">
 <a class="header-anchor" href="#convergence">#</a>Convergence</h2>
 
-<p>Plotting the pointwise error of the Barycentric interpolant<label for="cheb-nodes" class="margin-toggle sidenote-number"></label><input type="checkbox" id="cheb-nodes" class="margin-toggle"><span class="sidenote">generated with Chebyshev nodes </span> approximating $f(x) = \sin(4x\cos(8x))$
+<p>Plotting the pointwise error of the Barycentric interpolant<label for="cheb-nodes" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="cheb-nodes" class="margin-toggle">
+<span class="sidenote">
+generated with Chebyshev nodes</span>
+ approximating $f(x) = \sin(4x\cos(8x))$
 suggests the polynomial interpolation is convergent.</p>
 
 <figure><img src="/assets/img/barycentric_interpolation/error.png"><figcaption></figcaption></figure>
 
 <p>Inspection of the error
-$l^2$ norms<label for="norm" class="margin-toggle sidenote-number"></label><input type="checkbox" id="norm" class="margin-toggle"><span class="sidenote">Note that many other norms can be used for convergence analysis as well. </span>
-suggests more:</p>
+$l^2$ norms<label for="norm" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="norm" class="margin-toggle">
+<span class="sidenote">
+Note that many other norms can be used for convergence analysis as well.</span></p>
+
+<p>suggests more:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Order   L2 norm
 16      8.562880126489002

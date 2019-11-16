@@ -747,6 +747,9 @@ section.self-image {
     .post-group h4,
     .post-group .custom-block {
       width: 100%; } }
+.post-group ol,
+.post-group ul {
+  width: 100%; }
 
 .title {
   margin-bottom: 0; }
