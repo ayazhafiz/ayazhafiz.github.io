@@ -734,6 +734,17 @@ section.self-image {
       left: unset;
       right: 1em; }
 
+section.footer {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  text-align: left;
+  width: 100%; }
+
 .post-group p,
 .post-group h2,
 .post-group h3,
@@ -762,9 +773,6 @@ section.self-image {
   @media only screen and (max-width: 760px) {
     .byline {
       margin-top: 0; } }
-
-.signoff {
-  text-align: left; }
 
 @media only screen and (max-width: 760px) {
   .post-group h1,
