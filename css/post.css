@@ -36,21 +36,6 @@ body {
 
 h1,
 h2,
-h3,
-h4,
-h5,
-h6 {
-  position: relative; }
-  h1:hover .header-anchor,
-  h2:hover .header-anchor,
-  h3:hover .header-anchor,
-  h4:hover .header-anchor,
-  h5:hover .header-anchor,
-  h6:hover .header-anchor {
-    display: block; }
-
-h1,
-h2,
 h3 {
   font-weight: 400;
   line-height: 1;
@@ -76,14 +61,6 @@ h3 {
 a {
   font-weight: 400;
   text-decoration: none; }
-  a.header-anchor {
-    bottom: 0;
-    color: #aaaaaa;
-    display: none;
-    font-style: normal;
-    left: -1em;
-    position: absolute;
-    width: 1em; }
   a, a:hover, a:active {
     color: #0366d6; }
   a:hover {
@@ -94,6 +71,34 @@ code {
 
 .align-left {
   text-align: left; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-left: -1em;
+  padding-left: 1em;
+  position: relative; }
+  h1:hover .header-anchor,
+  h2:hover .header-anchor,
+  h3:hover .header-anchor,
+  h4:hover .header-anchor,
+  h5:hover .header-anchor,
+  h6:hover .header-anchor {
+    display: block; }
+
+a.header-anchor {
+  bottom: 0;
+  color: #aaaaaa;
+  display: none;
+  font-style: normal;
+  left: 0;
+  position: absolute; }
+  a.header-anchor:hover, a.header-anchor:active {
+    color: #0366d6;
+    display: block; }
 
 .container {
   display: -webkit-box;
