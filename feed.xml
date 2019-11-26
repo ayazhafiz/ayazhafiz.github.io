@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-11-25T21:47:44-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">approximation with interpolating polynomials</title><link href="https://ayazhafiz.com/articles/19/barycentric-interpolation" rel="alternate" type="text/html" title="approximation with interpolating polynomials" /><published>2019-11-15T00:00:00-06:00</published><updated>2019-11-15T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/barycentric-interpolation</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/barycentric-interpolation">&lt;h2 id=&quot;lagrange-form&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#lagrange-form&quot;&gt;#&lt;/a&gt;Lagrange Form&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://staging.ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://staging.ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-11-25T21:54:42-06:00</updated><id>https://staging.ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">spacing of square roots</title><link href="https://staging.ayazhafiz.com/articles/19/square-root-spacing" rel="alternate" type="text/html" title="spacing of square roots" /><published>2019-11-25T00:00:00-06:00</published><updated>2019-11-25T00:00:00-06:00</updated><id>https://staging.ayazhafiz.com/articles/19/square-root-spacing</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/square-root-spacing">&lt;p&gt;The distance between consecutive perfect squares is not uniform:&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/squares/squares.png&quot; /&gt;&lt;figcaption&gt;First few perfect squares&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;The size of the space between $n^2$ and $(n+1)^2$ is $2n + 1$, intuitively
+evidenced by the growth in the spacing of the visualization above.&lt;/p&gt;
+
+&lt;p&gt;Now, take a look at the distance between consecutive integer square roots:&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/squares/sqroots.png&quot; /&gt;&lt;figcaption&gt;First few integer square roots&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;In particular, observe the spacing of integer square roots between $4$ and $9$ -
+at one degree of precision, they are uniformly distributed!&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/squares/sqroot-4-to-9.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;To me, this trend is significantly less intuitive. It makes sense in the “what
+else is expected?” kind-of way, but that expectation isn’t very satisfying. So
+here are a few other ways of understanding the spacing.&lt;/p&gt;
+
+&lt;h3 id=&quot;1--from-the-spacing-of-squares&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--from-the-spacing-of-squares&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  From the Spacing of Squares&lt;/h3&gt;
+
+&lt;p&gt;For $n \in \mathbb{N}$, between $n^2$ and $(n+1)^2$ are the natural numbers
+$n^2+1, n^2+2, \ldots, n^2 + 2n$. So between $n$ and $n+1$, there is a set of
+integer square root reals
+$S = \left\{\sqrt{n^2+1}, \sqrt{n^2+2}, \ldots, \sqrt{n^2 + 2n}\right\}$, and
+$|S| = 2n$. Now, because $S_{i+1} &amp;gt; S_i$, we can make an
+argument&lt;label for=&quot;pigeonhole&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;pigeonhole&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+somewhat similar
+to the pigeonhole principle&lt;/span&gt;
+ that for $n$ large, there are a large number of integer
+square roots in the 1-unit interval $(n, n+1)$, giving the perception of uniformity
+of the monotonically increasing set $S$.&lt;/p&gt;
+
+&lt;p&gt;But this explanation is not rigorous, and leaves one hungry for a more elegant
+explanation.&lt;/p&gt;
+
+&lt;h3 id=&quot;2--from-tangents&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--from-tangents&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  From Tangents&lt;/h3&gt;
+
+&lt;p&gt;Take a look at $f(x) = \sqrt{x}$:&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/squares/sqroot-plot.png&quot; /&gt;&lt;figcaption&gt;$f(x) = \sqrt{x}$ and its tangents, $\frac{d}{dx} f(x)$ on $x\pm 0.5, x\in[0,16]$&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;Observe that for $n$ large, the slopes of the tangents of $f(x)$ at $n$ and
+$n+1$ are small and very similar, implying&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;that there is little variation in the value of the function at $n$ and $n+1$,
+and&lt;/li&gt;
+  &lt;li&gt;the variation between $n$ and $n+1$ is very similar to the variation between
+$n+1$ and $n+2$.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;And that’s enough needed for a beautiful reasoning of the relative uniformity of
+integer square roots!&lt;/p&gt;
+
+&lt;p&gt;The great thing about this kind of reasoning is it also explains the increasing
+spacing between nodes of an exponential function, like $x^2$ or $e^x$. In both
+of these cases, the slopes of pointwise tangent lines are increasing,
+corresponding to the increasing rate of change in the spacing between e.g.
+perfect squares.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h4 id=&quot;3--a-remix&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--a-remix&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  A remix&lt;/h4&gt;
+
+  &lt;p&gt;To understand the previous reasoning a different way, consider
+$f(x) = \sqrt{x + 1} - \sqrt{x}$.&lt;/p&gt;
+
+  &lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/squares/sqroot-diff-plot.png&quot; /&gt;&lt;figcaption&gt;$f(x) = \sqrt{x + 1} - \sqrt{x}$&lt;/figcaption&gt;&lt;/figure&gt;
+
+  &lt;p&gt;The difference between consecutive integer square roots decreases
+asymptotically, and thus we have that there is a relative uniformity in their
+spacing – especially at large integer values.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;an-application&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#an-application&quot;&gt;#&lt;/a&gt;An Application&lt;/h2&gt;
+
+&lt;p&gt;A friend asked what practical purpose knowing the spacing of integer square
+roots serves. One useful application is in square root approximation - knowing
+that integer square roots are approximately uniform especially at large numbers,
+we can say that for an integer $q$, $\sqrt{q} \approx n + \frac{q-n^2}{2n+1}$,
+where
+$n = {\lfloor{\sqrt{q}}\rfloor}$&lt;label for=&quot;sqrt-example&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;sqrt-example&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+For example, $10.724 = \sqrt{115} \approx 10.714 = \sqrt{100} + \frac{15}{21}$.&lt;/span&gt;
+.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">The distance between consecutive perfect squares is not uniform:</summary></entry><entry><title type="html">approximation with interpolating polynomials</title><link href="https://staging.ayazhafiz.com/articles/19/barycentric-interpolation" rel="alternate" type="text/html" title="approximation with interpolating polynomials" /><published>2019-11-15T00:00:00-06:00</published><updated>2019-11-15T00:00:00-06:00</updated><id>https://staging.ayazhafiz.com/articles/19/barycentric-interpolation</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/barycentric-interpolation">&lt;h2 id=&quot;lagrange-form&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#lagrange-form&quot;&gt;#&lt;/a&gt;Lagrange Form&lt;/h2&gt;
 
 &lt;p&gt;Say you want to find an function approximating a set of data points&lt;label for=&quot;points&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;points&quot; class=&quot;margin-toggle&quot; /&gt;
@@ -135,7 +223,7 @@ Note that many other norms can be used for convergence analysis as well.&lt;/spa
 128     8.698460604825334e-14
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Clearly, the rate of convergence is pretty fast.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">#Lagrange Form</summary></entry><entry><title type="html">Texas carbon</title><link href="https://ayazhafiz.com/articles/19/texas-carbon" rel="alternate" type="text/html" title="Texas carbon" /><published>2019-10-26T01:00:00-05:00</published><updated>2019-10-26T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/texas-carbon</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/texas-carbon">&lt;p&gt;A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:&lt;/p&gt;
+&lt;p&gt;Clearly, the rate of convergence is pretty fast.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">#Lagrange Form</summary></entry><entry><title type="html">Texas carbon</title><link href="https://staging.ayazhafiz.com/articles/19/texas-carbon" rel="alternate" type="text/html" title="Texas carbon" /><published>2019-10-26T01:00:00-05:00</published><updated>2019-10-26T01:00:00-05:00</updated><id>https://staging.ayazhafiz.com/articles/19/texas-carbon</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/texas-carbon">&lt;p&gt;A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:&lt;/p&gt;
 
 &lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/texas-carbon-examples.png&quot; /&gt;&lt;figcaption&gt;Mistakenly-drawn carbon valencies&lt;/figcaption&gt;&lt;/figure&gt;
 
@@ -206,7 +294,7 @@ be planar. Both of these form beautiful five-point shapes.&lt;/p&gt;
 &lt;p&gt;Pentavalent carbons are one of those ideas most of us won’t deal with very often. But I think
 unique patterns like these are worth knowing, if not just for the sake of knowing.&lt;/p&gt;
 
-&lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry><entry><title type="html">type folding and options</title><link href="https://ayazhafiz.com/articles/19/type-folding-and-options" rel="alternate" type="text/html" title="type folding and options" /><published>2019-10-03T01:00:00-05:00</published><updated>2019-10-03T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/type-folding-and-options</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/type-folding-and-options">&lt;p&gt;Sometimes, I work with TypeScript compiler
+&lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry><entry><title type="html">type folding and options</title><link href="https://staging.ayazhafiz.com/articles/19/type-folding-and-options" rel="alternate" type="text/html" title="type folding and options" /><published>2019-10-03T01:00:00-05:00</published><updated>2019-10-03T01:00:00-05:00</updated><id>https://staging.ayazhafiz.com/articles/19/type-folding-and-options</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/type-folding-and-options">&lt;p&gt;Sometimes, I work with TypeScript compiler
 APIs&lt;label for=&quot;tsapi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;tsapi&quot; class=&quot;margin-toggle&quot; /&gt;
 &lt;span class=&quot;marginnote&quot;&gt;
@@ -280,7 +368,7 @@ very quickly:&lt;/p&gt;
 &lt;script src=&quot;https://gist.github.com/2a42ded6979c988875188f6133639f78.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;Will the Angular Language Service use &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s? Probably not. But it’s a fun
-idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕ They’re great APIs! . Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language Service If the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:. :</summary></entry><entry><title type="html">Equivalence matters</title><link href="https://ayazhafiz.com/articles/19/equivalence-matters" rel="alternate" type="text/html" title="Equivalence matters" /><published>2019-09-02T01:00:00-05:00</published><updated>2019-09-02T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/equivalence-matters</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/equivalence-matters">&lt;p&gt;I recently wrote about
+idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕ They’re great APIs! . Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language Service If the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:. :</summary></entry><entry><title type="html">Equivalence matters</title><link href="https://staging.ayazhafiz.com/articles/19/equivalence-matters" rel="alternate" type="text/html" title="Equivalence matters" /><published>2019-09-02T01:00:00-05:00</published><updated>2019-09-02T01:00:00-05:00</updated><id>https://staging.ayazhafiz.com/articles/19/equivalence-matters</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/equivalence-matters">&lt;p&gt;I recently wrote about
 &lt;a href=&quot;./smart-is-not-a-good-word&quot;&gt;why “smart” is not a good word&lt;/a&gt;. You don’t
 necessarily need to read that post to understand this one; the main idea is that
 “smart” is usually used as a supercategory abstracting and trivializing
@@ -408,7 +496,7 @@ individual’s experience.&lt;/p&gt;
 only hope this can provide a perspective.&lt;/p&gt;
 
 &lt;p&gt;If you would like to contact me for any reason, I am best reached
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry><entry><title type="html">what i did summer 2019</title><link href="https://ayazhafiz.com/articles/19/what-i-did-this-summer" rel="alternate" type="text/html" title="what i did summer 2019" /><published>2019-08-10T01:00:00-05:00</published><updated>2019-08-10T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/what-i-did-this-summer</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/what-i-did-this-summer">&lt;p&gt;&lt;label for=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry><entry><title type="html">what i did summer 2019</title><link href="https://staging.ayazhafiz.com/articles/19/what-i-did-this-summer" rel="alternate" type="text/html" title="what i did summer 2019" /><published>2019-08-10T01:00:00-05:00</published><updated>2019-08-10T01:00:00-05:00</updated><id>https://staging.ayazhafiz.com/articles/19/what-i-did-this-summer</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/what-i-did-this-summer">&lt;p&gt;&lt;label for=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot; /&gt;
 &lt;span class=&quot;marginnote&quot;&gt;
 A &lt;em&gt;What I Did&lt;/em&gt; is my intersection
@@ -677,7 +765,7 @@ Chemistry.&lt;/li&gt;
 
 &lt;p&gt;If you got this far, you probably want to talk. Cool, I do too! The best way to
 contact me is via
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕ A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry><entry><title type="html">“Smart” is not a good word</title><link href="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word" rel="alternate" type="text/html" title="&quot;Smart&quot; is not a good word" /><published>2019-07-18T01:00:00-05:00</published><updated>2019-07-18T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/smart-is-not-a-good-word</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word">&lt;blockquote&gt;
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕ A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry><entry><title type="html">“Smart” is not a good word</title><link href="https://staging.ayazhafiz.com/articles/19/smart-is-not-a-good-word" rel="alternate" type="text/html" title="&quot;Smart&quot; is not a good word" /><published>2019-07-18T01:00:00-05:00</published><updated>2019-07-18T01:00:00-05:00</updated><id>https://staging.ayazhafiz.com/articles/19/smart-is-not-a-good-word</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/smart-is-not-a-good-word">&lt;blockquote&gt;
   &lt;p&gt;&lt;small&gt;I’m going to be vulnerable in this post. Regardless of whether you know
 me personally, please treat this discussion primarily as a presentation of
 opinion.&lt;/small&gt;&lt;/p&gt;
@@ -821,7 +909,7 @@ it’s even a bad word.&lt;/p&gt;
 &lt;h4 id=&quot;thoughtthoughts&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#thoughtthoughts&quot;&gt;#&lt;/a&gt;ThoughtThoughts&lt;/h4&gt;
 
 &lt;p&gt;I would like to hear your thoughts about my thoughts. The best way to contact me
-is via &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Ideas&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I’m going to be vulnerable in this post. Regardless of whether you know me personally, please treat this discussion primarily as a presentation of opinion.</summary></entry><entry><title type="html">A macOS workspace with a tiling WM</title><link href="https://ayazhafiz.com/articles/19/tiling-wm-macos" rel="alternate" type="text/html" title="A macOS workspace with a tiling WM" /><published>2019-05-05T01:00:00-05:00</published><updated>2019-05-05T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/tiling-wm-macos</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/tiling-wm-macos">&lt;blockquote&gt;
+is via &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Ideas&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I’m going to be vulnerable in this post. Regardless of whether you know me personally, please treat this discussion primarily as a presentation of opinion.</summary></entry><entry><title type="html">A macOS workspace with a tiling WM</title><link href="https://staging.ayazhafiz.com/articles/19/tiling-wm-macos" rel="alternate" type="text/html" title="A macOS workspace with a tiling WM" /><published>2019-05-05T01:00:00-05:00</published><updated>2019-05-05T01:00:00-05:00</updated><id>https://staging.ayazhafiz.com/articles/19/tiling-wm-macos</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/tiling-wm-macos">&lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;Update&lt;/em&gt;: Development of &lt;a href=&quot;https://github.com/koekeishiya/chunkwm&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt;&lt;/a&gt;
 has ceased in favor of &lt;a href=&quot;https://github.com/koekeishiya/yabai&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;yabai&lt;/code&gt;&lt;/a&gt;. It’s
 recommended you now use &lt;code class=&quot;highlighter-rouge&quot;&gt;yabai&lt;/code&gt; for your macOS tiling needs.&lt;/p&gt;
@@ -1011,7 +1099,7 @@ this one constantly evolves as my needs and preferences change.&lt;/p&gt;
 &lt;p&gt;If you find my configurations useful, have comments about this discussion, have
 another perspective you’d like share, or anything else related, &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re: Your macOS workspace with a tiling
 wm&quot;&gt;please ping
-me&lt;/a&gt;. I’d love to chat.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Update: Development of chunkwm has ceased in favor of yabai. It’s recommended you now use yabai for your macOS tiling needs.</summary></entry><entry><title type="html">over-engineering a code</title><link href="https://ayazhafiz.com/articles/19/engineering-a-code" rel="alternate" type="text/html" title="over-engineering a code" /><published>2019-02-28T00:00:00-06:00</published><updated>2019-02-28T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/engineering-a-code</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/engineering-a-code">&lt;p&gt;Say you are a software engineer, or developer, or whatever other abstracted
+me&lt;/a&gt;. I’d love to chat.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Update: Development of chunkwm has ceased in favor of yabai. It’s recommended you now use yabai for your macOS tiling needs.</summary></entry><entry><title type="html">over-engineering a code</title><link href="https://staging.ayazhafiz.com/articles/19/engineering-a-code" rel="alternate" type="text/html" title="over-engineering a code" /><published>2019-02-28T00:00:00-06:00</published><updated>2019-02-28T00:00:00-06:00</updated><id>https://staging.ayazhafiz.com/articles/19/engineering-a-code</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/19/engineering-a-code">&lt;p&gt;Say you are a software engineer, or developer, or whatever other abstracted
 word for &lt;em&gt;programmer&lt;/em&gt; that has some meaning to you. Say you have also been given
 some scientific computation problem, like estimating the value of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \pi &lt;/script&gt;&lt;/span&gt; with the
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Monte_Carlo_method&quot;&gt;Monte Carlo&lt;/a&gt; method.&lt;/p&gt;
@@ -1088,7 +1176,7 @@ read: new age&lt;/span&gt;
 
 &lt;h2 id=&quot;4--why&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#4--why&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;4:&lt;/span&gt;  Why?&lt;/h2&gt;
 
-&lt;p&gt;I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A good reason for over-engineering&quot;&gt;let me know&lt;/a&gt;. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Say you are a software engineer, or developer, or whatever other abstracted word for programmer that has some meaning to you. Say you have also been given some scientific computation problem, like estimating the value of ​ with the Monte Carlo method.</summary></entry><entry><title type="html">where i’m going</title><link href="https://ayazhafiz.com/articles/18/where-im-going" rel="alternate" type="text/html" title="where i'm going" /><published>2018-11-23T00:00:00-06:00</published><updated>2018-11-23T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/18/where-im-going</id><content type="html" xml:base="https://ayazhafiz.com/articles/18/where-im-going">&lt;hr /&gt;
+&lt;p&gt;I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A good reason for over-engineering&quot;&gt;let me know&lt;/a&gt;. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Say you are a software engineer, or developer, or whatever other abstracted word for programmer that has some meaning to you. Say you have also been given some scientific computation problem, like estimating the value of ​ with the Monte Carlo method.</summary></entry><entry><title type="html">where i’m going</title><link href="https://staging.ayazhafiz.com/articles/18/where-im-going" rel="alternate" type="text/html" title="where i'm going" /><published>2018-11-23T00:00:00-06:00</published><updated>2018-11-23T00:00:00-06:00</updated><id>https://staging.ayazhafiz.com/articles/18/where-im-going</id><content type="html" xml:base="https://staging.ayazhafiz.com/articles/18/where-im-going">&lt;hr /&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:much&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;&amp;#8712;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;months&lt;/span&gt;
@@ -1189,88 +1277,4 @@ read: new age&lt;/span&gt;
 
 &lt;h2 id=&quot;checkered_flag&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#checkered_flag&quot;&gt;#&lt;/a&gt;:checkered_flag:&lt;/h2&gt;
 
-&lt;p&gt;And with that, my revitalization is in motion (okay, maybe &lt;em&gt;revitalization&lt;/em&gt; is too dramatic). But really, I do anticipate that I will be making Big Contributions in the near future. I am not a relic of The Important Past.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">i =&amp;gt; !done(:much) &amp;#8712; (0..=18).months</summary></entry><entry><title type="html">the case of the missing alcohol proton</title><link href="https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol" rel="alternate" type="text/html" title="the case of the missing alcohol proton" /><published>2018-02-27T00:00:00-06:00</published><updated>2018-02-27T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol</id><content type="html" xml:base="https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol">&lt;p&gt;I recently performed a &lt;a href=&quot;https://pubchem.ncbi.nlm.nih.gov/compound/Sodium_dichromate&quot;&gt;sodium dichromate&lt;/a&gt;
-oxidation of 2-butanol to 2-butanone&lt;label for=&quot;butanoloxd&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;butanoloxd&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/oxidation-2-butanol.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;For reasons soon to be mentioned, I thought my attempt at this reaction had
-failed miserably, and so I decided to accept and forget. But a few days later I
-examined my experimental data - where I expected an alcohol proton in my NMR,
-there was none to be found!&lt;/p&gt;
-
-&lt;h2 id=&quot;h--the-experiment&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#h--the-experiment&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;H:&lt;/span&gt;  The Experiment&lt;/h2&gt;
-
-&lt;p&gt;The oxidation was performed via fractional distillation, with 2-butanone
-expected to distill in the 77-85°C range. I used 2.5mL butanol as my limiting
-reagent, and anticipated a modest ~2mL crude distillate.&lt;/p&gt;
-
-&lt;p&gt;I collected less than 0.5mL. Perhaps my setup was just very low-yielding? I ran
-an IR and submitted an NMR sample. The IR suggested the collected &lt;em&gt;“product”&lt;/em&gt;
-was almost entirely 2-butanol. I decided to run the experiment again,
-double-checking each step of the procedure.&lt;/p&gt;
-
-&lt;p&gt;Again, less than 0.5mL product was collected. I sighed, and st-&lt;/p&gt;
-
-&lt;p&gt;&lt;span class=&quot;newthought&quot;&gt;What the hell?&lt;/span&gt; 
-Gas was evolving from my apparatus! Turns out, the distillation head had a small
-hole at the bottom of its thermometer joint&lt;label for=&quot;thrm&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;thrm&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Likely from someone
-attaching a thermometer too violently.&lt;/span&gt;
-. This explained the lack of
-product, but this time I could not run the reaction again - less than an hour
-remained in the lab period, there were no spare distillation heads, and I would
-still have to purify my product and collecting a melting point.&lt;/p&gt;
-
-&lt;p&gt;I cleaned up and headed out, forgetting to retract my bad NMR sample.&lt;/p&gt;
-
-&lt;h2 id=&quot;he--the-data&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#he--the-data&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;He:&lt;/span&gt;  The Data&lt;/h2&gt;
-
-&lt;p&gt;A couple days later, I received the NMR spectra for my submitted product, which
-I knew was actually 2-butanol. And that’s when it got interesting.&lt;/p&gt;
-
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/nmr-2-butanol.png&quot; /&gt;&lt;figcaption&gt;&lt;code&gt;1H NMR (400 MHz, CDCl3) δ ppm:&lt;/code&gt;&lt;br /&gt;&lt;code&gt;2.45 (t, 2H), 2.14 (s, 3H), 1.70 (s, 1H), 1.06(d, 3H)&lt;/code&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;br /&gt;
-Do you see it? Almost every hydrogen is accounted for - the signals at &lt;code class=&quot;highlighter-rouge&quot;&gt;2.14&lt;/code&gt;ppm
-and &lt;code class=&quot;highlighter-rouge&quot;&gt;1.06&lt;/code&gt;ppm correspond to the molecule’s methyl groups, at &lt;code class=&quot;highlighter-rouge&quot;&gt;1.70&lt;/code&gt;ppm is the hydrogen adjacent
-the alcohol&lt;label for=&quot;upfield&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;upfield&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-This proton should actually be further downfield.&lt;br /&gt;&lt;br /&gt;&lt;/span&gt;
-,
-and at &lt;code class=&quot;highlighter-rouge&quot;&gt;2.45&lt;/code&gt;ppm are the protons of the third carbon&lt;label for=&quot;solvent&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;solvent&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-The minute rise at &lt;code&gt;7.27&lt;/code&gt; is the solvent, CDCl&lt;sub&gt;3&lt;/sub&gt;.&lt;/span&gt;
- -
-but the alcohol proton is missing!&lt;/p&gt;
-
-&lt;p&gt;So where did it go? An argument could be made that the NMR sample was
-impure, producing a bad spectra. While this may be true, even in a poor
-spectrum one can expect the protons of the sample to have at least a small
-presence&lt;label for=&quot;goodnmr&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;goodnmr&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/nmr-2-butanol-PURE.png&quot; /&gt;&lt;br /&gt;For completeness, here is a spectrum of pure 2-butanol.&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;In fact, there is a far more interesting solution this puzzle.&lt;/p&gt;
-
-&lt;h2 id=&quot;li--hydrogen-bonding-and--oh-shifts&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#li--hydrogen-bonding-and--oh-shifts&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;Li:&lt;/span&gt;  Hydrogen Bonding and -OH Shifts&lt;/h2&gt;
-
-&lt;p&gt;The alcohol group of 2-butanol is susceptible to hydrogen bonding, but
-hydrogen bonds are dynamic and constantly changing. This produces a fairly large
-variability in electron density around the alcohol proton, leading to a broad
-range of potential chemical shifts&lt;label for=&quot;addit&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;addit&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-This type of behavior
-extends to most functional groups exhibiting hydrogen or other dynamic
-bonding, including amines.&lt;/span&gt;
- (roughly between 2 and 5 ppm).&lt;/p&gt;
-
-&lt;p&gt;It may seems crazy, but this suggests that the alcohol proton is really just
-hidden amongst the doublet or triplet at &lt;code class=&quot;highlighter-rouge&quot;&gt;2.45&lt;/code&gt;ppm and &lt;code class=&quot;highlighter-rouge&quot;&gt;2.14&lt;/code&gt;ppm, respectively.
-At least, that’s my best theory&lt;label for=&quot;better&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;better&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-If you know of a better
-one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A theory for the missing alcohol&quot;&gt;let me know&lt;/a&gt;!&lt;/span&gt;
-,
-and it absolutely blows my mind.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently performed a sodium dichromate oxidation of 2-butanol to 2-butanone⊕.</summary></entry></feed>
+&lt;p&gt;And with that, my revitalization is in motion (okay, maybe &lt;em&gt;revitalization&lt;/em&gt; is too dramatic). But really, I do anticipate that I will be making Big Contributions in the near future. I am not a relic of The Important Past.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">i =&amp;gt; !done(:much) &amp;#8712; (0..=18).months</summary></entry></feed>
