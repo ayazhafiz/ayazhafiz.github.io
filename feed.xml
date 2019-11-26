@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-11-25T20:12:44-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">approximation with interpolating polynomials</title><link href="https://ayazhafiz.com/articles/19/barycentric-interpolation" rel="alternate" type="text/html" title="approximation with interpolating polynomials" /><published>2019-11-15T00:00:00-06:00</published><updated>2019-11-15T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/barycentric-interpolation</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/barycentric-interpolation">&lt;h2 id=&quot;lagrange-form&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#lagrange-form&quot;&gt;#&lt;/a&gt;Lagrange Form&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="/https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="/https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-11-25T20:24:41-06:00</updated><id>/https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">approximation with interpolating polynomials</title><link href="/https://ayazhafiz.com/articles/19/barycentric-interpolation" rel="alternate" type="text/html" title="approximation with interpolating polynomials" /><published>2019-11-15T00:00:00-06:00</published><updated>2019-11-15T00:00:00-06:00</updated><id>/https://ayazhafiz.com/articles/19/barycentric-interpolation</id><content type="html" xml:base="/https://ayazhafiz.com/articles/19/barycentric-interpolation">&lt;h2 id=&quot;lagrange-form&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#lagrange-form&quot;&gt;#&lt;/a&gt;Lagrange Form&lt;/h2&gt;
 
 &lt;p&gt;Say you want to find an function approximating a set of data points&lt;label for=&quot;points&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;points&quot; class=&quot;margin-toggle&quot; /&gt;
@@ -81,7 +81,7 @@ to be recomputed for subsequent evaluations of $p_n$.&lt;/p&gt;
 &lt;p&gt;Approximating $f(x) = \sin(4x\cos(8x))$ with various degrees of the Barycentric interpolant, using
 equidistant interpolating nodes, gives&lt;/p&gt;
 
-&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/equidistant.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/barycentric_interpolation/equidistant.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;These polynomials definitely interpolate points of $f(x)$, but have the unfortunate tendency to blow up
 around the interval endpoints. Note that the magnitude of the error at the edges grows with the degree of
@@ -108,7 +108,7 @@ exhibit exactly this kind of edge-heavy density, making them very useful for pol
 
 &lt;p&gt;Creating a Barycentric interpolant with Chebyshev nodes yields a nice improvement.&lt;/p&gt;
 
-&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/chebyshev.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/barycentric_interpolation/chebyshev.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;convergence&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#convergence&quot;&gt;#&lt;/a&gt;Convergence&lt;/h2&gt;
 
@@ -119,7 +119,7 @@ generated with Chebyshev nodes&lt;/span&gt;
  approximating $f(x) = \sin(4x\cos(8x))$
 suggests the polynomial interpolation is convergent.&lt;/p&gt;
 
-&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/error.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/barycentric_interpolation/error.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;Inspection of the error
 $l^2$ norms&lt;label for=&quot;norm&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
@@ -135,11 +135,11 @@ Note that many other norms can be used for convergence analysis as well.&lt;/spa
 128     8.698460604825334e-14
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Clearly, the rate of convergence is pretty fast.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">#Lagrange Form</summary></entry><entry><title type="html">Texas carbon</title><link href="https://ayazhafiz.com/articles/19/texas-carbon" rel="alternate" type="text/html" title="Texas carbon" /><published>2019-10-26T01:00:00-05:00</published><updated>2019-10-26T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/texas-carbon</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/texas-carbon">&lt;p&gt;A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:&lt;/p&gt;
+&lt;p&gt;Clearly, the rate of convergence is pretty fast.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">#Lagrange Form</summary></entry><entry><title type="html">Texas carbon</title><link href="/https://ayazhafiz.com/articles/19/texas-carbon" rel="alternate" type="text/html" title="Texas carbon" /><published>2019-10-26T01:00:00-05:00</published><updated>2019-10-26T01:00:00-05:00</updated><id>/https://ayazhafiz.com/articles/19/texas-carbon</id><content type="html" xml:base="/https://ayazhafiz.com/articles/19/texas-carbon">&lt;p&gt;A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:&lt;/p&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/texas-carbon-examples.png&quot; /&gt;&lt;figcaption&gt;Mistakenly-drawn carbon valencies&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/texas-carbon-examples.png&quot; /&gt;&lt;figcaption&gt;Mistakenly-drawn carbon valencies&lt;/figcaption&gt;&lt;/figure&gt;
 
-&lt;p&gt;Colloquially, carbon atoms with five covalent bonds are called &lt;a href=&quot;http://www.chem.ucla.edu/~harding/IGOC/P/pentavalent_carbon.html&quot;&gt;Texas Carbon&lt;/a&gt;s&lt;label for=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/texas-carbon-flag.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;label for=&quot;texas-carbon&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;p&gt;Colloquially, carbon atoms with five covalent bonds are called &lt;a href=&quot;http://www.chem.ucla.edu/~harding/IGOC/P/pentavalent_carbon.html&quot;&gt;Texas Carbon&lt;/a&gt;s&lt;label for=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;https://ayazhafiz.com/assets/img/texas-carbon-flag.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;label for=&quot;texas-carbon&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon&quot; class=&quot;margin-toggle&quot; /&gt;
 &lt;span class=&quot;sidenote&quot;&gt;
 Either because the Texas star has five points or because everything is bigger in Texas.&lt;/span&gt;
@@ -169,7 +169,7 @@ prepared using methanium:&lt;/p&gt;
 \text{C}_2\text{H}_7^+ \to \text{C}_2\text{H}_5^+ + \text{H}_2
 &lt;/script&gt;&lt;/div&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/ethanium-ethenium.png&quot; /&gt;&lt;figcaption&gt;Dissociation of ethanium into ethenium and hydrogen gas&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/ethanium-ethenium.png&quot; /&gt;&lt;figcaption&gt;Dissociation of ethanium into ethenium and hydrogen gas&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;Practically, these species are formed as intermediate species and via thermal cracking&lt;label for=&quot;pcformation&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;pcformation&quot; class=&quot;margin-toggle&quot; /&gt;
@@ -185,7 +185,7 @@ substantial claims about the stability of such compounds, it seems (somewhat exp
 to well-charged, larger-size atoms like those in Group 15 and 16 help stabilize pentavalent carbon
 and boron.&lt;/p&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/pentavalent-cb.png&quot; /&gt;&lt;figcaption&gt;Pentavalent Carbon and Boron Compounds&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/pentavalent-cb.png&quot; /&gt;&lt;figcaption&gt;Pentavalent Carbon and Boron Compounds&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;The bond angle of the emphasized &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{O}-\text{C}-\text{O}&lt;/script&gt;&lt;/span&gt; is &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\sim 160^\circ&lt;/script&gt;&lt;/span&gt;, more than the
 &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;144^\circ&lt;/script&gt;&lt;/span&gt; expected for the star shape of a pentavalent carbon, and likely explained by
@@ -199,14 +199,14 @@ experimentally in the gas phase. &lt;a href=&quot;https://pubs.rsc.org/en/conten
 predicts the lithium cluster derivatives &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{CBe}_5{Li}_n^{n-4}, n \in [1, 5]&lt;/script&gt;&lt;/span&gt; to also
 be planar. Both of these form beautiful five-point shapes.&lt;/p&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/cbe5-derivatives.png&quot; /&gt;&lt;figcaption&gt;Star-shaped pentavalent carbon derivatives&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/cbe5-derivatives.png&quot; /&gt;&lt;figcaption&gt;Star-shaped pentavalent carbon derivatives&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;beyond-the-stars&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#beyond-the-stars&quot;&gt;#&lt;/a&gt;Beyond the stars&lt;/h3&gt;
 
 &lt;p&gt;Pentavalent carbons are one of those ideas most of us won’t deal with very often. But I think
 unique patterns like these are worth knowing, if not just for the sake of knowing.&lt;/p&gt;
 
-&lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry><entry><title type="html">type folding and options</title><link href="https://ayazhafiz.com/articles/19/type-folding-and-options" rel="alternate" type="text/html" title="type folding and options" /><published>2019-10-03T01:00:00-05:00</published><updated>2019-10-03T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/type-folding-and-options</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/type-folding-and-options">&lt;p&gt;Sometimes, I work with TypeScript compiler
+&lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry><entry><title type="html">type folding and options</title><link href="/https://ayazhafiz.com/articles/19/type-folding-and-options" rel="alternate" type="text/html" title="type folding and options" /><published>2019-10-03T01:00:00-05:00</published><updated>2019-10-03T01:00:00-05:00</updated><id>/https://ayazhafiz.com/articles/19/type-folding-and-options</id><content type="html" xml:base="/https://ayazhafiz.com/articles/19/type-folding-and-options">&lt;p&gt;Sometimes, I work with TypeScript compiler
 APIs&lt;label for=&quot;tsapi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;tsapi&quot; class=&quot;margin-toggle&quot; /&gt;
 &lt;span class=&quot;marginnote&quot;&gt;
@@ -280,7 +280,7 @@ very quickly:&lt;/p&gt;
 &lt;script src=&quot;https://gist.github.com/2a42ded6979c988875188f6133639f78.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;Will the Angular Language Service use &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s? Probably not. But it’s a fun
-idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕ They’re great APIs! . Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language Service If the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:. :</summary></entry><entry><title type="html">Equivalence matters</title><link href="https://ayazhafiz.com/articles/19/equivalence-matters" rel="alternate" type="text/html" title="Equivalence matters" /><published>2019-09-02T01:00:00-05:00</published><updated>2019-09-02T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/equivalence-matters</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/equivalence-matters">&lt;p&gt;I recently wrote about
+idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕ They’re great APIs! . Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language Service If the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:. :</summary></entry><entry><title type="html">Equivalence matters</title><link href="/https://ayazhafiz.com/articles/19/equivalence-matters" rel="alternate" type="text/html" title="Equivalence matters" /><published>2019-09-02T01:00:00-05:00</published><updated>2019-09-02T01:00:00-05:00</updated><id>/https://ayazhafiz.com/articles/19/equivalence-matters</id><content type="html" xml:base="/https://ayazhafiz.com/articles/19/equivalence-matters">&lt;p&gt;I recently wrote about
 &lt;a href=&quot;./smart-is-not-a-good-word&quot;&gt;why “smart” is not a good word&lt;/a&gt;. You don’t
 necessarily need to read that post to understand this one; the main idea is that
 “smart” is usually used as a supercategory abstracting and trivializing
@@ -408,7 +408,7 @@ individual’s experience.&lt;/p&gt;
 only hope this can provide a perspective.&lt;/p&gt;
 
 &lt;p&gt;If you would like to contact me for any reason, I am best reached
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry><entry><title type="html">what i did summer 2019</title><link href="https://ayazhafiz.com/articles/19/what-i-did-this-summer" rel="alternate" type="text/html" title="what i did summer 2019" /><published>2019-08-10T01:00:00-05:00</published><updated>2019-08-10T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/what-i-did-this-summer</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/what-i-did-this-summer">&lt;p&gt;&lt;label for=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry><entry><title type="html">what i did summer 2019</title><link href="/https://ayazhafiz.com/articles/19/what-i-did-this-summer" rel="alternate" type="text/html" title="what i did summer 2019" /><published>2019-08-10T01:00:00-05:00</published><updated>2019-08-10T01:00:00-05:00</updated><id>/https://ayazhafiz.com/articles/19/what-i-did-this-summer</id><content type="html" xml:base="/https://ayazhafiz.com/articles/19/what-i-did-this-summer">&lt;p&gt;&lt;label for=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot; /&gt;
 &lt;span class=&quot;marginnote&quot;&gt;
 A &lt;em&gt;What I Did&lt;/em&gt; is my intersection
@@ -571,7 +571,7 @@ a joyful summer.&lt;/p&gt;
 &lt;span class=&quot;marginnote&quot;&gt;
 These names likely mean nothing to you, but the picture only missed Dino and Courtney :cry:&lt;/span&gt;&lt;/p&gt;
 
-&lt;figure&gt;&lt;img src=&quot;/assets/img/hh2019.jpg&quot; /&gt;&lt;figcaption&gt;Mountain View Hacker Home, Summer 2019&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/hh2019.jpg&quot; /&gt;&lt;figcaption&gt;Mountain View Hacker Home, Summer 2019&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;what-i-learned&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#what-i-learned&quot;&gt;#&lt;/a&gt;What I learned&lt;/h3&gt;
 
@@ -677,7 +677,7 @@ Chemistry.&lt;/li&gt;
 
 &lt;p&gt;If you got this far, you probably want to talk. Cool, I do too! The best way to
 contact me is via
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕ A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry><entry><title type="html">“Smart” is not a good word</title><link href="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word" rel="alternate" type="text/html" title="&quot;Smart&quot; is not a good word" /><published>2019-07-18T01:00:00-05:00</published><updated>2019-07-18T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/smart-is-not-a-good-word</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word">&lt;blockquote&gt;
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕ A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry><entry><title type="html">“Smart” is not a good word</title><link href="/https://ayazhafiz.com/articles/19/smart-is-not-a-good-word" rel="alternate" type="text/html" title="&quot;Smart&quot; is not a good word" /><published>2019-07-18T01:00:00-05:00</published><updated>2019-07-18T01:00:00-05:00</updated><id>/https://ayazhafiz.com/articles/19/smart-is-not-a-good-word</id><content type="html" xml:base="/https://ayazhafiz.com/articles/19/smart-is-not-a-good-word">&lt;blockquote&gt;
   &lt;p&gt;&lt;small&gt;I’m going to be vulnerable in this post. Regardless of whether you know
 me personally, please treat this discussion primarily as a presentation of
 opinion.&lt;/small&gt;&lt;/p&gt;
@@ -821,7 +821,7 @@ it’s even a bad word.&lt;/p&gt;
 &lt;h4 id=&quot;thoughtthoughts&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#thoughtthoughts&quot;&gt;#&lt;/a&gt;ThoughtThoughts&lt;/h4&gt;
 
 &lt;p&gt;I would like to hear your thoughts about my thoughts. The best way to contact me
-is via &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Ideas&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I’m going to be vulnerable in this post. Regardless of whether you know me personally, please treat this discussion primarily as a presentation of opinion.</summary></entry><entry><title type="html">A macOS workspace with a tiling WM</title><link href="https://ayazhafiz.com/articles/19/tiling-wm-macos" rel="alternate" type="text/html" title="A macOS workspace with a tiling WM" /><published>2019-05-05T01:00:00-05:00</published><updated>2019-05-05T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/tiling-wm-macos</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/tiling-wm-macos">&lt;blockquote&gt;
+is via &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Ideas&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I’m going to be vulnerable in this post. Regardless of whether you know me personally, please treat this discussion primarily as a presentation of opinion.</summary></entry><entry><title type="html">A macOS workspace with a tiling WM</title><link href="/https://ayazhafiz.com/articles/19/tiling-wm-macos" rel="alternate" type="text/html" title="A macOS workspace with a tiling WM" /><published>2019-05-05T01:00:00-05:00</published><updated>2019-05-05T01:00:00-05:00</updated><id>/https://ayazhafiz.com/articles/19/tiling-wm-macos</id><content type="html" xml:base="/https://ayazhafiz.com/articles/19/tiling-wm-macos">&lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;Update&lt;/em&gt;: Development of &lt;a href=&quot;https://github.com/koekeishiya/chunkwm&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt;&lt;/a&gt;
 has ceased in favor of &lt;a href=&quot;https://github.com/koekeishiya/yabai&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;yabai&lt;/code&gt;&lt;/a&gt;. It’s
 recommended you now use &lt;code class=&quot;highlighter-rouge&quot;&gt;yabai&lt;/code&gt; for your macOS tiling needs.&lt;/p&gt;
@@ -867,15 +867,15 @@ setup of &lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt;.&l
 
 &lt;h3 id=&quot;02--screens&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#02--screens&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;0.2:&lt;/span&gt;  Screens&lt;/h3&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/neovim_start.jpg&quot; /&gt;&lt;figcaption&gt;neovim start screen&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/neovim_start.jpg&quot; /&gt;&lt;figcaption&gt;neovim start screen&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/vim_tmux_chunkwm.jpg&quot; /&gt;&lt;figcaption&gt;neovim in tmux, chunkwm-tiled windows&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/vim_tmux_chunkwm.jpg&quot; /&gt;&lt;figcaption&gt;neovim in tmux, chunkwm-tiled windows&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/ranger_qutebrowser.jpg&quot; /&gt;&lt;figcaption&gt;ranger in tmux, qutebrowser&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/ranger_qutebrowser.jpg&quot; /&gt;&lt;figcaption&gt;ranger in tmux, qutebrowser&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;1--chunkwm-and-skhd-for-tiling-windows&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--chunkwm-and-skhd-for-tiling-windows&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  &lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;skhd&lt;/code&gt; for tiling windows&lt;/h2&gt;
 
@@ -898,7 +898,7 @@ the program that sends messages to &lt;code class=&quot;highlighter-rouge&quot;&
 
 &lt;p&gt;commands, enabling window management via just the keyboard.&lt;/p&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/skhd-chunkwm.gif&quot; /&gt;&lt;figcaption&gt;manipulating windows with skhd&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/skhd-chunkwm.gif&quot; /&gt;&lt;figcaption&gt;manipulating windows with skhd&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chunkwm&lt;/code&gt; provides a configuration file for setting window gaps, border offsets,
 border colors, and other aesthetic features; &lt;code class=&quot;highlighter-rouge&quot;&gt;skhd&lt;/code&gt; has a configuration file for
@@ -933,7 +933,7 @@ have just one terminal window open and manage various sessions inside it. &lt;co
 sessions persist independently of the emulator they are run in, so you can enter
 and exit them anytime you want.&lt;/p&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/tmux.gif&quot; /&gt;&lt;figcaption&gt;working with multiple tmux sessions&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/tmux.gif&quot; /&gt;&lt;figcaption&gt;working with multiple tmux sessions&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; allows for aesthetic and keybinding configurations via a &lt;code class=&quot;highlighter-rouge&quot;&gt;.tmux.conf&lt;/code&gt;. Of
 course, I’ve made mine
@@ -1011,7 +1011,7 @@ this one constantly evolves as my needs and preferences change.&lt;/p&gt;
 &lt;p&gt;If you find my configurations useful, have comments about this discussion, have
 another perspective you’d like share, or anything else related, &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re: Your macOS workspace with a tiling
 wm&quot;&gt;please ping
-me&lt;/a&gt;. I’d love to chat.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Update: Development of chunkwm has ceased in favor of yabai. It’s recommended you now use yabai for your macOS tiling needs.</summary></entry><entry><title type="html">over-engineering a code</title><link href="https://ayazhafiz.com/articles/19/engineering-a-code" rel="alternate" type="text/html" title="over-engineering a code" /><published>2019-02-28T00:00:00-06:00</published><updated>2019-02-28T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/engineering-a-code</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/engineering-a-code">&lt;p&gt;Say you are a software engineer, or developer, or whatever other abstracted
+me&lt;/a&gt;. I’d love to chat.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Update: Development of chunkwm has ceased in favor of yabai. It’s recommended you now use yabai for your macOS tiling needs.</summary></entry><entry><title type="html">over-engineering a code</title><link href="/https://ayazhafiz.com/articles/19/engineering-a-code" rel="alternate" type="text/html" title="over-engineering a code" /><published>2019-02-28T00:00:00-06:00</published><updated>2019-02-28T00:00:00-06:00</updated><id>/https://ayazhafiz.com/articles/19/engineering-a-code</id><content type="html" xml:base="/https://ayazhafiz.com/articles/19/engineering-a-code">&lt;p&gt;Say you are a software engineer, or developer, or whatever other abstracted
 word for &lt;em&gt;programmer&lt;/em&gt; that has some meaning to you. Say you have also been given
 some scientific computation problem, like estimating the value of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \pi &lt;/script&gt;&lt;/span&gt; with the
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Monte_Carlo_method&quot;&gt;Monte Carlo&lt;/a&gt; method.&lt;/p&gt;
@@ -1088,7 +1088,7 @@ read: new age&lt;/span&gt;
 
 &lt;h2 id=&quot;4--why&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#4--why&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;4:&lt;/span&gt;  Why?&lt;/h2&gt;
 
-&lt;p&gt;I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A good reason for over-engineering&quot;&gt;let me know&lt;/a&gt;. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Say you are a software engineer, or developer, or whatever other abstracted word for programmer that has some meaning to you. Say you have also been given some scientific computation problem, like estimating the value of ​ with the Monte Carlo method.</summary></entry><entry><title type="html">where i’m going</title><link href="https://ayazhafiz.com/articles/18/where-im-going" rel="alternate" type="text/html" title="where i'm going" /><published>2018-11-23T00:00:00-06:00</published><updated>2018-11-23T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/18/where-im-going</id><content type="html" xml:base="https://ayazhafiz.com/articles/18/where-im-going">&lt;hr /&gt;
+&lt;p&gt;I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A good reason for over-engineering&quot;&gt;let me know&lt;/a&gt;. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Say you are a software engineer, or developer, or whatever other abstracted word for programmer that has some meaning to you. Say you have also been given some scientific computation problem, like estimating the value of ​ with the Monte Carlo method.</summary></entry><entry><title type="html">where i’m going</title><link href="/https://ayazhafiz.com/articles/18/where-im-going" rel="alternate" type="text/html" title="where i'm going" /><published>2018-11-23T00:00:00-06:00</published><updated>2018-11-23T00:00:00-06:00</updated><id>/https://ayazhafiz.com/articles/18/where-im-going</id><content type="html" xml:base="/https://ayazhafiz.com/articles/18/where-im-going">&lt;hr /&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;
         &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:much&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;&amp;#8712;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;months&lt;/span&gt;
@@ -1185,12 +1185,12 @@ read: new age&lt;/span&gt;
 
 &lt;h3 id=&quot;store&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#store&quot;&gt;#&lt;/a&gt;store&lt;/h3&gt;
 
-&lt;p&gt;Sell more Harvard shirts&lt;label for=&quot;harvardshirt&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;harvardshirt&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/harvard.jpg&quot; /&gt;&lt;br /&gt;For the uninitiated, my roommate and I made these.&lt;/span&gt;. It’s fun, and I could be putting in more effort, so I’m going to.&lt;/p&gt;
+&lt;p&gt;Sell more Harvard shirts&lt;label for=&quot;harvardshirt&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;harvardshirt&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;https://ayazhafiz.com/assets/img/harvard.jpg&quot; /&gt;&lt;br /&gt;For the uninitiated, my roommate and I made these.&lt;/span&gt;. It’s fun, and I could be putting in more effort, so I’m going to.&lt;/p&gt;
 
 &lt;h2 id=&quot;checkered_flag&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#checkered_flag&quot;&gt;#&lt;/a&gt;:checkered_flag:&lt;/h2&gt;
 
-&lt;p&gt;And with that, my revitalization is in motion (okay, maybe &lt;em&gt;revitalization&lt;/em&gt; is too dramatic). But really, I do anticipate that I will be making Big Contributions in the near future. I am not a relic of The Important Past.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">i =&amp;gt; !done(:much) &amp;#8712; (0..=18).months</summary></entry><entry><title type="html">the case of the missing alcohol proton</title><link href="https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol" rel="alternate" type="text/html" title="the case of the missing alcohol proton" /><published>2018-02-27T00:00:00-06:00</published><updated>2018-02-27T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol</id><content type="html" xml:base="https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol">&lt;p&gt;I recently performed a &lt;a href=&quot;https://pubchem.ncbi.nlm.nih.gov/compound/Sodium_dichromate&quot;&gt;sodium dichromate&lt;/a&gt;
-oxidation of 2-butanol to 2-butanone&lt;label for=&quot;butanoloxd&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;butanoloxd&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/oxidation-2-butanol.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;And with that, my revitalization is in motion (okay, maybe &lt;em&gt;revitalization&lt;/em&gt; is too dramatic). But really, I do anticipate that I will be making Big Contributions in the near future. I am not a relic of The Important Past.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">i =&amp;gt; !done(:much) &amp;#8712; (0..=18).months</summary></entry><entry><title type="html">the case of the missing alcohol proton</title><link href="/https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol" rel="alternate" type="text/html" title="the case of the missing alcohol proton" /><published>2018-02-27T00:00:00-06:00</published><updated>2018-02-27T00:00:00-06:00</updated><id>/https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol</id><content type="html" xml:base="/https://ayazhafiz.com/articles/18/the-case-of-the-missing-alcohol">&lt;p&gt;I recently performed a &lt;a href=&quot;https://pubchem.ncbi.nlm.nih.gov/compound/Sodium_dichromate&quot;&gt;sodium dichromate&lt;/a&gt;
+oxidation of 2-butanol to 2-butanone&lt;label for=&quot;butanoloxd&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;butanoloxd&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;https://ayazhafiz.com/assets/img/oxidation-2-butanol.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;.&lt;/p&gt;
 
 &lt;p&gt;For reasons soon to be mentioned, I thought my attempt at this reaction had
 failed miserably, and so I decided to accept and forget. But a few days later I
@@ -1229,7 +1229,7 @@ still have to purify my product and collecting a melting point.&lt;/p&gt;
 &lt;p&gt;A couple days later, I received the NMR spectra for my submitted product, which
 I knew was actually 2-butanol. And that’s when it got interesting.&lt;/p&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/nmr-2-butanol.png&quot; /&gt;&lt;figcaption&gt;&lt;code&gt;1H NMR (400 MHz, CDCl3) δ ppm:&lt;/code&gt;&lt;br /&gt;&lt;code&gt;2.45 (t, 2H), 2.14 (s, 3H), 1.70 (s, 1H), 1.06(d, 3H)&lt;/code&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;https://ayazhafiz.com/assets/img/nmr-2-butanol.png&quot; /&gt;&lt;figcaption&gt;&lt;code&gt;1H NMR (400 MHz, CDCl3) δ ppm:&lt;/code&gt;&lt;br /&gt;&lt;code&gt;2.45 (t, 2H), 2.14 (s, 3H), 1.70 (s, 1H), 1.06(d, 3H)&lt;/code&gt;&lt;/figcaption&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;br /&gt;
 Do you see it? Almost every hydrogen is accounted for - the signals at &lt;code class=&quot;highlighter-rouge&quot;&gt;2.14&lt;/code&gt;ppm
 and &lt;code class=&quot;highlighter-rouge&quot;&gt;1.06&lt;/code&gt;ppm correspond to the molecule’s methyl groups, at &lt;code class=&quot;highlighter-rouge&quot;&gt;1.70&lt;/code&gt;ppm is the hydrogen adjacent
@@ -1248,7 +1248,7 @@ but the alcohol proton is missing!&lt;/p&gt;
 &lt;p&gt;So where did it go? An argument could be made that the NMR sample was
 impure, producing a bad spectra. While this may be true, even in a poor
 spectrum one can expect the protons of the sample to have at least a small
-presence&lt;label for=&quot;goodnmr&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;goodnmr&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/nmr-2-butanol-PURE.png&quot; /&gt;&lt;br /&gt;For completeness, here is a spectrum of pure 2-butanol.&lt;/span&gt;.&lt;/p&gt;
+presence&lt;label for=&quot;goodnmr&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;goodnmr&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;https://ayazhafiz.com/assets/img/nmr-2-butanol-PURE.png&quot; /&gt;&lt;br /&gt;For completeness, here is a spectrum of pure 2-butanol.&lt;/span&gt;.&lt;/p&gt;
 
 &lt;p&gt;In fact, there is a far more interesting solution this puzzle.&lt;/p&gt;
 
