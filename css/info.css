@@ -144,6 +144,9 @@ a.header-anchor {
           flex: 3 0;
   max-width: 100%; }
 
+blockquote {
+  opacity: 0.8; }
+
 blockquote,
 ol,
 ul {
