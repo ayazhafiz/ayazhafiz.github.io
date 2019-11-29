@@ -83,7 +83,7 @@
 <h2 id="all-posts">
 <a class="header-anchor" href="#all-posts">#</a>All Posts</h2>
 
-<p>
+<p class="post-options">
   <select name="year-filter" size="0">
     <option value="all">All years</option>
       
@@ -112,6 +112,8 @@
       <label for="musings-filter">Musings</label>
     </span>
   
+
+  <span class="marginnote"><button id="random-post">Random Post</button></span>
 </p>
 
 <h3 id="2019" class="year">
@@ -301,6 +303,46 @@
       </li>
     
   </ul>
+
+<script type="text/javascript">
+  const gwwPostUrls = [
+    
+      '/articles/19/square-root-spacing',
+    
+      '/articles/19/barycentric-interpolation',
+    
+      '/articles/19/texas-carbon',
+    
+      '/articles/19/type-folding-and-options',
+    
+      '/articles/19/equivalence-matters',
+    
+      '/articles/19/what-i-did-this-summer',
+    
+      '/articles/19/smart-is-not-a-good-word',
+    
+      '/articles/19/tiling-wm-macos',
+    
+      '/articles/19/engineering-a-code',
+    
+      '/articles/18/where-im-going',
+    
+      '/articles/18/the-case-of-the-missing-alcohol',
+    
+      '/articles/18/rusts-great-interoperability',
+    
+      '/articles/17/what-causes-that-ephemeral-facial-flush',
+    
+      '/articles/17/exploiting-chirality-to-create-generic-counterparts',
+    
+      '/articles/17/a-heuristic-approach-to-calculating-geometric-centers',
+    
+      '/articles/16/the-relationship-between-dilution-and-dissociation',
+    
+  ];
+</script>
+
+<script src="/assets/js/random_post.js"></script>
 
 <script src="/assets/js/filter/cc.js"></script>
 

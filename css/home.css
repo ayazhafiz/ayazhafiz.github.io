@@ -497,5 +497,13 @@ section.self-image {
   .color-list .emojis {
     font-size: 1.5rem; }
 
+.post-options {
+  -webkit-padding-start: 5%;
+  padding-left: 2em;
+  width: calc(65% + 2em); }
+  .post-options .marginnote {
+    margin-right: -60%;
+    line-height: 2em; }
+
 .summary {
   width: 80%; }
