@@ -2,7 +2,7 @@
 # (c) 2016 cloudrkt
 # Adopted from https://gist.github.com/cloudrkt/e680a0270478a58f25c3c7fe32710423.
 
-dir=`dirname "$0"`
+dir=$(dirname "$0")
 
 POSTS="$dir/../_posts"
 DICT="$dir/spellcheck/dictionary.txt"

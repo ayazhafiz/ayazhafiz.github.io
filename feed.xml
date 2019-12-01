@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-12-01T11:34:44-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">spacing of square roots</title><link href="https://ayazhafiz.com/articles/19/square-root-spacing" rel="alternate" type="text/html" title="spacing of square roots" /><published>2019-11-25T00:00:00-06:00</published><updated>2019-11-25T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/square-root-spacing</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/square-root-spacing">&lt;p&gt;The distance between consecutive perfect squares is not uniform:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-12-01T13:46:14-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">spacing of square roots</title><link href="https://ayazhafiz.com/articles/19/square-root-spacing" rel="alternate" type="text/html" title="spacing of square roots" /><published>2019-11-25T00:00:00-06:00</published><updated>2019-11-25T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/square-root-spacing</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/square-root-spacing">&lt;p&gt;The distance between consecutive perfect squares is not uniform:&lt;/p&gt;
 
 &lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/squares/squares.png&quot; /&gt;&lt;figcaption&gt;First few perfect squares&lt;/figcaption&gt;&lt;/figure&gt;
 
@@ -243,23 +243,19 @@ class may have you believe.&lt;/p&gt;
 the presence of very strong acids. The simplest pentavalent carbon, &lt;a href=&quot;https://en.wikipedia.org/wiki/Methanium&quot;&gt;methanium&lt;/a&gt; (&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{CH}_5^+&lt;/script&gt;&lt;/span&gt;),
 can be prepared from methane in the presence of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{SbF}_5 + \text{HF}&lt;/script&gt;&lt;/span&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Ethanium&quot;&gt;Ethanium&lt;/a&gt; (&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{C}_2\text{H}_7^+&lt;/script&gt;&lt;/span&gt;)is a protonated
-ethane derivative, also hosting a pentavalent carbon. Ethanium is interesting in part because it is
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Ethanium&quot;&gt;Ethanium&lt;/a&gt; (&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{C}_2\text{H}_7^+&lt;/script&gt;&lt;/span&gt;) is a protonated
+ethane derivative, also hosting a pentavalent carbon. Ethanium is interesting partly because it is
 prepared using methanium:&lt;/p&gt;
 
 &lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
 \text{CH}_5^+ + \text{C}_2\text{H}_6 \to \text{CH}_4 + \text{C}_2\text{H}_7^+
 &lt;/script&gt;&lt;/div&gt;
 
-&lt;p&gt;and because it easily dissociates into ethenium, which also has pentavalent carbons:&lt;/p&gt;
+&lt;p&gt;and partly because it easily dissociates into ethenium, which also has pentavalent carbons:&lt;/p&gt;
 
-&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-\text{C}_2\text{H}_7^+ \to \text{C}_2\text{H}_5^+ + \text{H}_2
-&lt;/script&gt;&lt;/div&gt;
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/ethanium-ethenium.png&quot; /&gt;&lt;figcaption&gt;$\text{C}_2\text{H}_7^+ \to \text{C}_2\text{H}_5^+ + \text{H}_2$&lt;/figcaption&gt;&lt;/figure&gt;
 
-&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/ethanium-ethenium.png&quot; /&gt;&lt;figcaption&gt;Dissociation of ethanium into ethenium and hydrogen gas&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;Practically, these species are formed as intermediate species and via thermal cracking&lt;label for=&quot;pcformation&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;p&gt;In practice, pentavalent acids are formed as intermediate species and during thermal cracking&lt;label for=&quot;pcformation&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
 &lt;input type=&quot;checkbox&quot; id=&quot;pcformation&quot; class=&quot;margin-toggle&quot; /&gt;
 &lt;span class=&quot;sidenote&quot;&gt;
 Per to a DOE &lt;a href=&quot;https://www1.eere.energy.gov/manufacturing/resources/petroleum_refining/pdfs/bandwidth.pdf&quot;&gt;report, page 8&lt;/a&gt;.&lt;/span&gt;
@@ -268,23 +264,22 @@ Per to a DOE &lt;a href=&quot;https://www1.eere.energy.gov/manufacturing/resourc
 &lt;h3 id=&quot;both-b-and-c&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#both-b-and-c&quot;&gt;#&lt;/a&gt;Both &lt;strong&gt;B&lt;/strong&gt; and &lt;strong&gt;C&lt;/strong&gt;&lt;/h3&gt;
 
 &lt;p&gt;Yamamotoa’s and Akibab’s 2004 &lt;a href=&quot;https://www.jstage.jst.go.jp/article/yukigoseikyokaishi1943/62/11/62_11_1128/_pdf&quot;&gt;&lt;em&gt;Synthesis of Hypervalent Pentavalent Carbon and Boron Compounds&lt;/em&gt;&lt;/a&gt;
-describes the characteristics of larger pentavalent compounds. Though the authors make no
-substantial claims about the stability of such compounds, it seems (somewhat expectedly) that bonds
+describes the characteristics of larger pentavalent compounds. It appears (somewhat expectedly) that bonds
 to well-charged, larger-size atoms like those in Group 15 and 16 help stabilize pentavalent carbon
 and boron.&lt;/p&gt;
 
 &lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/pentavalent-cb.png&quot; /&gt;&lt;figcaption&gt;Pentavalent Carbon and Boron Compounds&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;The bond angle of the emphasized &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{O}-\text{C}-\text{O}&lt;/script&gt;&lt;/span&gt; is &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\sim 160^\circ&lt;/script&gt;&lt;/span&gt;, more than the
-&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;144^\circ&lt;/script&gt;&lt;/span&gt; expected for the star shape of a pentavalent carbon, and likely explained by
-the distance of the oxygens.&lt;/p&gt;
+&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;144^\circ&lt;/script&gt;&lt;/span&gt; expected for a star-shaped pentavalency, and likely explained by
+the distance of the oxygens from the carbon.&lt;/p&gt;
 
 &lt;h3 id=&quot;are-there-star-shaped-pentavalencies&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#are-there-star-shaped-pentavalencies&quot;&gt;#&lt;/a&gt;Are there star-shaped pentavalencies?&lt;/h3&gt;
 
-&lt;p&gt;Yes! We have already seen stable methanium, for instance. Another
+&lt;p&gt;Yes! One is stable methanium, which we have already seen. Another
 is &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{CBe}_5^{4-}&lt;/script&gt;&lt;/span&gt;, which is predicted to be &lt;strong&gt;planar&lt;/strong&gt; and possible to prepare
-experimentally in the gas phase. &lt;a href=&quot;https://pubs.rsc.org/en/content/articlelanding/2015/CP/C4CP05659K#!divAbstract&quot;&gt;Grande-Aztatzi et al., 2015&lt;/a&gt;
-predicts the lithium cluster derivatives &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{CBe}_5{Li}_n^{n-4}, n \in [1, 5]&lt;/script&gt;&lt;/span&gt; to also
+experimentally in the gas phase. &lt;a href=&quot;https://pubs.rsc.org/en/content/articlelanding/2015/CP/C4CP05659K#!divAbstract&quot;&gt;Grande-Aztatzi et al.&lt;/a&gt;
+predict the lithium cluster derivatives &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\text{CBe}_5{Li}_n^{n-4}, n \in [1, 5]&lt;/script&gt;&lt;/span&gt; to also
 be planar. Both of these form beautiful five-point shapes.&lt;/p&gt;
 
 &lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/cbe5-derivatives.png&quot; /&gt;&lt;figcaption&gt;Star-shaped pentavalent carbon derivatives&lt;/figcaption&gt;&lt;/figure&gt;
@@ -292,7 +287,7 @@ be planar. Both of these form beautiful five-point shapes.&lt;/p&gt;
 &lt;h3 id=&quot;beyond-the-stars&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#beyond-the-stars&quot;&gt;#&lt;/a&gt;Beyond the stars&lt;/h3&gt;
 
 &lt;p&gt;Pentavalent carbons are one of those ideas most of us won’t deal with very often. But I think
-unique patterns like these are worth knowing, if not just for the sake of knowing.&lt;/p&gt;
+unique patterns like these are worth knowing, at least for the sake of knowing.&lt;/p&gt;
 
 &lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry><entry><title type="html">type folding and options</title><link href="https://ayazhafiz.com/articles/19/type-folding-and-options" rel="alternate" type="text/html" title="type folding and options" /><published>2019-10-03T01:00:00-05:00</published><updated>2019-10-03T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/type-folding-and-options</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/type-folding-and-options">&lt;p&gt;Sometimes, I work with TypeScript compiler
 APIs&lt;label for=&quot;tsapi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
