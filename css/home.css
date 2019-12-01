@@ -498,12 +498,15 @@ section.self-image {
     font-size: 1.5rem; }
 
 .post-options {
-  -webkit-padding-start: 5%;
-  padding-left: 2em;
   width: calc(65% + 2em); }
   .post-options .marginnote {
-    margin-right: -60%;
+    margin-right: calc(-60% - 2em);
     line-height: 2em; }
 
 .summary {
   width: 80%; }
+
+.side-link {
+  color: #aaaaaa;
+  font-size: 0.5em;
+  margin-left: 1em; }
