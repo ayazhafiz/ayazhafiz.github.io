@@ -1,4 +1,4 @@
-personal_ws-1.1 en 204 
+personal_ws-1.1 en 205
 CIP
 del
 ebd
@@ -203,3 +203,4 @@ codebases
 chiral
 workspace
 myProperty
+allowtransparency

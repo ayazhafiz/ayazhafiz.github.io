@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-12-01T13:46:14-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">spacing of square roots</title><link href="https://ayazhafiz.com/articles/19/square-root-spacing" rel="alternate" type="text/html" title="spacing of square roots" /><published>2019-11-25T00:00:00-06:00</published><updated>2019-11-25T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/square-root-spacing</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/square-root-spacing">&lt;p&gt;The distance between consecutive perfect squares is not uniform:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-12-16T23:15:57-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">seeing the big picture</title><link href="https://ayazhafiz.com/articles/19/seeing-the-big-picture" rel="alternate" type="text/html" title="seeing the big picture" /><published>2019-12-16T00:00:00-06:00</published><updated>2019-12-16T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/seeing-the-big-picture</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/seeing-the-big-picture">&lt;p&gt;I’m not a good chess player. Perhaps causally, I was never very interested in it
+either.&lt;/p&gt;
+
+&lt;p&gt;But recently, I saw something new – chess is macro game. It’s a game between
+sides, not between pieces.&lt;/p&gt;
+
+&lt;p&gt;I don’t know why it took me 16 years for me to see this. Okay, it was definitely
+some combination of taking the game for granted and a lack of further interest.
+Those aren’t bad things – I think you should spend the most time on the things
+you care most about. But they have led to at least two very scary results:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;When learning something new, it’s easy to step back and realize where
+knowledge and integration gaps exist. I’ve known about chess my whole life,
+and never stopped to back up.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;This new perspective has reinvigorated my interest in chess and made me a
+much stronger player.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There are many analogies you can derive here. So I challenge you:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Where else is the Big Picture being missed?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth resp-iframe-container&quot; style=&quot;margin-top:2em&quot;&gt;
+  &lt;iframe class=&quot;resp-iframe&quot; src=&quot;https://lichess.org/tv/frame&quot; allowtransparency=&quot;true&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+&lt;/figure&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I’m not a good chess player. Perhaps causally, I was never very interested in it either.</summary></entry><entry><title type="html">spacing of square roots</title><link href="https://ayazhafiz.com/articles/19/square-root-spacing" rel="alternate" type="text/html" title="spacing of square roots" /><published>2019-11-25T00:00:00-06:00</published><updated>2019-11-25T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/square-root-spacing</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/square-root-spacing">&lt;p&gt;The distance between consecutive perfect squares is not uniform:&lt;/p&gt;
 
 &lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/squares/squares.png&quot; /&gt;&lt;figcaption&gt;First few perfect squares&lt;/figcaption&gt;&lt;/figure&gt;
 
@@ -1171,105 +1200,4 @@ read: new age&lt;/span&gt;
 
 &lt;h2 id=&quot;4--why&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#4--why&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;4:&lt;/span&gt;  Why?&lt;/h2&gt;
 
-&lt;p&gt;I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A good reason for over-engineering&quot;&gt;let me know&lt;/a&gt;. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Say you are a software engineer, or developer, or whatever other abstracted word for programmer that has some meaning to you. Say you have also been given some scientific computation problem, like estimating the value of ​ with the Monte Carlo method.</summary></entry><entry><title type="html">where i’m going</title><link href="https://ayazhafiz.com/articles/18/where-im-going" rel="alternate" type="text/html" title="where i'm going" /><published>2018-11-23T00:00:00-06:00</published><updated>2018-11-23T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/18/where-im-going</id><content type="html" xml:base="https://ayazhafiz.com/articles/18/where-im-going">&lt;hr /&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:much&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;&amp;#8712;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;months&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;I have not done much in the last 18 months.&lt;/p&gt;
-
-&lt;p&gt;At best, I feel that I have stagnated in my academic and professional endeavors. More realistically, I am losing the drives to complete things I care about. This does not bode well, for I am a maker of things.&lt;/p&gt;
-
-&lt;h2 id=&quot;college&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#college&quot;&gt;#&lt;/a&gt;College&lt;/h2&gt;
-
-&lt;p&gt;When I left High School for College, I exhaled a large breath of burden and stress. This was a great thing! Quickly, however, I realized that I am most ambitious and successful when I am stressed, especially by deadlines I’ve subscribed to. For whatever reason, when I am doing a large amount of work, I find relaxation in focusing on other large commitments. As an example, if I am doing a large problem set, I will use my breaks to fix bugs in side projects.&lt;/p&gt;
-
-&lt;p&gt;Thus, large obligations lead me to pursue more large obligations.&lt;/p&gt;
-
-&lt;p&gt;In college I have found large obligations to be few and far between. Due to what I will call the &lt;strong&gt;Problem of Willfulness Inertia&lt;/strong&gt;, if I am not already committed to a large obligation, I find it difficult to begin another.&lt;/p&gt;
-
-&lt;p&gt;There is a second, simpler problem I have discovered: the &lt;strong&gt;Problem of Passion&lt;/strong&gt;. This one is self-describing. As I will show, both problems are interdependent, and actually the same.&lt;/p&gt;
-
-&lt;h2 id=&quot;willfulness-inertia--equiv--passion&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#willfulness-inertia--equiv--passion&quot;&gt;#&lt;/a&gt;Willfulness Inertia &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \equiv &lt;/script&gt;&lt;/span&gt; Passion&lt;/h2&gt;
-
-&lt;p&gt;I mean, they already kind of sound the same, don’t they?&lt;/p&gt;
-
-&lt;p&gt;I didn’t realize these problems until this semester. In High School, I was already Doing A Lot and did not encounter what I am experiencing today. In the 2017-2018 school year, I was consistently focused on my schoolwork and social relationships, and found those to be compounding obligations. But this semester, I started applying to jobs.&lt;/p&gt;
-
-&lt;p&gt;Applying to jobs sucks. Sure, job interviews are engaging, but the form-filling, credential-giving steps are mundane, long, and tiresome. The really interesting part is that despite the fact that applying to jobs is a large obligation, it does not provide me Willfulness Inertia to work on other large obligations, because I have little Passion for applying to jobs! Actually, job applications should be a micro-section.&lt;/p&gt;
-
-&lt;h3 id=&quot;applying-to-jobs&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#applying-to-jobs&quot;&gt;#&lt;/a&gt;Applying to Jobs&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Jobs on their own are great, but the process to getting one, as I’ve mentioned, leaves me exhausted and undesiring to work on anything else. This is because I consume much of my stimulus energy during the process, but derive little to no intellectual stimulation from it.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;What has upset me more is my reaction to receiving job offers. The most excited I have been this semester is from receiving a job offer I had highly anticipated. This was definitely a great accomplishment for me, but the excitement and sensations I experienced were those that I have previously experienced for large, contributing accomplishments that I feel are more significant than a job offer. It may be unfair, but I feel that I have lowered my bar for achievement (read: Passion).&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;A second development that I have found difficult to reconcile is my relationship with Chemistry.&lt;/p&gt;
-
-&lt;h3 id=&quot;chemistry&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#chemistry&quot;&gt;#&lt;/a&gt;Chemistry&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I truly love Chemistry. But I have started to give up on it. With the mentality that I had 18+ months ago, I certainly would have completed the double major I first convinced myself I could do - in this time, I have backed down, under the guise of difficulty and unsustainability. I maintain that it is a fair excuse, but it is also a trivial one in comparison to Passion. Before coming into college, I was certain that my education would lead me to chemical academia. That hasn’t happened, but not because I don’t want it to.&lt;/p&gt;
-
-  &lt;p&gt;Perhaps I have begun to lose my Passion for chemistry, or perhaps I have simply lost the drive to succeed in it. Or perhaps there is no difference.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;As a consequence of what has happened the last 18 months (or the lack thereof), I theorize the following are all true and equivalent:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Work I find little meaning in does not provide me motivation for work I find significant meaning in,&lt;/li&gt;
-  &lt;li&gt;I have a lowered drive for the achievement of work I find significant meaning in,&lt;/li&gt;
-  &lt;li&gt;My standard of achievement has been lowered by work I find little meaning in.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I really shouldn’t be treating this like a standard proof, but it’s helped me show that my Problem of Willfulness Inertia is equivalent to my Problem of Passion. I’ll need this, and the three equivalencies described above, to resolve these issues.&lt;/p&gt;
-
-&lt;h2 id=&quot;wwwwwh&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#wwwwwh&quot;&gt;#&lt;/a&gt;WWWWWH&lt;/h2&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;who:   &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Me&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;what:  &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Two&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Problems&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;where: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Future&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;when:  &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Now&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;why:   &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Better&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Me&lt;/span&gt;
-&lt;span class=&quot;ss&quot;&gt;how:
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;By re-instigating contribution to the projects I have experience in and find a lot of meaning in, I will provide motivation for myself to work on obligations I find meaningful, increase my drive for accomplishing my obligations, and raise my expectations for the success of my commitments.&lt;/p&gt;
-
-&lt;p&gt;This plan is described by five concrete action items: &lt;em&gt;mail&lt;/em&gt;, &lt;em&gt;meetHere&lt;/em&gt;, &lt;em&gt;research&lt;/em&gt;, &lt;em&gt;research2&lt;/em&gt;, &lt;em&gt;store&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;mail-incoming_envelope&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#mail-incoming_envelope&quot;&gt;#&lt;/a&gt;mail :incoming_envelope:&lt;/h3&gt;
-
-&lt;p&gt;Branded as hMail, &lt;a href=&quot;https://ayazhafiz.com/mail&quot;&gt;mail&lt;/a&gt; is a file- and link-sharing platform I’ve created. It’s doing pretty well, but missing a lot - mainly because of poorly-written code I shipped for a hasty release after little work during the 2017-2018 school year. So now, the plan is as follows:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Refactor the entire codebase, with emphasis on the server/API implementation.&lt;/li&gt;
-  &lt;li&gt;Add enhanced security features, ability to remove and forward files, and prevent unsolicited file sending.&lt;/li&gt;
-  &lt;li&gt;Separate the application from my website, purchase an independent domain, and explore a Rust rewrite.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;meethere-round_pushpin&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#meethere-round_pushpin&quot;&gt;#&lt;/a&gt;meetHere :round_pushpin:&lt;/h3&gt;
-
-&lt;p&gt;YAKWTFGO, I’m going to rebuild this bad boy from the ground up. I still get anxiety working on it from my experiences in High School, but I have been making significant progress - many of the algorithms have been rewritten, I have a Trello board set up, and am nearly done with an all-new style guide (with great help from some very talented people :blush:). The plan is to grind it out while I am skiing this winter - I think it will be tremendously useful to be doing two things I love dearly in tandem.&lt;/p&gt;
-
-&lt;h3 id=&quot;research&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#research&quot;&gt;#&lt;/a&gt;research&lt;/h3&gt;
-
-&lt;p&gt;For chemistry. I planned to shadow a chemistry lab this semester, but convinced myself I shouldn’t because I was already involved in another lab. Next semester, however, I will likely be much less involved in my current lab, and because I am truly much more passionate about chemistry, will actively get involved in lab shadow. Hold me to it.&lt;/p&gt;
-
-&lt;h3 id=&quot;research2&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#research2&quot;&gt;#&lt;/a&gt;research2&lt;/h3&gt;
-
-&lt;p&gt;This one is for my job (internship) this summer. I am excited for the product I will be working on, and will be building a plan for its success. For this, I also have a Trello board setup. Significant open-source contribution will be required for this project: I will apply myself to the development of the Crystal compiler, an emerging language I am fond of.&lt;/p&gt;
-
-&lt;h3 id=&quot;store&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#store&quot;&gt;#&lt;/a&gt;store&lt;/h3&gt;
-
-&lt;p&gt;Sell more Harvard shirts&lt;label for=&quot;harvardshirt&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;harvardshirt&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/harvard.jpg&quot; /&gt;&lt;br /&gt;For the uninitiated, my roommate and I made these.&lt;/span&gt;. It’s fun, and I could be putting in more effort, so I’m going to.&lt;/p&gt;
-
-&lt;h2 id=&quot;checkered_flag&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#checkered_flag&quot;&gt;#&lt;/a&gt;:checkered_flag:&lt;/h2&gt;
-
-&lt;p&gt;And with that, my revitalization is in motion (okay, maybe &lt;em&gt;revitalization&lt;/em&gt; is too dramatic). But really, I do anticipate that I will be making Big Contributions in the near future. I am not a relic of The Important Past.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">i =&amp;gt; !done(:much) &amp;#8712; (0..=18).months</summary></entry></feed>
+&lt;p&gt;I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A good reason for over-engineering&quot;&gt;let me know&lt;/a&gt;. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Say you are a software engineer, or developer, or whatever other abstracted word for programmer that has some meaning to you. Say you have also been given some scientific computation problem, like estimating the value of ​ with the Monte Carlo method.</summary></entry></feed>
