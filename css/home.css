@@ -217,8 +217,9 @@ section.nav {
 
 .nav-link {
   color: #aaaaaa;
-  font-size: 1.2em;
-  margin-right: 2em; }
+  font-size: 1.2em; }
+  .nav-link:not(.no-margin) {
+    margin-right: 2em; }
   .nav-link:not(*) {
     color: #0366d6; }
 
