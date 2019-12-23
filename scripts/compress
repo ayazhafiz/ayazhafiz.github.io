@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Usage:
+#   scripts/compress <directory>
+
+dir=$1
+
+if [ -z "$dir" ]; then
+  echo "No directory specified."
+  exit 1
+fi
+
+JPG="jpg"
+PROCESSED="scripts/compress-processed"
+find "$dir" -type f -iname "*" | while read -r file; do
+  name="${file%.*}"
+  ext="${file##*.}"
+  pros="$PROCESSED/$name"
+  jpgfile="$name.$JPG"
+
+  if [ -f "$pros" ]; then
+    echo "Skipping $file, which has been processed previously."
+    continue
+  fi
+
+  # First, convert to jpg.
+  convert -quality 100 "$file" "$jpgfile"
+  if [[ "$ext" != "$JPG" ]]; then
+    echo "Removing old file $file"
+    rm "$file"
+  fi
+
+  # Next, compress to 80% and make image progressive.
+  # https://evilmartians.com/chronicles/images-done-right-web-graphics-good-to-the-last-byte-optimization-techniques#jpeg
+  convert -strip -interlace Plane -quality 80 "$jpgfile" "$jpgfile"
+
+  # Finally, mark image as processed.
+  mkdir -p "$(dirname "$pros")" && touch "$pros"
+done
