@@ -1,4 +1,92 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-12-22T22:43:14-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">seeing the big picture</title><link href="https://ayazhafiz.com/articles/19/seeing-the-big-picture" rel="alternate" type="text/html" title="seeing the big picture" /><published>2019-12-16T00:00:00-06:00</published><updated>2019-12-16T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/seeing-the-big-picture</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/seeing-the-big-picture">&lt;p&gt;I’m not a good chess player. Perhaps causally, I was never very interested in it
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2019-12-31T07:29:41-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">analog algorithms</title><link href="https://ayazhafiz.com/articles/19/analog-algorithms" rel="alternate" type="text/html" title="analog algorithms" /><published>2019-12-30T00:00:00-06:00</published><updated>2019-12-30T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/analog-algorithms</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/analog-algorithms">&lt;p&gt;Most algorithms are designed for computation in a Turing machine. But Turing
+machines don’t encompass the physics of the universe, and of course there are
+algorithms designed to operate with other mechanics. Let’s call these other
+algorithms Analog Algorithms. Here’s one that claims to sort a set of numbers in
+linear time
+&lt;label for=&quot;Turing-linear&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;Turing-linear&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+If executed on a simulating Turing machine.&lt;/span&gt;
+.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h4 id=&quot;algorithm-spaghetti-sort&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#algorithm-spaghetti-sort&quot;&gt;#&lt;/a&gt;Algorithm &lt;a href=&quot;https://en.wikipedia.org/wiki/Spaghetti_sort&quot;&gt;Spaghetti Sort&lt;/a&gt;&lt;/h4&gt;
+
+  &lt;p&gt;Given an unsorted set of $n$ rational numbers
+$S = \{s_1, \ldots, s_n\}\quad s_i \in \mathbb{Q}$:&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;Obtain a set of spaghetti rods
+$R = \{r_1, \ldots, r_n\}\quad len(r_i) = s_i$. Form a fist around the
+rods.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Repeat until there are no more rods in the fist:&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Hit one end of the spaghetti rods perpendicularly against a table, such
+that the rods are aligned on that end.&lt;/li&gt;
+        &lt;li&gt;Lower a hand on the other side of the rods until it touches a spaghetti
+rod $r_i$.&lt;/li&gt;
+        &lt;li&gt;Remove the rod $r_i$ from the fist and place it at the end of the sorted
+output set.&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Parts of this sort may seem decidedly non-linear&lt;label for=&quot;not-Turing&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;not-Turing&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Or at least very expensive, since we’re not necessarily dealing with Turing machines.&lt;/span&gt;
+.
+What is the time bound for lowering a hand? How do we decide where to lower the hand
+from? If the hand placement is decided visually, what is the cost of synaptic transmission?
+And what is the cost of sensory response from the other hand touching the longest
+rod? How do we account for the size of a hand needed to hold a very large number
+of rods?&lt;/p&gt;
+
+&lt;p&gt;Still, the spaghetti sort seems reasonable, in at least the sense that this is
+how I would sort a set of spaghetti rods. And in celebration of the New Year, I
+propose another analog algorithm, this one solving the
+NP-complete&lt;label for=&quot;def-NP-complete&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
+&lt;input type=&quot;checkbox&quot; id=&quot;def-NP-complete&quot; class=&quot;margin-toggle&quot; /&gt;
+&lt;span class=&quot;sidenote&quot;&gt;
+Problems in the class NP are those whose solutions can be verified in polynomial time by a non-deterministic Turing machine. &lt;a href=&quot;https://en.wikipedia.org/wiki/NP-completeness&quot;&gt;NP-completeness&lt;/a&gt; refers to the class of problems hardest in NP. Every problem in NP can be transformed to an equivalent NP-complete problem.&lt;/span&gt;
+ &lt;a href=&quot;https://en.wikipedia.org/wiki/Clique_problem&quot;&gt;clique problem&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;h4 id=&quot;algorithm-new-years-cliquer&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#algorithm-new-years-cliquer&quot;&gt;#&lt;/a&gt;Algorithm New Year’s Cliquer&lt;/h4&gt;
+
+  &lt;p&gt;Given an undirected graph $G$ with vertices $V = \{v_1, \ldots, v_n\}$ and
+edges $E = \{v_i \leftrightarrow v_j, \ldots\}$:&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;Gather a group of people $P = \{p_1, \ldots, p_n\}$ and for each edge
+$v_i \leftrightarrow v_j = e \in E$, introduce $p_i$ and $p_j$. Ensure that
+each introduction results in an equivalent-strength friendship.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Institute a universal aid policy that provides each person the opportunity
+to visit their new friends for the New Year.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;On New Year’s Day, let each person $p_i$ mingle until they find a group of
+individuals $R_i$ where each individual in $R_i$ knows every other
+individual in $R_i$, and $R_i$ is the largest of all such groups. By nature
+of the friendships, this is guaranteed to happen.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;Count the size of each group $R_j$ formed. All cliques of size $n$ in $P$
+for any $n \in \mathbb{N}$ are now known. Mapping the cliques in the graph
+$G$ is trivial.&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Have we proved $P = NP$? Definitely not. Is a New Year universal aid policy a
+great idea? Absolutely. Anyway, I wish you a fulfilling New Year!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Most algorithms are designed for computation in a Turing machine. But Turing machines don’t encompass the physics of the universe, and of course there are algorithms designed to operate with other mechanics. Let’s call these other algorithms Analog Algorithms. Here’s one that claims to sort a set of numbers in linear time If executed on a simulating Turing machine. .</summary></entry><entry><title type="html">seeing the big picture</title><link href="https://ayazhafiz.com/articles/19/seeing-the-big-picture" rel="alternate" type="text/html" title="seeing the big picture" /><published>2019-12-16T00:00:00-06:00</published><updated>2019-12-16T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/seeing-the-big-picture</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/seeing-the-big-picture">&lt;p&gt;I’m not a good chess player. Perhaps causally, I was never very interested in it
 either.&lt;/p&gt;
 
 &lt;p&gt;But recently, I saw something new – chess is macro game. It’s a game between
@@ -1123,81 +1211,4 @@ this one constantly evolves as my needs and preferences change.&lt;/p&gt;
 &lt;p&gt;If you find my configurations useful, have comments about this discussion, have
 another perspective you’d like share, or anything else related, &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re: Your macOS workspace with a tiling
 wm&quot;&gt;please ping
-me&lt;/a&gt;. I’d love to chat.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Update: Development of chunkwm has ceased in favor of yabai. It’s recommended you now use yabai for your macOS tiling needs.</summary></entry><entry><title type="html">over-engineering a code</title><link href="https://ayazhafiz.com/articles/19/engineering-a-code" rel="alternate" type="text/html" title="over-engineering a code" /><published>2019-02-28T00:00:00-06:00</published><updated>2019-02-28T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/engineering-a-code</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/engineering-a-code">&lt;p&gt;Say you are a software engineer, or developer, or whatever other abstracted
-word for &lt;em&gt;programmer&lt;/em&gt; that has some meaning to you. Say you have also been given
-some scientific computation problem, like estimating the value of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \pi &lt;/script&gt;&lt;/span&gt; with the
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Monte_Carlo_method&quot;&gt;Monte Carlo&lt;/a&gt; method.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Inscribe a circle of radius &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \frac{1}{2} &lt;/script&gt;&lt;/span&gt; in a square of length
-&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; 1 &lt;/script&gt;&lt;/span&gt;. Then the probability a random point generated in the
-square is also inside the circle is equal to the ratio of the circle’s area to the
-square’s, which is &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \frac{\pi}{4} &lt;/script&gt;&lt;/span&gt;.&lt;/p&gt;
-
-  &lt;p&gt;We now have a method for approximating &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \frac{\pi}{4} &lt;/script&gt;&lt;/span&gt; by generating a set of
-random points in the square and finding the ratio of those points also inside the circle.
-This value multiplied by 4 gives us an estimate of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \pi &lt;/script&gt;&lt;/span&gt;, which becomes more
-precise with an increasing volume of generated points.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Your friend is an electrical engineer, and knows how to program in JavaScript. She quickly codes a simple, easily-understandable procedure:&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/7eea1f8f18000c6ccdc3920cf2fd5076.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;You&lt;label for=&quot;actually-you&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;actually-you&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-perhaps vicariously through another&lt;/span&gt;
-, having already taken on some abstracted title for yourself, chose instead to over-engineer her perfectly good solution to be &lt;em&gt;TheBestCode&lt;/em&gt;™&lt;/p&gt;
-
-&lt;h2 id=&quot;1--everything-functional&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--everything-functional&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  Everything Functional&lt;/h2&gt;
-
-&lt;p&gt;Since the only operations done here are on an array, all the loops can be eliminated in favor of immutable function calls on the original array. Even the instantiation of random points in the array can be sugared into the initializer.&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/40fea356a4e4c0d305db57babac4120d.js&quot;&gt; &lt;/script&gt;
-
-&lt;h2 id=&quot;2--on-incircle&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--on-incircle&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  On &lt;code class=&quot;highlighter-rouge&quot;&gt;inCircle&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;~Idiomatic~&lt;label for=&quot;new-age&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;new-age&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-read: new age&lt;/span&gt;
- JavaScript calls for arrow notation on small functions, so that’s what we’ll do. We can also allow for a variable circle radius - of course, that’s totally useless for this example, but makes the function more ~scalable~. Finally, there is a marginal cost reduction in comparing the square of the euclidean distance to the square of the radius rather than computing a square root.&lt;/p&gt;
-
-&lt;p&gt;This gives an artisanally-crafted code:&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/506d11f17b7b54cd5c027f0df809d013.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;We’re not done yet. If we take a quarter circle of radius 1 inscribed in the square instead, the ratio of quarter-circle-to-square area remains &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; {\pi\over4} &lt;/script&gt;&lt;/span&gt;, but now the center of the circle is at the origin, which eliminates two subtractions in the function call. The code is made even more idiomatic with JavaScript’s exponentiation operator.&lt;/p&gt;
-
-&lt;p&gt;For now, this will be our final form:&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/559d68654cf90acf049dd5abdcdb7ad0.js&quot;&gt; &lt;/script&gt;
-
-&lt;h2 id=&quot;3--defining-and-objectifying&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--defining-and-objectifying&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  Defining and Objectifying&lt;/h2&gt;
-
-&lt;p&gt;But what &lt;em&gt;is&lt;/em&gt; a point? In this case, a pair of &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; (x, y) &lt;/script&gt;&lt;/span&gt; coordinates. Let’s define the points as named tuples:&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/85e4c911e098091730f50e3516fe8047.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;We abstracted &lt;code class=&quot;highlighter-rouge&quot;&gt;inCircle&lt;/code&gt; to be of any radius earlier, but of course that’s kind of useless since the function is specifically designed for measuring &lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt; \pi &lt;/script&gt;&lt;/span&gt;. What we should do is wrap our estimation script into one experimentation procedure that accepts a variable point sample size. This is the &lt;strong&gt;ultimate abstraction&lt;/strong&gt; we could ask for.&lt;/p&gt;
-
-&lt;p&gt;After a multitude of revisions and totally misaligned priorities, we arrive to modular paradise.&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/603d939e1038673380eb5b1892169c2c.js&quot;&gt; &lt;/script&gt;
-
-&lt;h2 id=&quot;4--why&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#4--why&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;4:&lt;/span&gt;  Why?&lt;/h2&gt;
-
-&lt;p&gt;I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=A good reason for over-engineering&quot;&gt;let me know&lt;/a&gt;. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Say you are a software engineer, or developer, or whatever other abstracted word for programmer that has some meaning to you. Say you have also been given some scientific computation problem, like estimating the value of ​ with the Monte Carlo method.</summary></entry></feed>
+me&lt;/a&gt;. I’d love to chat.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Update: Development of chunkwm has ceased in favor of yabai. It’s recommended you now use yabai for your macOS tiling needs.</summary></entry></feed>

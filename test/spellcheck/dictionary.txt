@@ -1,4 +1,4 @@
-personal_ws-1.1 en 205
+personal_ws-1.1 en 210 
 CIP
 del
 ebd
@@ -28,6 +28,7 @@ alacritty
 Aztatzi
 hella
 FFI
+allowtransparency
 densify
 workflow
 integrable
@@ -54,7 +55,9 @@ chebyshev
 esque
 alkyl
 oxygens
+Cliquer
 futurecc
+undirected
 hydronium
 meso
 circ
@@ -63,8 +66,8 @@ intelligences
 protonated
 methanium
 undesiring
-butanone
 href
+butanone
 acetaldehyde
 hexavalent
 meetHere
@@ -100,9 +103,10 @@ Ayaz
 ae
 YAKWTFGO
 jpg
+len
 goldie
-cb
 al
+cb
 interoperability
 tess
 maincolumn
@@ -111,6 +115,7 @@ bddce
 artisanally
 MBP
 br
+leftrightarrow
 pentavalent
 fd
 setminus
@@ -157,8 +162,8 @@ NMR
 ABI
 Akibab's
 interpolationproof
-UI
 ss
+UI
 amines
 barycentric
 instantiation
@@ -166,6 +171,7 @@ marginnote
 wm
 TypeScript
 Benzi
+parodic
 stereocenters
 frameborder
 memoizable
@@ -203,4 +209,3 @@ codebases
 chiral
 workspace
 myProperty
-allowtransparency

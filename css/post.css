@@ -293,7 +293,8 @@ span.el {
   overflow-x: scroll;
   overflow-y: hidden;
   vertical-align: baseline;
-  width: 50%; }
+  width: 50%;
+  z-index: 10; }
   @media only screen and (max-width: 760px) {
     .sidenote,
     .marginnote {
@@ -770,7 +771,7 @@ section.footer {
       width: 100%; } }
 .post-group ol,
 .post-group ul {
-  width: 100%; }
+  width: calc(100% - 5% - 2em); }
 
 .title {
   margin-bottom: 0; }
