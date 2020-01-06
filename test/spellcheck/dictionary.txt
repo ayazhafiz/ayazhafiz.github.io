@@ -1,4 +1,4 @@
-personal_ws-1.1 en 210 
+personal_ws-1.1 en 219 
 CIP
 del
 ebd
@@ -10,12 +10,15 @@ chunkwm
 extrema
 cheb
 racemate
+lfloor
 quo
 enantiomers
 enzymic
 lorde
 tex
 emoji
+walkthrough
+unserious
 keybinding
 texas
 toml
@@ -27,8 +30,8 @@ src
 alacritty
 Aztatzi
 hella
-FFI
 allowtransparency
+FFI
 densify
 workflow
 integrable
@@ -51,13 +54,14 @@ superimposable
 LibHello
 eps
 endmath
+rfloor
 chebyshev
 esque
 alkyl
 oxygens
 Cliquer
-futurecc
 undirected
+futurecc
 hydronium
 meso
 circ
@@ -79,6 +83,7 @@ softwares
 Runge's
 enantiomer
 clib
+desc
 vims
 hoc
 Refactor
@@ -105,8 +110,8 @@ YAKWTFGO
 jpg
 len
 goldie
-al
 cb
+al
 interoperability
 tess
 maincolumn
@@ -154,6 +159,7 @@ supercategory
 Yamamotoa's
 formulaically
 nike
+sqroots
 abe
 inCircle
 th
@@ -162,8 +168,8 @@ NMR
 ABI
 Akibab's
 interpolationproof
-ss
 UI
+ss
 amines
 barycentric
 instantiation
@@ -174,6 +180,7 @@ Benzi
 parodic
 stereocenters
 frameborder
+xs
 memoizable
 cationic
 Kythe
@@ -186,6 +193,7 @@ CBe
 cbe
 Yamamotoa
 whatididdoc
+sqroot
 qquad
 pentavalencies
 chirality
@@ -204,6 +212,7 @@ covalent
 mathbb
 libc
 ethanium
+sqrt
 hMail
 codebases
 chiral
