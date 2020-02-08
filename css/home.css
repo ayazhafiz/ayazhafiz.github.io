@@ -28,7 +28,7 @@ body {
   background-color: white;
   color: #172b4c;
   counter-reset: sidenote-counter;
-  font-family: -apple-system-font, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: -apple-system-font, BlinkMacSystemFont, Helvetica, Helvetica Neue, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 300;
   line-height: 2em;
   margin: auto;
@@ -375,7 +375,7 @@ span.el {
 .sidenote::before,
 .marginnote::before,
 .sidenote-number::after {
-  font-family: -apple-system-font, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif; }
+  font-family: -apple-system-font, BlinkMacSystemFont, Helvetica, Helvetica Neue, Segoe UI, Roboto, Arial, sans-serif; }
 
 .sidenote-number::after,
 .sidenote::before {
