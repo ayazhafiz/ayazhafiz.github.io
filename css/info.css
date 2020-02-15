@@ -93,7 +93,7 @@ a.header-anchor {
   color: #aaaaaa;
   display: none;
   font-style: normal;
-  left: 0;
+  left: 0.2em;
   position: absolute; }
   a.header-anchor:hover, a.header-anchor:active {
     color: #0366d6;
@@ -106,7 +106,7 @@ a.header-anchor {
   -webkit-box-pack: center;
           justify-content: center;
   margin: auto;
-  max-width: 1400px;
+  max-width: 800px;
   overflow: hidden;
   position: relative; }
   @media only screen and (max-width: 760px) {
@@ -142,7 +142,8 @@ a.header-anchor {
 .column-right {
   -webkit-box-flex: 3;
           flex: 3 0;
-  max-width: 100%; }
+  max-width: 100%;
+  margin: auto; }
 
 blockquote {
   opacity: 0.8; }
@@ -189,7 +190,7 @@ section.nav {
 
 .gist {
   margin-left: -2em;
-  width: calc(65% + 2em); }
+  width: calc(65% + 4em); }
   @media only screen and (max-width: 760px) {
     .gist {
       margin-left: 0;
@@ -207,6 +208,10 @@ section.nav {
     @media screen and (min-width: 900px) {
       .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
         font-size: 14px; } }
+  .gist .gist-meta {
+    display: none; }
+  .gist .gist-data {
+    border-bottom: none !important; }
 
 .mathblock {
   width: 65%; }

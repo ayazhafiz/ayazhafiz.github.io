@@ -90,7 +90,7 @@ a.header-anchor {
   color: #aaaaaa;
   display: none;
   font-style: normal;
-  left: 0;
+  left: 0.2em;
   position: absolute; }
   a.header-anchor:hover, a.header-anchor:active {
     color: #0366d6;
@@ -103,7 +103,7 @@ a.header-anchor {
   -webkit-box-pack: center;
           justify-content: center;
   margin: auto;
-  max-width: 1400px;
+  max-width: 800px;
   overflow: hidden;
   position: relative; }
   @media only screen and (max-width: 760px) {
@@ -139,7 +139,8 @@ a.header-anchor {
 .column-right {
   -webkit-box-flex: 3;
           flex: 3 0;
-  max-width: 100%; }
+  max-width: 100%;
+  margin: auto; }
 
 section.nav {
   margin-bottom: 2em; }
