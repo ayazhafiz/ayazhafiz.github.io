@@ -51,9 +51,6 @@ h1 {
   margin-bottom: 1.5rem;
   margin-top: 0; }
 
-h2 {
-  font-size: 2.2rem; }
-
 h3 {
   font-size: 1.7rem;
   font-style: italic; }
@@ -267,6 +264,16 @@ section.nav {
   overflow: hidden;
   padding-top: 56.25%;
   position: relative; }
+
+.post-options .filter-section {
+  display: inline-block; }
+@media screen and (max-width: 600px) {
+  .post-options .domains {
+    display: -webkit-inline-box;
+    display: inline-flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column; } }
 
 .filter-option {
   line-height: 2em;
