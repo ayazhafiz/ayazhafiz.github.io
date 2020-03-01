@@ -1,29 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-02-17T18:28:00-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">apathy</title><link href="https://ayazhafiz.com/articles/20/apathy" rel="alternate" type="text/html" title="apathy" /><published>2020-02-03T02:00:00-06:00</published><updated>2020-02-03T02:00:00-06:00</updated><id>https://ayazhafiz.com/articles/20/apathy</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/apathy">&lt;p&gt;Discussions of apathy generally refer to the normative kind. This kind of apathy is characterized by
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-02-29T23:43:11-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">apathy</title><link href="https://ayazhafiz.com/articles/20/apathy" rel="alternate" type="text/html" title="apathy" /><published>2020-02-03T02:00:00-06:00</published><updated>2020-02-03T02:00:00-06:00</updated><id>https://ayazhafiz.com/articles/20/apathy</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/apathy">&lt;p&gt;Discussions of apathy generally refer to the normative kind. This kind of apathy is characterized by
 an indifference to a context that one has the privilege to interface with. There are many
 reasons one may be apathetic – common arguments propose convenience or
-indifference&lt;label for=&quot;indifference&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;indifference&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Of course, indifference and apathy are synonymous.&lt;/span&gt;
-.
+indifference&lt;label for=&quot;indifference&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;indifference&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Of course, indifference and apathy are synonymous.&lt;/span&gt;.
 More difficult explanations extend medical conditions and social influences; apathy is a consequence
 of a &lt;a href=&quot;https://neuro.psychiatryonline.org/doi/full/10.1176/jnp.17.1.7&quot;&gt;number of neurological diseases&lt;/a&gt;
-and is propagated by communities that &lt;a href=&quot;https://www.ted.com/talks/dave_meslin_the_antidote_to_apathy&quot;&gt;romanticize born heroes&lt;/a&gt;&lt;label for=&quot;bornhhero&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;bornhhero&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-I find it hard to believe that apathetic populations are inherently impartial. I argue that societies with strict representations of success model a majority of individuals to be inconsequential. By design, this pressures a feeling of unimportance even for the self-motivated.&lt;/span&gt;
-.&lt;/p&gt;
+and is propagated by communities that &lt;a href=&quot;https://www.ted.com/talks/dave_meslin_the_antidote_to_apathy&quot;&gt;romanticize born heroes&lt;/a&gt;&lt;label for=&quot;bornhhero&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;bornhhero&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;I find it hard to believe that apathetic populations are inherently impartial. I argue that societies with strict representations of success model a majority of individuals to be inconsequential. By design, this pressures a feeling of unimportance even for the self-motivated.&lt;/span&gt;.&lt;/p&gt;
 
 &lt;p&gt;There is a kind of apathy often overlooked. Let’s call it budgeted apathy. This kind of
 apathy is characterized by an indifference to a context that is orthogonal or abstracted by
 one’s priorities.&lt;/p&gt;
 
 &lt;p&gt;Here’s one example – a low-income family living in an expensive city may not have the time to think
-about the long-term health effects of the fast food they consume&lt;label for=&quot;example&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;example&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-This is not meant to be an anecdotal or accurate example. It’s just an example.&lt;/span&gt;
-.
+about the long-term health effects of the fast food they consume&lt;label for=&quot;example&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;example&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;This is not meant to be an anecdotal or accurate example. It’s just an example.&lt;/span&gt;.
 There are at least two reasons why this might be the case: the family values fast food’s
 accessibility more than it discounts adverse effects, or the family is ignorant of fast food’s
 adverse health effects. I argue that there is a possible third reason: the family is indifferent to
@@ -39,16 +27,12 @@ focuses on what immediately affects them.&lt;/p&gt;
 &lt;p&gt;Maybe this is a nice idea, but it’s missing some action. One we all can take is advocacy for and
 appreciation of others’ contexts. This is a little more abstract than walking in another’s shoes; it
 requires a trust in individuals’ motivation, no matter how disparate they are from our own. Albeit
-romantic, this is a simple, extraordinarily compassionate perspective.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Discussions of apathy generally refer to the normative kind. This kind of apathy is characterized by an indifference to a context that one has the privilege to interface with. There are many reasons one may be apathetic – common arguments propose convenience or indifference Of course, indifference and apathy are synonymous. . More difficult explanations extend medical conditions and social influences; apathy is a consequence of a number of neurological diseases and is propagated by communities that romanticize born heroes⊕ I find it hard to believe that apathetic populations are inherently impartial. I argue that societies with strict representations of success model a majority of individuals to be inconsequential. By design, this pressures a feeling of unimportance even for the self-motivated. .</summary></entry><entry><title type="html">analog algorithms</title><link href="https://ayazhafiz.com/articles/19/analog-algorithms" rel="alternate" type="text/html" title="analog algorithms" /><published>2019-12-30T00:00:00-06:00</published><updated>2019-12-30T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/analog-algorithms</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/analog-algorithms">&lt;p&gt;Most algorithms are designed for computation in a Turing machine. But Turing
+romantic, this is a simple, extraordinarily compassionate perspective.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Discussions of apathy generally refer to the normative kind. This kind of apathy is characterized by an indifference to a context that one has the privilege to interface with. There are many reasons one may be apathetic – common arguments propose convenience or indifferenceOf course, indifference and apathy are synonymous.. More difficult explanations extend medical conditions and social influences; apathy is a consequence of a number of neurological diseases and is propagated by communities that romanticize born heroes⊕I find it hard to believe that apathetic populations are inherently impartial. I argue that societies with strict representations of success model a majority of individuals to be inconsequential. By design, this pressures a feeling of unimportance even for the self-motivated..</summary></entry><entry><title type="html">analog algorithms</title><link href="https://ayazhafiz.com/articles/19/analog-algorithms" rel="alternate" type="text/html" title="analog algorithms" /><published>2019-12-30T00:00:00-06:00</published><updated>2019-12-30T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/analog-algorithms</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/analog-algorithms">&lt;p&gt;Most algorithms are designed for computation in a Turing machine. But Turing
 machines don’t encompass the physics of the universe, and of course there are
 algorithms designed to operate with other mechanics. Let’s call these other
 algorithms Analog Algorithms. Here’s one that claims to sort a set of numbers in
 linear time
-&lt;label for=&quot;Turing-linear&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;Turing-linear&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-If executed on a simulating Turing machine.&lt;/span&gt;
-.&lt;/p&gt;
+&lt;label for=&quot;Turing-linear&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;Turing-linear&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;If executed on a simulating Turing machine.&lt;/span&gt;.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;h4 id=&quot;algorithm-spaghetti-sort&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#algorithm-spaghetti-sort&quot;&gt;#&lt;/a&gt;Algorithm &lt;a href=&quot;https://en.wikipedia.org/wiki/Spaghetti_sort&quot;&gt;Spaghetti Sort&lt;/a&gt;&lt;/h4&gt;
@@ -76,11 +60,7 @@ output set.&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Parts of this sort may seem decidedly non-linear&lt;label for=&quot;not-Turing&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;not-Turing&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Or at least very expensive, since we’re not necessarily dealing with Turing machines.&lt;/span&gt;
-.
+&lt;p&gt;Parts of this sort may seem decidedly non-linear&lt;label for=&quot;not-Turing&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;not-Turing&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Or at least very expensive, since we’re not necessarily dealing with Turing machines.&lt;/span&gt;.
 What is the time bound for lowering a hand? How do we decide where to lower the hand
 from? If the hand placement is decided visually, what is the cost of synaptic transmission?
 And what is the cost of sensory response from the other hand touching the longest
@@ -90,11 +70,7 @@ of rods?&lt;/p&gt;
 &lt;p&gt;Still, the spaghetti sort seems reasonable, in at least the sense that this is
 how I would sort a set of spaghetti rods. And in celebration of the New Year, I
 propose another analog algorithm, this one solving the
-NP-complete&lt;label for=&quot;def-NP-complete&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;def-NP-complete&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Problems in the class NP are those whose solutions can be verified in polynomial time by a non-deterministic Turing machine. &lt;a href=&quot;https://en.wikipedia.org/wiki/NP-completeness&quot;&gt;NP-completeness&lt;/a&gt; refers to the class of problems hardest in NP. Every problem in NP can be transformed to an equivalent NP-complete problem.&lt;/span&gt;
- &lt;a href=&quot;https://en.wikipedia.org/wiki/Clique_problem&quot;&gt;clique problem&lt;/a&gt;.&lt;/p&gt;
+NP-complete&lt;label for=&quot;def-NP-complete&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;def-NP-complete&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Problems in the class NP are those whose solutions can be verified in polynomial time by a non-deterministic Turing machine. &lt;a href=&quot;https://en.wikipedia.org/wiki/NP-completeness&quot;&gt;NP-completeness&lt;/a&gt; refers to the class of problems hardest in NP. Every problem in NP can be transformed to an equivalent NP-complete problem.&lt;/span&gt; &lt;a href=&quot;https://en.wikipedia.org/wiki/Clique_problem&quot;&gt;clique problem&lt;/a&gt;.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;h4 id=&quot;algorithm-new-years-cliquer&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#algorithm-new-years-cliquer&quot;&gt;#&lt;/a&gt;Algorithm New Year’s Cliquer&lt;/h4&gt;
@@ -127,7 +103,7 @@ $G$ is trivial.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Have we proved $P = NP$? Definitely not. Is a New Year universal aid policy a
-great idea? Absolutely. Anyway, I wish you a fulfilling New Year!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Most algorithms are designed for computation in a Turing machine. But Turing machines don’t encompass the physics of the universe, and of course there are algorithms designed to operate with other mechanics. Let’s call these other algorithms Analog Algorithms. Here’s one that claims to sort a set of numbers in linear time If executed on a simulating Turing machine. .</summary></entry><entry><title type="html">seeing the big picture</title><link href="https://ayazhafiz.com/articles/19/seeing-the-big-picture" rel="alternate" type="text/html" title="seeing the big picture" /><published>2019-12-16T00:00:00-06:00</published><updated>2019-12-16T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/seeing-the-big-picture</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/seeing-the-big-picture">&lt;p&gt;I’m not a good chess player. Perhaps causally, I was never very interested in it
+great idea? Absolutely. Anyway, I wish you a fulfilling New Year!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Most algorithms are designed for computation in a Turing machine. But Turing machines don’t encompass the physics of the universe, and of course there are algorithms designed to operate with other mechanics. Let’s call these other algorithms Analog Algorithms. Here’s one that claims to sort a set of numbers in linear time If executed on a simulating Turing machine..</summary></entry><entry><title type="html">seeing the big picture</title><link href="https://ayazhafiz.com/articles/19/seeing-the-big-picture" rel="alternate" type="text/html" title="seeing the big picture" /><published>2019-12-16T00:00:00-06:00</published><updated>2019-12-16T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/seeing-the-big-picture</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/seeing-the-big-picture">&lt;p&gt;I’m not a good chess player. Perhaps causally, I was never very interested in it
 either.&lt;/p&gt;
 
 &lt;p&gt;But recently, I saw something new – chess is macro game. It’s a game between
@@ -183,12 +159,8 @@ $n^2+1, n^2+2, \ldots, n^2 + 2n$. So between $n$ and $n+1$, there is a set of
 integer square root reals
 $S = \left\{\sqrt{n^2+1}, \sqrt{n^2+2}, \ldots, \sqrt{n^2 + 2n}\right\}$, and
 $|S| = 2n$. Now, because $S_{i+1} &amp;gt; S_i$, we can make an
-argument&lt;label for=&quot;pigeonhole&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;pigeonhole&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-somewhat similar
-to the pigeonhole principle&lt;/span&gt;
- that for $n$ large, there are a large number of integer
+argument&lt;label for=&quot;pigeonhole&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;pigeonhole&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;somewhat similar
+to the pigeonhole principle&lt;/span&gt; that for $n$ large, there are a large number of integer
 square roots in the 1-unit interval $(n, n+1)$, giving the perception of uniformity
 of the monotonically increasing set $S$.&lt;/p&gt;
 
@@ -240,17 +212,9 @@ roots serves. One useful application is in square root approximation - knowing
 that integer square roots are approximately uniform especially at large numbers,
 we can say that for an integer $q$, $\sqrt{q} \approx n + \frac{q-n^2}{2n+1}$,
 where
-$n = {\lfloor{\sqrt{q}}\rfloor}$&lt;label for=&quot;sqrt-example&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;sqrt-example&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-For example, $10.724 = \sqrt{115} \approx 10.714 = \sqrt{100} + \frac{15}{21}$.&lt;/span&gt;
-.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">The distance between consecutive perfect squares is not uniform:</summary></entry><entry><title type="html">approximation with interpolating polynomials</title><link href="https://ayazhafiz.com/articles/19/barycentric-interpolation" rel="alternate" type="text/html" title="approximation with interpolating polynomials" /><published>2019-11-15T00:00:00-06:00</published><updated>2019-11-15T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/barycentric-interpolation</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/barycentric-interpolation">&lt;h2 id=&quot;lagrange-form&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#lagrange-form&quot;&gt;#&lt;/a&gt;Lagrange Form&lt;/h2&gt;
+$n = {\lfloor{\sqrt{q}}\rfloor}$&lt;label for=&quot;sqrt-example&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sqrt-example&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;For example, $10.724 = \sqrt{115} \approx 10.714 = \sqrt{100} + \frac{15}{21}$.&lt;/span&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">The distance between consecutive perfect squares is not uniform:</summary></entry><entry><title type="html">approximation with interpolating polynomials</title><link href="https://ayazhafiz.com/articles/19/barycentric-interpolation" rel="alternate" type="text/html" title="approximation with interpolating polynomials" /><published>2019-11-15T00:00:00-06:00</published><updated>2019-11-15T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/barycentric-interpolation</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/barycentric-interpolation">&lt;h2 id=&quot;lagrange-form&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#lagrange-form&quot;&gt;#&lt;/a&gt;Lagrange Form&lt;/h2&gt;
 
-&lt;p&gt;Say you want to find an function approximating a set of data points&lt;label for=&quot;points&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;points&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$&lt;/span&gt;
-. One way to do this is to find a
+&lt;p&gt;Say you want to find an function approximating a set of data points&lt;label for=&quot;points&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;points&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$&lt;/span&gt;. One way to do this is to find a
 polynomial $p_n \in \mathbb{P}_n$ satisfying the interpolation property&lt;/p&gt;
 
 &lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
@@ -280,10 +244,7 @@ p_n(x)    &amp;= \sum_{i=0}^n \ell_i(x)f_i \\
 
 &lt;div class=&quot;custom-block&quot;&gt;
 where $\ell_i$ is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Lagrange_polynomial&quot;&gt;Lagrange
-polynomial&lt;/a&gt; of degree $n$.&lt;label for=&quot;interpolationproof&quot; class=&quot;margin-toggle&quot;&gt;&amp;#8853;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;interpolationproof&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;div class=&quot;marginnote&quot;&gt;
- To see that $p_n$ interpolates correctly, observe that
+polynomial&lt;/a&gt; of degree $n$.&lt;label for=&quot;interpolationproof&quot; class=&quot;margin-toggle&quot;&gt;&amp;#8853;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;interpolationproof&quot; class=&quot;margin-toggle&quot; /&gt;&lt;div class=&quot;marginnote&quot;&gt; To see that $p_n$ interpolates correctly, observe that
 
 &lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
 \ell_i(x) = \begin{cases}
@@ -337,19 +298,11 @@ the approximation.&lt;/p&gt;
 
 &lt;p&gt;This behavior is &lt;a href=&quot;https://en.wikipedia.org/wiki/Runge%27s_phenomenon&quot;&gt;Runge’s phenomenon&lt;/a&gt;, and
 means that increasing the order of an approximating polynomial interpolant may not
-improve its accuracy&lt;label for=&quot;wiki&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;wiki&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Why this occurs is beyond the scope of this post; &lt;a href=&quot;https://en.wikipedia.org/wiki/Runge%27s_phenomenon#Reason&quot;&gt;Wikipedia&lt;/a&gt; gives a good explanation.&lt;/span&gt;
-.&lt;/p&gt;
+improve its accuracy&lt;label for=&quot;wiki&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;wiki&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Why this occurs is beyond the scope of this post; &lt;a href=&quot;https://en.wikipedia.org/wiki/Runge%27s_phenomenon#Reason&quot;&gt;Wikipedia&lt;/a&gt; gives a good explanation.&lt;/span&gt;.&lt;/p&gt;
 
 &lt;p&gt;One way to minimize Runge’s phenomenon is to densify the interpolating points near the endpoints of
-the approximation interval&lt;label for=&quot;interval-endpoint&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;interval-endpoint&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Thereby more accurately fitting the
-parts of the approximation affected by Runge’s phenomenon.&lt;/span&gt;
-. &lt;a href=&quot;https://en.wikipedia.org/wiki/Chebyshev_nodes&quot;&gt;Chebyshev nodes&lt;/a&gt;
+the approximation interval&lt;label for=&quot;interval-endpoint&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;interval-endpoint&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Thereby more accurately fitting the
+parts of the approximation affected by Runge’s phenomenon.&lt;/span&gt;. &lt;a href=&quot;https://en.wikipedia.org/wiki/Chebyshev_nodes&quot;&gt;Chebyshev nodes&lt;/a&gt;
 exhibit exactly this kind of edge-heavy density, making them very useful for polynomial interpolation.&lt;/p&gt;
 
 &lt;p&gt;Creating a Barycentric interpolant with Chebyshev nodes yields a nice improvement.&lt;/p&gt;
@@ -358,21 +311,13 @@ exhibit exactly this kind of edge-heavy density, making them very useful for pol
 
 &lt;h2 id=&quot;convergence&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#convergence&quot;&gt;#&lt;/a&gt;Convergence&lt;/h2&gt;
 
-&lt;p&gt;Plotting the pointwise error of the Barycentric interpolant&lt;label for=&quot;cheb-nodes&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;cheb-nodes&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-generated with Chebyshev nodes&lt;/span&gt;
- approximating $f(x) = \sin(4x\cos(8x))$
+&lt;p&gt;Plotting the pointwise error of the Barycentric interpolant&lt;label for=&quot;cheb-nodes&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cheb-nodes&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;generated with Chebyshev nodes&lt;/span&gt; approximating $f(x) = \sin(4x\cos(8x))$
 suggests the polynomial interpolation is convergent.&lt;/p&gt;
 
 &lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/error.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
 
 &lt;p&gt;Inspection of the error
-$l^2$ norms&lt;label for=&quot;norm&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;norm&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Note that many other norms can be used for convergence analysis as well.&lt;/span&gt;
- suggests more:&lt;/p&gt;
+$l^2$ norms&lt;label for=&quot;norm&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;norm&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Note that many other norms can be used for convergence analysis as well.&lt;/span&gt; suggests more:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Order   L2 norm
 16      8.562880126489002
@@ -385,11 +330,7 @@ Note that many other norms can be used for convergence analysis as well.&lt;/spa
 
 &lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/texas-carbon-examples.png&quot; /&gt;&lt;figcaption&gt;Mistakenly-drawn carbon valencies&lt;/figcaption&gt;&lt;/figure&gt;
 
-&lt;p&gt;Colloquially, carbon atoms with five covalent bonds are called &lt;a href=&quot;http://www.chem.ucla.edu/~harding/IGOC/P/pentavalent_carbon.html&quot;&gt;Texas Carbon&lt;/a&gt;s&lt;label for=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/texas-carbon-flag.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;label for=&quot;texas-carbon&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Either because the Texas star has five points or because everything is bigger in Texas.&lt;/span&gt;
-.
+&lt;p&gt;Colloquially, carbon atoms with five covalent bonds are called &lt;a href=&quot;http://www.chem.ucla.edu/~harding/IGOC/P/pentavalent_carbon.html&quot;&gt;Texas Carbon&lt;/a&gt;s&lt;label for=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon-flag&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/assets/img/texas-carbon-flag.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;&lt;label for=&quot;texas-carbon&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;texas-carbon&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Either because the Texas star has five points or because everything is bigger in Texas.&lt;/span&gt;.
 Formally, they are known as pentavalent carbons.&lt;/p&gt;
 
 &lt;p&gt;It turns out that well-formed pentavalent carbons are much more frequent than an organic chemistry
@@ -413,11 +354,7 @@ prepared using methanium:&lt;/p&gt;
 
 &lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/ethanium-ethenium.png&quot; /&gt;&lt;figcaption&gt;$\text{C}_2\text{H}_7^+ \to \text{C}_2\text{H}_5^+ + \text{H}_2$&lt;/figcaption&gt;&lt;/figure&gt;
 
-&lt;p&gt;In practice, pentavalent acids are formed as intermediate species and during thermal cracking&lt;label for=&quot;pcformation&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;pcformation&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Per a DOE &lt;a href=&quot;https://www1.eere.energy.gov/manufacturing/resources/petroleum_refining/pdfs/bandwidth.pdf&quot;&gt;report, page 8&lt;/a&gt;.&lt;/span&gt;
-.&lt;/p&gt;
+&lt;p&gt;In practice, pentavalent acids are formed as intermediate species and during thermal cracking&lt;label for=&quot;pcformation&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;pcformation&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Per a DOE &lt;a href=&quot;https://www1.eere.energy.gov/manufacturing/resources/petroleum_refining/pdfs/bandwidth.pdf&quot;&gt;report, page 8&lt;/a&gt;.&lt;/span&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;both-b-and-c&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#both-b-and-c&quot;&gt;#&lt;/a&gt;Both &lt;strong&gt;B&lt;/strong&gt; and &lt;strong&gt;C&lt;/strong&gt;&lt;/h3&gt;
 
@@ -448,20 +385,12 @@ be planar. Both of these form beautiful five-point shapes.&lt;/p&gt;
 unique patterns like these are worth knowing, at least for the sake of knowing.&lt;/p&gt;
 
 &lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry><entry><title type="html">type folding and options</title><link href="https://ayazhafiz.com/articles/19/type-folding-and-options" rel="alternate" type="text/html" title="type folding and options" /><published>2019-10-03T01:00:00-05:00</published><updated>2019-10-03T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/type-folding-and-options</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/type-folding-and-options">&lt;p&gt;Sometimes, I work with TypeScript compiler
-APIs&lt;label for=&quot;tsapi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;tsapi&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-They’re great APIs!&lt;/span&gt;
-. Because the language
+APIs&lt;label for=&quot;tsapi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;tsapi&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;They’re great APIs!&lt;/span&gt;. Because the language
 semantics are non-trivial, traversing a TypeScript AST almost always involves
 extensive validation. Here’s a particularly specific traversal we use in the
-&lt;a href=&quot;https://angular.io/guide/language-service&quot;&gt;Angular Language Service&lt;/a&gt;&lt;label for=&quot;ng-ls&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;ng-ls&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-If the Language
+&lt;a href=&quot;https://angular.io/guide/language-service&quot;&gt;Angular Language Service&lt;/a&gt;&lt;label for=&quot;ng-ls&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;ng-ls&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;If the Language
 Service is something that interests you and would like to contribute, please let me know! Or nike
-swoosh it :slightly_smiling_face:.&lt;/span&gt;
-:&lt;/p&gt;
+swoosh it :slightly_smiling_face:.&lt;/span&gt;:&lt;/p&gt;
 
 &lt;noscript&gt;&lt;pre&gt;400: Invalid request
 &lt;/pre&gt;&lt;/noscript&gt;
@@ -494,19 +423,11 @@ linearly makes it more readable to me.&lt;/p&gt;
 &lt;h3 id=&quot;tess&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#tess&quot;&gt;#&lt;/a&gt;tess&lt;/h3&gt;
 
 &lt;p&gt;Okay, so how do we get this in TypeScript? Well, for a variety of good
-reasons&lt;label for=&quot;ynot&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;ynot&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Mainly because TypeScript is focused on supplementing JavaScript with types, not with more
-language features that aren’t in the standard.&lt;/span&gt;
-,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s&lt;label for=&quot;noopt&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;noopt&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-TypeScript does
+reasons&lt;label for=&quot;ynot&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;ynot&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Mainly because TypeScript is focused on supplementing JavaScript with types, not with more
+language features that aren’t in the standard.&lt;/span&gt;,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s&lt;label for=&quot;noopt&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;noopt&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;TypeScript does
 provide an &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/Option&quot;&gt;HTML Option&lt;/a&gt;,
-which is distinctly different.&lt;/span&gt;
- will probably never be in the standard
+which is distinctly different.&lt;/span&gt; will probably never be in the standard
 library.
 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining&quot;&gt;Optional chaining&lt;/a&gt;
 will help, but won’t solve type mapping.&lt;/p&gt;
@@ -521,7 +442,7 @@ very quickly:&lt;/p&gt;
 &lt;script src=&quot;https://gist.github.com/2a42ded6979c988875188f6133639f78.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;Will the Angular Language Service use &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s? Probably not. But it’s a fun
-idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕ They’re great APIs! . Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language Service If the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:. :</summary></entry><entry><title type="html">Equivalence matters</title><link href="https://ayazhafiz.com/articles/19/equivalence-matters" rel="alternate" type="text/html" title="Equivalence matters" /><published>2019-09-02T01:00:00-05:00</published><updated>2019-09-02T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/equivalence-matters</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/equivalence-matters">&lt;p&gt;I recently wrote about
+idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕They’re great APIs!. Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language ServiceIf the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:.:</summary></entry><entry><title type="html">Equivalence matters</title><link href="https://ayazhafiz.com/articles/19/equivalence-matters" rel="alternate" type="text/html" title="Equivalence matters" /><published>2019-09-02T01:00:00-05:00</published><updated>2019-09-02T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/equivalence-matters</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/equivalence-matters">&lt;p&gt;I recently wrote about
 &lt;a href=&quot;./smart-is-not-a-good-word&quot;&gt;why “smart” is not a good word&lt;/a&gt;. You don’t
 necessarily need to read that post to understand this one; the main idea is that
 “smart” is usually used as a supercategory abstracting and trivializing
@@ -558,19 +479,12 @@ may dramatically impact estimations made from categorical assumptions.&lt;/p&gt;
 categories they perceive to be valuable. Of course, these choices are unique.&lt;/p&gt;
 
 &lt;p&gt;I argue that philosophy is not only
-individual&lt;label for=&quot;phi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;phi&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-Certainly, this statement is itself biased by my individual philosophies.&lt;/span&gt;
- -
+individual&lt;label for=&quot;phi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;phi&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;Certainly, this statement is itself biased by my individual philosophies.&lt;/span&gt; -
 it becomes externally important when individuals use their philosophies to make
 decisions impacting others. In claiming that value categorizations are
 dangerous, there is a precondition of my philosophy on externalities.&lt;/p&gt;
 
-&lt;p&gt;&lt;label for=&quot;my-values&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;my-values&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-I only claim these to be my values, but I see little motivation for
+&lt;p&gt;&lt;label for=&quot;my-values&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;my-values&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;I only claim these to be my values, but I see little motivation for
 disagreeing with such values without a philosophy of rational egoism.&lt;/span&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -592,12 +506,8 @@ to treat all individuals as computationally equivalent and all individuals’
 values as value-equivalent, or more simply, as value-less. In this model,
 external value assignment becomes obsolete. For instance, a Level 16 CEO and a
 Level 1 employee in a company are
-equivalent&lt;label for=&quot;even-further&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;even-further&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-My philosophy of equivalence goes further; I claim that e.g. a human and a rock have the same complexity and value.&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;and of equal value, even if cultural norms claim otherwise.&lt;/p&gt;
+equivalent&lt;label for=&quot;even-further&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;even-further&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;My philosophy of equivalence goes further; I claim that e.g. a human and a rock have the same complexity and value.&lt;/span&gt;
+and of equal value, even if cultural norms claim otherwise.&lt;/p&gt;
 
 &lt;h3 id=&quot;2--dangerous-categories&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--dangerous-categories&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  Dangerous Categories&lt;/h3&gt;
 
@@ -614,12 +524,8 @@ dangerous.&lt;/p&gt;
 &lt;h3 id=&quot;3--int&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--int&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  Int&lt;/h3&gt;
 
 &lt;p&gt;Okay, so that’s my
-proof&lt;label for=&quot;proof&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;proof&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-I mean, this is kind of how I think. Or at least I
-think I do.&lt;/span&gt;
-. Here’s something for intuition.&lt;/p&gt;
+proof&lt;label for=&quot;proof&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;proof&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;I mean, this is kind of how I think. Or at least I
+think I do.&lt;/span&gt;. Here’s something for intuition.&lt;/p&gt;
 
 &lt;p&gt;Consider some individual working a job that societal norms may generally
 prescribe as prestigious. Others in the same environment as that individual may
@@ -633,11 +539,7 @@ non-self-prescribed value not necessarily representative of how the individual
 chooses to view themselves.&lt;/p&gt;
 
 &lt;p&gt;To me, that’s not a great way to let others live their
-lives&lt;label for=&quot;lorde&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;lorde&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-I recently read Audrey Lorde’s &lt;a href=&quot;https://uk.sagepub.com/sites/default/files/upm-binaries/11881_Chapter_5.pdf&quot;&gt;&lt;em&gt;The Uses of the Erotic&lt;/em&gt;&lt;/a&gt;. It discusses marginalization of the erotic in women, presenting interesting ideas somewhat tangential to this post, and reads in ~thirty minutes.&lt;/span&gt;
-.
+lives&lt;label for=&quot;lorde&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;lorde&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;I recently read Audrey Lorde’s &lt;a href=&quot;https://uk.sagepub.com/sites/default/files/upm-binaries/11881_Chapter_5.pdf&quot;&gt;&lt;em&gt;The Uses of the Erotic&lt;/em&gt;&lt;/a&gt;. It discusses marginalization of the erotic in women, presenting interesting ideas somewhat tangential to this post, and reads in ~thirty minutes.&lt;/span&gt;.
 Sure, the individual may have value attributions to what they do, but it’s not
 up to the rest of us to make those attributions. Normative statements can be
 useful, but I think they should be avoided where they marginalize an
@@ -649,10 +551,7 @@ individual’s experience.&lt;/p&gt;
 only hope this can provide a perspective.&lt;/p&gt;
 
 &lt;p&gt;If you would like to contact me for any reason, I am best reached
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry><entry><title type="html">what i did summer 2019</title><link href="https://ayazhafiz.com/articles/19/what-i-did-this-summer" rel="alternate" type="text/html" title="what i did summer 2019" /><published>2019-08-10T01:00:00-05:00</published><updated>2019-08-10T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/what-i-did-this-summer</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/what-i-did-this-summer">&lt;p&gt;&lt;label for=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-A &lt;em&gt;What I Did&lt;/em&gt; is my intersection
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry><entry><title type="html">what i did summer 2019</title><link href="https://ayazhafiz.com/articles/19/what-i-did-this-summer" rel="alternate" type="text/html" title="what i did summer 2019" /><published>2019-08-10T01:00:00-05:00</published><updated>2019-08-10T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/what-i-did-this-summer</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/what-i-did-this-summer">&lt;p&gt;&lt;label for=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;A &lt;em&gt;What I Did&lt;/em&gt; is my intersection
 between what Julia Evans describes as a
 &lt;a href=&quot;https://www.jvns.ca/blog/brag-documents/&quot;&gt;brag document&lt;/a&gt; and a
 &lt;a href=&quot;https://cc.ayazhafiz.com/articles/18/where-im-going&quot;&gt;Where I’m Going&lt;/a&gt;, applied
@@ -673,11 +572,7 @@ even more interesting. The company’s work environment was one of the first I�
 been able to be my whole self in. I have many other thoughts about the
 experience and have been thinking about how I can share and give this experience
 to
-others&lt;label for=&quot;futurecc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;futurecc&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-This will be a &lt;a href=&quot;#share-experience&quot;&gt;future &lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; post.&lt;/a&gt;&lt;/span&gt;
-.
+others&lt;label for=&quot;futurecc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;futurecc&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This will be a &lt;a href=&quot;#share-experience&quot;&gt;future &lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; post.&lt;/a&gt;&lt;/span&gt;.
 In the meantime, please
 &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email me&lt;/a&gt;
 if you’d like to chat!&lt;/p&gt;
@@ -715,11 +610,7 @@ class property &lt;code class=&quot;highlighter-rouge&quot;&gt;myProperty&lt;/co
 spent the next quarter of my internship adding support for the rest of the Angular
 &lt;a href=&quot;https://angular.io/guide/template-syntax&quot;&gt;template syntax&lt;/a&gt; and rolling out the
 indexer to production on all of Google’s internal
-codebase&lt;label for=&quot;ngmodule&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;ngmodule&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Browsed by more than 45K developers, and consisting of more than 26K Angular modules!&lt;/span&gt;
-.
+codebase&lt;label for=&quot;ngmodule&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;ngmodule&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Browsed by more than 45K developers, and consisting of more than 26K Angular modules!&lt;/span&gt;.
 The last quarter of my internship I fixed bugs, hacked on some Rust stuff, and
 worked with customers of &lt;a href=&quot;#3--typescript-indexer&quot;&gt;TypeScript indexer plugins&lt;/a&gt;.&lt;/p&gt;
 
@@ -799,18 +690,11 @@ and helped create a diverse, accepting environment where I could literally let
 my hair down.&lt;/p&gt;
 
 &lt;p&gt;Finally, I lived in a “Hacker Home” with a healthy
-amount&lt;label for=&quot;2324&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;2324&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-23? 24? It was a
-lot.&lt;/span&gt;
- of other individuals who offered me new perspectives and shared with me
+amount&lt;label for=&quot;2324&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;2324&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;23? 24? It was a
+lot.&lt;/span&gt; of other individuals who offered me new perspectives and shared with me
 a joyful summer.&lt;/p&gt;
 
-&lt;p&gt;&lt;label for=&quot;dino&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;dino&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-These names likely mean nothing to you, but the picture only missed Dino and Courtney :cry:&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;label for=&quot;dino&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;dino&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;These names likely mean nothing to you, but the picture only missed Dino and Courtney :cry:&lt;/span&gt;&lt;/p&gt;
 
 &lt;figure&gt;&lt;img src=&quot;/assets/img/hh2019.jpg&quot; /&gt;&lt;figcaption&gt;Mountain View Hacker Home, Summer 2019&lt;/figcaption&gt;&lt;/figure&gt;
 
@@ -918,7 +802,7 @@ Chemistry.&lt;/li&gt;
 
 &lt;p&gt;If you got this far, you probably want to talk. Cool, I do too! The best way to
 contact me is via
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕ A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry><entry><title type="html">“Smart” is not a good word</title><link href="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word" rel="alternate" type="text/html" title="&quot;Smart&quot; is not a good word" /><published>2019-07-18T01:00:00-05:00</published><updated>2019-07-18T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/smart-is-not-a-good-word</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word">&lt;p&gt;I grew up not understanding mental illness. Like
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry><entry><title type="html">“Smart” is not a good word</title><link href="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word" rel="alternate" type="text/html" title="&quot;Smart&quot; is not a good word" /><published>2019-07-18T01:00:00-05:00</published><updated>2019-07-18T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/smart-is-not-a-good-word</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word">&lt;p&gt;I grew up not understanding mental illness. Like
 &lt;a href=&quot;https://medium.com/@junwu_46652/the-intelligence-myth-8b5722145180&quot;&gt;Jun Wu&lt;/a&gt;, I
 found studying this domain to be self-actualizing — anxiety and clinical
 depression had not been anomalies, but intrinsic parts of my childhood.&lt;/p&gt;
@@ -929,10 +813,7 @@ ubiquitous in my daily life.&lt;/p&gt;
 &lt;p&gt;My experiences with mental health have been the result of many influences. One
 of the most important influences has been the notion of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;ness. I’ll
 discuss my interpretation of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;, then explain why I think it’s not a good
-word.&lt;label for=&quot;definitely&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;definitely&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-I use the
+word.&lt;label for=&quot;definitely&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;definitely&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;I use the
 word “definitely” frequently in this post, not as an emphasis but as a synonym for “confidently”.&lt;/span&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;u--school-rules&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#u--school-rules&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;u:&lt;/span&gt;  School Rules&lt;/h3&gt;
@@ -954,11 +835,7 @@ for a student that has spent all of their primary education experience in such
 an environment, it is very likely the only environment they know exists. I still
 sometimes feel that it is the only environment that matters.&lt;/p&gt;
 
-&lt;p&gt;Viewers&lt;label for=&quot;viewers&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;viewers&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-e.g. parents, teachers&lt;/span&gt;
- would compliment many
+&lt;p&gt;Viewers&lt;label for=&quot;viewers&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;viewers&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;e.g. parents, teachers&lt;/span&gt; would compliment many
 in this environment for their intelligence, and of course, for being &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;.
 Maybe it is already obvious that &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; is not a good word for this - 80 hour
 academic work weeks, at any age, is not necessarily an indication of
@@ -989,19 +866,11 @@ means this usage of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/co
 
 &lt;p&gt;&lt;a href=&quot;https://soundcloud.com/benzi&quot;&gt;DJ Benzi&lt;/a&gt; is one of the most clever and
 knowledgeable individuals in their
-field&lt;label for=&quot;dj-benzi&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;dj-benzi&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-From my perspective. There are many other clever and
-knowledgeable individuals in this domain as well. I just wrote this listening to Benzi.&lt;/span&gt;
-.
+field&lt;label for=&quot;dj-benzi&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;dj-benzi&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;From my perspective. There are many other clever and
+knowledgeable individuals in this domain as well. I just wrote this listening to Benzi.&lt;/span&gt;.
 From Benzi’s perspective, I imagine there is one domain that he would consider me
-clever and knowledgeable in. I also believe that both of us have equal&lt;label for=&quot;highly-similar&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;highly-similar&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-or at least definitely highly-similar&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;intelligences.&lt;/p&gt;
+clever and knowledgeable in. I also believe that both of us have equal&lt;label for=&quot;highly-similar&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;highly-similar&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;or at least definitely highly-similar&lt;/span&gt;
+intelligences.&lt;/p&gt;
 
 &lt;p&gt;Maybe someone could say DJ Benzi and I are both smart. What does that tell you?&lt;/p&gt;
 
@@ -1009,41 +878,25 @@ or at least definitely highly-similar&lt;/span&gt;&lt;/p&gt;
 
 &lt;p&gt;The thing is, I’m pretty sure all entities in the environments around us are
 computationally
-equivalent&lt;label for=&quot;tcomputations&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;tcomputations&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-Derived from the theory of computation, itself an idea &lt;a href=&quot;https://www.wolframscience.com/nks/&quot;&gt;popularized&lt;/a&gt; by Stephen Wolfram.&lt;/span&gt;
-,
+equivalent&lt;label for=&quot;tcomputations&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;tcomputations&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Derived from the theory of computation, itself an idea &lt;a href=&quot;https://www.wolframscience.com/nks/&quot;&gt;popularized&lt;/a&gt; by Stephen Wolfram.&lt;/span&gt;,
 which is the idea that structures are identical in their design complexity
 though their functionality may be radically
-different&lt;label for=&quot;opt&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;opt&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;marginnote&quot;&gt;
-My interpretation of computational equivalence is a very
+different&lt;label for=&quot;opt&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;opt&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;My interpretation of computational equivalence is a very
 optimistic one. It may be the case that this model can be absolutely refuted, but it is the most
-generic appeal to logic I currently have.&lt;/span&gt;
-.&lt;/p&gt;
+generic appeal to logic I currently have.&lt;/span&gt;.&lt;/p&gt;
 
 &lt;p&gt;Treating all entities as computationally equivalent generalizes influences on
 functionality. In this model, &lt;code class=&quot;highlighter-rouge&quot;&gt;intelligence&lt;/code&gt; is as not good of a word as &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;
 is. It becomes easy to show that the only
-differentiators&lt;label for=&quot;this-disc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;this-disc&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-as related to this discussion&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;between any two entities are the knowledge domains they operate in.&lt;/p&gt;
+differentiators&lt;label for=&quot;this-disc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;this-disc&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;as related to this discussion&lt;/span&gt;
+between any two entities are the knowledge domains they operate in.&lt;/p&gt;
 
 &lt;p&gt;This means the cumulative domain signature an entity operates in must be
 globally unique. Perception of something as “difficult” or “interesting” is an
 artifact of contrasting domain signatures, though in fact every domain is
 equally complex. This is the model I employ for reasoning why different people
-find problems to be “difficult” or “interesting”&lt;label for=&quot;ethnoc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;
-&lt;input type=&quot;checkbox&quot; id=&quot;ethnoc&quot; class=&quot;margin-toggle&quot; /&gt;
-&lt;span class=&quot;sidenote&quot;&gt;
-This can be thought of as generalizing a context of
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Ethnocentrism&quot;&gt;ethnocentrism&lt;/a&gt;.&lt;/span&gt;
-.&lt;/p&gt;
+find problems to be “difficult” or “interesting”&lt;label for=&quot;ethnoc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;ethnoc&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This can be thought of as generalizing a context of
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Ethnocentrism&quot;&gt;ethnocentrism&lt;/a&gt;.&lt;/span&gt;.&lt;/p&gt;
 
 &lt;p&gt;“Passion” is also solved by this model. &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s “passion” is an artifact of &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s
 perception of contrasting structural distribution. Structures may be more or

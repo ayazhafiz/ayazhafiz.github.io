@@ -332,7 +332,7 @@ span.el {
 .sidenote-number::after,
 .sidenote::before {
   color: #a00000;
-  content: counter(sidenote-counter) " ";
+  content: counter(sidenote-counter);
   position: relative;
   vertical-align: baseline; }
 

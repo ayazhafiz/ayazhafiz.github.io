@@ -78,28 +78,19 @@
 
         <div class="column-right">
           <section class="nav">
-  <a class="nav-link" href="/">cc</a>
-  <a class="nav-link" href="/vis">vis</a>
+  <a class="nav-link" href="/">cc</a><a class="nav-link" href="/vis">vis</a>
 </section>
  <article class="post-group">
   <h1 class="title">Type Folding and Options</h1>
   <p class="byline">October 3, 2019</p>
 
   <p>Sometimes, I work with TypeScript compiler
-APIs<label for="tsapi" class="margin-toggle">⊕</label>
-<input type="checkbox" id="tsapi" class="margin-toggle">
-<span class="marginnote">
-They’re great APIs!</span>
-. Because the language
+APIs<label for="tsapi" class="margin-toggle">⊕</label><input type="checkbox" id="tsapi" class="margin-toggle"><span class="marginnote">They’re great APIs!</span>. Because the language
 semantics are non-trivial, traversing a TypeScript AST almost always involves
 extensive validation. Here’s a particularly specific traversal we use in the
-<a href="https://angular.io/guide/language-service">Angular Language Service</a><label for="ng-ls" class="margin-toggle sidenote-number"></label>
-<input type="checkbox" id="ng-ls" class="margin-toggle">
-<span class="sidenote">
-If the Language
+<a href="https://angular.io/guide/language-service">Angular Language Service</a><label for="ng-ls" class="margin-toggle sidenote-number"></label><input type="checkbox" id="ng-ls" class="margin-toggle"><span class="sidenote">If the Language
 Service is something that interests you and would like to contribute, please let me know! Or nike
-swoosh it <img class="emoji" title=":slightly_smiling_face:" alt=":slightly_smiling_face:" src="https://glcdn.githack.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f642.png" height="20" width="20">.</span>
-:</p>
+swoosh it <img class="emoji" title=":slightly_smiling_face:" alt=":slightly_smiling_face:" src="https://glcdn.githack.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f642.png" height="20" width="20">.</span>:</p>
 
 <noscript><pre>400: Invalid request
 </pre></noscript>
@@ -134,19 +125,11 @@ linearly makes it more readable to me.</p>
 <a class="header-anchor" href="#tess">#</a>tess</h3>
 
 <p>Okay, so how do we get this in TypeScript? Well, for a variety of good
-reasons<label for="ynot" class="margin-toggle sidenote-number"></label>
-<input type="checkbox" id="ynot" class="margin-toggle">
-<span class="sidenote">
-Mainly because TypeScript is focused on supplementing JavaScript with types, not with more
-language features that aren’t in the standard.</span>
-,
-<code class="highlighter-rouge">Option</code>s<label for="noopt" class="margin-toggle sidenote-number"></label>
-<input type="checkbox" id="noopt" class="margin-toggle">
-<span class="sidenote">
-TypeScript does
+reasons<label for="ynot" class="margin-toggle sidenote-number"></label><input type="checkbox" id="ynot" class="margin-toggle"><span class="sidenote">Mainly because TypeScript is focused on supplementing JavaScript with types, not with more
+language features that aren’t in the standard.</span>,
+<code class="highlighter-rouge">Option</code>s<label for="noopt" class="margin-toggle sidenote-number"></label><input type="checkbox" id="noopt" class="margin-toggle"><span class="sidenote">TypeScript does
 provide an <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/Option">HTML Option</a>,
-which is distinctly different.</span>
- will probably never be in the standard
+which is distinctly different.</span> will probably never be in the standard
 library.
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">Optional chaining</a>
 will help, but won’t solve type mapping.</p>
@@ -168,7 +151,7 @@ idea!</p>
     
     <a href="/articles/19/equivalence-matters">« Equivalence Matters</a>
     
-    <span><img class="emoji" title=":shoe:" alt=":shoe:" src="https://glcdn.githack.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f45e.png" height="20" width="20">  
+    <span><img class="emoji" title=":shoe:" alt=":shoe:" src="https://glcdn.githack.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f45e.png" height="20" width="20"> 
       <span>​<script type="math/tex">
           G = \left\{\Pi_n^0 g(x), \Pi_n^1 g(x), \dots, \Pi_n^{n-1} g(x) \right\}
         </script></span>
