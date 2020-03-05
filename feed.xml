@@ -1,4 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-02-29T23:43:11-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">apathy</title><link href="https://ayazhafiz.com/articles/20/apathy" rel="alternate" type="text/html" title="apathy" /><published>2020-02-03T02:00:00-06:00</published><updated>2020-02-03T02:00:00-06:00</updated><id>https://ayazhafiz.com/articles/20/apathy</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/apathy">&lt;p&gt;Discussions of apathy generally refer to the normative kind. This kind of apathy is characterized by
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-03-04T22:04:54-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">satellites</title><link href="https://ayazhafiz.com/articles/20/satellites" rel="alternate" type="text/html" title="satellites" /><published>2020-02-29T02:00:00-06:00</published><updated>2020-02-29T02:00:00-06:00</updated><id>https://ayazhafiz.com/articles/20/satellites</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/satellites">&lt;p&gt;At some point, all fads were satellite ideas pursued by one more independent groups. As a fad grows,
+so does the size and number of groups associated with it. Eventually a fad achieves a non-trivial
+adoption rate (becomes a fact) or fades away (becomes an artifact).&lt;/p&gt;
+
+&lt;p&gt;The relationships of groups pursuing an idea at all of these stages is well studied, especially
+&lt;a href=&quot;https://www.sciencedirect.com/science/article/pii/S2212827114003709&quot;&gt;with&lt;/a&gt; &lt;a href=&quot;https://www.sciencedirect.com/science/article/pii/S0956522104000272&quot;&gt;respect&lt;/a&gt;
+&lt;a href=&quot;https://academic.oup.com/isr/article-abstract/11/3/523/1796789?redirectedFrom=fulltext&quot;&gt;to&lt;/a&gt;
+&lt;a href=&quot;https://en.wikipedia.org/wiki/The_Complexity_of_Cooperation&quot;&gt;collaboration and competition&lt;/a&gt;&lt;label for=&quot;four-links&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;four-links&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;These are four separate links :slightly_smiling_face:&lt;/span&gt;.
+In this cc, I wish to briefly discuss the consequences of each of these stages on individual
+productivity and efficiency. Let’s start from the back.&lt;/p&gt;
+
+&lt;h2 id=&quot;4--fact&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#4--fact&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;4:&lt;/span&gt;  Fact&lt;/h2&gt;
+
+&lt;p&gt;Intuition might suggest that productivity is lowered significant after a fad becomes a fact. But
+while there may not be a lot of effort required in growing the fact to a greater level of adoption,
+maintenance is non-trivial. For example, the upfront cost of building a new house is high, but this
+cost is marginal relative to the maintenance costs required over the better part of the next
+century&lt;label for=&quot;maintenance&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;maintenance&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Maintenance requires both individual contribution (time) and
+transient contributions (e.g. via money paid for services) of productivity.&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;An individual may expect a consistent maintenance cost associated with a fact. This cost is likely
+to be small compared to an individual’s other responsibilities, and an increase in maintenance costs
+incites an individual to develop optimizations&lt;label for=&quot;maintenance-cost&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;maintenance-cost&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;E.g. a system
+that requires a lot of manual tuning is likely to be superseded.&lt;/span&gt; (read: new satellite ideas).
+This can lead to a cycle of individual effort invested in an idea.&lt;/p&gt;
+
+&lt;h2 id=&quot;3--artifact&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--artifact&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  Artifact&lt;/h2&gt;
+
+&lt;p&gt;When a fad becomes an artifact, an individual has two choices:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Invest more time in the artifact. This boosts individual productivity, but is
+inefficient when the fad has been shown to be flawed. For example, &lt;a href=&quot;http://nlp.seas.harvard.edu/NamedTensor.html&quot;&gt;untyped tensors&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pivot to another idea. This may lead to a loss of productivity in the short term due to ramp-up
+investment, but increases efficiency in the long term.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Aside these considerations, the productivity invested in an artifact is very similar to that of a
+fact.&lt;/p&gt;
+
+&lt;h2 id=&quot;2--fad&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--fad&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  Fad&lt;/h2&gt;
+
+&lt;p&gt;Okay, so here’s where it gets interesting. I’m not convinced that being involved with a fad is
+productive.&lt;/p&gt;
+
+&lt;p&gt;What’s the hot thing right now? Whatever it is, I’m sure there are a lot of people working on it.
+Realistically, if any one individual working on that fad ceased their contribution immediately,
+whatever they could have discovered would be independently discovered in the next &lt;a href=&quot;https://en.wikipedia.org/wiki/15_minutes_of_fame&quot;&gt;15 minutes of
+fame&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Don’t get me wrong – 10% contributions add up. But for the individual, 10% isn’t always enough.
+This seems like a degradation in individual efficiency.&lt;/p&gt;
+
+&lt;h2 id=&quot;1--satellite&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--satellite&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  Satellite&lt;/h2&gt;
+
+&lt;p&gt;Naturally, satellite ideas require a large efficiency investment. Whether this translates to
+heightened productivity is largely dependent on personal motivation.&lt;/p&gt;
+
+&lt;p&gt;Satellites are lonely. Work on divergent ideas must be self-motivated, as invested dependents
+are often lacking. When a road map is unclear (as is often the case for satellite ideas), it can be
+difficult to convince oneself to be going. So a satellite must be really into it.&lt;/p&gt;
+
+&lt;p&gt;I feel that this facet is often overlooked. Revolutionary ideas are good ideas, and they are also
+incredibly unique and obsessively pursued. In fact, uniqueness and investment are the primary
+factors that can promote a satellite into a fad. The soundness of an idea becomes more important
+only later on.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">At some point, all fads were satellite ideas pursued by one more independent groups. As a fad grows, so does the size and number of groups associated with it. Eventually a fad achieves a non-trivial adoption rate (becomes a fact) or fades away (becomes an artifact).</summary></entry><entry><title type="html">apathy</title><link href="https://ayazhafiz.com/articles/20/apathy" rel="alternate" type="text/html" title="apathy" /><published>2020-02-03T02:00:00-06:00</published><updated>2020-02-03T02:00:00-06:00</updated><id>https://ayazhafiz.com/articles/20/apathy</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/apathy">&lt;p&gt;Discussions of apathy generally refer to the normative kind. This kind of apathy is characterized by
 an indifference to a context that one has the privilege to interface with. There are many
 reasons one may be apathetic – common arguments propose convenience or
 indifference&lt;label for=&quot;indifference&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;indifference&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Of course, indifference and apathy are synonymous.&lt;/span&gt;.
@@ -802,111 +871,4 @@ Chemistry.&lt;/li&gt;
 
 &lt;p&gt;If you got this far, you probably want to talk. Cool, I do too! The best way to
 contact me is via
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry><entry><title type="html">“Smart” is not a good word</title><link href="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word" rel="alternate" type="text/html" title="&quot;Smart&quot; is not a good word" /><published>2019-07-18T01:00:00-05:00</published><updated>2019-07-18T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/smart-is-not-a-good-word</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/smart-is-not-a-good-word">&lt;p&gt;I grew up not understanding mental illness. Like
-&lt;a href=&quot;https://medium.com/@junwu_46652/the-intelligence-myth-8b5722145180&quot;&gt;Jun Wu&lt;/a&gt;, I
-found studying this domain to be self-actualizing — anxiety and clinical
-depression had not been anomalies, but intrinsic parts of my childhood.&lt;/p&gt;
-
-&lt;p&gt;I’m now somewhere around 20 years old and persistence of least the latter is
-ubiquitous in my daily life.&lt;/p&gt;
-
-&lt;p&gt;My experiences with mental health have been the result of many influences. One
-of the most important influences has been the notion of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;ness. I’ll
-discuss my interpretation of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;, then explain why I think it’s not a good
-word.&lt;label for=&quot;definitely&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;definitely&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;I use the
-word “definitely” frequently in this post, not as an emphasis but as a synonym for “confidently”.&lt;/span&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;u--school-rules&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#u--school-rules&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;u:&lt;/span&gt;  School Rules&lt;/h3&gt;
-
-&lt;p&gt;I grew up in an extremely competitive school district. Exemplifications of this
-include&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;some of my friends began competing their SAT scores in the 7&lt;sup&gt;th&lt;/sup&gt;
-grade;&lt;/li&gt;
-  &lt;li&gt;having a 4.0 GPA would not guarantee that you were in the academic top 10% of
-the student body;&lt;/li&gt;
-  &lt;li&gt;student leadership positions were often explicitly granted on a combined
-prestige and quid pro quo basis.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The problem is not always that such an environment exists. The problem is that
-for a student that has spent all of their primary education experience in such
-an environment, it is very likely the only environment they know exists. I still
-sometimes feel that it is the only environment that matters.&lt;/p&gt;
-
-&lt;p&gt;Viewers&lt;label for=&quot;viewers&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;viewers&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;e.g. parents, teachers&lt;/span&gt; would compliment many
-in this environment for their intelligence, and of course, for being &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;.
-Maybe it is already obvious that &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; is not a good word for this - 80 hour
-academic work weeks, at any age, is not necessarily an indication of
-intelligence. It can only definitely be an indication of hard work.&lt;/p&gt;
-
-&lt;p&gt;But also, &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;ness doesn’t have anything to do with intelligence.&lt;/p&gt;
-
-&lt;h3 id=&quot;s--dj-benzi&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#s--dj-benzi&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;s:&lt;/span&gt;  DJ Benzi&lt;/h3&gt;
-
-&lt;p&gt;What does being &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; even mean? In my experience, people use &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; to
-simultaneously describe to someone’s prowess in a certain skill and their
-overall intelligence.&lt;/p&gt;
-
-&lt;p&gt;The problem with this is that knowledge of a particular domain and general
-intelligence have almost nothing to do with each other. The reality is that you
-and I are probably very knowledgeable in respective (but different!) knowledge
-areas, and also probably have nearly-equal intelligences. Lumping the two
-together means that a a listener who hears something about an individual’s
-&lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;s has to either&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;treat &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;ness as a score of both domains, or&lt;/li&gt;
-  &lt;li&gt;ask more questions.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Deference to the latter is least-ambiguous, but the presence of ambiguity at all
-means this usage of &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; is already not a good pattern.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://soundcloud.com/benzi&quot;&gt;DJ Benzi&lt;/a&gt; is one of the most clever and
-knowledgeable individuals in their
-field&lt;label for=&quot;dj-benzi&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;dj-benzi&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;From my perspective. There are many other clever and
-knowledgeable individuals in this domain as well. I just wrote this listening to Benzi.&lt;/span&gt;.
-From Benzi’s perspective, I imagine there is one domain that he would consider me
-clever and knowledgeable in. I also believe that both of us have equal&lt;label for=&quot;highly-similar&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;highly-similar&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;or at least definitely highly-similar&lt;/span&gt;
-intelligences.&lt;/p&gt;
-
-&lt;p&gt;Maybe someone could say DJ Benzi and I are both smart. What does that tell you?&lt;/p&gt;
-
-&lt;h3 id=&quot;t--computational-equivalence&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#t--computational-equivalence&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;t:&lt;/span&gt;  Computational Equivalence&lt;/h3&gt;
-
-&lt;p&gt;The thing is, I’m pretty sure all entities in the environments around us are
-computationally
-equivalent&lt;label for=&quot;tcomputations&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;tcomputations&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Derived from the theory of computation, itself an idea &lt;a href=&quot;https://www.wolframscience.com/nks/&quot;&gt;popularized&lt;/a&gt; by Stephen Wolfram.&lt;/span&gt;,
-which is the idea that structures are identical in their design complexity
-though their functionality may be radically
-different&lt;label for=&quot;opt&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;opt&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;My interpretation of computational equivalence is a very
-optimistic one. It may be the case that this model can be absolutely refuted, but it is the most
-generic appeal to logic I currently have.&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;Treating all entities as computationally equivalent generalizes influences on
-functionality. In this model, &lt;code class=&quot;highlighter-rouge&quot;&gt;intelligence&lt;/code&gt; is as not good of a word as &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt;
-is. It becomes easy to show that the only
-differentiators&lt;label for=&quot;this-disc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;this-disc&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;as related to this discussion&lt;/span&gt;
-between any two entities are the knowledge domains they operate in.&lt;/p&gt;
-
-&lt;p&gt;This means the cumulative domain signature an entity operates in must be
-globally unique. Perception of something as “difficult” or “interesting” is an
-artifact of contrasting domain signatures, though in fact every domain is
-equally complex. This is the model I employ for reasoning why different people
-find problems to be “difficult” or “interesting”&lt;label for=&quot;ethnoc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;ethnoc&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This can be thought of as generalizing a context of
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Ethnocentrism&quot;&gt;ethnocentrism&lt;/a&gt;.&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;“Passion” is also solved by this model. &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s “passion” is an artifact of &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s
-perception of contrasting structural distribution. Structures may be more or
-less rare, but they are still all equivalent in complexity. It’s even possible
-to generalize that &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s passion is &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt;’s computational signature.&lt;/p&gt;
-
-&lt;p&gt;Anyway, that’s an unbound idea. The point is &lt;code class=&quot;highlighter-rouge&quot;&gt;smart&lt;/code&gt; is not a good word. Maybe
-it’s even a bad word.&lt;/p&gt;
-
-&lt;h4 id=&quot;thoughtthoughts&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#thoughtthoughts&quot;&gt;#&lt;/a&gt;ThoughtThoughts&lt;/h4&gt;
-
-&lt;p&gt;I would like to hear your thoughts about my thoughts. The best way to contact me
-is via &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Ideas&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I grew up not understanding mental illness. Like Jun Wu, I found studying this domain to be self-actualizing — anxiety and clinical depression had not been anomalies, but intrinsic parts of my childhood.</summary></entry></feed>
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry></feed>
