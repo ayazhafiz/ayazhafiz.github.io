@@ -401,7 +401,7 @@ li .sidenote,
 li .marginnote,
 blockquote .sidenote,
 blockquote .marginnote {
-  margin-right: -60%; }
+  margin-right: -64%; }
 
 @media only screen and (max-width: 760px) {
   .margin-toggle:checked + .sidenote,

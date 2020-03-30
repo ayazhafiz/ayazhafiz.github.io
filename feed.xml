@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-03-29T23:03:00-05:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">satellites</title><link href="https://ayazhafiz.com/articles/20/satellites" rel="alternate" type="text/html" title="satellites" /><published>2020-02-29T02:00:00-06:00</published><updated>2020-02-29T02:00:00-06:00</updated><id>https://ayazhafiz.com/articles/20/satellites</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/satellites">&lt;p&gt;At some point, all fads were satellite ideas pursued by one more independent groups. As a fad grows,
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-03-30T01:06:49-05:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">scaling up</title><link href="https://ayazhafiz.com/articles/20/scaling-up" rel="alternate" type="text/html" title="scaling up" /><published>2020-03-29T03:00:00-05:00</published><updated>2020-03-29T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/scaling-up</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/scaling-up">&lt;p&gt;There’s this not-so-novel idea that a businesses will often find success by focusing on inputs
+rather than outputs. The reasoning is that outputs are affected by many more externalities
+that inputs, and that a strong application of a business’s inputs will naturally lead to
+desired outputs. For example, a salesperson may wish to focus more on the number of meetings they
+set up rather than their conversion rate&lt;label for=&quot;number-meetings&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;number-meetings&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;The latter is less
+deterministic than the former, and finding success in the former will lead to a larger number of
+conversions anyway.&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;But business must consider a number of other strategies, including how to scale up.
+Observing the current&lt;label for=&quot;current&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;current&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;At the time of this writing&lt;/span&gt; COVID-19 pandemic, I
+have become convinced that effective scaling is a pivotal consideration for all organizations, not
+just businesses, and will play a tremendous role in the pandemic’s impact on human livelihoods. I’ll
+give just three examples (you could find many more!):&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Insurance premiums will soar after (and possibly during) this pandemic. Part of this will be
+because a lot of people will get sick and insurance companies need to maintain short-term
+profitability. Part of this is that insurance companies, like many nations’ healthcare systems,
+are unprepared to scale for catastrophe.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;As the pandemic begins to stabilize, many individuals will need convenient, flexible
+sources of income. Businesses in the gig economy, like rideshare and delivery apps, will be
+stressed to intake a tremendous userbase without meticulous foresight.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I planned to immigrate to Switzerland in May, prior to the nation’s suspension of work visas.
+Due to an increased backlog and higher workload, Swiss consulates estimate the processing time of
+a visa to increase to over a month&lt;label for=&quot;month&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;month&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;&lt;span&gt;​&lt;script type=&quot;math/tex&quot;&gt;\sim4\text{x}&lt;/script&gt;&lt;/span&gt; the regular
+processing time&lt;/span&gt; after the suspension is lifted. Could this timeline
+be improved with a buffer, like delaying the start date of an issued visa?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I anticipate that we will think about scale much more as COVID rages on, and that scaling solutions
+will resurge as a &lt;a href=&quot;/articles/20/satellites#4--fact&quot;&gt;fact&lt;/a&gt; in a post-COVID world. Part of the
+difficulty with scaling is that it is not cheap, and without an expectation for long-term need,
+arguments for scalability are dulled. It will be interesting to see how these challenges are solved.
+My bet is on an economy of platforms and services.&lt;/p&gt;
+
+&lt;h2 id=&quot;bring-it-back&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#bring-it-back&quot;&gt;#&lt;/a&gt;bring it back&lt;/h2&gt;
+
+&lt;p&gt;Generalizing&lt;label for=&quot;generalization&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;generalization&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;Pun intended :slightly_smiling_face:&lt;/span&gt; the idea of
+“scaling up”, one can thinking about going from a specialization to a generalization. Scale in this
+sense can be very individual – it’s one thing to understand how much salt a scrambled egg requires,
+it’s another to understand the same for an arbitrary dish.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">There’s this not-so-novel idea that a businesses will often find success by focusing on inputs rather than outputs. The reasoning is that outputs are affected by many more externalities that inputs, and that a strong application of a business’s inputs will naturally lead to desired outputs. For example, a salesperson may wish to focus more on the number of meetings they set up rather than their conversion rateThe latter is less deterministic than the former, and finding success in the former will lead to a larger number of conversions anyway..</summary></entry><entry><title type="html">satellites</title><link href="https://ayazhafiz.com/articles/20/satellites" rel="alternate" type="text/html" title="satellites" /><published>2020-02-29T02:00:00-06:00</published><updated>2020-02-29T02:00:00-06:00</updated><id>https://ayazhafiz.com/articles/20/satellites</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/satellites">&lt;p&gt;At some point, all fads were satellite ideas pursued by one more independent groups. As a fad grows,
 so does the size and number of groups associated with it. Eventually a fad achieves a non-trivial
 adoption rate (becomes a fact) or fades away (becomes an artifact).&lt;/p&gt;
 
@@ -620,255 +666,4 @@ individual’s experience.&lt;/p&gt;
 only hope this can provide a perspective.&lt;/p&gt;
 
 &lt;p&gt;If you would like to contact me for any reason, I am best reached
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry><entry><title type="html">what i did summer 2019</title><link href="https://ayazhafiz.com/articles/19/what-i-did-this-summer" rel="alternate" type="text/html" title="what i did summer 2019" /><published>2019-08-10T01:00:00-05:00</published><updated>2019-08-10T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/what-i-did-this-summer</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/what-i-did-this-summer">&lt;p&gt;&lt;label for=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;whatididdoc&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;A &lt;em&gt;What I Did&lt;/em&gt; is my intersection
-between what Julia Evans describes as a
-&lt;a href=&quot;https://www.jvns.ca/blog/brag-documents/&quot;&gt;brag document&lt;/a&gt; and a
-&lt;a href=&quot;https://cc.ayazhafiz.com/articles/18/where-im-going&quot;&gt;Where I’m Going&lt;/a&gt;, applied
-to relatively short time frame.&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;This summer I worked with the &lt;a href=&quot;https://angular.io&quot;&gt;Angular Team&lt;/a&gt; at Google in
-Sunnyvale, CA. I feel incredibly fortunate to have had such an experience,
-during which I&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;shipped an Angular indexer for all of Google’s internal codebase,&lt;/li&gt;
-  &lt;li&gt;improved a TypeScript indexer, including adding plugin support,&lt;/li&gt;
-  &lt;li&gt;added a semantic analysis API to the open-source Angular project.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I felt these were interesting things to work on, and the people around me were
-even more interesting. The company’s work environment was one of the first I’ve
-been able to be my whole self in. I have many other thoughts about the
-experience and have been thinking about how I can share and give this experience
-to
-others&lt;label for=&quot;futurecc&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;futurecc&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This will be a &lt;a href=&quot;#share-experience&quot;&gt;future &lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; post.&lt;/a&gt;&lt;/span&gt;.
-In the meantime, please
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email me&lt;/a&gt;
-if you’d like to chat!&lt;/p&gt;
-
-&lt;h3 id=&quot;projects&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#projects&quot;&gt;#&lt;/a&gt;Projects&lt;/h3&gt;
-
-&lt;h4 id=&quot;1--angular-indexer&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--angular-indexer&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  Angular Indexer&lt;/h4&gt;
-
-&lt;p&gt;I designed, developed, and shipped an
-indexer for &lt;a href=&quot;https://github.com/angular/angular&quot;&gt;Angular&lt;/a&gt; source code. This was
-a fantastic project with unexpected complexity throughout, even in its very
-early stages. The indexer used the &lt;a href=&quot;https://github.com/kythe/kythe&quot;&gt;Kythe&lt;/a&gt;
-framework, which has a
-&lt;a href=&quot;https://xrefs-dot-kythe-repo.appspot.com/#kythe/cxx/indexer/cxx/marked_source.cc?corpus=kythe&amp;amp;signature&quot;&gt;sample UI&lt;/a&gt;
-demonstrating the kinds of cross-references a Kythe indexer can generate.&lt;/p&gt;
-
-&lt;p&gt;The project was initially scoped out to provide indexing information about
-interpolated properties and methods in templates. For example, given an Angular
-template&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/016102ae4e643ac1731d268c2d86db61.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;and component&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/bddce1d2398cb64ad3070ebd22940077.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;the indexer was to generate cross-references and usage information about the
-class property &lt;code class=&quot;highlighter-rouge&quot;&gt;myProperty&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;I showed this was reliably practicable in the first half of my internship, then
-spent the next quarter of my internship adding support for the rest of the Angular
-&lt;a href=&quot;https://angular.io/guide/template-syntax&quot;&gt;template syntax&lt;/a&gt; and rolling out the
-indexer to production on all of Google’s internal
-codebase&lt;label for=&quot;ngmodule&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;ngmodule&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Browsed by more than 45K developers, and consisting of more than 26K Angular modules!&lt;/span&gt;.
-The last quarter of my internship I fixed bugs, hacked on some Rust stuff, and
-worked with customers of &lt;a href=&quot;#3--typescript-indexer&quot;&gt;TypeScript indexer plugins&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I gave a talk on developing the Angular indexer:&lt;/p&gt;
-
-&lt;figure class=&quot;fullwidth resp-iframe-container&quot;&gt;
-  &lt;iframe class=&quot;resp-iframe&quot; src=&quot;https://docs.google.com/presentation/d/e/2PACX-1vS6faRapIClhDbsSLqn7Zc3Wuqca2J08fnSJaKqFIT4IVtW9JZR4WNXvvFZyMncp8rnzJ1DtxlKb7d5/embed?start=false&amp;amp;loop=false&amp;amp;delayms=3000&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h4 id=&quot;2--angular-indexing-api&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--angular-indexing-api&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  Angular Indexing API&lt;/h4&gt;
-
-&lt;p&gt;As part of my work on the Angular indexer, I needed to extract semantic
-information about an Angular project. To enable this, I created a new semantic
-analysis API called the
-&lt;a href=&quot;https://github.com/angular/angular/tree/master/packages/compiler-cli/src/ngtsc/indexer&quot;&gt;Angular indexing API&lt;/a&gt;
-on the Angular compiler.&lt;/p&gt;
-
-&lt;p&gt;The indexing API is fairly small, TypeScript-compiler-esque, and is very easy to use:&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/5689ff6d1a4a4a236d2c7abe04fd5394.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;There are now some thoughts of using this API for an open-source Angular indexer
-and of using it in the Angular language service.&lt;/p&gt;
-
-&lt;p&gt;Near the end of my internship, I gave a talk on what I learned contributing to a
-large open source project like Angular:&lt;/p&gt;
-
-&lt;figure class=&quot;fullwidth resp-iframe-container&quot;&gt;
-  &lt;iframe class=&quot;resp-iframe&quot; src=&quot;https://docs.google.com/presentation/d/e/2PACX-1vTDQuGFkUvK7sx4R_wO4PWeEuJMmK0sZLWKK7OVj40hYa5E_O_nal1Aw09XIzIkv32MQefpcFU7hztq/embed?start=false&amp;amp;loop=false&amp;amp;delayms=3000&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;
-&lt;/figure&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h4 id=&quot;3--typescript-indexer&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--typescript-indexer&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  TypeScript Indexer&lt;/h4&gt;
-
-&lt;p&gt;I added many new features to the open-source Kythe
-&lt;a href=&quot;https://github.com/kythe/kythe/tree/master/kythe/typescript&quot;&gt;TypeScript indexer&lt;/a&gt;,
-including&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;new cross-reference features,&lt;/li&gt;
-  &lt;li&gt;information about overridden methods on a class,&lt;/li&gt;
-  &lt;li&gt;a
-&lt;a href=&quot;https://github.com/kythe/kythe/tree/master/kythe/typescript/SCHEMA.md&quot;&gt;schema&lt;/a&gt;
-for entries emitted by the indexer,&lt;/li&gt;
-  &lt;li&gt;a
-&lt;a href=&quot;https://github.com/kythe/kythe/blob/35a252f56067d2f2043a7edb758b6825e35a38f1/kythe/typescript/indexer.ts#L96&quot;&gt;plugin model&lt;/a&gt;
-for adding additional functionality to the indexer.
-    &lt;ul&gt;
-      &lt;li&gt;now used by three separate indexers&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Like the Angular indexer, the TypeScript indexer runs on all of Google’s
-codebase, which consists of thousands of TypeScript projects and is browsed by
-more than 45K developers.&lt;/p&gt;
-
-&lt;h3 id=&quot;collaboration-n-friends&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#collaboration-n-friends&quot;&gt;#&lt;/a&gt;Collaboration ‘n’ Friends&lt;/h3&gt;
-
-&lt;p&gt;My intern host was &lt;a href=&quot;https://github.com/kyliau&quot;&gt;Keen Yee Liau&lt;/a&gt;, an incredible
-individual from whom I learned a tremendous amount (especially about philosophy
-and life). I consider us good friends now, and we will continue to keep
-collaborating.&lt;/p&gt;
-
-&lt;p&gt;I collaborated with &lt;a href=&quot;https://github.com/evmar&quot;&gt;Evan Martin&lt;/a&gt;, who built the Kythe
-TypeScript indexer and works on TypeScript at Google. I also worked extensively
-with &lt;a href=&quot;https://github.com/alxhub&quot;&gt;Alex Rickabaugh&lt;/a&gt;, who is the code owner of the
-Angular compiler. I communicated quite often with the
-&lt;a href=&quot;https://github.com/kythe&quot;&gt;Kythe team&lt;/a&gt; and with two other individuals developing
-indexers with TypeScript indexer plugins.&lt;/p&gt;
-
-&lt;p&gt;The entirety of the Angular team was amazing. Each presented me with new ideas
-and helped create a diverse, accepting environment where I could literally let
-my hair down.&lt;/p&gt;
-
-&lt;p&gt;Finally, I lived in a “Hacker Home” with a healthy
-amount&lt;label for=&quot;2324&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;2324&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;23? 24? It was a
-lot.&lt;/span&gt; of other individuals who offered me new perspectives and shared with me
-a joyful summer.&lt;/p&gt;
-
-&lt;p&gt;&lt;label for=&quot;dino&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;dino&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;These names likely mean nothing to you, but the picture only missed Dino and Courtney :cry:&lt;/span&gt;&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/assets/img/hh2019.jpg&quot; /&gt;&lt;figcaption&gt;Mountain View Hacker Home, Summer 2019&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;what-i-learned&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#what-i-learned&quot;&gt;#&lt;/a&gt;What I learned&lt;/h3&gt;
-
-&lt;p&gt;In no particular order,&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;New languages and technologies.
-    &lt;ul&gt;
-      &lt;li&gt;Lots: &lt;a href=&quot;https://github.com/angular/angular&quot;&gt;Angular&lt;/a&gt;,
-&lt;a href=&quot;https://github.com/kythe/kythe&quot;&gt;Kythe&lt;/a&gt;,
-&lt;a href=&quot;https://github.com/bazel/bazel&quot;&gt;Bazel&lt;/a&gt;,
-&lt;a href=&quot;https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API&quot;&gt;TypeScript compiler&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Some: &lt;a href=&quot;https://golang.org&quot;&gt;Go lang&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Programming language and compiler design.
-    &lt;ul&gt;
-      &lt;li&gt;Influenced by the TypeScript and Angular compilers.&lt;/li&gt;
-      &lt;li&gt;&lt;em&gt;Design a compiler to support semantic analysis from the start&lt;/em&gt;. This may
-seem cumbersome because the primary goal of a new compiler is to emit code
-quickly and correctly, not have support for language analysis features, but
-designing for language analysis features will decrease cost of work
-substantially down the line. Many compilers face the issue of high cost,
-including Angular’s and Rust’s.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Advanced and idiomatic TypeScript.&lt;/li&gt;
-  &lt;li&gt;How to approach
-&lt;a href=&quot;https://docs.google.com/presentation/d/18FwLIKWiMrvgxkDFUKiaMeHfzn3ScMVf4uq9snX3fGY/edit?usp=sharing&quot;&gt;large codebases and open-source projects&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Meta stuff!
-    &lt;ul&gt;
-      &lt;li&gt;More about who I am as a person.&lt;/li&gt;
-      &lt;li&gt;What I want from a job (right now).
-        &lt;ul&gt;
-          &lt;li&gt;Interesting problems, and preferably impact. Less so money.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://soundcloud.com/dvmvnds/sets/a-something-to-jacky&quot;&gt;How to See the World More and Worry Less&lt;/a&gt;.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;where-im-going--next-goals&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#where-im-going--next-goals&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;Where I’m going:&lt;/span&gt;  Next Goals&lt;/h3&gt;
-
-&lt;p&gt;My internship is over, but my work isn’t. In no particular order, my goals for
-the next semester are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Continue contributing to &lt;a href=&quot;https://github.com/angular/angular&quot;&gt;Angular&lt;/a&gt;.
-    &lt;ul&gt;
-      &lt;li&gt;My current focus is on
-&lt;a href=&quot;https://github.com/angular/angular/issues/31898&quot;&gt;fixing inconsistencies and stabilizing&lt;/a&gt;
-the Angular compiler.&lt;/li&gt;
-      &lt;li&gt;I hope to also contribute to the
-&lt;a href=&quot;https://github.com/angular/angular/tree/master/packages/language-service&quot;&gt;Angular language service&lt;/a&gt;,
-expanding on the knowledge I learned building the Angular indexer.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Continue contributing to &lt;a href=&quot;https://github.com/kythe/kythe&quot;&gt;Kythe&lt;/a&gt;.
-    &lt;ul&gt;
-      &lt;li&gt;There is work to be done with
-&lt;a href=&quot;https://github.com/kythe/kythe/pull/3934&quot;&gt;Code Search UI limitations&lt;/a&gt;.&lt;/li&gt;
-      &lt;li&gt;The TypeScript indexer still has interesting places to grow in, including
-some refactorings of the codebase and supporting lower-priority
-cross-reference features.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;span id=&quot;share-experience&quot;&gt;Find ways to share and give my experience to
-others.&lt;/span&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; post coming soon.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Write and Talk.
-    &lt;ul&gt;
-      &lt;li&gt;Write a blog post about my experiences contributing to Angular, based off my
-&lt;a href=&quot;https://docs.google.com/presentation/d/18FwLIKWiMrvgxkDFUKiaMeHfzn3ScMVf4uq9snX3fGY/edit?usp=sharing&quot;&gt;presentation&lt;/a&gt;
-on the same topic.&lt;/li&gt;
-      &lt;li&gt;Find an Angular conference to attend.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Take interesting classes.
-    &lt;ul&gt;
-      &lt;li&gt;In my (hopeful) lineup for the next two semesters are Distributed Systems,
-Algorithms, Compiler Design, Cryptography, Synthetic Chemistry, and Physical
-Chemistry.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Perform an analysis of how various student groups at my university operate.
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; post coming after project completion.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Be a good TA for &lt;a href=&quot;https://vuse-cs3251.github.io&quot;&gt;CS3251&lt;/a&gt;.
-    &lt;ul&gt;
-      &lt;li&gt;Develop, spread &lt;a href=&quot;https://github.com/ayazhafiz/patterns&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;patterns&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;(Hopefully) find a job for Summer 2020.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;epi&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#epi&quot;&gt;#&lt;/a&gt;Epi&lt;/h2&gt;
-
-&lt;p&gt;If you got this far, you probably want to talk. Cool, I do too! The best way to
-contact me is via
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC&quot;&gt;email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">⊕A What I Did is my intersection between what Julia Evans describes as a brag document and a Where I’m Going, applied to relatively short time frame.</summary></entry></feed>
+&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry></feed>

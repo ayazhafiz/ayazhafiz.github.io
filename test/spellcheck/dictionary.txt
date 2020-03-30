@@ -1,4 +1,4 @@
-personal_ws-1.1 en 221
+personal_ws-1.1 en 228
 CIP
 del
 ebd
@@ -220,3 +220,10 @@ workspace
 myProperty
 untyped
 optimizations
+COVID
+impactful
+resurge
+rideshare
+userbase
+scalability
+healthcare
