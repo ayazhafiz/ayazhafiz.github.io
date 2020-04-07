@@ -131,8 +131,7 @@ to integrate with Rust.</span>.</p>
 
 <p>Luckily, this is only 3 lines of Rust.</p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/7bd12df2567ba085b368a250d07af458.js"> </script>
 
 <p>But this function, as is, cannot be read by other languages when compiled. For
@@ -147,15 +146,13 @@ strings - this is because Rust strings are
 <a href="https://doc.rust-lang.org/book/first-edition/strings.html">different</a>
 from those of other languages.</span></p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/d90ff4e2920ba59aa562d870f5042913.js"> </script>
 
 <p>In <code class="highlighter-rouge">Cargo.toml</code>, specify the build to be a dynamic library so it can be accessed
 by other processes.</p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/2d5a17210f40250717b73c58983c3fab.js"> </script>
 
 <p>And now,</p>
@@ -172,8 +169,7 @@ the current path. Then we can bind the library in four lines:</p>
 <p><label for="stringnew" class="margin-toggle">⊕</label><input type="checkbox" id="stringnew" class="margin-toggle"><span class="marginnote">Note that <code class="highlighter-rouge">String.new</code> must be used to build the char
 pointer returned by <code class="highlighter-rouge">LibHello.hello</code></span></p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/2100aefe3e0190b3ef7658687334d34e.js"> </script>
 
 <p>And compile to print “Hello, world!”.</p>

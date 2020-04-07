@@ -103,8 +103,7 @@ precise with an increasing volume of generated points.</p>
 
 <p>Your friend is an electrical engineer, and knows how to program in JavaScript. She quickly codes a simple, easily-understandable procedure:</p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/7eea1f8f18000c6ccdc3920cf2fd5076.js"> </script>
 
 <p>You<label for="actually-you" class="margin-toggle sidenote-number"></label><input type="checkbox" id="actually-you" class="margin-toggle"><span class="sidenote">perhaps vicariously through another</span>, having already taken on some abstracted title for yourself, chose instead to over-engineer her perfectly good solution to be <em>TheBestCode</em>™</p>
@@ -114,8 +113,7 @@ precise with an increasing volume of generated points.</p>
 
 <p>Since the only operations done here are on an array, all the loops can be eliminated in favor of immutable function calls on the original array. Even the instantiation of random points in the array can be sugared into the initializer.</p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/40fea356a4e4c0d305db57babac4120d.js"> </script>
 
 <h2 id="2--on-incircle">
@@ -126,16 +124,14 @@ precise with an increasing volume of generated points.</p>
 
 <p>This gives an artisanally-crafted code:</p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/506d11f17b7b54cd5c027f0df809d013.js"> </script>
 
 <p>We’re not done yet. If we take a quarter circle of radius 1 inscribed in the square instead, the ratio of quarter-circle-to-square area remains <span>​<script type="math/tex"> {\pi\over4} </script></span>, but now the center of the circle is at the origin, which eliminates two subtractions in the function call. The code is made even more idiomatic with JavaScript’s exponentiation operator.</p>
 
 <p>For now, this will be our final form:</p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/559d68654cf90acf049dd5abdcdb7ad0.js"> </script>
 
 <h2 id="3--defining-and-objectifying">
@@ -143,16 +139,14 @@ precise with an increasing volume of generated points.</p>
 
 <p>But what <em>is</em> a point? In this case, a pair of <span>​<script type="math/tex"> (x, y) </script></span> coordinates. Let’s define the points as named tuples:</p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/85e4c911e098091730f50e3516fe8047.js"> </script>
 
 <p>We abstracted <code class="highlighter-rouge">inCircle</code> to be of any radius earlier, but of course that’s kind of useless since the function is specifically designed for measuring <span>​<script type="math/tex"> \pi </script></span>. What we should do is wrap our estimation script into one experimentation procedure that accepts a variable point sample size. This is the <strong>ultimate abstraction</strong> we could ask for.</p>
 
 <p>After a multitude of revisions and totally misaligned priorities, we arrive to modular paradise.</p>
 
-<noscript><pre>400: Invalid request
-</pre></noscript>
+<noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/603d939e1038673380eb5b1892169c2c.js"> </script>
 
 <h2 id="4--why">

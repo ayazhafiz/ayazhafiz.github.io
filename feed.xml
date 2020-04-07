@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-03-30T01:06:49-05:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">scaling up</title><link href="https://ayazhafiz.com/articles/20/scaling-up" rel="alternate" type="text/html" title="scaling up" /><published>2020-03-29T03:00:00-05:00</published><updated>2020-03-29T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/scaling-up</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/scaling-up">&lt;p&gt;There’s this not-so-novel idea that a businesses will often find success by focusing on inputs
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-04-07T15:23:26-05:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">scaling up</title><link href="https://ayazhafiz.com/articles/20/scaling-up" rel="alternate" type="text/html" title="scaling up" /><published>2020-03-29T03:00:00-05:00</published><updated>2020-03-29T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/scaling-up</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/scaling-up">&lt;p&gt;There’s this not-so-novel idea that a businesses will often find success by focusing on inputs
 rather than outputs. The reasoning is that outputs are affected by many more externalities
 that inputs, and that a strong application of a business’s inputs will naturally lead to
 desired outputs. For example, a salesperson may wish to focus more on the number of meetings they
@@ -507,8 +507,7 @@ extensive validation. Here’s a particularly specific traversal we use in the
 Service is something that interests you and would like to contribute, please let me know! Or nike
 swoosh it :slightly_smiling_face:.&lt;/span&gt;:&lt;/p&gt;
 
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
 &lt;script src=&quot;https://gist.github.com/e296d213923043d5b33381bc81a5fcd4.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;All validations branch on type checks, so in languages with design ideas like
@@ -528,8 +527,7 @@ an &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt; applies a
 &lt;p&gt;If the TypeScript API had Rust bindings, I would imagine the code above to look
 something like&lt;/p&gt;
 
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
 &lt;script src=&quot;https://gist.github.com/269f25526c492b193a73741a19c82eca.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;My hot take is that is way nicer - declaring the procedure functionally and
@@ -552,8 +550,7 @@ types, there at least &lt;a href=&quot;https://github.com/shogogg/ts-option&quot
 can be used. If a library is too much, a lightweight &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt; can be written
 very quickly:&lt;/p&gt;
 
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request
-&lt;/pre&gt;&lt;/noscript&gt;
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
 &lt;script src=&quot;https://gist.github.com/2a42ded6979c988875188f6133639f78.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;Will the Angular Language Service use &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s? Probably not. But it’s a fun
