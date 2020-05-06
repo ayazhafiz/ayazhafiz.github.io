@@ -76,14 +76,16 @@
         </section>
         -->
 
-        <div class="column-right">
+        <div class="column-right rust's great interoperability-main">
           <section class="nav">
   <a class="nav-link" href="/">cc</a><a class="nav-link" href="/vis">vis</a>
 </section>
- <article class="post-group">
-  <h1 class="title">Rust's Great Interoperability</h1>
-  <p class="byline">February 7, 2018</p>
+ <div class="showhide-notes">»</div>
 
+<h1 class="title">Rust's Great Interoperability</h1>
+<p class="byline">February 7, 2018</p>
+
+<article class="post">
   <h2 id="0--rust-on-the-rocks">
 <a class="header-anchor" href="#0--rust-on-the-rocks">#</a><span class="el">0:</span>  Rust on the Rocks</h2>
 
@@ -91,7 +93,7 @@
 <a href="https://github.com/rust-lang/regex/blob/master/src/exec.rs">beautiful</a>,
 <a href="http://theburningmonk.com/2015/05/rust-memory-safety-without-gc/">memory safe</a>,
 and <a href="https://www.reddit.com/r/rust/comments/5urar1/is_rust_likely_the_next_fastest_language_after_c/">faster than the Tesla Roadster</a>
-<label for="roadster" class="margin-toggle">⊕</label><input type="checkbox" id="roadster" class="margin-toggle"><span class="marginnote">Remember when Elon launched his <a href="https://twitter.com/elonmusk/status/960994034960416768?ref_src=twsrc%5Etfw&amp;ref_url=https%3A%2F%2Fwww.cnbc.com%2F2018%2F02%2F06%2Fthis-is-what-a-tesla-roadster-looks-like-floating-through-space.html">into space</a>?</span> -
+<span class="note"><label for="roadster" class="margin-toggle">⊕</label></span><input type="checkbox" id="roadster" class="margin-toggle"><span class="marginnote">Remember when Elon launched his <a href="https://twitter.com/elonmusk/status/960994034960416768?ref_src=twsrc%5Etfw&amp;ref_url=https%3A%2F%2Fwww.cnbc.com%2F2018%2F02%2F06%2Fthis-is-what-a-tesla-roadster-looks-like-floating-through-space.html">into space</a>?</span> -
 but perhaps my favorite thing about Rust is its fantastic
 <a href="https://doc.rust-lang.org/book/first-edition/ffi.html">FFI</a>, which allows for
 interoperability with almost all modern languages.</p>
@@ -118,7 +120,7 @@ like Ruby or Bash, while being <a href="https://github.com/kostya/crystal-benchm
 There are some applications (<em>read: APIs</em>) that would be better written in
 another language (<em>read: Rust</em>), but that I want to interface with apps
 written Crystal. And
-so, bindings come into play <label for="clearb" class="margin-toggle">⊕</label><input type="checkbox" id="clearb" class="margin-toggle"><span class="marginnote">For Python, Ruby, and
+so, bindings come into play <span class="note"><label for="clearb" class="margin-toggle">⊕</label></span><input type="checkbox" id="clearb" class="margin-toggle"><span class="marginnote">For Python, Ruby, and
 JavaScript (Node), Rust’s FFI is
 <a href="https://doc.rust-lang.org/1.2.0/book/rust-inside-other-languages.html">cleanly outlined</a>.
 For Crystal it is not, but I was able to figure it out even without any documentation,
@@ -138,10 +140,10 @@ to integrate with Rust.</span>.</p>
 that, the function must be extended with a C interface, which requires the <code class="highlighter-rouge">libc</code>
 crate.</p>
 
-<p><label for="what2do" class="margin-toggle">⊕</label><input type="checkbox" id="what2do" class="margin-toggle"><span class="marginnote">All that must be done is to include <code class="highlighter-rouge">libc</code>, create
+<p><span class="note"><label for="what2do" class="margin-toggle">⊕</label></span><input type="checkbox" id="what2do" class="margin-toggle"><span class="marginnote">All that must be done is to include <code class="highlighter-rouge">libc</code>, create
 an function definition along the C ABI, and wrap the function with C types.<br><br></span></p>
 
-<p><label for="why-ptr" class="margin-toggle">⊕</label><input type="checkbox" id="why-ptr" class="margin-toggle"><span class="marginnote">Observe that a <code class="highlighter-rouge">c_char</code> pointer is used for passing
+<p><span class="note"><label for="why-ptr" class="margin-toggle">⊕</label></span><input type="checkbox" id="why-ptr" class="margin-toggle"><span class="marginnote">Observe that a <code class="highlighter-rouge">c_char</code> pointer is used for passing
 strings - this is because Rust strings are
 <a href="https://doc.rust-lang.org/book/first-edition/strings.html">different</a>
 from those of other languages.</span></p>
@@ -166,7 +168,7 @@ because Rust supports the C ABI, we can also link Rust functions!</p>
 <p>Suppose that <code class="highlighter-rouge">hello.rs</code> builds to <code class="highlighter-rouge">target/release/hello.dylib</code> relative to
 the current path. Then we can bind the library in four lines:</p>
 
-<p><label for="stringnew" class="margin-toggle">⊕</label><input type="checkbox" id="stringnew" class="margin-toggle"><span class="marginnote">Note that <code class="highlighter-rouge">String.new</code> must be used to build the char
+<p><span class="note"><label for="stringnew" class="margin-toggle">⊕</label></span><input type="checkbox" id="stringnew" class="margin-toggle"><span class="marginnote">Note that <code class="highlighter-rouge">String.new</code> must be used to build the char
 pointer returned by <code class="highlighter-rouge">LibHello.hello</code></span></p>
 
 <noscript><pre>400: Invalid request</pre></noscript>
@@ -174,21 +176,70 @@ pointer returned by <code class="highlighter-rouge">LibHello.hello</code></span>
 
 <p>And compile to print “Hello, world!”.</p>
 
-
-  <section class="footer">
-    
-    <a href="/articles/17/what-causes-that-ephemeral-facial-flush">« What Causes That Ephemeral Facial Flush</a>
-    
-    <span><img class="emoji" title=":squid:" alt=":squid:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f991.png" height="20" width="20"> 
-      <span>​<script type="math/tex">
-          \det(\alpha A) = \alpha^n\det(A)
-        </script></span>
-    </span>
-    
-    <a href="/articles/18/the-case-of-the-missing-alcohol">The Case of the Missing Alcohol Proton »</a>
-    
-  </section>
 </article>
+
+<section class="footer">
+  
+  <a href="/articles/17/what-causes-that-ephemeral-facial-flush">« What Causes That Ephemeral Facial Flush</a>
+  
+  <span><img class="emoji" title=":squid:" alt=":squid:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f991.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        \det(\alpha A) = \alpha^n\det(A)
+      </script></span>
+  </span>
+  
+  <a href="/articles/18/the-case-of-the-missing-alcohol">The Case of the Missing Alcohol Proton »</a>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  function toggleShowHideNotesSwitch(isFullWidth) {
+    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+    $(".showhide-notes").addEventListener("click", toggleFullWidth);
+  });
+</script>
 
         </div>
       </div>

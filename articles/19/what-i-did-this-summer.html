@@ -76,15 +76,17 @@
         </section>
         -->
 
-        <div class="column-right">
+        <div class="column-right what i did summer 2019-main">
           <section class="nav">
   <a class="nav-link" href="/">cc</a><a class="nav-link" href="/vis">vis</a>
 </section>
- <article class="post-group">
-  <h1 class="title">What I Did Summer 2019</h1>
-  <p class="byline">August 10, 2019</p>
+ <div class="showhide-notes">»</div>
 
-  <p><label for="whatididdoc" class="margin-toggle">⊕</label><input type="checkbox" id="whatididdoc" class="margin-toggle"><span class="marginnote">A <em>What I Did</em> is my intersection
+<h1 class="title">What I Did Summer 2019</h1>
+<p class="byline">August 10, 2019</p>
+
+<article class="post">
+  <p><span class="note"><label for="whatididdoc" class="margin-toggle">⊕</label></span><input type="checkbox" id="whatididdoc" class="margin-toggle"><span class="marginnote">A <em>What I Did</em> is my intersection
 between what Julia Evans describes as a
 <a href="https://www.jvns.ca/blog/brag-documents/">brag document</a> and a
 <a href="https://cc.ayazhafiz.com/articles/18/where-im-going">Where I’m Going</a>, applied
@@ -105,7 +107,7 @@ even more interesting. The company’s work environment was one of the first I�
 been able to be my whole self in. I have many other thoughts about the
 experience and have been thinking about how I can share and give this experience
 to
-others<label for="futurecc" class="margin-toggle sidenote-number"></label><input type="checkbox" id="futurecc" class="margin-toggle"><span class="sidenote">This will be a <a href="#share-experience">future <code class="highlighter-rouge">cc</code> post.</a></span>.
+others<span class="note"><label for="futurecc" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="futurecc" class="margin-toggle"><span class="sidenote">This will be a <a href="#share-experience">future <code class="highlighter-rouge">cc</code> post.</a></span>.
 In the meantime, please
 <a href="mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC">email me</a>
 if you’d like to chat!</p>
@@ -143,7 +145,7 @@ class property <code class="highlighter-rouge">myProperty</code>.</p>
 spent the next quarter of my internship adding support for the rest of the Angular
 <a href="https://angular.io/guide/template-syntax">template syntax</a> and rolling out the
 indexer to production on all of Google’s internal
-codebase<label for="ngmodule" class="margin-toggle sidenote-number"></label><input type="checkbox" id="ngmodule" class="margin-toggle"><span class="sidenote">Browsed by more than 45K developers, and consisting of more than 26K Angular modules!</span>.
+codebase<span class="note"><label for="ngmodule" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="ngmodule" class="margin-toggle"><span class="sidenote">Browsed by more than 45K developers, and consisting of more than 26K Angular modules!</span>.
 The last quarter of my internship I fixed bugs, hacked on some Rust stuff, and
 worked with customers of <a href="#3--typescript-indexer">TypeScript indexer plugins</a>.</p>
 
@@ -225,11 +227,11 @@ and helped create a diverse, accepting environment where I could literally let
 my hair down.</p>
 
 <p>Finally, I lived in a “Hacker Home” with a healthy
-amount<label for="2324" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2324" class="margin-toggle"><span class="sidenote">23? 24? It was a
+amount<span class="note"><label for="2324" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="2324" class="margin-toggle"><span class="sidenote">23? 24? It was a
 lot.</span> of other individuals who offered me new perspectives and shared with me
 a joyful summer.</p>
 
-<p><label for="dino" class="margin-toggle">⊕</label><input type="checkbox" id="dino" class="margin-toggle"><span class="marginnote">These names likely mean nothing to you, but the picture only missed Dino and Courtney <img class="emoji" title=":cry:" alt=":cry:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f622.png" height="20" width="20"></span></p>
+<p><span class="note"><label for="dino" class="margin-toggle">⊕</label></span><input type="checkbox" id="dino" class="margin-toggle"><span class="marginnote">These names likely mean nothing to you, but the picture only missed Dino and Courtney <img class="emoji" title=":cry:" alt=":cry:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f622.png" height="20" width="20"></span></p>
 
 <figure><img src="/assets/img/hh2019.jpg"><figcaption>Mountain View Hacker Home, Summer 2019</figcaption></figure>
 
@@ -349,21 +351,70 @@ Chemistry.</li>
 contact me is via
 <a href="mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Summer%202019%20-%20CC">email</a>.</p>
 
-
-  <section class="footer">
-    
-    <a href="/articles/19/smart-is-not-a-good-word">« "Smart" Is Not a Good Word</a>
-    
-    <span><img class="emoji" title=":link:" alt=":link:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f517.png" height="20" width="20"> 
-      <span>​<script type="math/tex">
-          \text{Definition}\subseteq\text{Reference}
-        </script></span>
-    </span>
-    
-    <a href="/articles/19/equivalence-matters">Equivalence Matters »</a>
-    
-  </section>
 </article>
+
+<section class="footer">
+  
+  <a href="/articles/19/smart-is-not-a-good-word">« "Smart" Is Not a Good Word</a>
+  
+  <span><img class="emoji" title=":link:" alt=":link:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f517.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        \text{Definition}\subseteq\text{Reference}
+      </script></span>
+  </span>
+  
+  <a href="/articles/19/equivalence-matters">Equivalence Matters »</a>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  function toggleShowHideNotesSwitch(isFullWidth) {
+    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+    $(".showhide-notes").addEventListener("click", toggleFullWidth);
+  });
+</script>
 
         </div>
       </div>

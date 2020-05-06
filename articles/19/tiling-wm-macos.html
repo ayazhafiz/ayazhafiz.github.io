@@ -76,14 +76,16 @@
         </section>
         -->
 
-        <div class="column-right">
+        <div class="column-right A macOS workspace with a tiling WM-main">
           <section class="nav">
   <a class="nav-link" href="/">cc</a><a class="nav-link" href="/vis">vis</a>
 </section>
- <article class="post-group">
-  <h1 class="title">A macOS Workspace With a Tiling WM</h1>
-  <p class="byline">May 5, 2019</p>
+ <div class="showhide-notes">»</div>
 
+<h1 class="title">A macOS Workspace With a Tiling WM</h1>
+<p class="byline">May 5, 2019</p>
+
+<article class="post">
   <blockquote>
   <p><em>Update</em>: Development of <a href="https://github.com/koekeishiya/chunkwm"><code class="highlighter-rouge">chunkwm</code></a>
 has ceased in favor of <a href="https://github.com/koekeishiya/yabai"><code class="highlighter-rouge">yabai</code></a>. It’s
@@ -118,7 +120,7 @@ everything one buys a Mac for.</p>
 
 <p>As I’ve become more productive, I’ve increasingly turned to power tools like
 <code class="highlighter-rouge">vim</code>, <a href="https://github.com/tmux/tmux"><code class="highlighter-rouge">tmux</code></a>, and most recently,
-<a href="https://github.com/koekeishiya/chunkwm"><code class="highlighter-rouge">chunkwm</code></a><label for="chunkwm" class="margin-toggle sidenote-number"></label><input type="checkbox" id="chunkwm" class="margin-toggle"><span class="sidenote">A tiling window manager for macOS</span>.
+<a href="https://github.com/koekeishiya/chunkwm"><code class="highlighter-rouge">chunkwm</code></a><span class="note"><label for="chunkwm" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="chunkwm" class="margin-toggle"><span class="sidenote">A tiling window manager for macOS</span>.
 <code class="highlighter-rouge">chunkwm</code> in particular has been a big jump for me in terms of productivity and
 workspace aesthetic. This post discusses my macOS configuration, motivated by my
 setup of <code class="highlighter-rouge">chunkwm</code>.</p>
@@ -154,7 +156,7 @@ desktop, though the value of that may vary by taste. I quite like it.</p>
 its own it’s pretty nice, but its full potential comes out with a hotkey daemon
 like <a href="https://github.com/koekeishiya/skhd"><code class="highlighter-rouge">skhd</code></a>, which maps keystrokes to
 arbitrary system actions. <code class="highlighter-rouge">skhd</code> can be used for mapping hotkeys to
-<code class="highlighter-rouge">chunkc</code><label for="chunkc" class="margin-toggle sidenote-number"></label><input type="checkbox" id="chunkc" class="margin-toggle"><span class="sidenote">the program that sends messages to <code class="highlighter-rouge">chunkwm</code></span>
+<code class="highlighter-rouge">chunkc</code><span class="note"><label for="chunkc" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="chunkc" class="margin-toggle"><span class="sidenote">the program that sends messages to <code class="highlighter-rouge">chunkwm</code></span>
 commands, enabling window management via just the keyboard.</p>
 
 <figure class="fullwidth"><img src="/assets/img/skhd-chunkwm.gif"><figcaption>manipulating windows with skhd</figcaption></figure>
@@ -162,7 +164,7 @@ commands, enabling window management via just the keyboard.</p>
 <p><code class="highlighter-rouge">chunkwm</code> provides a configuration file for setting window gaps, border offsets,
 border colors, and other aesthetic features; <code class="highlighter-rouge">skhd</code> has a configuration file for
 hotkey
-bindings<label for="skhdrc-more" class="margin-toggle">⊕</label><input type="checkbox" id="skhdrc-more" class="margin-toggle"><span class="marginnote">The nice thing about <code class="highlighter-rouge">skhd</code> is keybindings can act on more than just <code class="highlighter-rouge">chunkc</code> - for instance, I have bindings for opening a terminal and web browser.</span>.
+bindings<span class="note"><label for="skhdrc-more" class="margin-toggle">⊕</label></span><input type="checkbox" id="skhdrc-more" class="margin-toggle"><span class="marginnote">The nice thing about <code class="highlighter-rouge">skhd</code> is keybindings can act on more than just <code class="highlighter-rouge">chunkc</code> - for instance, I have bindings for opening a terminal and web browser.</span>.
 I’ve made public my personal
 <a href="https://github.com/ayazhafiz/hmcd/blob/master/.chunkwmrc"><code class="highlighter-rouge">.chunkwmrc</code></a> and
 <a href="https://github.com/ayazhafiz/hmcd/blob/master/.skhdrc"><code class="highlighter-rouge">.skhdrc</code></a>.</p>
@@ -171,7 +173,7 @@ I’ve made public my personal
 <a class="header-anchor" href="#2--alacritty-as-a-terminal-and-tmux-as-its-multiplexer">#</a><span class="el">2:</span>  <code class="highlighter-rouge">alacritty</code> as a terminal and <code class="highlighter-rouge">tmux</code> as its multiplexer</h2>
 
 <p>Right now I use <a href="https://github.com/jwilm/alacritty"><code class="highlighter-rouge">alacritty</code></a> as my terminal
-emulator<label for="alacritty" class="margin-toggle sidenote-number"></label><input type="checkbox" id="alacritty" class="margin-toggle"><span class="sidenote">For a while I used <a href="https://hyper.is/"><code class="highlighter-rouge">hyper</code></a>, but people are right about the Electron bloat. I’ve heard good things about <a href="https://github.com/kovidgoyal/kitty"><code class="highlighter-rouge">kitty</code></a>, but haven’t had the chance to use it.</span>.
+emulator<span class="note"><label for="alacritty" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="alacritty" class="margin-toggle"><span class="sidenote">For a while I used <a href="https://hyper.is/"><code class="highlighter-rouge">hyper</code></a>, but people are right about the Electron bloat. I’ve heard good things about <a href="https://github.com/kovidgoyal/kitty"><code class="highlighter-rouge">kitty</code></a>, but haven’t had the chance to use it.</span>.
 It’s great – fast as hell, not a battery leech, and has nice configuration
 options with extensible keybindings (you can see my configuration
 <a href="https://github.com/ayazhafiz/hmcd/blob/master/.config/alacritty/alacritty.yml">here</a>).
@@ -198,7 +200,7 @@ course, I’ve made mine
 <p>For a while, I thought <code class="highlighter-rouge">vim</code> was a needlessly cumbersome tool, as I’m sure most
 do initially. Once I began to seriously use it though, I realized my enhancement
 in productivity, and now I use <code class="highlighter-rouge">vim</code> for pretty much
-everything<label for="neovim" class="margin-toggle sidenote-number"></label><input type="checkbox" id="neovim" class="margin-toggle"><span class="sidenote">More accurately, I use <a href="https://github.com/neovim/neovim"><code class="highlighter-rouge">neovim</code></a>.</span>.
+everything<span class="note"><label for="neovim" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="neovim" class="margin-toggle"><span class="sidenote">More accurately, I use <a href="https://github.com/neovim/neovim"><code class="highlighter-rouge">neovim</code></a>.</span>.
 Working with only a keyboard certainly imposed a learning curve, but has paid
 off in a a tremendous speedup for literally everything I do on my machine. In
 fact, the productivity benefits <code class="highlighter-rouge">vim</code> has provided me are the primary reason I
@@ -211,7 +213,7 @@ productivity – at least over <code class="highlighter-rouge">Finder</code>, in
 
 <p>If you’re looking for a beautiful, extensible text editor to replace your IDEs
 and speedup your workflow, I cannot recommend <code class="highlighter-rouge">vim</code>
-enough<label for="vim" class="margin-toggle sidenote-number"></label><input type="checkbox" id="vim" class="margin-toggle"><span class="sidenote"><code class="highlighter-rouge">emacs</code> is also really nice, if that’s more your thing. Regardless, the advantage of keybindings is undeniable – there’s a reason <code class="highlighter-rouge">VS Code</code> and <code class="highlighter-rouge">Atom</code> have command palettes.</span>.
+enough<span class="note"><label for="vim" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="vim" class="margin-toggle"><span class="sidenote"><code class="highlighter-rouge">emacs</code> is also really nice, if that’s more your thing. Regardless, the advantage of keybindings is undeniable – there’s a reason <code class="highlighter-rouge">VS Code</code> and <code class="highlighter-rouge">Atom</code> have command palettes.</span>.
 And once you get hooked on that, check out <code class="highlighter-rouge">ranger</code>. And if you’re trying to get
 really deep, maybe you even want a command-line email client like
 <a href="http://www.mutt.org/"><code class="highlighter-rouge">mutt</code></a>. There’s an entire world out there for you to
@@ -260,21 +262,70 @@ this one constantly evolves as my needs and preferences change.</p>
 another perspective you’d like share, or anything else related, <a href="mailto:ayaz.hafiz.1@gmail.com?subject=Re:%20Your%20macOS%20workspace%20with%20a%20tiling%0Awm">please ping
 me</a>. I’d love to chat.</p>
 
-
-  <section class="footer">
-    
-    <a href="/articles/19/engineering-a-code">« Over-Engineering a Code</a>
-    
-    <span><img class="emoji" title=":cherry_blossom:" alt=":cherry_blossom:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f338.png" height="20" width="20"> 
-      <span>​<script type="math/tex">
-          \Phi\left(\Phi\left(0\right)\right)
-        </script></span>
-    </span>
-    
-    <a href="/articles/19/smart-is-not-a-good-word">"Smart" Is Not a Good Word »</a>
-    
-  </section>
 </article>
+
+<section class="footer">
+  
+  <a href="/articles/19/engineering-a-code">« Over-Engineering a Code</a>
+  
+  <span><img class="emoji" title=":cherry_blossom:" alt=":cherry_blossom:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f338.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        \Phi\left(\Phi\left(0\right)\right)
+      </script></span>
+  </span>
+  
+  <a href="/articles/19/smart-is-not-a-good-word">"Smart" Is Not a Good Word »</a>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  function toggleShowHideNotesSwitch(isFullWidth) {
+    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+    $(".showhide-notes").addEventListener("click", toggleFullWidth);
+  });
+</script>
 
         </div>
       </div>

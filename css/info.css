@@ -104,7 +104,6 @@ a.header-anchor {
           justify-content: center;
   margin: auto;
   max-width: 800px;
-  overflow: hidden;
   position: relative; }
   @media only screen and (max-width: 760px) {
     .container {
@@ -186,8 +185,7 @@ section.nav {
     color: #0366d6; }
 
 .gist {
-  margin-left: -2em;
-  width: calc(65% + 4em); }
+  margin-left: -2em; }
   @media only screen and (max-width: 760px) {
     .gist {
       margin-left: 0;
@@ -210,11 +208,9 @@ section.nav {
   .gist .gist-data {
     border-bottom: none !important; }
 
-.mathblock {
-  width: 65%; }
-  @media only screen and (max-width: 760px) {
-    .mathblock {
-      width: 100%; } }
+@media only screen and (max-width: 760px) {
+  .mathblock {
+    width: 100%; } }
 
 .resp-iframe {
   border: 0;

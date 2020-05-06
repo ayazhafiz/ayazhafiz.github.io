@@ -105,7 +105,6 @@ a.header-anchor {
           justify-content: center;
   margin: auto;
   max-width: 800px;
-  overflow: hidden;
   position: relative; }
   @media only screen and (max-width: 760px) {
     .container {
@@ -152,12 +151,8 @@ figure {
   border: 0;
   font: inherit;
   font-size: 100%;
-  max-width: 55%;
   padding: 0;
   vertical-align: baseline; }
-  @media only screen and (max-width: 760px) {
-    figure {
-      max-width: 90%; } }
 
 figcaption {
   font-size: 0.8rem;
@@ -222,8 +217,7 @@ section.nav {
     color: #0366d6; }
 
 .gist {
-  margin-left: -2em;
-  width: calc(65% + 4em); }
+  margin-left: -2em; }
   @media only screen and (max-width: 760px) {
     .gist {
       margin-left: 0;
@@ -246,11 +240,9 @@ section.nav {
   .gist .gist-data {
     border-bottom: none !important; }
 
-.mathblock {
-  width: 65%; }
-  @media only screen and (max-width: 760px) {
-    .mathblock {
-      width: 100%; } }
+@media only screen and (max-width: 760px) {
+  .mathblock {
+    width: 100%; } }
 
 .resp-iframe {
   border: 0;
@@ -282,6 +274,23 @@ span.el {
   vertical-align: -8%;
   width: 1em; }
 
+.showhide-notes {
+  color: #a00000;
+  cursor: pointer;
+  font-size: 1.5em;
+  height: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  text-align: right;
+  top: 0;
+  z-index: 2; }
+  @media only screen and (max-width: 760px) {
+    .showhide-notes {
+      display: none; } }
+
+.note * {
+  cursor: pointer; }
+
 .sidenote,
 .marginnote {
   clear: right;
@@ -297,6 +306,10 @@ span.el {
   @media only screen and (max-width: 760px) {
     .sidenote,
     .marginnote {
+      display: none; } }
+  @media only screen and (min-width: 760px) {
+    .sidenote.maybe-hide,
+    .marginnote.maybe-hide {
       display: none; } }
   .sidenote::-webkit-scrollbar,
   .marginnote::-webkit-scrollbar {
@@ -319,6 +332,9 @@ span.el {
     font-weight: 500;
     left: 0.1rem;
     top: -0.5rem; }
+
+.note * {
+  cursor: pointer; }
 
 .margin-toggle:not(.sidenote-number) {
   display: none; }
@@ -757,22 +773,20 @@ section.footer {
   width: 100%;
   z-index: 100; }
 
-.post-group p,
-.post-group h2,
-.post-group h3,
-.post-group h4,
-.post-group .custom-block {
+.post {
+  -webkit-transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
   width: 65%; }
+  .post.full {
+    width: 100%;
+    -webkit-transition: width 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out; }
+  .post ol,
+  .post ul {
+    width: unset; }
   @media only screen and (max-width: 760px) {
-    .post-group p,
-    .post-group h2,
-    .post-group h3,
-    .post-group h4,
-    .post-group .custom-block {
+    .post {
       width: 100%; } }
-.post-group ol,
-.post-group ul {
-  width: calc(100% - 5% - 2em); }
 
 .title {
   margin-bottom: 0; }

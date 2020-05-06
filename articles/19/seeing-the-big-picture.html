@@ -76,14 +76,16 @@
         </section>
         -->
 
-        <div class="column-right">
+        <div class="column-right seeing the big picture-main">
           <section class="nav">
   <a class="nav-link" href="/">cc</a><a class="nav-link" href="/vis">vis</a>
 </section>
- <article class="post-group">
-  <h1 class="title">Seeing the Big Picture</h1>
-  <p class="byline">December 16, 2019</p>
+ <div class="showhide-notes">»</div>
 
+<h1 class="title">Seeing the Big Picture</h1>
+<p class="byline">December 16, 2019</p>
+
+<article class="post">
   <p>I’m not a good chess player. Perhaps causally, I was never very interested in it
 either.</p>
 
@@ -115,21 +117,70 @@ much stronger player.</p>
   <iframe class="resp-iframe" src="https://lichess.org/tv/frame" allowtransparency="true" frameborder="0"></iframe>
 </figure>
 
-
-  <section class="footer">
-    
-    <a href="/articles/19/square-root-spacing">« Spacing of Square Roots</a>
-    
-    <span><img class="emoji" title=":tent:" alt=":tent:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/26fa.png" height="20" width="20"> 
-      <span>​<script type="math/tex">
-          M = V\Sigma V^{-1}
-        </script></span>
-    </span>
-    
-    <a href="/articles/19/analog-algorithms">Analog Algorithms »</a>
-    
-  </section>
 </article>
+
+<section class="footer">
+  
+  <a href="/articles/19/square-root-spacing">« Spacing of Square Roots</a>
+  
+  <span><img class="emoji" title=":tent:" alt=":tent:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/26fa.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        M = V\Sigma V^{-1}
+      </script></span>
+  </span>
+  
+  <a href="/articles/19/analog-algorithms">Analog Algorithms »</a>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  function toggleShowHideNotesSwitch(isFullWidth) {
+    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+    $(".showhide-notes").addEventListener("click", toggleFullWidth);
+  });
+</script>
 
         </div>
       </div>

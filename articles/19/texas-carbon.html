@@ -76,19 +76,21 @@
         </section>
         -->
 
-        <div class="column-right">
+        <div class="column-right Texas carbon-main">
           <section class="nav">
   <a class="nav-link" href="/">cc</a><a class="nav-link" href="/vis">vis</a>
 </section>
- <article class="post-group">
-  <h1 class="title">Texas Carbon</h1>
-  <p class="byline">October 26, 2019</p>
+ <div class="showhide-notes">»</div>
 
+<h1 class="title">Texas Carbon</h1>
+<p class="byline">October 26, 2019</p>
+
+<article class="post">
   <p>A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</p>
 
 <figure class="fullwidth"><img src="/assets/img/texas-carbon-examples.png"><figcaption>Mistakenly-drawn carbon valencies</figcaption></figure>
 
-<p>Colloquially, carbon atoms with five covalent bonds are called <a href="http://www.chem.ucla.edu/~harding/IGOC/P/pentavalent_carbon.html">Texas Carbon</a>s<label for="texas-carbon-flag" class="margin-toggle">⊕</label><input type="checkbox" id="texas-carbon-flag" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/texas-carbon-flag.png"><br></span><label for="texas-carbon" class="margin-toggle sidenote-number"></label><input type="checkbox" id="texas-carbon" class="margin-toggle"><span class="sidenote">Either because the Texas star has five points or because everything is bigger in Texas.</span>.
+<p>Colloquially, carbon atoms with five covalent bonds are called <a href="http://www.chem.ucla.edu/~harding/IGOC/P/pentavalent_carbon.html">Texas Carbon</a>s<label for="texas-carbon-flag" class="margin-toggle">⊕</label><input type="checkbox" id="texas-carbon-flag" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/texas-carbon-flag.png"><br></span><span class="note"><label for="texas-carbon" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="texas-carbon" class="margin-toggle"><span class="sidenote">Either because the Texas star has five points or because everything is bigger in Texas.</span>.
 Formally, they are known as pentavalent carbons.</p>
 
 <p>It turns out that well-formed pentavalent carbons are much more frequent than an organic chemistry
@@ -113,7 +115,7 @@ prepared using methanium:</p>
 
 <figure class="fullwidth"><img src="/assets/img/ethanium-ethenium.png"><figcaption>$\text{C}_2\text{H}_7^+ \to \text{C}_2\text{H}_5^+ + \text{H}_2$</figcaption></figure>
 
-<p>In practice, pentavalent acids are formed as intermediate species and during thermal cracking<label for="pcformation" class="margin-toggle sidenote-number"></label><input type="checkbox" id="pcformation" class="margin-toggle"><span class="sidenote">Per a DOE <a href="https://www1.eere.energy.gov/manufacturing/resources/petroleum_refining/pdfs/bandwidth.pdf">report, page 8</a>.</span>.</p>
+<p>In practice, pentavalent acids are formed as intermediate species and during thermal cracking<span class="note"><label for="pcformation" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="pcformation" class="margin-toggle"><span class="sidenote">Per a DOE <a href="https://www1.eere.energy.gov/manufacturing/resources/petroleum_refining/pdfs/bandwidth.pdf">report, page 8</a>.</span>.</p>
 
 <h3 id="both-b-and-c">
 <a class="header-anchor" href="#both-b-and-c">#</a>Both <strong>B</strong> and <strong>C</strong>
@@ -149,21 +151,70 @@ unique patterns like these are worth knowing, at least for the sake of knowing.<
 
 <p>If you’re interested in hypervalencies, you may enjoy <a href="http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479">hexavalent carbons and undecavalent borons</a>.</p>
 
-
-  <section class="footer">
-    
-    <a href="/articles/19/type-folding-and-options">« Type Folding and Options</a>
-    
-    <span><img class="emoji" title=":bike:" alt=":bike:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f6b2.png" height="20" width="20"> 
-      <span>​<script type="math/tex">
-          fft(f) \sim [0, 1, \dots, {N\over2}, -{N\over2} + 1, -{N\over2} + 2, \dots, -1]
-        </script></span>
-    </span>
-    
-    <a href="/articles/19/barycentric-interpolation">Approximation With Interpolating Polynomials »</a>
-    
-  </section>
 </article>
+
+<section class="footer">
+  
+  <a href="/articles/19/type-folding-and-options">« Type Folding and Options</a>
+  
+  <span><img class="emoji" title=":bike:" alt=":bike:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f6b2.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        fft(f) \sim [0, 1, \dots, {N\over2}, -{N\over2} + 1, -{N\over2} + 2, \dots, -1]
+      </script></span>
+  </span>
+  
+  <a href="/articles/19/barycentric-interpolation">Approximation With Interpolating Polynomials »</a>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  function toggleShowHideNotesSwitch(isFullWidth) {
+    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+    $(".showhide-notes").addEventListener("click", toggleFullWidth);
+  });
+</script>
 
         </div>
       </div>

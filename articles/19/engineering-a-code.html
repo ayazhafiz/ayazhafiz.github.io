@@ -76,14 +76,16 @@
         </section>
         -->
 
-        <div class="column-right">
+        <div class="column-right over-engineering a code-main">
           <section class="nav">
   <a class="nav-link" href="/">cc</a><a class="nav-link" href="/vis">vis</a>
 </section>
- <article class="post-group">
-  <h1 class="title">Over-Engineering a Code</h1>
-  <p class="byline">February 28, 2019</p>
+ <div class="showhide-notes">»</div>
 
+<h1 class="title">Over-Engineering a Code</h1>
+<p class="byline">February 28, 2019</p>
+
+<article class="post">
   <p>Say you are a software engineer, or developer, or whatever other abstracted
 word for <em>programmer</em> that has some meaning to you. Say you have also been given
 some scientific computation problem, like estimating the value of <span>​<script type="math/tex"> \pi </script></span> with the
@@ -106,7 +108,7 @@ precise with an increasing volume of generated points.</p>
 <noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/7eea1f8f18000c6ccdc3920cf2fd5076.js"> </script>
 
-<p>You<label for="actually-you" class="margin-toggle sidenote-number"></label><input type="checkbox" id="actually-you" class="margin-toggle"><span class="sidenote">perhaps vicariously through another</span>, having already taken on some abstracted title for yourself, chose instead to over-engineer her perfectly good solution to be <em>TheBestCode</em>™</p>
+<p>You<span class="note"><label for="actually-you" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="actually-you" class="margin-toggle"><span class="sidenote">perhaps vicariously through another</span>, having already taken on some abstracted title for yourself, chose instead to over-engineer her perfectly good solution to be <em>TheBestCode</em>™</p>
 
 <h2 id="1--everything-functional">
 <a class="header-anchor" href="#1--everything-functional">#</a><span class="el">1:</span>  Everything Functional</h2>
@@ -120,7 +122,7 @@ precise with an increasing volume of generated points.</p>
 <a class="header-anchor" href="#2--on-incircle">#</a><span class="el">2:</span>  On <code class="highlighter-rouge">inCircle</code>
 </h2>
 
-<p>~Idiomatic~<label for="new-age" class="margin-toggle sidenote-number"></label><input type="checkbox" id="new-age" class="margin-toggle"><span class="sidenote">read: new age</span> JavaScript calls for arrow notation on small functions, so that’s what we’ll do. We can also allow for a variable circle radius - of course, that’s totally useless for this example, but makes the function more ~scalable~. Finally, there is a marginal cost reduction in comparing the square of the euclidean distance to the square of the radius rather than computing a square root.</p>
+<p>~Idiomatic~<span class="note"><label for="new-age" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="new-age" class="margin-toggle"><span class="sidenote">read: new age</span> JavaScript calls for arrow notation on small functions, so that’s what we’ll do. We can also allow for a variable circle radius - of course, that’s totally useless for this example, but makes the function more ~scalable~. Finally, there is a marginal cost reduction in comparing the square of the euclidean distance to the square of the radius rather than computing a square root.</p>
 
 <p>This gives an artisanally-crafted code:</p>
 
@@ -154,21 +156,70 @@ precise with an increasing volume of generated points.</p>
 
 <p>I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please <a href="mailto:ayaz.hafiz.1@gmail.com?subject=A%20good%20reason%20for%20over-engineering">let me know</a>. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.</p>
 
-
-  <section class="footer">
-    
-    <a href="/articles/18/where-im-going">« Where I'm Going</a>
-    
-    <span><img class="emoji" title=":strawberry:" alt=":strawberry:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f353.png" height="20" width="20"> 
-      <span>​<script type="math/tex">
-          \Gamma\left({1\over2}\right) = \sqrt{\pi}
-        </script></span>
-    </span>
-    
-    <a href="/articles/19/tiling-wm-macos">A macOS Workspace With a Tiling WM »</a>
-    
-  </section>
 </article>
+
+<section class="footer">
+  
+  <a href="/articles/18/where-im-going">« Where I'm Going</a>
+  
+  <span><img class="emoji" title=":strawberry:" alt=":strawberry:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f353.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        \Gamma\left({1\over2}\right) = \sqrt{\pi}
+      </script></span>
+  </span>
+  
+  <a href="/articles/19/tiling-wm-macos">A macOS Workspace With a Tiling WM »</a>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  function toggleShowHideNotesSwitch(isFullWidth) {
+    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+    $(".showhide-notes").addEventListener("click", toggleFullWidth);
+  });
+</script>
 
         </div>
       </div>

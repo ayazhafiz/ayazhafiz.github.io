@@ -76,14 +76,16 @@
         </section>
         -->
 
-        <div class="column-right">
+        <div class="column-right a heuristic approach to calculating geometric medians-main">
           <section class="nav">
   <a class="nav-link" href="/">cc</a><a class="nav-link" href="/vis">vis</a>
 </section>
- <article class="post-group">
-  <h1 class="title">A Heuristic Approach to Calculating Geometric Medians</h1>
-  <p class="byline">August 22, 2017</p>
+ <div class="showhide-notes">»</div>
 
+<h1 class="title">A Heuristic Approach to Calculating Geometric Medians</h1>
+<p class="byline">August 22, 2017</p>
+
+<article class="post">
   <p>I was recently given an interesting problem:</p>
 
 <blockquote>
@@ -92,7 +94,7 @@
 traveling from <span>​<script type="math/tex"> Q </script></span> to each other point.</p>
 </blockquote>
 
-<p>Ignoring the problem of calculating cost<label for="costs" class="margin-toggle sidenote-number"></label><input type="checkbox" id="costs" class="margin-toggle"><span class="sidenote">The differences
+<p>Ignoring the problem of calculating cost<span class="note"><label for="costs" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="costs" class="margin-toggle"><span class="sidenote">The differences
 between traveling by car, bike, and foot include important time and cost
 differences. Here, we’ll employ
 <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distance</a> as an
@@ -124,7 +126,7 @@ by <span>​<script type="math/tex"> 1.54\% </script></span> if we make that cen
 
 <p>For most, <span>​<script type="math/tex"> 1.54\% </script></span> isn’t all that much, and the median is a
 pretty good approximation for the latter point - the <strong>geometric median</strong>
-<label for="geom-center" class="margin-toggle sidenote-number"></label><input type="checkbox" id="geom-center" class="margin-toggle"><span class="sidenote"><a href="https://en.wikipedia.org/wiki/Geometric_median">More info</a>.</span>,
+<span class="note"><label for="geom-center" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="geom-center" class="margin-toggle"><span class="sidenote"><a href="https://en.wikipedia.org/wiki/Geometric_median">More info</a>.</span>,
 or <strong>center</strong> as I will refer to it from here. But what if the percent
 improvement grows higher, say to <span>​<script type="math/tex"> 5\% </script></span> or <span>​<script type="math/tex"> 10\% </script></span>
 or <span>​<script type="math/tex"> 20\% </script></span>? How do we derive this geometric median?</p>
@@ -157,7 +159,7 @@ test, and call it a day.</p>
 
 <p>Oh man. Maybe not. That looks like a pain in the ass to solve for
 <span>​<script type="math/tex"> Q_x </script></span>, let alone simultaneously with
-<span>​<script type="math/tex"> \frac{\partial}{\partial Q_y} </script></span><label for="ifudo" class="margin-toggle">⊕</label><input type="checkbox" id="ifudo" class="margin-toggle"><span class="marginnote">I have
+<span>​<script type="math/tex"> \frac{\partial}{\partial Q_y} </script></span><span class="note"><label for="ifudo" class="margin-toggle">⊕</label></span><input type="checkbox" id="ifudo" class="margin-toggle"><span class="marginnote">I have
 no idea how to do this efficiently, but if you do, please
 <a href="mailto:ayaz.hafiz.1@gmail.com?subject=Calculating%20geometric%20medians">let me know</a>.
 Looks like it could be worth a <strong>lot</strong> of money <img class="emoji" title=":wink:" alt=":wink:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f609.png" height="20" width="20">.</span>.
@@ -183,7 +185,7 @@ effective traversing it.</figcaption></figure>
 <p>As expected, the contour slopes in around the previously-shown minimum
 <span>​<script type="math/tex"> (0.211, 0.211) </script></span>. Interestingly, there seems to only be one
 minimum for this function - and in general, <strong><em>there is</em></strong> only one
-center<label for="one-proof" class="margin-toggle sidenote-number"></label><input type="checkbox" id="one-proof" class="margin-toggle"><span class="sidenote">See
+center<span class="note"><label for="one-proof" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="one-proof" class="margin-toggle"><span class="sidenote">See
 <a href="http://www.stat.rutgers.edu/home/cunhui/papers/39.pdf">this paper</a>, which
 shows that the geometric center is unique and convergent for any set of
 non-co-linear points.</span> for any set of points! This means we can employ
@@ -202,7 +204,7 @@ close to the center.</p>
 
 <p>This is a bit trickier. Of course, we can only travel in
 <span>​<script type="math/tex"> \Bbb{R}^2 </script></span>, so let’s just say we can go up, down,
-left, or right<label for="travel" class="margin-toggle">⊕</label><input type="checkbox" id="travel" class="margin-toggle"><span class="marginnote">Formally, <code class="highlighter-rouge">+y</code>, <code class="highlighter-rouge">-y</code>, <code class="highlighter-rouge">-x</code>, or
+left, or right<span class="note"><label for="travel" class="margin-toggle">⊕</label></span><input type="checkbox" id="travel" class="margin-toggle"><span class="marginnote">Formally, <code class="highlighter-rouge">+y</code>, <code class="highlighter-rouge">-y</code>, <code class="highlighter-rouge">-x</code>, or
 <code class="highlighter-rouge">+x</code>. A more thorough traversal could also employ diagonal directions.</span>.
 To find the best direction of descent, we travel to a candidate point in each
 direction and determine the one that most improves the cost.</p>
@@ -216,7 +218,7 @@ our search radius and repeating the descent mechanism again. And again, and agai
 until the approximation of the geometric center is within some acceptable
 margin of error <span>​<script type="math/tex"> \epsilon </script></span>.</p>
 
-<p>Alright, let’s code it!<label for="code-lang" class="margin-toggle">⊕</label><input type="checkbox" id="code-lang" class="margin-toggle"><span class="marginnote">These examples are in <code class="highlighter-rouge">Rust</code>,
+<p>Alright, let’s code it!<span class="note"><label for="code-lang" class="margin-toggle">⊕</label></span><input type="checkbox" id="code-lang" class="margin-toggle"><span class="marginnote">These examples are in <code class="highlighter-rouge">Rust</code>,
 but it should be easy to implement the logic in any language of your choice. The
 full code can be found <a href="/assets/code/geometric-center.rs">here</a>, with a <code class="highlighter-rouge">C</code>
 version <a href="https://github.com/ayazhafiz/meetHere/blob/master/src/native/point_set.c#L80">here</a>.
@@ -241,27 +243,76 @@ our three points from before, and…</p>
 <h2 id="n--some-details">
 <a class="header-anchor" href="#n--some-details">#</a><span class="el">n:</span>  Some Details</h2>
 
-<p>This function runs in <span>​<script type="math/tex"> O\left(\log n\right) </script></span> time<label for="better" class="margin-toggle sidenote-number"></label><input type="checkbox" id="better" class="margin-toggle"><span class="sidenote">A
+<p>This function runs in <span>​<script type="math/tex"> O\left(\log n\right) </script></span> time<span class="note"><label for="better" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="better" class="margin-toggle"><span class="sidenote">A
 method for exact computation of the geometric center in near-linear is
 proposed <a href="https://arxiv.org/pdf/1606.05225.pdf">here</a>.</span>, and its precision
 can be improved by reducing <span>​<script type="math/tex"> \epsilon </script></span> (epsilon) to an arbitrary
 minimum.</p>
 
-
-  <section class="footer">
-    
-    <a href="/articles/16/the-relationship-between-dilution-and-dissociation">« The Relationship Between Dilution and Dissociation</a>
-    
-    <span><img class="emoji" title=":snake:" alt=":snake:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f40d.png" height="20" width="20"> 
-      <span>​<script type="math/tex">
-          \int_0^1 \arccos(x^\frac{1}2)\ dx
-        </script></span>
-    </span>
-    
-    <a href="/articles/17/exploiting-chirality-to-create-generic-counterparts">Exploiting Chirality to Create Generic Counterparts »</a>
-    
-  </section>
 </article>
+
+<section class="footer">
+  
+  <a href="/articles/16/the-relationship-between-dilution-and-dissociation">« The Relationship Between Dilution and Dissociation</a>
+  
+  <span><img class="emoji" title=":snake:" alt=":snake:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f40d.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        \int_0^1 \arccos(x^\frac{1}2)\ dx
+      </script></span>
+  </span>
+  
+  <a href="/articles/17/exploiting-chirality-to-create-generic-counterparts">Exploiting Chirality to Create Generic Counterparts »</a>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  function toggleShowHideNotesSwitch(isFullWidth) {
+    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+    $(".showhide-notes").addEventListener("click", toggleFullWidth);
+  });
+</script>
 
         </div>
       </div>
