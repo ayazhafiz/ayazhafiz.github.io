@@ -1,4 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-05-09T23:06:08-05:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">scaling up</title><link href="https://ayazhafiz.com/articles/20/scaling-up" rel="alternate" type="text/html" title="scaling up" /><published>2020-03-29T03:00:00-05:00</published><updated>2020-03-29T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/scaling-up</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/scaling-up">&lt;p&gt;There’s this not-so-novel idea that a businesses will often find success by focusing on inputs
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-05-17T17:05:52-05:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">beauty</title><link href="https://ayazhafiz.com/articles/20/beauty" rel="alternate" type="text/html" title="beauty" /><published>2020-04-16T03:00:00-05:00</published><updated>2020-04-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/beauty</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/beauty">&lt;p&gt;There’s this great quote from one of Zhu’s songs&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;cocaine-model&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cocaine-model&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;&lt;a href=&quot;https://youtu.be/Skt_NKI4d6U?t=20&quot;&gt;Cocaine Model&lt;/a&gt;&lt;/span&gt; that has long influenced me:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;When I was seven, my father said, “Fashion fades, but beauty is eternal. Elegance is illumination.
+Blue is a language. Love and obsession is separated by a thin line, and that line is infatuation.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let’s broadly characterize human beauty as either normative or personal. Normative beauty attempts
+to please the norm (of which there may be several), while personal beauty attempts to please the
+self (of which there may be a few, but certainly not many). Normative beauty and personal beauty
+don’t have to be disjoint, and both can be influenced environmentally. But personal beauty, when
+realized, is always elegant to the self; unfortunately, the same cannot be said for normative
+beauty&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;touch-beauty&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;touch-beauty&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;For example, consider the disparity between what is beautiful to
+the eye and what is beautiful to the touch.&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;Understanding how an individual differentiates things like this has a tremendous influence on their
+relationships. Whereas obsession decays into a desire to appease an individual’s perceived needs,
+love is characterized by an understanding of their needs. These states are distinct, but may be
+subtle; perhaps that subtly is infatuation.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">There’s this great quote from one of Zhu’s songsCocaine Model that has long influenced me:</summary></entry><entry><title type="html">scaling up</title><link href="https://ayazhafiz.com/articles/20/scaling-up" rel="alternate" type="text/html" title="scaling up" /><published>2020-03-29T03:00:00-05:00</published><updated>2020-03-29T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/scaling-up</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/scaling-up">&lt;p&gt;There’s this not-so-novel idea that a businesses will often find success by focusing on inputs
 rather than outputs. The reasoning is that outputs are affected by many more externalities
 that inputs, and that a strong application of a business’s inputs will naturally lead to
 desired outputs. For example, a salesperson may wish to focus more on the number of meetings they
@@ -553,113 +571,4 @@ very quickly:&lt;/p&gt;
 &lt;script src=&quot;https://gist.github.com/2a42ded6979c988875188f6133639f78.js&quot;&gt; &lt;/script&gt;
 
 &lt;p&gt;Will the Angular Language Service use &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s? Probably not. But it’s a fun
-idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕They’re great APIs!. Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language ServiceIf the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:.:</summary></entry><entry><title type="html">Equivalence matters</title><link href="https://ayazhafiz.com/articles/19/equivalence-matters" rel="alternate" type="text/html" title="Equivalence matters" /><published>2019-09-02T01:00:00-05:00</published><updated>2019-09-02T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/equivalence-matters</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/equivalence-matters">&lt;p&gt;I recently wrote about
-&lt;a href=&quot;./smart-is-not-a-good-word&quot;&gt;why “smart” is not a good word&lt;/a&gt;. You don’t
-necessarily need to read that post to understand this one; the main idea is that
-“smart” is usually used as a supercategory abstracting and trivializing
-multiple, orthogonal subcategories.&lt;/p&gt;
-
-&lt;p&gt;A natural follow-up to this statement is why “smart” not being a good word
-matters. The reasoning I previously presented is that usage of “smart” at best
-ambiguates the word’s intent, and at worst provides no useful information at
-all. But there are more interesting reasonings.&lt;/p&gt;
-
-&lt;p&gt;In this post, I propose that “smart” not being a good word matters because
-value-categorizing words like “smart” are also &lt;em&gt;bad&lt;/em&gt; words, and that the
-categorizations these words attempt to delineate are dangerous to individuality.&lt;/p&gt;
-
-&lt;h3 id=&quot;0--preconditions&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#0--preconditions&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;0:&lt;/span&gt;  Preconditions&lt;/h3&gt;
-
-&lt;p&gt;First, it’s important to note that this is a discussion about people. And people
-are defined by some practical factors, including &lt;strong&gt;time&lt;/strong&gt; and &lt;strong&gt;philosophy&lt;/strong&gt;.
-There are some people with a lot of time and non-binding philosophies, but I am
-speaking on the scale of all people, and it is not the case that all people have
-infinite time and no philosophies.&lt;/p&gt;
-
-&lt;p&gt;I mention &lt;strong&gt;time&lt;/strong&gt; partly as a concession and partly as a segue. Limited time
-make categories a necessity - considering the nuances of every situation without
-using categorical assumptions results in exponential, and potentially unbounded,
-time investment. For instance, it is much easier to decide whether or not to
-cook pesto pasta given a general like or dislike towards pesto and pasta than it
-is to consider all other ingredients in the dish, its environmental and health
-implications, its monetary investment, etc. That’s not to say these other
-considerations aren’t important; they are, because they introduce nuances that
-may dramatically impact estimations made from categorical assumptions.&lt;/p&gt;
-
-&lt;p&gt;So &lt;strong&gt;philosophy&lt;/strong&gt; also becomes a factor. Individuals will focus their time on
-categories they perceive to be valuable. Of course, these choices are unique.&lt;/p&gt;
-
-&lt;p&gt;I argue that philosophy is not only
-individual&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;phi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;phi&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;Certainly, this statement is itself biased by my individual philosophies.&lt;/span&gt; -
-it becomes externally important when individuals use their philosophies to make
-decisions impacting others. In claiming that value categorizations are
-dangerous, there is a precondition of my philosophy on externalities.&lt;/p&gt;
-
-&lt;p&gt;&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;my-values&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;my-values&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;I only claim these to be my values, but I see little motivation for
-disagreeing with such values without a philosophy of rational egoism.&lt;/span&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I believe that actions that stifle the opportunities of individuals to make
-personal decisions are dangerous and should not be made.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I believe people should do things that empowers the opportunities and values of
-others. This is hard to always do, but I believe that value categories make it
-nearly impossible.&lt;/p&gt;
-
-&lt;h3 id=&quot;1--equalizing-values&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#1--equalizing-values&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;1:&lt;/span&gt;  Equalizing Values&lt;/h3&gt;
-
-&lt;p&gt;Different people have different perceptions of value. One way to decide what
-decisions empower the opportunities and values of others is to create a
-universal listing of value categorizations. Of course, this is impossible
-because of the near-infinite number of category permutations. An alternative is
-to treat all individuals as computationally equivalent and all individuals’
-values as value-equivalent, or more simply, as value-less. In this model,
-external value assignment becomes obsolete. For instance, a Level 16 CEO and a
-Level 1 employee in a company are
-equivalent&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;even-further&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;even-further&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;My philosophy of equivalence goes further; I claim that e.g. a human and a rock have the same complexity and value.&lt;/span&gt;
-and of equal value, even if cultural norms claim otherwise.&lt;/p&gt;
-
-&lt;h3 id=&quot;2--dangerous-categories&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#2--dangerous-categories&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;2:&lt;/span&gt;  Dangerous Categories&lt;/h3&gt;
-
-&lt;p&gt;External value assignment is dangerous because it entirely defeats computational
-equivalence, which in turn defeats unambiguous value perception. That’s a long
-sentence to say assigning values on others totally voids their desired
-perception of value.&lt;/p&gt;
-
-&lt;p&gt;Because value categorization &lt;em&gt;is&lt;/em&gt; value assignment, value categorization is
-dangerous.&lt;/p&gt;
-
-&lt;script type=&quot;math/tex&quot;&gt;\tag*{$\blacksquare$}&lt;/script&gt;
-
-&lt;h3 id=&quot;3--int&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#3--int&quot;&gt;#&lt;/a&gt;&lt;span class=&quot;el&quot;&gt;3:&lt;/span&gt;  Int&lt;/h3&gt;
-
-&lt;p&gt;Okay, so that’s my
-proof&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;proof&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;proof&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;I mean, this is kind of how I think. Or at least I
-think I do.&lt;/span&gt;. Here’s something for intuition.&lt;/p&gt;
-
-&lt;p&gt;Consider some individual working a job that societal norms may generally
-prescribe as prestigious. Others in the same environment as that individual may
-have jobs that societal norms prescribe as less prestigious. Prescribing any
-value to the kind of job that each individual has turns out to be useless for
-each individual’s self-worth and self-valuation because, generally speaking,
-each individual has their own motivations for doing their job. Attempts to
-externally classify the value of another’s work discards the nuances behind that
-individual’s decision to do their work, and furthermore assigns a
-non-self-prescribed value not necessarily representative of how the individual
-chooses to view themselves.&lt;/p&gt;
-
-&lt;p&gt;To me, that’s not a great way to let others live their
-lives&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;lorde&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;lorde&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;I recently read Audrey Lorde’s &lt;a href=&quot;https://uk.sagepub.com/sites/default/files/upm-binaries/11881_Chapter_5.pdf&quot;&gt;&lt;em&gt;The Uses of the Erotic&lt;/em&gt;&lt;/a&gt;. It discusses marginalization of the erotic in women, presenting interesting ideas somewhat tangential to this post, and reads in ~thirty minutes.&lt;/span&gt;.
-Sure, the individual may have value attributions to what they do, but it’s not
-up to the rest of us to make those attributions. Normative statements can be
-useful, but I think they should be avoided where they marginalize an
-individual’s experience.&lt;/p&gt;
-
-&lt;h4 id=&quot;thoughtthoughts&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#thoughtthoughts&quot;&gt;#&lt;/a&gt;ThoughtThoughts&lt;/h4&gt;
-
-&lt;p&gt;Anyway, those are just some of my thoughts. I may be wrong, but that’s okay. I
-only hope this can provide a perspective.&lt;/p&gt;
-
-&lt;p&gt;If you would like to contact me for any reason, I am best reached
-&lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com?subject=Hi!&quot;&gt;via email&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I recently wrote about why “smart” is not a good word. You don’t necessarily need to read that post to understand this one; the main idea is that “smart” is usually used as a supercategory abstracting and trivializing multiple, orthogonal subcategories.</summary></entry></feed>
+idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕They’re great APIs!. Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language ServiceIf the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:.:</summary></entry></feed>
