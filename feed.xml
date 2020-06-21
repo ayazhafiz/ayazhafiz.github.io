@@ -1,4 +1,148 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-06-05T22:15:39-05:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">beauty</title><link href="https://ayazhafiz.com/articles/20/beauty" rel="alternate" type="text/html" title="beauty" /><published>2020-04-16T03:00:00-05:00</published><updated>2020-04-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/beauty</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/beauty">&lt;p&gt;There’s this great quote from one of Zhu’s songs&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;cocaine-model&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cocaine-model&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;&lt;a href=&quot;https://youtu.be/Skt_NKI4d6U?t=20&quot;&gt;Cocaine Model&lt;/a&gt;&lt;/span&gt; that has long influenced me:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-06-21T12:46:49-05:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">on understanding</title><link href="https://ayazhafiz.com/articles/20/on-understanding" rel="alternate" type="text/html" title="on understanding" /><published>2020-05-16T03:00:00-05:00</published><updated>2020-05-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/on-understanding</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/on-understanding">&lt;p&gt;A juice diet is a fad. If it is to be ubiquitous, equity is not. Neither is the elimination of
+racism, or the distribution of healthcare, or the raising of millions out of poverty, or the safety
+or artificial intelligence, or the protection of endangered species, or any number of other things
+you or I may wish to see succeed.&lt;/p&gt;
+
+&lt;p&gt;Let’s call these &lt;strong&gt;hard problems&lt;/strong&gt;. These are problems large communities are passionate about, and
+cannot be solved in five, twenty, or even fifty years.&lt;/p&gt;
+
+&lt;p&gt;In most cases, the general population’s commitment to these problems seems to follow that of a
+fad&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;feels-fad&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;feels-fad&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;I am not saying this distribution is anywhere near representative; it is simply how it feels to me.&lt;/span&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;fullwidth&quot;&gt;&lt;img src=&quot;/assets/img/exp_of_exp.png&quot; /&gt;&lt;figcaption&gt;time vs perceived number of people committed to an issue&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;On the tail end, the number of people involved in resolving an issue converges to a value determined
+by a function of how many communities want resolution of the issue, how many don’t, and how many are
+indifferent. Note that only the first factor necessarily increases the convergent value.&lt;/p&gt;
+
+&lt;p&gt;This convergence is expected – the world can’t dedicate all of its resources to one thing, and it’s
+the whole reason for specialization. But if you are invested in an issue, and you want to see it
+succeed, be committed to it. Not doing so is &lt;a href=&quot;#on-nomenclature&quot;&gt;dangerous&lt;/a&gt;; because these kinds of
+issues take a very long time to solve, an initial high investment in a topic may cause workstreams
+in that domain to continue expecting a similar investment. If the investment suddenly declines,
+projects quickly fail.&lt;/p&gt;
+
+&lt;h2 id=&quot;prelude&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#prelude&quot;&gt;#&lt;/a&gt;Prelude&lt;/h2&gt;
+
+&lt;p&gt;My hope is this cc will encourage you to consider your world in a larger scope, ask more questions
+about it, and recalculate your reality. It’s nice to sit around, sharing fundraisers and correcting
+misinformation, believing there are a well-defined set of steps we all can take to solve a common
+problem. But this is naive and unrealistic; if it were so easy, no problem would be hard.&lt;/p&gt;
+
+&lt;p&gt;These ideas apply to many things, but the context of this cc is social problems. To that end, it
+doesn’t matter how many anti-racism protests you attend or how much money you donate towards
+eliminating homelessness if you can’t empathize with affected communities. Without empathy, you will
+quickly reach a barrier in your understanding another’s needs&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;russia&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;russia&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This comes from my experience in
+Russia – a white person who has only ever known other whites may not be a racist, but there is also
+no way for them to stand up for a black person (or any minority) in an effective manner.&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;I hope the perspectives in this cc are of some use to you. At the same time, they are the thoughts
+of a single individual and should be scrutinized.&lt;/p&gt;
+
+&lt;h2 id=&quot;on-perspective&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#on-perspective&quot;&gt;#&lt;/a&gt;On perspective&lt;/h2&gt;
+
+&lt;p&gt;It’s important for you and I to understand the roles we play in the problems we are invested in.
+Failing to understand this unsyncs our expectations with others’, which derailing priorities and
+causing internal conflicts. Understanding this is one part of &lt;a href=&quot;#on-the-big-picture&quot;&gt;the big picture&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The experiences of one individual will never be exactly like that of another.
+Commonalities can be found, but claiming lived experience of another’s life is absurd. This is why
+empathy and &lt;a href=&quot;#on-research&quot;&gt;research&lt;/a&gt; become pivotal skills to master; you will never live
+another’s experience, but you can learn to empathize and try to understand another’s perspective.&lt;/p&gt;
+
+&lt;p&gt;We must learn others’ perspectives if we are committed to solving problems together. There is a
+common mantra here that goes something like&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Give people the help that they need, not the help you think they need.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;because if we only give the help we think others need, at best we’ve fallen out of sync, and at
+worst we’ve derailed the mission.&lt;/p&gt;
+
+&lt;p&gt;There as a second, more subtle point to the above statement – hard problems are not about any one
+individual, and there are very rarely single heroes in their solutions. A good solution requires
+understanding the needs of hundreds of millions of people, which one individual can rarely do.&lt;/p&gt;
+
+&lt;p&gt;Furthermore, though every individual has a contribution to make, the solutions to such problems are
+moonshots. And because nothing is perfect, an actions of an individual to help one group may be
+regressive to another group (see &lt;a href=&quot;#on-intersectionality&quot;&gt;intersectionality&lt;/a&gt; below).&lt;/p&gt;
+
+&lt;h3 id=&quot;go&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#go&quot;&gt;#&lt;/a&gt;go!&lt;/h3&gt;
+
+&lt;p&gt;Maybe this seems romantic. If that’s case, do &lt;a href=&quot;#on-research&quot;&gt;research&lt;/a&gt; and speak to people involved
+in the things you care about. Keep sharing instagram stories and correcting ignorant statements, but
+recognize that without deeply understanding an issue, one’s actions are limited and often naive.&lt;/p&gt;
+
+&lt;h2 id=&quot;on-intersectionality&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#on-intersectionality&quot;&gt;#&lt;/a&gt;On intersectionality&lt;/h2&gt;
+
+&lt;p&gt;Because no two individuals have the same lived experiences or perspectives, it’s impossible to
+design an exhaustive solution to an issue&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;full-employment&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;full-employment&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;In mathematics, this is the
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Full_employment_theorem&quot;&gt;full employment theorem&lt;/a&gt;.&lt;/span&gt;. I’m not
+saying we shouldn’t shoot for solutions that solve problems for everyone, but what I am saying is
+that we can’t spend all our time just looking for the “perfect” one because then nothing ever gets
+done, and no one is better off.&lt;/p&gt;
+
+&lt;p&gt;So what is much more important is to shoot for milestones - maybe solutions that cover 90% of the
+problem, then 95%, then 99%, then 99.9%, and so on. Milestones prove that things are getting done,
+which is useful for morale and future investment.&lt;/p&gt;
+
+&lt;p&gt;We also shouldn’t pretend that a 100% solution is ever readily available. It’s difficult to know the
+needs of everyone because the most relevant solutions will always focus on the needs of the majority
+of affected populations. No one can ever come out and say, “okay, I’ve solved X hard problem,” because
+they’ve certainly failed to consider an intersectionality&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;intersectionality&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;intersectionality&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Intersectionality&quot;&gt;Intersectionality&lt;/a&gt; is the
+idea that some issues faced by an individual are formed by a combination of identities rather than
+a single one. For example, some issues faced a black woman are because they are black &lt;em&gt;and&lt;/em&gt; a woman,
+rather than because they or black or a woman.&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;Because of intersectionalities, the 90% solution may be orthogonal to solutions for the other 10%.
+As an example:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Consider ten people sleeping in a room. The room gets very hot, so one person turns on the cooler.
+But one person in the room is sleeping below the AC vent, and wakes up sick the next day. Despite
+the person being hot, simply turning on the AC did not fix all of their problems; the best solution
+for them is to move away from the vent.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It’s pivotal that milestones don’t regress on the status quo. Of course, this itself is a hard problem.&lt;/p&gt;
+
+&lt;h2 id=&quot;on-the-big-picture&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#on-the-big-picture&quot;&gt;#&lt;/a&gt;On the big picture&lt;/h2&gt;
+
+&lt;p&gt;It’s always important to step back and look at the big picture&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;big-picture&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;big-picture&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This is a vague term; for me the big picture is
+every level above the one currently being looked from.&lt;/span&gt;. There are at least two reasons for this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;It forces one to consider the goal in the context of an environment with more stakeholders. As an
+example related to the previous section, maybe the problem can’t be wholly solved right now, but
+getting a smaller win proves progress is being made, raising interest and laying the foundation
+for future work.&lt;/li&gt;
+  &lt;li&gt;Not everyone in the picture is aligned with your goals; maybe not even those you collaborate with.
+Failing to recognize the motivations of others is dangerous because it pushes you further out of
+understanding the context you are working in, and makes it more difficult to react to unexpected
+events. Taking help and trusting others is pivotal to achieving your goals, but such trust can’t
+be ignorant.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;on-research&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#on-research&quot;&gt;#&lt;/a&gt;On research&lt;/h2&gt;
+
+&lt;p&gt;Today, most answers to questions are designed to get the reader to take a specific perspective (this
+post is no different). So how do you find a definitive answer to something? In some sense, you
+can’t – at most, you can take samples of a number of different answers and aggregate them into
+your own understanding.&lt;/p&gt;
+
+&lt;p&gt;Trust is difficult. Bill Gates found it difficult, so he started his own foundation instead of
+donating all his money to existing funds. So before you convince yourself you understand something,
+make sure you do research and are confident in your interpretation.&lt;/p&gt;
+
+&lt;h2 id=&quot;on-nomenclature&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#on-nomenclature&quot;&gt;#&lt;/a&gt;On nomenclature&lt;/h2&gt;
+
+&lt;p&gt;The canonical usage of “problematic” is dangerous. Without a description of why something is
+“problematic”, saying something is “problematic” is equivalent to saying, “this statement says
+something bad, but I’m not going to tell you what it is or why it’s bad”. In that context,
+everything can be described as “problematic”, which is useless.&lt;/p&gt;
+
+&lt;p&gt;To me, it is much more useful to describe an idea as dangerous, and explain why it is so.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A juice diet is a fad. If it is to be ubiquitous, equity is not. Neither is the elimination of racism, or the distribution of healthcare, or the raising of millions out of poverty, or the safety or artificial intelligence, or the protection of endangered species, or any number of other things you or I may wish to see succeed.</summary></entry><entry><title type="html">beauty</title><link href="https://ayazhafiz.com/articles/20/beauty" rel="alternate" type="text/html" title="beauty" /><published>2020-04-16T03:00:00-05:00</published><updated>2020-04-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/beauty</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/beauty">&lt;p&gt;There’s this great quote from one of Zhu’s songs&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;cocaine-model&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cocaine-model&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;&lt;a href=&quot;https://youtu.be/Skt_NKI4d6U?t=20&quot;&gt;Cocaine Model&lt;/a&gt;&lt;/span&gt; that has long influenced me:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;When I was seven, my father said, “Fashion fades, but beauty is eternal. Elegance is illumination.
@@ -516,59 +660,4 @@ be planar. Both of these form beautiful five-point shapes.&lt;/p&gt;
 &lt;p&gt;Pentavalent carbons are one of those ideas most of us won’t deal with very often. But I think
 unique patterns like these are worth knowing, at least for the sake of knowing.&lt;/p&gt;
 
-&lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry><entry><title type="html">type folding and options</title><link href="https://ayazhafiz.com/articles/19/type-folding-and-options" rel="alternate" type="text/html" title="type folding and options" /><published>2019-10-03T01:00:00-05:00</published><updated>2019-10-03T01:00:00-05:00</updated><id>https://ayazhafiz.com/articles/19/type-folding-and-options</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/type-folding-and-options">&lt;p&gt;Sometimes, I work with TypeScript compiler
-APIs&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;tsapi&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;tsapi&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;They’re great APIs!&lt;/span&gt;. Because the language
-semantics are non-trivial, traversing a TypeScript AST almost always involves
-extensive validation. Here’s a particularly specific traversal we use in the
-&lt;a href=&quot;https://angular.io/guide/language-service&quot;&gt;Angular Language Service&lt;/a&gt;&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;ng-ls&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;ng-ls&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;If the Language
-Service is something that interests you and would like to contribute, please let me know! Or nike
-swoosh it :slightly_smiling_face:.&lt;/span&gt;:&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/e296d213923043d5b33381bc81a5fcd4.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;All validations branch on type checks, so in languages with design ideas like
-&lt;a href=&quot;http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html&quot;&gt;functors and monads&lt;/a&gt;
-we could find great solutions to simplifying the type folding done here. I want
-this to be a quick and (semi-)practical post, so I won’t explain what these words
-mean; instead, here’s an approach that I find simplifies this code.&lt;/p&gt;
-
-&lt;h3 id=&quot;rex&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#rex&quot;&gt;#&lt;/a&gt;rex&lt;/h3&gt;
-
-&lt;p&gt;First, Rust. Rust has an
-&lt;a href=&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;&lt;/a&gt; type
-that can be &lt;code class=&quot;highlighter-rouge&quot;&gt;Some&lt;/code&gt;thing or &lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;thing.
-&lt;a href=&quot;https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.map&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/a&gt;ping
-an &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt; applies a predicate to a &lt;code class=&quot;highlighter-rouge&quot;&gt;Some&lt;/code&gt; or propogates a &lt;code class=&quot;highlighter-rouge&quot;&gt;None&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If the TypeScript API had Rust bindings, I would imagine the code above to look
-something like&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/269f25526c492b193a73741a19c82eca.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;My hot take is that is way nicer - declaring the procedure functionally and
-linearly makes it more readable to me.&lt;/p&gt;
-
-&lt;h3 id=&quot;tess&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#tess&quot;&gt;#&lt;/a&gt;tess&lt;/h3&gt;
-
-&lt;p&gt;Okay, so how do we get this in TypeScript? Well, for a variety of good
-reasons&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;ynot&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;ynot&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Mainly because TypeScript is focused on supplementing JavaScript with types, not with more
-language features that aren’t in the standard.&lt;/span&gt;,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;noopt&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;noopt&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;TypeScript does
-provide an &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/Option&quot;&gt;HTML Option&lt;/a&gt;,
-which is distinctly different.&lt;/span&gt; will probably never be in the standard
-library.
-&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining&quot;&gt;Optional chaining&lt;/a&gt;
-will help, but won’t solve type mapping.&lt;/p&gt;
-
-&lt;p&gt;For domains where it is still useful to have &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt; (and other monad-family)
-types, there at least &lt;a href=&quot;https://github.com/shogogg/ts-option&quot;&gt;one library&lt;/a&gt; that
-can be used. If a library is too much, a lightweight &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt; can be written
-very quickly:&lt;/p&gt;
-
-&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
-&lt;script src=&quot;https://gist.github.com/2a42ded6979c988875188f6133639f78.js&quot;&gt; &lt;/script&gt;
-
-&lt;p&gt;Will the Angular Language Service use &lt;code class=&quot;highlighter-rouge&quot;&gt;Option&lt;/code&gt;s? Probably not. But it’s a fun
-idea!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Sometimes, I work with TypeScript compiler APIs⊕They’re great APIs!. Because the language semantics are non-trivial, traversing a TypeScript AST almost always involves extensive validation. Here’s a particularly specific traversal we use in the Angular Language ServiceIf the Language Service is something that interests you and would like to contribute, please let me know! Or nike swoosh it :slightly_smiling_face:.:</summary></entry></feed>
+&lt;p&gt;If you’re interested in hypervalencies, you may enjoy &lt;a href=&quot;http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479&quot;&gt;hexavalent carbons and undecavalent borons&lt;/a&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</summary></entry></feed>

@@ -539,3 +539,6 @@ section.self-image {
   color: #aaaaaa;
   font-size: 0.5em;
   margin-left: 1em; }
+
+.cc-main {
+  overflow: hidden; }
