@@ -1,4 +1,4 @@
-personal_ws-1.1 en 234
+personal_ws-1.1 en 236
 CIP
 del
 ebd
@@ -233,3 +233,5 @@ intersectionality
 intersectionalities
 workstreams
 unsyncs
+covid
+volunteerings
