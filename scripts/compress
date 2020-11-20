@@ -2,6 +2,8 @@
 # Usage:
 #   scripts/compress <directory>
 
+set -e
+
 dir=$1
 
 if [ -z "$dir" ]; then
@@ -9,11 +11,13 @@ if [ -z "$dir" ]; then
   exit 1
 fi
 
+rm -f "$dir/.DS_Store"
+
 JPG="jpg"
 PROCESSED="scripts/compress-processed"
 find "$dir" -type f -iname "*" | while read -r file; do
   name="${file%.*}"
-  ext="${file##*.}"
+  ext="$(echo "${file##*.}" | tr '[:upper:]' '[:lower:]')"
   pros="$PROCESSED/$name"
   jpgfile="$name.$JPG"
 
@@ -25,6 +29,7 @@ find "$dir" -type f -iname "*" | while read -r file; do
   # First, convert to jpg.
   convert -quality 100 "$file" "$jpgfile"
   if [[ "$ext" != "$JPG" ]]; then
+    echo $ext
     echo "Removing old file $file"
     rm "$file"
   fi
