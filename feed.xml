@@ -1,4 +1,142 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-11-19T23:38:04-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">on understanding</title><link href="https://ayazhafiz.com/articles/20/on-understanding" rel="alternate" type="text/html" title="on understanding" /><published>2020-05-16T03:00:00-05:00</published><updated>2020-05-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/on-understanding</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/on-understanding">&lt;p&gt;A juice diet is a fad. If it is to be ubiquitous, equity is not. Neither is the elimination of
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ayazhafiz.com/" rel="alternate" type="text/html" /><updated>2020-12-01T19:44:18-06:00</updated><id>https://ayazhafiz.com/feed.xml</id><title type="html">Ayaz Hafiz</title><subtitle>Hafiz's public website.</subtitle><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><entry><title type="html">impact vs innovation &amp;amp; industry vs academia</title><link href="https://ayazhafiz.com/articles/20/impact-vs-innovation" rel="alternate" type="text/html" title="impact vs innovation &amp; industry vs academia" /><published>2020-12-01T02:00:00-06:00</published><updated>2020-12-01T02:00:00-06:00</updated><id>https://ayazhafiz.com/articles/20/impact-vs-innovation</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/impact-vs-innovation">&lt;p&gt;I was recently reading Evan Martin’s blog post on his &lt;a href=&quot;http://neugierig.org/software/blog/2020/05/ninja.html&quot;&gt;takeaways from developing
+the ninja build system&lt;/a&gt;,
+and one thing Evan mentions is his frustration at engineers that don’t look at
+related work when designing systems. This reminded me of Rado Kirov’s posts on
+&lt;a href=&quot;https://rkirov.github.io/posts/incremental_computation_3/&quot;&gt;incremental computation&lt;/a&gt;,
+where Rado argues that a lot of work in the space of incremental software is
+underdeveloped because of the lack of cooperation between academic and industry
+actors. Which isn’t a novel realization in general, but recently was a novel
+realization to me, and has me thinking about something more general. So first a
+motivating comment on that, and then we’ll specialize back to the “divide” between
+academic and industry work.&lt;/p&gt;
+
+&lt;p&gt;A large thing I have been struggling with in my (so far incredibly short) career is
+a frequent incongruency between what I believe is impactful and what I believe
+is innovative work in an opportunity. Though “impactful” and “innovative”
+are broad and personal terms, in general I mean “impactful” work to be that
+which improves the quality of products broader than the work itself&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;impactful&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;impactful&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;For example, reducing store waiting lines by 20% is impactful to
+a business and its consumers&lt;/span&gt;, and “innovative” work to be that which is
+novel in its domain&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;innovative&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;innovative&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;For example, the derivation of a
+theorem.&lt;/span&gt;. Now, I certainly don’t mean to claim there is no overlap in
+impactful and innovative opportunities, or even that some overlap is uncommon,
+but I do argue that opportunities with a large degree of impact and innovation
+in the steady state&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;steady&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;steady&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;because certainly, anything can one day
+be made into an innovation or induce a great impact!&lt;/span&gt; are not all that
+common.&lt;/p&gt;
+
+&lt;p&gt;Now back to the note we started this discussion with – I think the clearest
+place where this divide comes up is in this distinction between industry work
+(impact by way of application) and academic work (innovation by way of theory).&lt;/p&gt;
+
+&lt;p&gt;Even though theory and application are complementary - theory inspires
+application, inspires new theory, etc. - I believe that popular culture has
+separated these two ideas by a thin bridge. This is evident even in the divide
+we understand between theory and application!&lt;/p&gt;
+
+&lt;p&gt;Of course, this divide is very purposeful. You can’t do everything at once, and
+we know that the $\text{scientist}\leftrightarrow\text{engineer}$ model works well;
+it’s been alive for a very long time. The problem comes when people working on
+applications lack knowledge of theory (and do not seek to learn it!), or vice
+versa. Then, what
+is novel to an individual is not necessarily novel in general, and time is wasted approaching
+a problem from an industrial direction when theory has been developed for a
+version of the problem. Or vice versa.&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;related&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;related&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;A related problem
+is effective knowledge sharing between domains and how to fill “valleys” in the N-dimensional landscape of
+popular knowledge.&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s an example: my experience contributing to teams working on industrial
+programming languages, I have noticed that relatively few people working in this
+space in have background knowledge in programming language theory (even
+self-taught!). Generally this is not an issue, but sometimes a problem comes up
+that the team has not experienced before, and spends a lot of time “figuring
+out”, but the problem in general is well-known and solved.&lt;/p&gt;
+
+&lt;p&gt;This is a hard problem – the biggest
+challenge is that you don’t know what you don’t know, and the first step is even
+learning enough to realize what you don’t know. A final example: recently I got
+into abstract rewriting systems, but for a while I didn’t even realize the
+problems I was trying to solve were well-known in the theory of rewrite systems
+until about a month in! Obviously, after that, things got a lot easier.&lt;/p&gt;
+
+&lt;p&gt;All right, so maybe now you’re saying, “this is an ok observation, but so what?
+What can we do about it?” Well, I suggest the following personal steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Inspire the relationship between formal methods and their applications during
+education - concentrations like “Applied Mathematics” deserve a fair share of
+theory, and “Theoretical Algorithms” deserve a fair share of applications, at
+least enough so that individuals new to a field have enough of an
+understanding of the larger ecosystem to know what they don’t know, what is
+useful, and what isn’t.&lt;/li&gt;
+  &lt;li&gt;Seek out answers to ideas that are novel to you - while they may be novel to
+you, they are likely not novel in general. Instead of reinventing the wheel,
+first research to discover if the problem has already been solved. As
+mentioned, figuring out how to discover whether the problem has been solved
+may not be trivial, and so some prerequisite knowledge of the domain is
+required (perhaps via (1)).&lt;/li&gt;
+  &lt;li&gt;When developing novel solutions, start from formal models.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;It’s either that, or get very knowledgeable about everything. I’m not certain
+which is more realistic, but I have a suspicion. And as always, if you have thoughts,
+I &lt;a href=&quot;mailto:ayaz.hafiz.1@gmail.com&quot;&gt;would love to hear from you&lt;/a&gt;!&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">I was recently reading Evan Martin’s blog post on his takeaways from developing the ninja build system, and one thing Evan mentions is his frustration at engineers that don’t look at related work when designing systems. This reminded me of Rado Kirov’s posts on incremental computation, where Rado argues that a lot of work in the space of incremental software is underdeveloped because of the lack of cooperation between academic and industry actors. Which isn’t a novel realization in general, but recently was a novel realization to me, and has me thinking about something more general. So first a motivating comment on that, and then we’ll specialize back to the “divide” between academic and industry work.</summary></entry><entry><title type="html">heterogeneity in volunteering</title><link href="https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering" rel="alternate" type="text/html" title="heterogeneity in volunteering" /><published>2020-09-21T03:00:00-05:00</published><updated>2020-09-21T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering">&lt;blockquote&gt;
+  &lt;p&gt;Note: This article is written with regard to ad-hoc volunteer programs, and
+less so with regard to long-standing, consistent volunteering commitments.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I went volunteering this past weekend for the first time since late March 2020
+(around when the covid-19 pandemic began taking large swing in the U.S.).&lt;/p&gt;
+
+&lt;p&gt;What are the characteristics of an individual who, during a pandemic, goes to
+volunteer at a home for those experiencing homelessness? In my opinion, such an
+individual is fairly invested in volunteering in this space. But what
+surprised me about this session was the vast diversity of my fellow volunteers’
+motivations for volunteering at the home.&lt;/p&gt;
+
+&lt;p&gt;A senior couple told me they were excited to give someone a meal and help
+contribute to the home’s rehabilitation program.
+They wanted to see men experiencing homelessness get an education, find a job, and obtain
+stable housing. The two, working with their local church, produce personal care
+bags handed out to those they see living on the streets. Only once has a
+recipient of a bag asked them for money instead&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;bag&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;bag&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This surprised me a lot. My
+first impression was this would an example of giving presumed help, not the help
+someone actually needs.&lt;/span&gt;.&lt;/p&gt;
+
+&lt;p&gt;A lawyer 25 years my senior said she was there to say hi to the men, many of
+whom were now her close friends. As a side effect of her contribution for the
+day, she would take home the egg shells and cardboard cartons for thirty dozen
+eggs, which she gave to her composting and flower-growing neighbors
+respectively. Why was she volunteering at this home? Well, it is quite
+enjoyable and meaningful as a sense of community for her. In
+fact, aside her apartment, this is the only indoor location she has been in since
+the pandemic has taken large swing; she has not even ordered food in.&lt;/p&gt;
+
+&lt;p&gt;As for me, I came because I wanted to speak to men experiencing homelessness
+and learn how the pandemic has affected their livelihoods. It was my first time at
+this home, and I wanted to learn about the experiences of the administrators of
+the home, how the home operates, what the men in the home find challenging about
+the home’s operations, and what unique initiatives the home drives.&lt;/p&gt;
+
+&lt;p&gt;I list these motivations because they are very different, well-formed
+perspectives.
+Perhaps I had not noticed such diversities in reasoning in
+previous volunteerings, perhaps I needed a several-month break, perhaps
+this diversity is just characteristic to a group of individuals that would
+volunteer in such a time, or perhaps something else.&lt;/p&gt;
+
+&lt;p&gt;In previous volunteerings, I found that the motivations of my fellow volunteers were
+often “non-interesting” – they were there to complete a requirement, try something new,
+or just learn about a cause. For me, new insights and perspectives would come
+from those impacted by the volunteering, and rarely from my peers.&lt;/p&gt;
+
+&lt;p&gt;This time, I learned the most from my peers. This was such a great thing! I
+felt surrounded by passionate, genuinely dedicated individuals in a way that I
+had not before. It felt like a team in a way that I had not seen from ad-hoc
+volunteer programs before.&lt;/p&gt;
+
+&lt;p&gt;I am hungry to find more such programs. I write this as a retrospective,
+inviting you to find such environments as well. And if you’re already a
+part of one, I’d love to hear about your experience.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Note: This article is written with regard to ad-hoc volunteer programs, and less so with regard to long-standing, consistent volunteering commitments.</summary></entry><entry><title type="html">on understanding</title><link href="https://ayazhafiz.com/articles/20/on-understanding" rel="alternate" type="text/html" title="on understanding" /><published>2020-05-16T03:00:00-05:00</published><updated>2020-05-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/on-understanding</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/on-understanding">&lt;p&gt;A juice diet is a fad. If it is to be ubiquitous, equity is not. Neither is the elimination of
 racism, or the distribution of healthcare, or the raising of millions out of poverty, or the safety
 or artificial intelligence, or the protection of endangered species, or any number of other things
 you or I may wish to see succeed.&lt;/p&gt;
@@ -142,64 +280,7 @@ make sure you do research and are confident in your interpretation.&lt;/p&gt;
 something bad, but I’m not going to tell you what it is or why it’s bad”. In that context,
 everything can be described as “problematic”, which is useless.&lt;/p&gt;
 
-&lt;p&gt;To me, it is much more useful to describe an idea as dangerous, and explain why it is so.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A juice diet is a fad. If it is to be ubiquitous, equity is not. Neither is the elimination of racism, or the distribution of healthcare, or the raising of millions out of poverty, or the safety or artificial intelligence, or the protection of endangered species, or any number of other things you or I may wish to see succeed.</summary></entry><entry><title type="html">heterogeneity in volunteering</title><link href="https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering" rel="alternate" type="text/html" title="heterogeneity in volunteering" /><published>2020-05-16T03:00:00-05:00</published><updated>2020-05-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering">&lt;blockquote&gt;
-  &lt;p&gt;Note: This article is written with regard to ad-hoc volunteer programs, and
-less so with regard to long-standing, consistent volunteering commitments.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I went volunteering this past weekend for the first time since late March 2020
-(around when the covid-19 pandemic began taking large swing in the U.S.).&lt;/p&gt;
-
-&lt;p&gt;What are the characteristics of an individual who, during a pandemic, goes to
-volunteer at a home for those experiencing homelessness? In my opinion, such an
-individual is fairly invested in volunteering in this space. But what
-surprised me about this session was the vast diversity of my fellow volunteers’
-motivations for volunteering at the home.&lt;/p&gt;
-
-&lt;p&gt;A senior couple told me they were excited to give someone a meal and help
-contribute to the home’s rehabilitation program.
-They wanted to see men experiencing homelessness get an education, find a job, and obtain
-stable housing. The two, working with their local church, produce personal care
-bags handed out to those they see living on the streets. Only once has a
-recipient of a bag asked them for money instead&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;bag&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;bag&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This surprised me a lot. My
-first impression was this would an example of giving presumed help, not the help
-someone actually needs.&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;A lawyer 25 years my senior said she was there to say hi to the men, many of
-whom were now her close friends. As a side effect of her contribution for the
-day, she would take home the egg shells and cardboard cartons for thirty dozen
-eggs, which she gave to her composting and flower-growing neighbors
-respectively. Why was she volunteering at this home? Well, it is quite
-enjoyable and meaningful as a sense of community for her. In
-fact, aside her apartment, this is the only indoor location she has been in since
-the pandemic has taken large swing; she has not even ordered food in.&lt;/p&gt;
-
-&lt;p&gt;As for me, I came because I wanted to speak to men experiencing homelessness
-and learn how the pandemic has affected their livelihoods. It was my first time at
-this home, and I wanted to learn about the experiences of the administrators of
-the home, how the home operates, what the men in the home find challenging about
-the home’s operations, and what unique initiatives the home drives.&lt;/p&gt;
-
-&lt;p&gt;I list these motivations because they are very different, well-formed
-perspectives.
-Perhaps I had not noticed such diversities in reasoning in
-previous volunteerings, perhaps I needed a several-month break, perhaps
-this diversity is just characteristic to a group of individuals that would
-volunteer in such a time, or perhaps something else.&lt;/p&gt;
-
-&lt;p&gt;In previous volunteerings, I found that the motivations of my fellow volunteers were
-often “non-interesting” – they were there to complete a requirement, try something new,
-or just learn about a cause. For me, new insights and perspectives would come
-from those impacted by the volunteering, and rarely from my peers.&lt;/p&gt;
-
-&lt;p&gt;This time, I learned the most from my peers. This was such a great thing! I
-felt surrounded by passionate, genuinely dedicated individuals in a way that I
-had not before. It felt like a team in a way that I had not seen from ad-hoc
-volunteer programs before.&lt;/p&gt;
-
-&lt;p&gt;I am hungry to find more such programs. I write this as a retrospective,
-inviting you to find such environments as well. And if you’re already a
-part of one, I’d love to hear about your experience.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">Note: This article is written with regard to ad-hoc volunteer programs, and less so with regard to long-standing, consistent volunteering commitments.</summary></entry><entry><title type="html">beauty</title><link href="https://ayazhafiz.com/articles/20/beauty" rel="alternate" type="text/html" title="beauty" /><published>2020-04-16T03:00:00-05:00</published><updated>2020-04-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/beauty</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/beauty">&lt;p&gt;There’s this great quote from one of Zhu’s songs&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;cocaine-model&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cocaine-model&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;&lt;a href=&quot;https://youtu.be/Skt_NKI4d6U?t=20&quot;&gt;Cocaine Model&lt;/a&gt;&lt;/span&gt; that has long influenced me:&lt;/p&gt;
+&lt;p&gt;To me, it is much more useful to describe an idea as dangerous, and explain why it is so.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">A juice diet is a fad. If it is to be ubiquitous, equity is not. Neither is the elimination of racism, or the distribution of healthcare, or the raising of millions out of poverty, or the safety or artificial intelligence, or the protection of endangered species, or any number of other things you or I may wish to see succeed.</summary></entry><entry><title type="html">beauty</title><link href="https://ayazhafiz.com/articles/20/beauty" rel="alternate" type="text/html" title="beauty" /><published>2020-04-16T03:00:00-05:00</published><updated>2020-04-16T03:00:00-05:00</updated><id>https://ayazhafiz.com/articles/20/beauty</id><content type="html" xml:base="https://ayazhafiz.com/articles/20/beauty">&lt;p&gt;There’s this great quote from one of Zhu’s songs&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;cocaine-model&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cocaine-model&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;&lt;a href=&quot;https://youtu.be/Skt_NKI4d6U?t=20&quot;&gt;Cocaine Model&lt;/a&gt;&lt;/span&gt; that has long influenced me:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;When I was seven, my father said, “Fashion fades, but beauty is eternal. Elegance is illumination.
@@ -545,118 +626,4 @@ roots serves. One useful application is in square root approximation - knowing
 that integer square roots are approximately uniform especially at large numbers,
 we can say that for an integer $q$, $\sqrt{q} \approx n + \frac{q-n^2}{2n+1}$,
 where
-$n = {\lfloor{\sqrt{q}}\rfloor}$&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;sqrt-example&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sqrt-example&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;For example, $10.724 = \sqrt{115} \approx 10.714 = \sqrt{100} + \frac{15}{21}$.&lt;/span&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">The distance between consecutive perfect squares is not uniform:</summary></entry><entry><title type="html">approximation with interpolating polynomials</title><link href="https://ayazhafiz.com/articles/19/barycentric-interpolation" rel="alternate" type="text/html" title="approximation with interpolating polynomials" /><published>2019-11-15T00:00:00-06:00</published><updated>2019-11-15T00:00:00-06:00</updated><id>https://ayazhafiz.com/articles/19/barycentric-interpolation</id><content type="html" xml:base="https://ayazhafiz.com/articles/19/barycentric-interpolation">&lt;h2 id=&quot;lagrange-form&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#lagrange-form&quot;&gt;#&lt;/a&gt;Lagrange Form&lt;/h2&gt;
-
-&lt;p&gt;Say you want to find an function approximating a set of data points&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;points&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;points&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$&lt;/span&gt;. One way to do this is to find a
-polynomial $p_n \in \mathbb{P}_n$ satisfying the interpolation property&lt;/p&gt;
-
-&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-p_n(x_i) = f_i\qquad i \in [0, n]
-&lt;/script&gt;&lt;/div&gt;
-
-&lt;p&gt;Playing around a bit, we find that this polynomial can be written as&lt;/p&gt;
-
-&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-\begin{align*}
-p_n(x) = &amp;\frac{(x - x_1) * (x - x_2) * \ldots * (x - x_n)}{(x_0 - x_1) * (x_0 - x_2) * \ldots * (x_0 - x_n)} f_0 \\
-       &amp;+ \frac{(x - x_0) * (x - x_2) * \ldots * (x - x_n)}{(x_1 - x_0) * (x_1 - x_2) * \ldots * (x_1 - x_n)} f_1 \\
-       &amp;+ \ldots \\
-       &amp;+ \frac{(x - x_0) * (x - x_1) * \ldots * (x - x_{n-1})}{(x_n - x_0) * (x_n - x_1) * \ldots * (x_n - x_{n-1})} f_n \\
-       = &amp;\sum_{i=0}^n \prod_{j=0\\j\ne i}^n \frac{x-x_j}{x_i-x_j} f_i\qquad j \in [0, n]
-\end{align*}
-&lt;/script&gt;&lt;/div&gt;
-
-&lt;p&gt;This is known as the Lagrange form of an interpolating polynomial, and is more commonly expressed as&lt;/p&gt;
-
-&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-\begin{align*}
-p_n(x)    &amp;= \sum_{i=0}^n \ell_i(x)f_i \\
-\ell_i(x) &amp;= \prod_{j=0\\j\ne i}^n \frac{x-x_j}{x_i-x_j}\qquad j \in [0, n]
-\end{align*}
-&lt;/script&gt;&lt;/div&gt;
-
-&lt;div class=&quot;custom-block&quot;&gt;
-where $\ell_i$ is a &lt;a href=&quot;https://en.wikipedia.org/wiki/Lagrange_polynomial&quot;&gt;Lagrange
-polynomial&lt;/a&gt; of degree $n$.&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;interpolationproof&quot; class=&quot;margin-toggle&quot;&gt;&amp;#8853;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;interpolationproof&quot; class=&quot;margin-toggle&quot; /&gt;&lt;div class=&quot;marginnote&quot;&gt; To see that $p_n$ interpolates correctly, observe that
-
-&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-\ell_i(x) = \begin{cases}
-         1 &amp; x = x_i\\
-         0 &amp; x \in \left\{x_0,\ldots,x_n\right\}\setminus \left\{x_i\right\}
-         \end{cases}
-&lt;/script&gt;&lt;/div&gt;
-
-and so $p_n(x_i) = f_i + \sum_{j=0\\j\ne i}^n 0 f_j = f_i$.&lt;br /&gt;
-
-It's not difficult to prove that $p_n$ is unique and of at most degree $n$, but we won't do that
-here.
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;cost&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#cost&quot;&gt;#&lt;/a&gt;Cost&lt;/h2&gt;
-
-&lt;p&gt;The Lagrange form is not suitable for computation. Its construction requires massive
-multiplication and division, which can be catastrophic for floating point precision.
-The form is also not memoizable; evaluating $p_n(a)$ does not help in any part of the evaluation of
-$p_n(b)$ when $b \ne a$.&lt;/p&gt;
-
-&lt;p&gt;With some more play, we can get a computationally-suitable equation known as the &lt;a href=&quot;https://en.wikipedia.org/wiki/Lagrange_polynomial#Barycentric_form&quot;&gt;Barycentric form&lt;/a&gt;
-of an interpolating polynomial, defined as&lt;/p&gt;
-
-&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-p_n(x) = \frac{\sum_{i=0}^n \frac{\omega_i}{x-x_i} * f_i}{\sum_{i=0}^n \frac{\omega_i}{x-x_i}}
-&lt;/script&gt;&lt;/div&gt;
-
-&lt;p&gt;where $w_i$ is a barycentric weight&lt;/p&gt;
-
-&lt;div class=&quot;mathblock&quot;&gt;&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-\omega_i(x) = \frac{1}{\prod_{j=0\\j\ne i}^n (x_i - x_j)}
-&lt;/script&gt;&lt;/div&gt;
-
-&lt;p&gt;Because $\omega_i$ relies only on the explicitly-defined nodes $x_0, \ldots, x_n$, it does not need
-to be recomputed for subsequent evaluations of $p_n$.&lt;/p&gt;
-
-&lt;h2 id=&quot;attempt-1&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#attempt-1&quot;&gt;#&lt;/a&gt;Attempt 1&lt;/h2&gt;
-
-&lt;p&gt;Approximating $f(x) = \sin(4x\cos(8x))$ with various degrees of the Barycentric interpolant, using
-equidistant interpolating nodes, gives&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/equidistant.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;These polynomials definitely interpolate points of $f(x)$, but have the unfortunate tendency to blow up
-around the interval endpoints. Note that the magnitude of the error at the edges grows with the degree of
-the approximation.&lt;/p&gt;
-
-&lt;h2 id=&quot;runge&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#runge&quot;&gt;#&lt;/a&gt;Runge&lt;/h2&gt;
-
-&lt;p&gt;This behavior is &lt;a href=&quot;https://en.wikipedia.org/wiki/Runge%27s_phenomenon&quot;&gt;Runge’s phenomenon&lt;/a&gt;, and
-means that increasing the order of an approximating polynomial interpolant may not
-improve its accuracy&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;wiki&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;wiki&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Why this occurs is beyond the scope of this post; &lt;a href=&quot;https://en.wikipedia.org/wiki/Runge%27s_phenomenon#Reason&quot;&gt;Wikipedia&lt;/a&gt; gives a good explanation.&lt;/span&gt;.&lt;/p&gt;
-
-&lt;p&gt;One way to minimize Runge’s phenomenon is to densify the interpolating points near the endpoints of
-the approximation interval&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;interval-endpoint&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;interval-endpoint&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Thereby more accurately fitting the
-parts of the approximation affected by Runge’s phenomenon.&lt;/span&gt;. &lt;a href=&quot;https://en.wikipedia.org/wiki/Chebyshev_nodes&quot;&gt;Chebyshev nodes&lt;/a&gt;
-exhibit exactly this kind of edge-heavy density, making them very useful for polynomial interpolation.&lt;/p&gt;
-
-&lt;p&gt;Creating a Barycentric interpolant with Chebyshev nodes yields a nice improvement.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/chebyshev.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;convergence&quot;&gt;&lt;a class=&quot;header-anchor&quot; href=&quot;#convergence&quot;&gt;#&lt;/a&gt;Convergence&lt;/h2&gt;
-
-&lt;p&gt;Plotting the pointwise error of the Barycentric interpolant&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;cheb-nodes&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;cheb-nodes&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;generated with Chebyshev nodes&lt;/span&gt; approximating $f(x) = \sin(4x\cos(8x))$
-suggests the polynomial interpolation is convergent.&lt;/p&gt;
-
-&lt;figure&gt;&lt;img src=&quot;/assets/img/barycentric_interpolation/error.png&quot; /&gt;&lt;figcaption&gt;&lt;/figcaption&gt;&lt;/figure&gt;
-
-&lt;p&gt;Inspection of the error
-$l^2$ norms&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;norm&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;norm&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Note that many other norms can be used for convergence analysis as well.&lt;/span&gt; suggests more:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Order   L2 norm
-16      8.562880126489002
-32      0.4243100460236342
-64      5.324902188796007e-05
-128     8.698460604825334e-14
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Clearly, the rate of convergence is pretty fast.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">#Lagrange Form</summary></entry></feed>
+$n = {\lfloor{\sqrt{q}}\rfloor}$&lt;span class=&quot;note&quot;&gt;&lt;label for=&quot;sqrt-example&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;/span&gt;&lt;input type=&quot;checkbox&quot; id=&quot;sqrt-example&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;For example, $10.724 = \sqrt{115} \approx 10.714 = \sqrt{100} + \frac{15}{21}$.&lt;/span&gt;.&lt;/p&gt;</content><author><name>hafiz</name><email>ayaz.hafiz.1@gmail.com</email></author><summary type="html">The distance between consecutive perfect squares is not uniform:</summary></entry></feed>
