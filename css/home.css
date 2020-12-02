@@ -552,8 +552,8 @@ section.self-image {
           transform: translate(-50%, -50%);
   z-index: -999;
   opacity: 0.95;
-  -webkit-filter: hue-rotate(-25deg);
-          filter: hue-rotate(-25deg); }
+  -webkit-filter: hue-rotate(-30deg);
+          filter: hue-rotate(-30deg); }
 
 .overhang > * {
   display: inline-block;
