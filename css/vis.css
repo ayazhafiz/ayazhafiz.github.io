@@ -85,7 +85,7 @@ h6 {
 
 a.header-anchor {
   bottom: 0;
-  color: #aaaaaa;
+  color: #777777;
   display: none;
   font-style: normal;
   left: 0.2em;
@@ -143,7 +143,7 @@ section.nav {
   margin-bottom: 2em; }
 
 .nav-link {
-  color: #aaaaaa;
+  color: rgba(0, 0, 0, 0.6);
   font-size: 1.2em; }
   .nav-link:not(.no-margin) {
     margin-right: 2em; }
