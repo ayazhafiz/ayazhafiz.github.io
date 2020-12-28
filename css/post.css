@@ -52,6 +52,9 @@ h1 {
   margin-bottom: 1.5rem;
   margin-top: 0; }
 
+h2 {
+  font-size: 2.4rem; }
+
 h3 {
   font-size: 1.7rem;
   font-style: italic; }
@@ -773,6 +776,9 @@ section.footer {
   text-align: left;
   width: 100%;
   z-index: 100; }
+
+pre {
+  overflow-x: scroll; }
 
 .post {
   -webkit-transition: width 0.2s ease-in-out;
