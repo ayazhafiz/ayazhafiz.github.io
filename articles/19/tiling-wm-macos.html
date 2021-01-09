@@ -9,7 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
 
 <title>
-   A macOS Workspace With a Tiling WM 
+  
+    A macOS Workspace With a Tiling WM
+  
 </title>
 <meta name="description" content="My macOS desktop environment and editing configuration." />
 
@@ -39,33 +41,31 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css"
+      href="/css/post.css?1610169723619250871"
     />
   </head>
 
   <style></style>
 
   <body>
-    <div class="container">
+    <div class="container post">
       <div class="panel">
         <div class="column-right A macOS workspace with a tiling WM-main">
           <section class="nav">
   <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <div class="showhide-notes">»</div>
-
-<h1 class="title">A macOS Workspace With a Tiling WM</h1>
+ <h1 class="title">A macOS Workspace With a Tiling WM</h1>
 <p class="byline">May 5, 2019</p>
 
 <article class="post">
   <blockquote>
-  <p><em>Update</em>: Development of <a href="https://github.com/koekeishiya/chunkwm"><code class="highlighter-rouge">chunkwm</code></a>
-has ceased in favor of <a href="https://github.com/koekeishiya/yabai"><code class="highlighter-rouge">yabai</code></a>. It’s
-recommended you now use <code class="highlighter-rouge">yabai</code> for your macOS tiling needs.</p>
+  <p><em>Update</em>: Development of <a href="https://github.com/koekeishiya/chunkwm"><code class="language-plaintext highlighter-rouge">chunkwm</code></a>
+has ceased in favor of <a href="https://github.com/koekeishiya/yabai"><code class="language-plaintext highlighter-rouge">yabai</code></a>. It’s
+recommended you now use <code class="language-plaintext highlighter-rouge">yabai</code> for your macOS tiling needs.</p>
 </blockquote>
 
 <h2 id="0--prelude">
-<a class="header-anchor" href="#0--prelude">#</a><span class="el">0:</span>  Prelude</h2>
+<a class="header-anchor" href="#0--prelude"></a><span class="el">0:</span>  Prelude</h2>
 
 <blockquote>
   <p><strong><em>I speak for myself</em></strong>: The softwares and configurations I present here work
@@ -77,31 +77,31 @@ configuration development.</p>
 <blockquote>
   <p><strong><em>Learning curve</em></strong>: All the tools I mention here have a learning curve, the
 magnitude of which varies but is largely due to learning keybindings. I will
-say that once one learns to work with <code class="highlighter-rouge">vim</code> effectively, most other
+say that once one learns to work with <code class="language-plaintext highlighter-rouge">vim</code> effectively, most other
 keyboard-based softwares are fairly easy to pick up, as many have similar
-semantics to <code class="highlighter-rouge">vim</code>. Tips from personal experience can be found in
+semantics to <code class="language-plaintext highlighter-rouge">vim</code>. Tips from personal experience can be found in
 <a href="#31--vims-learning-curve">section 3.1</a>.</p>
 </blockquote>
 
 <h3 id="01--motivation">
-<a class="header-anchor" href="#01--motivation">#</a><span class="el">0.1:</span>  Motivation</h3>
+<a class="header-anchor" href="#01--motivation"></a><span class="el">0.1:</span>  Motivation</h3>
 
 <p>I work on a 15” 2016 MBP. It’s a really nice machine I was fortunate enough to
 buy with scholarship money a couple years back, and does nicely pretty much
 everything one buys a Mac for.</p>
 
 <p>As I’ve become more productive, I’ve increasingly turned to power tools like
-<code class="highlighter-rouge">vim</code>, <a href="https://github.com/tmux/tmux"><code class="highlighter-rouge">tmux</code></a>, and most recently,
-<a href="https://github.com/koekeishiya/chunkwm"><code class="highlighter-rouge">chunkwm</code></a><span class="note"><label for="chunkwm" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="chunkwm" class="margin-toggle"><span class="sidenote">A tiling window manager for macOS</span>.
-<code class="highlighter-rouge">chunkwm</code> in particular has been a big jump for me in terms of productivity and
+<code class="language-plaintext highlighter-rouge">vim</code>, <a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">tmux</code></a>, and most recently,
+<a href="https://github.com/koekeishiya/chunkwm"><code class="language-plaintext highlighter-rouge">chunkwm</code></a><span class="note"><label for="chunkwm" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="chunkwm" class="margin-toggle"><span class="sidenote">A tiling window manager for macOS</span>.
+<code class="language-plaintext highlighter-rouge">chunkwm</code> in particular has been a big jump for me in terms of productivity and
 workspace aesthetic. This post discusses my macOS configuration, motivated by my
-setup of <code class="highlighter-rouge">chunkwm</code>.</p>
+setup of <code class="language-plaintext highlighter-rouge">chunkwm</code>.</p>
 
 <p>My configuration files are available on GitHub at
 <a href="https://github.com/ayazhafiz/hmcd">ayazhafiz/hmcd</a>.</p>
 
 <h3 id="02--screens">
-<a class="header-anchor" href="#02--screens">#</a><span class="el">0.2:</span>  Screens</h3>
+<a class="header-anchor" href="#02--screens"></a><span class="el">0.2:</span>  Screens</h3>
 
 <figure class="fullwidth"><img src="/assets/img/neovim_start.jpg"><figcaption>neovim start screen</figcaption></figure>
 
@@ -114,7 +114,7 @@ setup of <code class="highlighter-rouge">chunkwm</code>.</p>
 <figure class="fullwidth"><img src="/assets/img/ranger_qutebrowser.jpg"><figcaption>ranger in tmux, qutebrowser</figcaption></figure>
 
 <h2 id="1--chunkwm-and-skhd-for-tiling-windows">
-<a class="header-anchor" href="#1--chunkwm-and-skhd-for-tiling-windows">#</a><span class="el">1:</span>  <code class="highlighter-rouge">chunkwm</code> and <code class="highlighter-rouge">skhd</code> for tiling windows</h2>
+<a class="header-anchor" href="#1--chunkwm-and-skhd-for-tiling-windows"></a><span class="el">1:</span>  <code class="language-plaintext highlighter-rouge">chunkwm</code> and <code class="language-plaintext highlighter-rouge">skhd</code> for tiling windows</h2>
 
 <p>First, a definition - <strong>tiling window managers</strong> organize windows in
 compartmentalized buffers on a desktop, and often support handling windows on
@@ -124,105 +124,105 @@ spot, with the user having to adjust window sizes and locations only ad-hoc. A
 side effect of these managers is the orthogonal aesthetic they provide to one’s
 desktop, though the value of that may vary by taste. I quite like it.</p>
 
-<p><a href="https://github.com/koekeishiya/chunkwm"><code class="highlighter-rouge">chunkwm</code></a> is a tiling wm for macOS. On
+<p><a href="https://github.com/koekeishiya/chunkwm"><code class="language-plaintext highlighter-rouge">chunkwm</code></a> is a tiling wm for macOS. On
 its own it’s pretty nice, but its full potential comes out with a hotkey daemon
-like <a href="https://github.com/koekeishiya/skhd"><code class="highlighter-rouge">skhd</code></a>, which maps keystrokes to
-arbitrary system actions. <code class="highlighter-rouge">skhd</code> can be used for mapping hotkeys to
-<code class="highlighter-rouge">chunkc</code><span class="note"><label for="chunkc" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="chunkc" class="margin-toggle"><span class="sidenote">the program that sends messages to <code class="highlighter-rouge">chunkwm</code></span>
+like <a href="https://github.com/koekeishiya/skhd"><code class="language-plaintext highlighter-rouge">skhd</code></a>, which maps keystrokes to
+arbitrary system actions. <code class="language-plaintext highlighter-rouge">skhd</code> can be used for mapping hotkeys to
+<code class="language-plaintext highlighter-rouge">chunkc</code><span class="note"><label for="chunkc" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="chunkc" class="margin-toggle"><span class="sidenote">the program that sends messages to <code class="language-plaintext highlighter-rouge">chunkwm</code></span>
 commands, enabling window management via just the keyboard.</p>
 
 <figure class="fullwidth"><img src="/assets/img/skhd-chunkwm.gif"><figcaption>manipulating windows with skhd</figcaption></figure>
 
-<p><code class="highlighter-rouge">chunkwm</code> provides a configuration file for setting window gaps, border offsets,
-border colors, and other aesthetic features; <code class="highlighter-rouge">skhd</code> has a configuration file for
+<p><code class="language-plaintext highlighter-rouge">chunkwm</code> provides a configuration file for setting window gaps, border offsets,
+border colors, and other aesthetic features; <code class="language-plaintext highlighter-rouge">skhd</code> has a configuration file for
 hotkey
-bindings<span class="note"><label for="skhdrc-more" class="margin-toggle">⊕</label></span><input type="checkbox" id="skhdrc-more" class="margin-toggle"><span class="marginnote">The nice thing about <code class="highlighter-rouge">skhd</code> is keybindings can act on more than just <code class="highlighter-rouge">chunkc</code> - for instance, I have bindings for opening a terminal and web browser.</span>.
+bindings<span class="note"><label for="skhdrc-more" class="margin-toggle">⊕</label></span><input type="checkbox" id="skhdrc-more" class="margin-toggle"><span class="marginnote">The nice thing about <code class="language-plaintext highlighter-rouge">skhd</code> is keybindings can act on more than just <code class="language-plaintext highlighter-rouge">chunkc</code> - for instance, I have bindings for opening a terminal and web browser.</span>.
 I’ve made public my personal
-<a href="https://github.com/ayazhafiz/hmcd/blob/master/.chunkwmrc"><code class="highlighter-rouge">.chunkwmrc</code></a> and
-<a href="https://github.com/ayazhafiz/hmcd/blob/master/.skhdrc"><code class="highlighter-rouge">.skhdrc</code></a>.</p>
+<a href="https://github.com/ayazhafiz/hmcd/blob/master/.chunkwmrc"><code class="language-plaintext highlighter-rouge">.chunkwmrc</code></a> and
+<a href="https://github.com/ayazhafiz/hmcd/blob/master/.skhdrc"><code class="language-plaintext highlighter-rouge">.skhdrc</code></a>.</p>
 
 <h2 id="2--alacritty-as-a-terminal-and-tmux-as-its-multiplexer">
-<a class="header-anchor" href="#2--alacritty-as-a-terminal-and-tmux-as-its-multiplexer">#</a><span class="el">2:</span>  <code class="highlighter-rouge">alacritty</code> as a terminal and <code class="highlighter-rouge">tmux</code> as its multiplexer</h2>
+<a class="header-anchor" href="#2--alacritty-as-a-terminal-and-tmux-as-its-multiplexer"></a><span class="el">2:</span>  <code class="language-plaintext highlighter-rouge">alacritty</code> as a terminal and <code class="language-plaintext highlighter-rouge">tmux</code> as its multiplexer</h2>
 
-<p>Right now I use <a href="https://github.com/jwilm/alacritty"><code class="highlighter-rouge">alacritty</code></a> as my terminal
-emulator<span class="note"><label for="alacritty" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="alacritty" class="margin-toggle"><span class="sidenote">For a while I used <a href="https://hyper.is/"><code class="highlighter-rouge">hyper</code></a>, but people are right about the Electron bloat. I’ve heard good things about <a href="https://github.com/kovidgoyal/kitty"><code class="highlighter-rouge">kitty</code></a>, but haven’t had the chance to use it.</span>.
+<p>Right now I use <a href="https://github.com/jwilm/alacritty"><code class="language-plaintext highlighter-rouge">alacritty</code></a> as my terminal
+emulator<span class="note"><label for="alacritty" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="alacritty" class="margin-toggle"><span class="sidenote">For a while I used <a href="https://hyper.is/"><code class="language-plaintext highlighter-rouge">hyper</code></a>, but people are right about the Electron bloat. I’ve heard good things about <a href="https://github.com/kovidgoyal/kitty"><code class="language-plaintext highlighter-rouge">kitty</code></a>, but haven’t had the chance to use it.</span>.
 It’s great – fast as hell, not a battery leech, and has nice configuration
 options with extensible keybindings (you can see my configuration
 <a href="https://github.com/ayazhafiz/hmcd/blob/master/.config/alacritty/alacritty.yml">here</a>).
 Especially with a transparent background and color palettes generated by
-<a href="https://github.com/dylanaraps/pywal"><code class="highlighter-rouge">wal</code></a>, it’s easily the most beautiful
+<a href="https://github.com/dylanaraps/pywal"><code class="language-plaintext highlighter-rouge">wal</code></a>, it’s easily the most beautiful
 application on my machine.</p>
 
-<p>Why <a href="https://github.com/tmux/tmux"><code class="highlighter-rouge">tmux</code></a>? It may seem ridiculous to nest
-terminal sessions within windows within a window manager, but I use <code class="highlighter-rouge">tmux</code> to
-have just one terminal window open and manage various sessions inside it. <code class="highlighter-rouge">tmux</code>
+<p>Why <a href="https://github.com/tmux/tmux"><code class="language-plaintext highlighter-rouge">tmux</code></a>? It may seem ridiculous to nest
+terminal sessions within windows within a window manager, but I use <code class="language-plaintext highlighter-rouge">tmux</code> to
+have just one terminal window open and manage various sessions inside it. <code class="language-plaintext highlighter-rouge">tmux</code>
 sessions persist independently of the emulator they are run in, so you can enter
 and exit them anytime you want.</p>
 
 <figure class="fullwidth"><img src="/assets/img/tmux.gif"><figcaption>working with multiple tmux sessions</figcaption></figure>
 
-<p><code class="highlighter-rouge">tmux</code> allows for aesthetic and keybinding configurations via a <code class="highlighter-rouge">.tmux.conf</code>. Of
+<p><code class="language-plaintext highlighter-rouge">tmux</code> allows for aesthetic and keybinding configurations via a <code class="language-plaintext highlighter-rouge">.tmux.conf</code>. Of
 course, I’ve made mine
 <a href="https://github.com/ayazhafiz/hmcd/blob/master/.tmux.conf">publicly avaliable</a>.</p>
 
 <h2 id="3--power-tools-vim-and-ranger">
-<a class="header-anchor" href="#3--power-tools-vim-and-ranger">#</a><span class="el">3:</span>  Power tools: <code class="highlighter-rouge">vim</code> and <code class="highlighter-rouge">ranger</code>
+<a class="header-anchor" href="#3--power-tools-vim-and-ranger"></a><span class="el">3:</span>  Power tools: <code class="language-plaintext highlighter-rouge">vim</code> and <code class="language-plaintext highlighter-rouge">ranger</code>
 </h2>
 
-<p>For a while, I thought <code class="highlighter-rouge">vim</code> was a needlessly cumbersome tool, as I’m sure most
+<p>For a while, I thought <code class="language-plaintext highlighter-rouge">vim</code> was a needlessly cumbersome tool, as I’m sure most
 do initially. Once I began to seriously use it though, I realized my enhancement
-in productivity, and now I use <code class="highlighter-rouge">vim</code> for pretty much
-everything<span class="note"><label for="neovim" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="neovim" class="margin-toggle"><span class="sidenote">More accurately, I use <a href="https://github.com/neovim/neovim"><code class="highlighter-rouge">neovim</code></a>.</span>.
+in productivity, and now I use <code class="language-plaintext highlighter-rouge">vim</code> for pretty much
+everything<span class="note"><label for="neovim" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="neovim" class="margin-toggle"><span class="sidenote">More accurately, I use <a href="https://github.com/neovim/neovim"><code class="language-plaintext highlighter-rouge">neovim</code></a>.</span>.
 Working with only a keyboard certainly imposed a learning curve, but has paid
 off in a a tremendous speedup for literally everything I do on my machine. In
-fact, the productivity benefits <code class="highlighter-rouge">vim</code> has provided me are the primary reason I
+fact, the productivity benefits <code class="language-plaintext highlighter-rouge">vim</code> has provided me are the primary reason I
 switched to a key-bound tiling wm and and now do 90% of my work in a terminal
 emulator.</p>
 
-<p>On a similar note, the <a href="https://github.com/ranger/ranger"><code class="highlighter-rouge">ranger</code> filemanager</a>
-provides <code class="highlighter-rouge">vim</code>-like key bindings for browsing file systems. This is a boon for
-productivity – at least over <code class="highlighter-rouge">Finder</code>, in my experience.</p>
+<p>On a similar note, the <a href="https://github.com/ranger/ranger"><code class="language-plaintext highlighter-rouge">ranger</code> filemanager</a>
+provides <code class="language-plaintext highlighter-rouge">vim</code>-like key bindings for browsing file systems. This is a boon for
+productivity – at least over <code class="language-plaintext highlighter-rouge">Finder</code>, in my experience.</p>
 
 <p>If you’re looking for a beautiful, extensible text editor to replace your IDEs
-and speedup your workflow, I cannot recommend <code class="highlighter-rouge">vim</code>
-enough<span class="note"><label for="vim" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="vim" class="margin-toggle"><span class="sidenote"><code class="highlighter-rouge">emacs</code> is also really nice, if that’s more your thing. Regardless, the advantage of keybindings is undeniable – there’s a reason <code class="highlighter-rouge">VS Code</code> and <code class="highlighter-rouge">Atom</code> have command palettes.</span>.
-And once you get hooked on that, check out <code class="highlighter-rouge">ranger</code>. And if you’re trying to get
+and speedup your workflow, I cannot recommend <code class="language-plaintext highlighter-rouge">vim</code>
+enough<span class="note"><label for="vim" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="vim" class="margin-toggle"><span class="sidenote"><code class="language-plaintext highlighter-rouge">emacs</code> is also really nice, if that’s more your thing. Regardless, the advantage of keybindings is undeniable – there’s a reason <code class="language-plaintext highlighter-rouge">VS Code</code> and <code class="language-plaintext highlighter-rouge">Atom</code> have command palettes.</span>.
+And once you get hooked on that, check out <code class="language-plaintext highlighter-rouge">ranger</code>. And if you’re trying to get
 really deep, maybe you even want a command-line email client like
-<a href="http://www.mutt.org/"><code class="highlighter-rouge">mutt</code></a>. There’s an entire world out there for you to
+<a href="http://www.mutt.org/"><code class="language-plaintext highlighter-rouge">mutt</code></a>. There’s an entire world out there for you to
 discover <img class="emoji" title=":smile:" alt=":smile:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f604.png" height="20" width="20">.</p>
 
 <h3 id="31--vims-learning-curve">
-<a class="header-anchor" href="#31--vims-learning-curve">#</a><span class="el">3.1:</span>  <code class="highlighter-rouge">vim</code>’s Learning Curve</h3>
+<a class="header-anchor" href="#31--vims-learning-curve"></a><span class="el">3.1:</span>  <code class="language-plaintext highlighter-rouge">vim</code>’s Learning Curve</h3>
 
-<p><code class="highlighter-rouge">vim</code>’s learning curve kinda sucks if you haven’t worked much with key-bound
+<p><code class="language-plaintext highlighter-rouge">vim</code>’s learning curve kinda sucks if you haven’t worked much with key-bound
 applications before. Getting over that hill is a personal journey, but I have
 two tips from personal experience:</p>
 
 <ol>
   <li>
-    <p><code class="highlighter-rouge">vimtutor</code> is your best friend. Launch it up in your command line and go
+    <p><code class="language-plaintext highlighter-rouge">vimtutor</code> is your best friend. Launch it up in your command line and go
 through all of it; the tutorial isn’t very long and will teach you everything
-you need to be functional in <code class="highlighter-rouge">vim</code>.</p>
+you need to be functional in <code class="language-plaintext highlighter-rouge">vim</code>.</p>
   </li>
   <li>
-    <p>Actually use <code class="highlighter-rouge">vim</code>. Make it the exclusive workspace for your next few
+    <p>Actually use <code class="language-plaintext highlighter-rouge">vim</code>. Make it the exclusive workspace for your next few
 projects, homework assignments, papers, whatever else. At first it might
 really suck and you might want to switch back editors, but soon <em>it’ll click</em>
 and you’ll begin to experience why it’s raved about so much. Non-toy usage of
-<code class="highlighter-rouge">vim</code> will also teach you all the tricks <code class="highlighter-rouge">vimtutor</code> doesn’t and force you to
+<code class="language-plaintext highlighter-rouge">vim</code> will also teach you all the tricks <code class="language-plaintext highlighter-rouge">vimtutor</code> doesn’t and force you to
 configure the editor to your liking.</p>
   </li>
 </ol>
 
 <p>Speaking of configuration,
-<a href="https://github.com/ayazhafiz/hmcd/blob/master/.vimrc">here’s my <code class="highlighter-rouge">.vimrc</code></a>. Like
+<a href="https://github.com/ayazhafiz/hmcd/blob/master/.vimrc">here’s my <code class="language-plaintext highlighter-rouge">.vimrc</code></a>. Like
 the other configurations I’ve made public, you should use it only to pick and
 choose what you need - my preferences and plugins probably don’t exactly align
 with your needs, and it’s useful to know what the commands you’re including
 actually mean.</p>
 
 <h2 id="00--postlude">
-<a class="header-anchor" href="#00--postlude">#</a><span class="el">00:</span>  Postlude</h2>
+<a class="header-anchor" href="#00--postlude"></a><span class="el">00:</span>  Postlude</h2>
 
 <p>I hope this article has provided you with an additional perspective on macOS
 configuration options. If you choose to incorporate any of the tools I’ve
@@ -283,10 +283,6 @@ me</a>. I’d love to chat.</p>
     });
   }
 
-  function toggleShowHideNotesSwitch(isFullWidth) {
-    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     $$(".note").forEach(toggle =>
       toggle.addEventListener("click", () => {
@@ -295,8 +291,6 @@ me</a>. I’d love to chat.</p>
         }
       })
     );
-    $(".showhide-notes").addEventListener("click", toggleFullWidth);
-    
   });
 </script>
 

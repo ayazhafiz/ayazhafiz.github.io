@@ -9,7 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
 
 <title>
-   Rust's Great Interoperability 
+  
+    Rust's Great Interoperability
+  
 </title>
 <meta name="description" content="Interoperability between Rust and Crystal." />
 
@@ -39,27 +41,25 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css"
+      href="/css/post.css?1610169723619250871"
     />
   </head>
 
   <style></style>
 
   <body>
-    <div class="container">
+    <div class="container post">
       <div class="panel">
         <div class="column-right rust's great interoperability-main">
           <section class="nav">
   <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <div class="showhide-notes">»</div>
-
-<h1 class="title">Rust's Great Interoperability</h1>
+ <h1 class="title">Rust's Great Interoperability</h1>
 <p class="byline">February 7, 2018</p>
 
 <article class="post">
   <h2 id="0--rust-on-the-rocks">
-<a class="header-anchor" href="#0--rust-on-the-rocks">#</a><span class="el">0:</span>  Rust on the Rocks</h2>
+<a class="header-anchor" href="#0--rust-on-the-rocks"></a><span class="el">0:</span>  Rust on the Rocks</h2>
 
 <p>You can find a lot of discussions online on why Rust is great - it’s
 <a href="https://github.com/rust-lang/regex/blob/master/src/exec.rs">beautiful</a>,
@@ -73,7 +73,7 @@ interoperability with almost all modern languages.</p>
 <p>What’s the advantage of Rust for this purpose over, say, C or C++?</p>
 
 <ol>
-  <li>C - An oldie and a goldie, C allows almost any language out there to bind to it. The problem is C has no real package manager (outside of maybe <code class="highlighter-rouge">clib</code>), and many programmers prefer more feature-full, quickly incremented languages these days.</li>
+  <li>C - An oldie and a goldie, C allows almost any language out there to bind to it. The problem is C has no real package manager (outside of maybe <code class="language-plaintext highlighter-rouge">clib</code>), and many programmers prefer more feature-full, quickly incremented languages these days.</li>
   <li>C++ - The <a href="https://en.wikipedia.org/wiki/Lithium_aluminium_hydride#Properties.2C_structure.2C_preparation">LAH</a> of programming languages, C++ is fast and efficient, if not a little violent. The problem is C++ has <a href="https://softwareengineering.stackexchange.com/questions/281882/why-does-c-provide-language-bindings-where-c-falls-short">almost-nonexistent</a> <a href="https://users.rust-lang.org/t/any-updates-on-calling-c-from-rust/10257">support for</a> <a href="https://github.com/crystal-lang/crystal/issues/3098">bindings</a>.</li>
   <li>Rust - Though it’s a newbie, Rust is hella fast, beautiful, and <a href="https://insights.stackoverflow.com/survey/2017#technology-most-loved-dreaded-and-wanted-languages">loved by developers</a>. It rivals C/C++ in almost every way; most importantly for this discussion, it has a <a href="https://doc.rust-lang.org/book/first-edition/ffi.html">C ABI</a>, meaning it can be called from every language that can also call C.</li>
 </ol>
@@ -83,7 +83,7 @@ is a great option for developing safe applications that need to be efficient
 and easily integrable with applications written in other languages.</p>
 
 <h2 id="1--creating-an-app">
-<a class="header-anchor" href="#1--creating-an-app">#</a><span class="el">1:</span>  Creating an App</h2>
+<a class="header-anchor" href="#1--creating-an-app"></a><span class="el">1:</span>  Creating an App</h2>
 
 <p>Much of the work I do is done in <a href="https://crystal-lang.org">Crystal</a>, a compiled
 language with Ruby-like syntax.
@@ -101,7 +101,7 @@ to integrate with Rust.</span>.</p>
 
 <p><span class="newthought">Imagine</span>  we want to create a variable greeting function,</p>
 
-<p><code class="highlighter-rouge">hello(name) -&gt; "Hello, #{name}!"</code></p>
+<p><code class="language-plaintext highlighter-rouge">hello(name) -&gt; "Hello, #{name}!"</code></p>
 
 <p>Luckily, this is only 3 lines of Rust.</p>
 
@@ -109,13 +109,13 @@ to integrate with Rust.</span>.</p>
 <script src="https://gist.github.com/7bd12df2567ba085b368a250d07af458.js"> </script>
 
 <p>But this function, as is, cannot be read by other languages when compiled. For
-that, the function must be extended with a C interface, which requires the <code class="highlighter-rouge">libc</code>
+that, the function must be extended with a C interface, which requires the <code class="language-plaintext highlighter-rouge">libc</code>
 crate.</p>
 
-<p><span class="note"><label for="what2do" class="margin-toggle">⊕</label></span><input type="checkbox" id="what2do" class="margin-toggle"><span class="marginnote">All that must be done is to include <code class="highlighter-rouge">libc</code>, create
+<p><span class="note"><label for="what2do" class="margin-toggle">⊕</label></span><input type="checkbox" id="what2do" class="margin-toggle"><span class="marginnote">All that must be done is to include <code class="language-plaintext highlighter-rouge">libc</code>, create
 an function definition along the C ABI, and wrap the function with C types.<br><br></span></p>
 
-<p><span class="note"><label for="why-ptr" class="margin-toggle">⊕</label></span><input type="checkbox" id="why-ptr" class="margin-toggle"><span class="marginnote">Observe that a <code class="highlighter-rouge">c_char</code> pointer is used for passing
+<p><span class="note"><label for="why-ptr" class="margin-toggle">⊕</label></span><input type="checkbox" id="why-ptr" class="margin-toggle"><span class="marginnote">Observe that a <code class="language-plaintext highlighter-rouge">c_char</code> pointer is used for passing
 strings - this is because Rust strings are
 <a href="https://doc.rust-lang.org/book/first-edition/strings.html">different</a>
 from those of other languages.</span></p>
@@ -123,7 +123,7 @@ from those of other languages.</span></p>
 <noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/d90ff4e2920ba59aa562d870f5042913.js"> </script>
 
-<p>In <code class="highlighter-rouge">Cargo.toml</code>, specify the build to be a dynamic library so it can be accessed
+<p>In <code class="language-plaintext highlighter-rouge">Cargo.toml</code>, specify the build to be a dynamic library so it can be accessed
 by other processes.</p>
 
 <noscript><pre>400: Invalid request</pre></noscript>
@@ -132,16 +132,16 @@ by other processes.</p>
 <p>And now,</p>
 
 <h2 id="2--bind-the-library">
-<a class="header-anchor" href="#2--bind-the-library">#</a><span class="el">2:</span>  Bind the Library</h2>
+<a class="header-anchor" href="#2--bind-the-library"></a><span class="el">2:</span>  Bind the Library</h2>
 
-<p>Crystal allows linking to C functions and types via a <code class="highlighter-rouge">lib</code> declaration. And
+<p>Crystal allows linking to C functions and types via a <code class="language-plaintext highlighter-rouge">lib</code> declaration. And
 because Rust supports the C ABI, we can also link Rust functions!</p>
 
-<p>Suppose that <code class="highlighter-rouge">hello.rs</code> builds to <code class="highlighter-rouge">target/release/hello.dylib</code> relative to
+<p>Suppose that <code class="language-plaintext highlighter-rouge">hello.rs</code> builds to <code class="language-plaintext highlighter-rouge">target/release/hello.dylib</code> relative to
 the current path. Then we can bind the library in four lines:</p>
 
-<p><span class="note"><label for="stringnew" class="margin-toggle">⊕</label></span><input type="checkbox" id="stringnew" class="margin-toggle"><span class="marginnote">Note that <code class="highlighter-rouge">String.new</code> must be used to build the char
-pointer returned by <code class="highlighter-rouge">LibHello.hello</code></span></p>
+<p><span class="note"><label for="stringnew" class="margin-toggle">⊕</label></span><input type="checkbox" id="stringnew" class="margin-toggle"><span class="marginnote">Note that <code class="language-plaintext highlighter-rouge">String.new</code> must be used to build the char
+pointer returned by <code class="language-plaintext highlighter-rouge">LibHello.hello</code></span></p>
 
 <noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/2100aefe3e0190b3ef7658687334d34e.js"> </script>
@@ -197,10 +197,6 @@ pointer returned by <code class="highlighter-rouge">LibHello.hello</code></span>
     });
   }
 
-  function toggleShowHideNotesSwitch(isFullWidth) {
-    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     $$(".note").forEach(toggle =>
       toggle.addEventListener("click", () => {
@@ -209,8 +205,6 @@ pointer returned by <code class="highlighter-rouge">LibHello.hello</code></span>
         }
       })
     );
-    $(".showhide-notes").addEventListener("click", toggleFullWidth);
-    
   });
 </script>
 

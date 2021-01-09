@@ -9,7 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
 
 <title>
-   A Heuristic Approach to Calculating Geometric Medians 
+  
+    A Heuristic Approach to Calculating Geometric Medians
+  
 </title>
 <meta name="description" content="An efficient algorithm for finding distance-minimizing points." />
 
@@ -39,22 +41,20 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css"
+      href="/css/post.css?1610169723619250871"
     />
   </head>
 
   <style></style>
 
   <body>
-    <div class="container">
+    <div class="container post">
       <div class="panel">
         <div class="column-right a heuristic approach to calculating geometric medians-main">
           <section class="nav">
   <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <div class="showhide-notes">»</div>
-
-<h1 class="title">A Heuristic Approach to Calculating Geometric Medians</h1>
+ <h1 class="title">A Heuristic Approach to Calculating Geometric Medians</h1>
 <p class="byline">August 22, 2017</p>
 
 <article class="post">
@@ -74,7 +74,7 @@ uncomplicated, normalizing cost function.</span>, this problem may seem fairly
 straightforward. Let’s look at some approaches.</p>
 
 <h2 id="0---q--as-the-median">
-<a class="header-anchor" href="#0---q--as-the-median">#</a><span class="el">0:</span>  <span>​<script type="math/tex"> Q </script></span> as the Median</h2>
+<a class="header-anchor" href="#0---q--as-the-median"></a><span class="el">0:</span>  <span>​<script type="math/tex"> Q </script></span> as the Median</h2>
 
 <p>As it happens, the median of a set of points is guaranteed to be the
 cost-minimum center of those points <strong>only in <span>​<script type="math/tex"> \Bbb{R}^1 </script></span>
@@ -104,7 +104,7 @@ improvement grows higher, say to <span>​<script type="math/tex"> 5\% </script>
 or <span>​<script type="math/tex"> 20\% </script></span>? How do we derive this geometric median?</p>
 
 <h2 id="1--function-minimization">
-<a class="header-anchor" href="#1--function-minimization">#</a><span class="el">1:</span>  Function Minimization</h2>
+<a class="header-anchor" href="#1--function-minimization"></a><span class="el">1:</span>  Function Minimization</h2>
 
 <p>What if we attempt to minimize the net cost function? Say that for some point
 <span>​<script type="math/tex"> Q = (Q_x, Q_y) </script></span>, the net cost of traveling from a set of
@@ -138,7 +138,7 @@ Looks like it could be worth a <strong>lot</strong> of money <img class="emoji" 
 Don’t forget this process would have to be automated, too - <em>wow</em> that looks fun!</p>
 
 <h2 id="2--heuristic-approximation">
-<a class="header-anchor" href="#2--heuristic-approximation">#</a><span class="el">2:</span>  Heuristic Approximation</h2>
+<a class="header-anchor" href="#2--heuristic-approximation"></a><span class="el">2:</span>  Heuristic Approximation</h2>
 
 <p>You know the old saying:</p>
 
@@ -176,8 +176,8 @@ close to the center.</p>
 
 <p>This is a bit trickier. Of course, we can only travel in
 <span>​<script type="math/tex"> \Bbb{R}^2 </script></span>, so let’s just say we can go up, down,
-left, or right<span class="note"><label for="travel" class="margin-toggle">⊕</label></span><input type="checkbox" id="travel" class="margin-toggle"><span class="marginnote">Formally, <code class="highlighter-rouge">+y</code>, <code class="highlighter-rouge">-y</code>, <code class="highlighter-rouge">-x</code>, or
-<code class="highlighter-rouge">+x</code>. A more thorough traversal could also employ diagonal directions.</span>.
+left, or right<span class="note"><label for="travel" class="margin-toggle">⊕</label></span><input type="checkbox" id="travel" class="margin-toggle"><span class="marginnote">Formally, <code class="language-plaintext highlighter-rouge">+y</code>, <code class="language-plaintext highlighter-rouge">-y</code>, <code class="language-plaintext highlighter-rouge">-x</code>, or
+<code class="language-plaintext highlighter-rouge">+x</code>. A more thorough traversal could also employ diagonal directions.</span>.
 To find the best direction of descent, we travel to a candidate point in each
 direction and determine the one that most improves the cost.</p>
 
@@ -190,9 +190,9 @@ our search radius and repeating the descent mechanism again. And again, and agai
 until the approximation of the geometric center is within some acceptable
 margin of error <span>​<script type="math/tex"> \epsilon </script></span>.</p>
 
-<p>Alright, let’s code it!<span class="note"><label for="code-lang" class="margin-toggle">⊕</label></span><input type="checkbox" id="code-lang" class="margin-toggle"><span class="marginnote">These examples are in <code class="highlighter-rouge">Rust</code>,
+<p>Alright, let’s code it!<span class="note"><label for="code-lang" class="margin-toggle">⊕</label></span><input type="checkbox" id="code-lang" class="margin-toggle"><span class="marginnote">These examples are in <code class="language-plaintext highlighter-rouge">Rust</code>,
 but it should be easy to implement the logic in any language of your choice. The
-full code can be found <a href="/assets/code/geometric-center.rs">here</a>, with a <code class="highlighter-rouge">C</code>
+full code can be found <a href="/assets/code/geometric-center.rs">here</a>, with a <code class="language-plaintext highlighter-rouge">C</code>
 version <a href="https://github.com/ayazhafiz/meetHere/blob/master/src/native/point_set.c#L80">here</a>.
 </span> First, the boilerplate - a euclidean cost function.</p>
 
@@ -208,12 +208,12 @@ algorithm.</p>
 <p>Let’s <a href="https://play.rust-lang.org/?gist=d059b53ca16d74166623c5f20e0b1a5c&amp;version=stable">plug in</a>
 our three points from before, and…</p>
 
-<p><code class="highlighter-rouge">[0.21126302083333331, 0.21126302083333331]</code></p>
+<p><code class="language-plaintext highlighter-rouge">[0.21126302083333331, 0.21126302083333331]</code></p>
 
 <p>Awesome!</p>
 
 <h2 id="n--some-details">
-<a class="header-anchor" href="#n--some-details">#</a><span class="el">n:</span>  Some Details</h2>
+<a class="header-anchor" href="#n--some-details"></a><span class="el">n:</span>  Some Details</h2>
 
 <p>This function runs in <span>​<script type="math/tex"> O\left(\log n\right) </script></span> time<span class="note"><label for="better" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="better" class="margin-toggle"><span class="sidenote">A
 method for exact computation of the geometric center in near-linear is
@@ -270,10 +270,6 @@ minimum.</p>
     });
   }
 
-  function toggleShowHideNotesSwitch(isFullWidth) {
-    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     $$(".note").forEach(toggle =>
       toggle.addEventListener("click", () => {
@@ -282,8 +278,6 @@ minimum.</p>
         }
       })
     );
-    $(".showhide-notes").addEventListener("click", toggleFullWidth);
-    
   });
 </script>
 

@@ -9,7 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
 
 <title>
-   Type Folding and Options 
+  
+    Type Folding and Options
+  
 </title>
 <meta name="description" content="A case for algebraic structures in TypeScript/JavaScript." />
 
@@ -39,22 +41,20 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css"
+      href="/css/post.css?1610169723619250871"
     />
   </head>
 
   <style></style>
 
   <body>
-    <div class="container">
+    <div class="container post">
       <div class="panel">
         <div class="column-right type folding and options-main">
           <section class="nav">
   <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <div class="showhide-notes">»</div>
-
-<h1 class="title">Type Folding and Options</h1>
+ <h1 class="title">Type Folding and Options</h1>
 <p class="byline">October 3, 2019</p>
 
 <article class="post">
@@ -76,13 +76,13 @@ this to be a quick and (semi-)practical post, so I won’t explain what these wo
 mean; instead, here’s an approach that I find simplifies this code.</p>
 
 <h3 id="rex">
-<a class="header-anchor" href="#rex">#</a>rex</h3>
+<a class="header-anchor" href="#rex"></a>rex</h3>
 
 <p>First, Rust. Rust has an
-<a href="https://doc.rust-lang.org/stable/std/option/enum.Option.html"><code class="highlighter-rouge">Option</code></a> type
-that can be <code class="highlighter-rouge">Some</code>thing or <code class="highlighter-rouge">None</code>thing.
-<a href="https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.map"><code class="highlighter-rouge">map</code></a>ping
-an <code class="highlighter-rouge">Option</code> applies a predicate to a <code class="highlighter-rouge">Some</code> or propogates a <code class="highlighter-rouge">None</code>.</p>
+<a href="https://doc.rust-lang.org/stable/std/option/enum.Option.html"><code class="language-plaintext highlighter-rouge">Option</code></a> type
+that can be <code class="language-plaintext highlighter-rouge">Some</code>thing or <code class="language-plaintext highlighter-rouge">None</code>thing.
+<a href="https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.map"><code class="language-plaintext highlighter-rouge">map</code></a>ping
+an <code class="language-plaintext highlighter-rouge">Option</code> applies a predicate to a <code class="language-plaintext highlighter-rouge">Some</code> or propogates a <code class="language-plaintext highlighter-rouge">None</code>.</p>
 
 <p>If the TypeScript API had Rust bindings, I would imagine the code above to look
 something like</p>
@@ -94,27 +94,27 @@ something like</p>
 linearly makes it more readable to me.</p>
 
 <h3 id="tess">
-<a class="header-anchor" href="#tess">#</a>tess</h3>
+<a class="header-anchor" href="#tess"></a>tess</h3>
 
 <p>Okay, so how do we get this in TypeScript? Well, for a variety of good
 reasons<span class="note"><label for="ynot" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="ynot" class="margin-toggle"><span class="sidenote">Mainly because TypeScript is focused on supplementing JavaScript with types, not with more
 language features that aren’t in the standard.</span>,
-<code class="highlighter-rouge">Option</code>s<span class="note"><label for="noopt" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="noopt" class="margin-toggle"><span class="sidenote">TypeScript does
+<code class="language-plaintext highlighter-rouge">Option</code>s<span class="note"><label for="noopt" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="noopt" class="margin-toggle"><span class="sidenote">TypeScript does
 provide an <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement/Option">HTML Option</a>,
 which is distinctly different.</span> will probably never be in the standard
 library.
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining">Optional chaining</a>
 will help, but won’t solve type mapping.</p>
 
-<p>For domains where it is still useful to have <code class="highlighter-rouge">Option</code> (and other monad-family)
+<p>For domains where it is still useful to have <code class="language-plaintext highlighter-rouge">Option</code> (and other monad-family)
 types, there at least <a href="https://github.com/shogogg/ts-option">one library</a> that
-can be used. If a library is too much, a lightweight <code class="highlighter-rouge">Option</code> can be written
+can be used. If a library is too much, a lightweight <code class="language-plaintext highlighter-rouge">Option</code> can be written
 very quickly:</p>
 
 <noscript><pre>400: Invalid request</pre></noscript>
 <script src="https://gist.github.com/2a42ded6979c988875188f6133639f78.js"> </script>
 
-<p>Will the Angular Language Service use <code class="highlighter-rouge">Option</code>s? Probably not. But it’s a fun
+<p>Will the Angular Language Service use <code class="language-plaintext highlighter-rouge">Option</code>s? Probably not. But it’s a fun
 idea!</p>
 
 </article>
@@ -166,10 +166,6 @@ idea!</p>
     });
   }
 
-  function toggleShowHideNotesSwitch(isFullWidth) {
-    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     $$(".note").forEach(toggle =>
       toggle.addEventListener("click", () => {
@@ -178,8 +174,6 @@ idea!</p>
         }
       })
     );
-    $(".showhide-notes").addEventListener("click", toggleFullWidth);
-    
   });
 </script>
 

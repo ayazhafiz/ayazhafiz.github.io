@@ -9,7 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
 
 <title>
-   Spacing of Square Roots 
+  
+    Spacing of Square Roots
+  
 </title>
 <meta name="description" content="An analysis of the spacing between integer square roots." />
 
@@ -39,22 +41,20 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css"
+      href="/css/post.css?1610169723619250871"
     />
   </head>
 
   <style></style>
 
   <body>
-    <div class="container">
+    <div class="container post">
       <div class="panel">
         <div class="column-right spacing of square roots-main">
           <section class="nav">
   <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <div class="showhide-notes">»</div>
-
-<h1 class="title">Spacing of Square Roots</h1>
+ <h1 class="title">Spacing of Square Roots</h1>
 <p class="byline">November 25, 2019</p>
 
 <article class="post">
@@ -79,7 +79,7 @@ else is expected?” kind-of way, but that expectation isn’t very satisfying. 
 here are a few other ways of understanding the spacing.</p>
 
 <h3 id="1--from-the-spacing-of-squares">
-<a class="header-anchor" href="#1--from-the-spacing-of-squares">#</a><span class="el">1:</span>  From the Spacing of Squares</h3>
+<a class="header-anchor" href="#1--from-the-spacing-of-squares"></a><span class="el">1:</span>  From the Spacing of Squares</h3>
 
 <p>For $n \in \mathbb{N}$, between $n^2$ and $(n+1)^2$ are the natural numbers
 $n^2+1, n^2+2, \ldots, n^2 + 2n$. So between $n$ and $n+1$, there is a set of
@@ -95,7 +95,7 @@ of the monotonically increasing set $S$.</p>
 explanation.</p>
 
 <h3 id="2--from-tangents">
-<a class="header-anchor" href="#2--from-tangents">#</a><span class="el">2:</span>  From Tangents</h3>
+<a class="header-anchor" href="#2--from-tangents"></a><span class="el">2:</span>  From Tangents</h3>
 
 <p>Take a look at $f(x) = \sqrt{x}$:</p>
 
@@ -122,7 +122,7 @@ perfect squares.</p>
 
 <blockquote>
   <h4 id="3--a-remix">
-<a class="header-anchor" href="#3--a-remix">#</a><span class="el">3:</span>  A remix</h4>
+<a class="header-anchor" href="#3--a-remix"></a><span class="el">3:</span>  A remix</h4>
 
   <p>To understand the previous reasoning a different way, consider
 $f(x) = \sqrt{x + 1} - \sqrt{x}$.</p>
@@ -135,7 +135,7 @@ spacing – especially at large integer values.</p>
 </blockquote>
 
 <h2 id="an-application">
-<a class="header-anchor" href="#an-application">#</a>An Application</h2>
+<a class="header-anchor" href="#an-application"></a>An Application</h2>
 
 <p>A friend asked what practical purpose knowing the spacing of integer square
 roots serves. One useful application is in square root approximation - knowing
@@ -193,10 +193,6 @@ $n = {\lfloor{\sqrt{q}}\rfloor}$<span class="note"><label for="sqrt-example" cla
     });
   }
 
-  function toggleShowHideNotesSwitch(isFullWidth) {
-    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     $$(".note").forEach(toggle =>
       toggle.addEventListener("click", () => {
@@ -205,8 +201,6 @@ $n = {\lfloor{\sqrt{q}}\rfloor}$<span class="note"><label for="sqrt-example" cla
         }
       })
     );
-    $(".showhide-notes").addEventListener("click", toggleFullWidth);
-    
   });
 </script>
 

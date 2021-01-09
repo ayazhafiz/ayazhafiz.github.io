@@ -9,7 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
 
 <title>
-   The Case of the Missing Alcohol Proton 
+  
+    The Case of the Missing Alcohol Proton
+  
 </title>
 <meta name="description" content="Debugging NMR spectra." />
 
@@ -39,22 +41,20 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css"
+      href="/css/post.css?1610169723619250871"
     />
   </head>
 
   <style></style>
 
   <body>
-    <div class="container">
+    <div class="container post">
       <div class="panel">
         <div class="column-right the case of the missing alcohol proton-main">
           <section class="nav">
   <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <div class="showhide-notes">»</div>
-
-<h1 class="title">The Case of the Missing Alcohol Proton</h1>
+ <h1 class="title">The Case of the Missing Alcohol Proton</h1>
 <p class="byline">February 27, 2018</p>
 
 <article class="post">
@@ -67,7 +67,7 @@ examined my experimental data - where I expected an alcohol proton in my NMR,
 there was none to be found!</p>
 
 <h2 id="h--the-experiment">
-<a class="header-anchor" href="#h--the-experiment">#</a><span class="el">H:</span>  The Experiment</h2>
+<a class="header-anchor" href="#h--the-experiment"></a><span class="el">H:</span>  The Experiment</h2>
 
 <p>The oxidation was performed via fractional distillation, with 2-butanone
 expected to distill in the 77-85°C range. I used 2.5mL butanol as my limiting
@@ -91,17 +91,17 @@ still have to purify my product and collecting a melting point.</p>
 <p>I cleaned up and headed out, forgetting to retract my bad NMR sample.</p>
 
 <h2 id="he--the-data">
-<a class="header-anchor" href="#he--the-data">#</a><span class="el">He:</span>  The Data</h2>
+<a class="header-anchor" href="#he--the-data"></a><span class="el">He:</span>  The Data</h2>
 
 <p>A couple days later, I received the NMR spectra for my submitted product, which
 I knew was actually 2-butanol. And that’s when it got interesting.</p>
 
 <figure class="fullwidth"><img src="/assets/img/nmr-2-butanol.png"><figcaption><code>1H NMR (400 MHz, CDCl3) δ ppm:</code><br><code>2.45 (t, 2H), 2.14 (s, 3H), 1.70 (s, 1H), 1.06(d, 3H)</code></figcaption></figure>
 <p><br>
-Do you see it? Almost every hydrogen is accounted for - the signals at <code class="highlighter-rouge">2.14</code>ppm
-and <code class="highlighter-rouge">1.06</code>ppm correspond to the molecule’s methyl groups, at <code class="highlighter-rouge">1.70</code>ppm is the hydrogen adjacent
+Do you see it? Almost every hydrogen is accounted for - the signals at <code class="language-plaintext highlighter-rouge">2.14</code>ppm
+and <code class="language-plaintext highlighter-rouge">1.06</code>ppm correspond to the molecule’s methyl groups, at <code class="language-plaintext highlighter-rouge">1.70</code>ppm is the hydrogen adjacent
 the alcohol<span class="note"><label for="upfield" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="upfield" class="margin-toggle"><span class="sidenote">This proton should actually be further downfield.<br><br></span>,
-and at <code class="highlighter-rouge">2.45</code>ppm are the protons of the third carbon<span class="note"><label for="solvent" class="margin-toggle">⊕</label></span><input type="checkbox" id="solvent" class="margin-toggle"><span class="marginnote">The minute rise at <code>7.27</code> is the solvent, CDCl<sub>3</sub>.</span> -
+and at <code class="language-plaintext highlighter-rouge">2.45</code>ppm are the protons of the third carbon<span class="note"><label for="solvent" class="margin-toggle">⊕</label></span><input type="checkbox" id="solvent" class="margin-toggle"><span class="marginnote">The minute rise at <code>7.27</code> is the solvent, CDCl<sub>3</sub>.</span> -
 but the alcohol proton is missing!</p>
 
 <p>So where did it go? An argument could be made that the NMR sample was
@@ -112,7 +112,7 @@ presence<label for="goodnmr" class="margin-toggle">⊕</label><input type="check
 <p>In fact, there is a far more interesting solution this puzzle.</p>
 
 <h2 id="li--hydrogen-bonding-and--oh-shifts">
-<a class="header-anchor" href="#li--hydrogen-bonding-and--oh-shifts">#</a><span class="el">Li:</span>  Hydrogen Bonding and -OH Shifts</h2>
+<a class="header-anchor" href="#li--hydrogen-bonding-and--oh-shifts"></a><span class="el">Li:</span>  Hydrogen Bonding and -OH Shifts</h2>
 
 <p>The alcohol group of 2-butanol is susceptible to hydrogen bonding, but
 hydrogen bonds are dynamic and constantly changing. This produces a fairly large
@@ -122,7 +122,7 @@ extends to most functional groups exhibiting hydrogen or other dynamic
 bonding, including amines.</span> (roughly between 2 and 5 ppm).</p>
 
 <p>It may seems crazy, but this suggests that the alcohol proton is really just
-hidden amongst the doublet or triplet at <code class="highlighter-rouge">2.45</code>ppm and <code class="highlighter-rouge">2.14</code>ppm, respectively.
+hidden amongst the doublet or triplet at <code class="language-plaintext highlighter-rouge">2.45</code>ppm and <code class="language-plaintext highlighter-rouge">2.14</code>ppm, respectively.
 At least, that’s my best theory<span class="note"><label for="better" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="better" class="margin-toggle"><span class="sidenote">If you know of a better
 one, please <a href="mailto:ayaz.hafiz.1@gmail.com?subject=A%20theory%20for%20the%20missing%20alcohol">let me know</a>!</span>,
 and it absolutely blows my mind.</p>
@@ -176,10 +176,6 @@ and it absolutely blows my mind.</p>
     });
   }
 
-  function toggleShowHideNotesSwitch(isFullWidth) {
-    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     $$(".note").forEach(toggle =>
       toggle.addEventListener("click", () => {
@@ -188,8 +184,6 @@ and it absolutely blows my mind.</p>
         }
       })
     );
-    $(".showhide-notes").addEventListener("click", toggleFullWidth);
-    
   });
 </script>
 

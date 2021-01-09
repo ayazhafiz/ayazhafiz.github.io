@@ -9,7 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
 
 <title>
-   Analog Algorithms 
+  
+    Analog Algorithms
+  
 </title>
 <meta name="description" content="An analysis of analog algorithms, and the proposition of an unserious, novel one." />
 
@@ -39,22 +41,20 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css"
+      href="/css/post.css?1610169723619250871"
     />
   </head>
 
   <style></style>
 
   <body>
-    <div class="container">
+    <div class="container post">
       <div class="panel">
         <div class="column-right analog algorithms-main">
           <section class="nav">
   <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <div class="showhide-notes">»</div>
-
-<h1 class="title">Analog Algorithms</h1>
+ <h1 class="title">Analog Algorithms</h1>
 <p class="byline">December 30, 2019</p>
 
 <article class="post">
@@ -66,7 +66,7 @@ linear time<span class="note"><label for="Turing-linear" class="margin-toggle si
 
 <blockquote>
   <h4 id="algorithm-spaghetti-sort">
-<a class="header-anchor" href="#algorithm-spaghetti-sort">#</a>Algorithm <a href="https://en.wikipedia.org/wiki/Spaghetti_sort">Spaghetti Sort</a>
+<a class="header-anchor" href="#algorithm-spaghetti-sort"></a>Algorithm <a href="https://en.wikipedia.org/wiki/Spaghetti_sort">Spaghetti Sort</a>
 </h4>
 
   <p>Given an unsorted set of $n$ rational numbers
@@ -106,7 +106,7 @@ NP-complete<span class="note"><label for="def-NP-complete" class="margin-toggle 
 
 <blockquote>
   <h4 id="algorithm-new-years-cliquer">
-<a class="header-anchor" href="#algorithm-new-years-cliquer">#</a>Algorithm New Year’s Cliquer</h4>
+<a class="header-anchor" href="#algorithm-new-years-cliquer"></a>Algorithm New Year’s Cliquer</h4>
 
   <p>Given an undirected graph $G$ with vertices $V = \{v_1, \ldots, v_n\}$ and
 edges $E = \{v_i \leftrightarrow v_j, \ldots\}$:</p>
@@ -187,10 +187,6 @@ great idea? Absolutely. Anyway, I wish you a fulfilling New Year!</p>
     });
   }
 
-  function toggleShowHideNotesSwitch(isFullWidth) {
-    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     $$(".note").forEach(toggle =>
       toggle.addEventListener("click", () => {
@@ -199,8 +195,6 @@ great idea? Absolutely. Anyway, I wish you a fulfilling New Year!</p>
         }
       })
     );
-    $(".showhide-notes").addEventListener("click", toggleFullWidth);
-    
   });
 </script>
 

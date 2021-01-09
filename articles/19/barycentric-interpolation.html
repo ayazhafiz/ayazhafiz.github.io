@@ -9,7 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
 
 <title>
-   Approximation With Interpolating Polynomials 
+  
+    Approximation With Interpolating Polynomials
+  
 </title>
 <meta name="description" content="Methods for generating polynomials approximating a set of points." />
 
@@ -39,27 +41,25 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css"
+      href="/css/post.css?1610169723619250871"
     />
   </head>
 
   <style></style>
 
   <body>
-    <div class="container">
+    <div class="container post">
       <div class="panel">
         <div class="column-right approximation with interpolating polynomials-main">
           <section class="nav">
   <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <div class="showhide-notes">»</div>
-
-<h1 class="title">Approximation With Interpolating Polynomials</h1>
+ <h1 class="title">Approximation With Interpolating Polynomials</h1>
 <p class="byline">November 15, 2019</p>
 
 <article class="post">
   <h2 id="lagrange-form">
-<a class="header-anchor" href="#lagrange-form">#</a>Lagrange Form</h2>
+<a class="header-anchor" href="#lagrange-form"></a>Lagrange Form</h2>
 
 <p>Say you want to find an function approximating a set of data points<span class="note"><label for="points" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="points" class="margin-toggle"><span class="sidenote">$(x_0, f_0), (x_1, f_1), \ldots, (x_n, f_n)$</span>. One way to do this is to find a
 polynomial $p_n \in \mathbb{P}_n$ satisfying the interpolation property</p>
@@ -108,7 +108,7 @@ here.
 </div>
 
 <h2 id="cost">
-<a class="header-anchor" href="#cost">#</a>Cost</h2>
+<a class="header-anchor" href="#cost"></a>Cost</h2>
 
 <p>The Lagrange form is not suitable for computation. Its construction requires massive
 multiplication and division, which can be catastrophic for floating point precision.
@@ -132,7 +132,7 @@ p_n(x) = \frac{\sum_{i=0}^n \frac{\omega_i}{x-x_i} * f_i}{\sum_{i=0}^n \frac{\om
 to be recomputed for subsequent evaluations of $p_n$.</p>
 
 <h2 id="attempt-1">
-<a class="header-anchor" href="#attempt-1">#</a>Attempt 1</h2>
+<a class="header-anchor" href="#attempt-1"></a>Attempt 1</h2>
 
 <p>Approximating $f(x) = \sin(4x\cos(8x))$ with various degrees of the Barycentric interpolant, using
 equidistant interpolating nodes, gives</p>
@@ -144,7 +144,7 @@ around the interval endpoints. Note that the magnitude of the error at the edges
 the approximation.</p>
 
 <h2 id="runge">
-<a class="header-anchor" href="#runge">#</a>Runge</h2>
+<a class="header-anchor" href="#runge"></a>Runge</h2>
 
 <p>This behavior is <a href="https://en.wikipedia.org/wiki/Runge%27s_phenomenon">Runge’s phenomenon</a>, and
 means that increasing the order of an approximating polynomial interpolant may not
@@ -160,7 +160,7 @@ exhibit exactly this kind of edge-heavy density, making them very useful for pol
 <figure><img src="/assets/img/barycentric_interpolation/chebyshev.png"><figcaption></figcaption></figure>
 
 <h2 id="convergence">
-<a class="header-anchor" href="#convergence">#</a>Convergence</h2>
+<a class="header-anchor" href="#convergence"></a>Convergence</h2>
 
 <p>Plotting the pointwise error of the Barycentric interpolant<span class="note"><label for="cheb-nodes" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="cheb-nodes" class="margin-toggle"><span class="sidenote">generated with Chebyshev nodes</span> approximating $f(x) = \sin(4x\cos(8x))$
 suggests the polynomial interpolation is convergent.</p>
@@ -170,7 +170,7 @@ suggests the polynomial interpolation is convergent.</p>
 <p>Inspection of the error
 $l^2$ norms<span class="note"><label for="norm" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="norm" class="margin-toggle"><span class="sidenote">Note that many other norms can be used for convergence analysis as well.</span> suggests more:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Order   L2 norm
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Order   L2 norm
 16      8.562880126489002
 32      0.4243100460236342
 64      5.324902188796007e-05
@@ -228,10 +228,6 @@ $l^2$ norms<span class="note"><label for="norm" class="margin-toggle sidenote-nu
     });
   }
 
-  function toggleShowHideNotesSwitch(isFullWidth) {
-    $(".showhide-notes").innerHTML = isFullWidth ? "&laquo;" : "&raquo;";
-  }
-
   document.addEventListener("DOMContentLoaded", () => {
     $$(".note").forEach(toggle =>
       toggle.addEventListener("click", () => {
@@ -240,8 +236,6 @@ $l^2$ norms<span class="note"><label for="norm" class="margin-toggle sidenote-nu
         }
       })
     );
-    $(".showhide-notes").addEventListener("click", toggleFullWidth);
-    
   });
 </script>
 
