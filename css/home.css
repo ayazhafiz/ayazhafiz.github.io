@@ -394,12 +394,6 @@ span.el {
   content: counter(sidenote-counter) ". ";
   top: 0; }
 
-li .sidenote,
-li .marginnote,
-blockquote .sidenote,
-blockquote .marginnote {
-  margin-right: -64%; }
-
 @media only screen and (max-width: 1300px) {
   .margin-toggle:checked + .sidenote,
   .margin-toggle:checked + .marginnote {
@@ -518,10 +512,14 @@ li[data-domain="musings"] {
 li[data-domain="chemistry"] {
   list-style: square; }
 
-.flex-space-between {
+.post-name-line {
   display: flex;
   justify-content: space-between; }
-  .flex-space-between .date {
+  .post-name-line .post-draft {
+    color: rgba(0, 0, 0, 0.5); }
+    .post-name-line .post-draft::before {
+      content: "[DRAFT] "; }
+  .post-name-line .date {
     flex-basis: 8em;
     text-align: right; }
 
