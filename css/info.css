@@ -55,8 +55,7 @@ h2 {
   font-size: 2.4rem; }
 
 h3 {
-  font-size: 1.7rem;
-  font-style: italic; }
+  font-size: 1.7rem; }
 
 a {
   font-weight: 400;
@@ -99,7 +98,7 @@ h6 {
       content: "#"; }
 
 a.header-anchor {
-  bottom: 0;
+  top: 0;
   color: #777777;
   display: none;
   font-style: normal;

@@ -1,0 +1,1040 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+
+<title>
+  
+    A Simple Language With Flow Typing
+  
+</title>
+<meta name="description" content="We discuss a simple language and type system that provides for flow typing with records and union types. We also present an extension that generalizes to near-arbitrary narrowing of types at the expense of greater runtime costs." />
+
+<link
+  rel="canonical"
+  href="/articles/21/lang-narrow"
+/>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+></script>
+
+
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/post.css?1611261509061241929"
+    />
+  </head>
+
+  <style></style>
+
+  <body>
+    <div class="container post">
+      <div class="panel">
+        <div class="column-right a simple language with flow typing-main">
+          <section class="nav">
+  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+</section>
+ <h1 class="title">A Simple Language With Flow Typing</h1>
+<p class="byline">January 20, 2021</p>
+
+<article class="post">
+  <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h2">
+<a href="#motivation">Motivation</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#the-merits-of-flow-typing">The merits of flow typing</a></li>
+<li class="toc-entry toc-h3">
+<a href="#the-merits-of-our-union-types-compared-to-adts">The merits of our union types compared to ADTs</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#the-disadvantages-of-our-union-types-compared-to-adts">The disadvantages of our union types compared to ADTs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#notation">Notation</a></li>
+<li class="toc-entry toc-h2">
+<a href="#lang_narrow">lang_narrow</a>
+<ul>
+<li class="toc-entry toc-h3">
+<a href="#basic-types-and-their-rules">Basic types and their rules</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#record-types">Record types</a></li>
+<li class="toc-entry toc-h4"><a href="#union-types">Union types</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3">
+<a href="#the-narrowed-type">The Narrowed type</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#interaction-with-branching-expressions">Interaction with branching expressions</a></li>
+<li class="toc-entry toc-h4"><a href="#the-is-narrowing-expression">The is narrowing expression</a></li>
+<li class="toc-entry toc-h4"><a href="#the-in-narrowing-expression">The in narrowing expression</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#a-runtime-implementation">A runtime implementation</a></li>
+<li class="toc-entry toc-h3"><a href="#performance-concerns-and-what-to-do-about-them">Performance concerns, and what to do about them</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2">
+<a href="#lang_extends">lang_extends</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#performance-concerns-and-what-to-do-about-them-1">Performance concerns, and what to do about them</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#going-further-an-algorithm-for-narrowed-contexts-in-imperative-programs">Going further: an algorithm for narrowed contexts in imperative programs</a></li>
+<li class="toc-entry toc-h2"><a href="#summary">Summary</a></li>
+</ul>
+<h2 id="introduction">
+<a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#introduction"></a>Introduction</h2>
+
+<blockquote>
+  <p>The full source code for the language described here is available at
+<a href="https://github.com/ayazhafiz/lang_narrow">gh:ayazhafiz/lang_narrow</a>.</p>
+</blockquote>
+
+<p>In this cc, we will formulate <a href="#lang_narrow"><code class="language-plaintext highlighter-rouge">lang_narrow</code></a>, a language that supports flow typing
+with record and union types<span class="note"><label for="union" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="union" class="margin-toggle"><span class="sidenote">Union types are also known as sum types.</span>. Flow
+typing empowers our language’s type system to structurally narrow values’ types
+at branches in a program’s control flow. To gain an intuition for what this means, let’s take a look at a
+simple example:<span class="note"><label for="ts" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="ts" class="margin-toggle"><span class="sidenote">If you are familiar with the TypeScript type system, our language’s semantics will feel very similar.</span></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn defaultNat(): nat {
+  1729
+}
+
+fn readNat(n: nat|string): nat {
+  if n is nat
+     then n             // n is nat
+     else defaultNat()  // n is string
+}
+
+fn narrowBToNat(p: nat|{a: bool, b: nat}|{b: string, c: nat}): nat {
+  if b in p
+     then readNat(p.b)  // p is {a: bool, b: nat}|{b: string, c: nat}
+     else p             // p is nat
+}
+
+// narrowBToNat(10) // =&gt; 10
+// narrowBToNat({a: true, b: 20}) // =&gt; 20
+// narrowBToNat({b: "not a nat" , c: 9}) // =&gt; 1729
+</code></pre></div></div>
+
+<p>The union type <code class="language-plaintext highlighter-rouge">T|U</code> denotes a type that is either <code class="language-plaintext highlighter-rouge">T</code> or <code class="language-plaintext highlighter-rouge">U</code>, and the
+<code class="language-plaintext highlighter-rouge">is</code> and <code class="language-plaintext highlighter-rouge">in</code> expressions introduce a condition that constrains a union type to
+a subtype in either branch. Hopefully it’s easy to get an idea of what is
+going; later, we’ll define the language and its constructs more formally.</p>
+
+<p>Even superficially, it is clear that our use of “union types” here is somewhat different from the
+tagged union <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">algebraic data types</a>
+(ADTs) present in Haskell (via <code class="language-plaintext highlighter-rouge">data</code>), OCaml (via
+<code class="language-plaintext highlighter-rouge">type</code>), or Rust (via <code class="language-plaintext highlighter-rouge">enum</code>). Our union types are structural rather than
+nominal, and the variants of our union types are types in of themselves, rather
+than simply tag names (or constructors). However, they are still tagged unions
+in the sense that the the variants of the union are named by their types. As
+mentioned, we’ll give a proper definition our union types later on.</p>
+
+<h2 id="motivation">
+<a class="anchor" href="#motivation" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#motivation"></a>Motivation</h2>
+
+<p>Before we delve into formalizations, it may be helpful give some motivation for why we might want to
+explore <code class="language-plaintext highlighter-rouge">lang_narrow</code>. After all, why not use ADTs in place of the kinds
+of unions we have here, and why would flow typing be useful when
+we can pattern match on data constructors? I will give two reasons, though
+there may be more.</p>
+
+<h3 id="the-merits-of-flow-typing">
+<a class="anchor" href="#the-merits-of-flow-typing" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-merits-of-flow-typing"></a>The merits of flow typing</h3>
+
+<p>In languages with ADTs, but without flow typing, we cannot employ the type system
+to constrain the variants of an ADT based on invariants in a program control
+flow. For example, consider some code like</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">send_recv</span><span class="p">(</span><span class="n">req</span><span class="p">:</span> <span class="n">Request</span><span class="p">):</span> <span class="n">Data</span> <span class="p">{</span>
+   <span class="k">const</span> <span class="n">resp</span> <span class="o">=</span> <span class="nf">send</span><span class="p">(</span><span class="n">req</span><span class="p">);</span>
+   <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="nn">Status</span><span class="p">::</span><span class="nb">Ok</span><span class="p">)</span> <span class="o">=</span> <span class="n">resp</span><span class="py">.status</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">resp</span><span class="py">.data</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="k">let</span> <span class="n">req</span> <span class="o">=</span> <span class="nf">expensive_refresh_request</span><span class="p">(</span><span class="n">req</span><span class="p">);</span>
+   <span class="k">let</span> <span class="n">req</span> <span class="o">=</span> <span class="nf">expensive_validate_request</span><span class="p">(</span><span class="n">req</span><span class="p">);</span>
+   <span class="k">match</span> <span class="n">resp</span><span class="py">.status</span> <span class="p">{</span>
+      <span class="nn">Status</span><span class="p">::</span><span class="n">RateLimited</span> <span class="k">=&gt;</span> <span class="nf">send_recv_with_backoff</span><span class="p">(</span><span class="n">req</span><span class="p">),</span>
+      <span class="nn">Status</span><span class="p">::</span><span class="n">Timeout</span> <span class="k">=&gt;</span> <span class="nf">send_recv_with_proxy</span><span class="p">(</span><span class="n">req</span><span class="p">),</span>
+      <span class="nn">Status</span><span class="p">::</span><span class="nb">Ok</span> <span class="k">=&gt;</span> <span class="nd">unreachable!</span><span class="p">(),</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is a toy, but I hope it inspires a realistic situation. You have
+some happy path you want to return from quickly, and a more expensive path to
+go down otherwise. However, even though <code class="language-plaintext highlighter-rouge">Status::Ok</code> is not a variant that could
+constitute <code class="language-plaintext highlighter-rouge">resp.status</code> in the last <code class="language-plaintext highlighter-rouge">match</code> expression, the type system doesn’t
+know that; we have to inform it that this is so, somewhat unergonomically.</p>
+
+<p>With flow typing, the type system could remove <code class="language-plaintext highlighter-rouge">Status::Ok</code> from the possible
+variants of <code class="language-plaintext highlighter-rouge">resp.status</code> after the first branch.</p>
+
+<h3 id="the-merits-of-our-union-types-compared-to-adts">
+<a class="anchor" href="#the-merits-of-our-union-types-compared-to-adts" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-merits-of-our-union-types-compared-to-adts"></a>The merits of our union types compared to ADTs</h3>
+
+<p>ADTs are closed. This means that whenever we add a new variant to an ADT, we
+have to handle that variant everywhere the ADT is used.<span class="note"><label for="adt-haskell" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="adt-haskell" class="margin-toggle"><span class="sidenote">This is not entirely true in Haskell, as
+Haskell permits partial functions. But supposing that we would like our
+functions to be total, this holds.</span></p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">Animal</span> <span class="o">=</span> <span class="p">{</span> <span class="nf">Cat</span><span class="p">(</span><span class="n">Cat</span><span class="p">),</span> <span class="nf">Dog</span><span class="p">(</span><span class="n">Dog</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">get_sound</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Animal</span><span class="p">):</span> <span class="nb">String</span> <span class="p">{</span> <span class="cm">/* impl */</span> <span class="p">}</span>
+<span class="k">fn</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Animal</span><span class="p">):</span> <span class="nb">String</span> <span class="p">{</span> <span class="cm">/* impl */</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>If I want to handle getting just the name for another animal, say <code class="language-plaintext highlighter-rouge">Zebra</code>, I
+need to add <code class="language-plaintext highlighter-rouge">Zebra</code> to the <code class="language-plaintext highlighter-rouge">Animal</code> ADT and handle the case of <code class="language-plaintext highlighter-rouge">Zebra</code> when
+unpacking <code class="language-plaintext highlighter-rouge">Animal</code> in both <code class="language-plaintext highlighter-rouge">getSound</code> and <code class="language-plaintext highlighter-rouge">getName</code>. Of course, there are
+ways around this: we could split up the <code class="language-plaintext highlighter-rouge">Animal</code> ADT into separate types to
+be used for <code class="language-plaintext highlighter-rouge">getSound</code> and <code class="language-plaintext highlighter-rouge">getName</code>, but then there is no easy way to
+convert between the separate types without writing even more code (at least
+if the ADTs are treated nominally, as they generally are).</p>
+
+<p>On the other hand, with union types this is easy:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn getSound(a: Cat|Dog|Zebra): string { /* impl */ }
+fn getSound(a: Cat|Dog): string { /* impl */ }
+</code></pre></div></div>
+
+<p>Since the variants of the union are types in themselves, we can
+include and exclude them freely. Furthermore, <code class="language-plaintext highlighter-rouge">Cat|Dog</code> can be subsumed by
+<code class="language-plaintext highlighter-rouge">Cat|Dog|Zebra</code> immediately<span class="note"><label for="subsumed-nominal" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="subsumed-nominal" class="margin-toggle"><span class="sidenote">As long as union types
+are treated structurally, the subsumption would hold whether <code class="language-plaintext highlighter-rouge">Cat</code> and <code class="language-plaintext highlighter-rouge">Dog</code> are treated nominally or structurally.</span>;
+we will formalize this subtyping relationship when developing the language in
+the sections below.</p>
+
+<h4 id="the-disadvantages-of-our-union-types-compared-to-adts">
+<a class="anchor" href="#the-disadvantages-of-our-union-types-compared-to-adts" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-disadvantages-of-our-union-types-compared-to-adts"></a>The disadvantages of our union types compared to ADTs</h4>
+
+<p>I certainly don’t wish to claim life is greener on one side.
+There are several disadvantages of using union types in the manner we will
+develop in this language, including</p>
+
+<ul>
+  <li>
+<strong>A lack of uniform tag names:</strong> as we will see later, the <code class="language-plaintext highlighter-rouge">is</code> expression
+requires that we attach to
+every value used in such an expression a runtime type tag. This means
+that the compiler must either employ some non-trivial machinery to determine all reachable
+values to which it should attach type tags, or attach a
+type tag to all runtime values. The cost of this work only increases with the <code class="language-plaintext highlighter-rouge">extends</code>
+narrowing expression we introduce in <a href="#lang-extends"><code class="language-plaintext highlighter-rouge">lang_extends</code></a>, which
+effectively requires a
+typechecker in the program runtime. With ADTs, the costs associated with the
+addition of type tags can be made
+local and minimal – tags are constructed and read at syntax-directed sites, making it
+obvious to a compiler where they should be inserted.</li>
+  <li>
+<strong>Recursive types are more difficult to formalize:</strong> given that our type system is
+structural rather than nominal, it is more difficult to typecheck recursive
+type definitions<span class="note"><label for="equi" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="equi" class="margin-toggle"><span class="sidenote">It actually wouldn’t be terrible with the
+use of equirecursive types, but that’s beyond the scope of this cc.</span>. To
+keep things simple, our language has neither a notion of type variables nor
+type inference, so there is no way to introduce recursive types.</li>
+</ul>
+
+<p>All this is to say, if I were implementing flow typing in a production
+language, I would likely use ADTs and perform narrowing on data constructors. But open unions
+are easier to bookkeep than ADTs, so we prefer them for the purposes of our small
+language. It should be pretty straightforward to translate our approach to
+a language with closed, nominal ADTs.</p>
+
+<h2 id="notation">
+<a class="anchor" href="#notation" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#notation"></a>Notation</h2>
+
+<p><span>​<script type="math/tex">\Gamma</script></span> signifies a typing context, with some number of
+variable-to-type bindings. For example, <span>​<script type="math/tex">\Gamma =
+\left\{\text{t}:\text{T}\right\}</script></span> is a typing context wherein the variable
+$\text{t}$ has type $\text{T}$.</p>
+
+<p><span>​<script type="math/tex">\Gamma\vdash \text{t} : \text{T}</script></span> means that under the context $\Gamma$, the expression $\text{t}$ has type $\text{T}$.
+For example,</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align*}
+\left\{ \text{a}: {\tt nat}, \text{id}: {\tt (nat): nat} \right\} \vdash \text{id}\left(\text{a}\right) : {\tt nat}
+\end{align*}
+</script></div>
+<p>is sound.</p>
+
+<p>A type derivation rule $\text{R}$ has the form <span>​<script type="math/tex">\frac{\left[\text{condition}\right]*}{\text{result}}</script></span>
+and can be read as, “when the conditions of $\text{R}$ hold, the result holds.”
+As an example, here is a derivation rule stipulating that the
+addition of two expressions whose types under <span>​<script type="math/tex">\Gamma</script></span> are <code class="language-plaintext highlighter-rouge">nat</code>s
+yields a <code class="language-plaintext highlighter-rouge">nat</code>:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation*}
+\frac{\Gamma\vdash \text{a}: \text{$\tt{nat}$} \quad \Gamma\vdash \text{b}: \tt{nat}}
+{\Gamma\vdash \text{a} + \text{b} : \tt{nat}}
+\end{equation*}
+</script></div>
+
+<p>$\text{S} &lt;: \text{T} % &gt;$ states that $\text{S}$ is a subtype of $\text{T}$.
+$\require{cancel}\text{S} \cancel{&lt;:} \text{T} % &gt;$ states that $\text{S}$ is
+not a subtype of $\text{T}$.</p>
+
+<h2 id="lang_narrow">
+<a class="anchor" href="#lang_narrow" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#lang_narrow"></a><code class="language-plaintext highlighter-rouge">lang_narrow</code>
+</h2>
+
+<p>Having discussed some motivation and notation, we will now begin to formalize
+<code class="language-plaintext highlighter-rouge">lang_narrow</code>. We will derive its type system, discuss what is needed to
+provide for flow typing, and go over a runtime for <code class="language-plaintext highlighter-rouge">lang_narrow</code> when compiled to C.</p>
+
+<p>Although we will present most of the interesting typing rules necessary to glue
+the system together, I don’t attempt to cover all that would be
+necessary to prove the correctness of this language’s type system<span class="note"><label for="correctness" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="correctness" class="margin-toggle"><span class="sidenote">In fact, I am not sure the type system is sound and complete,
+though “intuitively” it may be seen to be.</span>.</p>
+
+<h3 id="basic-types-and-their-rules">
+<a class="anchor" href="#basic-types-and-their-rules" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#basic-types-and-their-rules"></a>Basic types and their rules</h3>
+
+<p>Our language contains the primitive types <code class="language-plaintext highlighter-rouge">nat</code> (a natural number), <code class="language-plaintext highlighter-rouge">string</code>,
+<code class="language-plaintext highlighter-rouge">bool</code>, <code class="language-plaintext highlighter-rouge">unknown</code> (the top type<span class="note"><label for="top" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="top" class="margin-toggle"><span class="sidenote">The top type is
+inhabited by all values; it is the supertype of all types.</span>), and <code class="language-plaintext highlighter-rouge">never</code>
+(the bottom type<span class="note"><label for="bottom" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="bottom" class="margin-toggle"><span class="sidenote">The bottom type is inhabited by no values; it is the
+subtype of all types.</span>).</p>
+
+<p><code class="language-plaintext highlighter-rouge">lang_narrow</code> supports functions and types them; for example,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn add(a: nat, b: nat): nat { /* impl */ }
+</code></pre></div></div>
+
+<p>has the type <code class="language-plaintext highlighter-rouge">(nat, nat): nat</code>. However, this syntactic representation
+of function types is not admitted by the <a href="https://github.com/ayazhafiz/lang_narrow/blob/base/src/parser.mlyhttps://github.com/ayazhafiz/lang_narrow/blob/base/src/parser.mly">language front-end</a>;
+that is, no value
+can be explicitly typed as a function. Since all parameters must be typed by the user,
+this restriction effectively means that there are no higher-order functions in
+our language. Adding language support for higher-order functions would be
+straightforward (support for type influencing less so<span class="note"><label for="subtype-inference" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="subtype-inference" class="margin-toggle"><span class="sidenote">Historically, type inference in the presence of subtypes has presented serious
+implementation difficulties. In general, an efficient implementation of such
+systems requires careful design of a language with syntax-directed typing rules.
+For efficient implementations, see <a href="https://hal.inria.fr/inria-00073205/document">Pottier’s 1998 thesis</a>
+and <a href="https://www.cs.tufts.edu/~nr/cs257/archive/stephen-dolan/thesis.pdf">Dolan’s 2017 thesis</a>. Dolan’s
+thesis solves the even larger problem of type inference in the presence of subtyping and
+polymorphism by treating types foremost as an algebra. A simpler, yet just-as-powerful version of Dolan’s work is
+described in <a href="https://lptk.github.io/files/%5Bv1.8%5D%20simple-essence-algebraic-subtyping.pdf">Parreaux 2020</a>.
+Thanks to Ben Siraphob for introducing me to the latter two publications.</span>).</p>
+
+<h4 id="record-types">
+<a class="anchor" href="#record-types" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#record-types"></a>Record types</h4>
+
+<p>Our language supports records; <code class="language-plaintext highlighter-rouge">{a: 1, b: true}</code> is a record with fields <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code>, and has the type
+<code class="language-plaintext highlighter-rouge">{a: nat, b: bool}</code>. Records can be projected by field name; <code class="language-plaintext highlighter-rouge">{a: 1, b: true}.b</code>
+yields <code class="language-plaintext highlighter-rouge">true</code>. Here are the typing rules for record construction and
+projection<span class="note"><label for="record-union" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="record-union" class="margin-toggle"><span class="sidenote">After reading about <a href="#union-types">union types</a>, you may notice that neither $\ref{Record-Proj}$ nor any other rule
+permits the projection of a value of type <code class="language-plaintext highlighter-rouge">{a: nat, b: nat}|{b: string}</code> on the field <code class="language-plaintext highlighter-rouge">b</code>. As an exercise for you,
+suppose we would like such a projection to yield the type <code class="language-plaintext highlighter-rouge">nat|string</code> (in fact, the full <code class="language-plaintext highlighter-rouge">lang_narrow</code> type system does so). What
+modifications to $\ref{Record-Proj}$ must be made to support this? (You can also
+add additional rules, but doing so is not necessary).</span>:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Record-Ctor}\tag{Record-Ctor}
+\frac{\Gamma\vdash\text{t}_i:\text{T}_i \quad \forall i = 1, \dots, n}
+{\Gamma\vdash \left\{\text{f}_1: \text{t}_1, \dots, \text{f}_n: \text{t}_n\right\}
+:\left\{\text{f}_1: \text{T}_1, \dots, \text{f}_n: \text{T}_n\right\}}
+\end{equation}
+</script></div>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Record-Proj}\tag{Record-Proj}
+\frac{\Gamma\vdash\text{t}:\left\{\text{f}_1: \text{T}_1, \dots, \text{f}_n: \text{T}_n\right\}}
+{\Gamma\vdash\text{t}.\text{f}_i:\text{T}_i \quad i=1, \dots, n}
+\end{equation}
+</script></div>
+
+<p>We also define a subtyping rule for records:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Subtype-Record}\tag{Subtype-Record}
+\frac{
+\begin{gather*}
+\text{S}=\left\{ \text{f}_1: \text{S}_1, \dots, \text{f}_n: \text{S}_n \right\} \quad
+\text{T}=\left\{ \text{g}_1: \text{T}_1, \dots, \text{g}_m: \text{T}_m \right\} \\
+\forall i=1,\dots,m \;\; \exists j \text{ s.t. } \text{f}_j = \text{g}_i \text{ and } \text{S}_j <: \text{T}_i % >
+\end{gather*}
+}{\text{S} <: \text{T}} % >
+\end{equation}
+</script></div>
+
+<p>Notice that in the subtyping relation, the order of record fields does not
+matter;
+<span>​<script type="math/tex"> \left\{\text{c}: {\tt nat}, \text{b}: {\tt nat}, \text{a}: {\tt nat}\right\} \lt: \left\{\text{a}: {\tt nat}, \text{b}: {\tt nat}\right\} </script></span>
+holds.</p>
+
+<h4 id="union-types">
+<a class="anchor" href="#union-types" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#union-types"></a>Union types</h4>
+
+<p>A union type (also known as a sum type) is a type that may be inhabited by
+values of several different types. As an example, in our language union types
+are written like <code class="language-plaintext highlighter-rouge">{a: bool}|nat|string</code>, of which <code class="language-plaintext highlighter-rouge">{a: true}</code>, <code class="language-plaintext highlighter-rouge">1</code>, and <code class="language-plaintext highlighter-rouge">"hi"</code>
+are all valid inhabitants. In <code class="language-plaintext highlighter-rouge">lang_narrow</code>, variants of a union type <code class="language-plaintext highlighter-rouge">U</code> are
+subtypes of <code class="language-plaintext highlighter-rouge">U</code> and are tagged by their type name.</p>
+
+<p>All values of a type <code class="language-plaintext highlighter-rouge">T</code> are also of the singleton union type consisting of <code class="language-plaintext highlighter-rouge">T</code>;
+we make no distinction between these two notions. Unions types containing no
+type variants are equivalent to the <code class="language-plaintext highlighter-rouge">never</code> type; we make no distinction between
+these two either.</p>
+
+<p>Notice that it is
+impractical for us to deduce that a value of type <code class="language-plaintext highlighter-rouge">T</code> is of a union type that is a
+strict supertype of <code class="language-plaintext highlighter-rouge">T</code> without explicit annotations. For example, it is only
+sound to type the literal <code class="language-plaintext highlighter-rouge">1</code> as a <code class="language-plaintext highlighter-rouge">nat</code>, rather than <code class="language-plaintext highlighter-rouge">nat|string</code> or any other
+number of union types. However, we would also like to express the fact that a
+<code class="language-plaintext highlighter-rouge">nat</code> fits in a <code class="language-plaintext highlighter-rouge">nat|string</code>; for example</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn id(a: nat|string): nat|string { a }
+id(1)
+</code></pre></div></div>
+
+<p>should be well-typed. Thus, we have the following subtyping rule for unions:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Subtype-Union}\tag{Subtype-Union}
+\frac{
+\begin{gather*}
+\text{S}=\text{S}_1 ~|~ \dots ~|~ \text{S}_n \quad
+\text{T}=\text{T}_1 ~|~ \dots ~|~ \text{T}_m \\
+\forall i=1,\dots,n \;\; \exists \text{T}_j \text{ s.t. } \text{S}_i <: \text{T}_j
+\end{gather*}
+}{\text{S} <: \text{T}} % >
+\end{equation}
+</script></div>
+
+<p>As with <span>​<script type="math/tex">\ref{Subtype-Record}</script></span>, the order of union variants does
+not matter;
+<span>​<script type="math/tex">
+\text{nat}|\text{string} \lt: \text{string}|\text{bool}|\text{nat}
+</script></span>
+holds.</p>
+
+<p>There are also a few convenience rules we may want to introduce<span class="note"><label for="convenience" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="convenience" class="margin-toggle"><span class="sidenote">There are more than the two we present here; for example we could also have an
+“unfold” rule that makes <code class="language-plaintext highlighter-rouge">string|(bool|nat)</code> equivalent to <code class="language-plaintext highlighter-rouge">string|bool|nat</code>.</span>. For one,
+notice that the type <code class="language-plaintext highlighter-rouge">string|nat|string</code> is equivalent to <code class="language-plaintext highlighter-rouge">string|nat</code>.</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Union-dup}\tag{Union-dup}
+\frac{
+\begin{gather*}
+\text{T} = \text{T}_1 ~|~ \dots ~|~ \text{T}_i ~|~ \dots
+~|~ \text{T}_{j-1} ~|~ \text{T}_j ~|~ \text{T}_{j+1}
+~|~ \dots ~|~ \text{T}_n \\
+\text{T}_i = \text{T}_j
+\end{gather*}
+}{
+\text{T} = \text{T}_1 ~|~ \dots ~|~ \text{T}_i ~|~ \dots
+~|~ \text{T}_{j-1} ~|~ \text{T}_{j+1} ~|~ \dots ~|~ \text{T}_n
+}
+\end{equation}
+</script></div>
+
+<p>Furthermore, notice that <code class="language-plaintext highlighter-rouge">string|never</code> is equivalent to <code class="language-plaintext highlighter-rouge">string</code>, as <code class="language-plaintext highlighter-rouge">never</code> is
+inhabited by no values and therefore contributes nothing to the domain of the
+union type.</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Union-never}\tag{Union-never}
+\frac{
+\begin{gather*}
+\text{T} = \text{T}_1 ~|~ \dots
+~|~ \text{T}_{i-1} ~|~ \text{T}_i ~|~ \text{T}_{i+1}
+~|~ \dots ~|~ \text{T}_n \\
+\text{T}_i = \tt{never}
+\end{gather*}
+}{
+\text{T} = \text{T}_1 ~|~ \dots
+~|~ \text{T}_{i-1} ~|~ \text{T}_{i+1} ~|~ \dots ~|~ \text{T}_n
+}
+\end{equation}
+</script></div>
+
+<h3 id="the-narrowed-type">
+<a class="anchor" href="#the-narrowed-type" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-narrowed-type"></a>The <code class="language-plaintext highlighter-rouge">Narrowed</code> type</h3>
+
+<p>Next, let’s formalize the semantics of flow typing in <code class="language-plaintext highlighter-rouge">lang_narrow</code> and discuss
+what data structures we need to represent these semantics.</p>
+
+<p>As we saw in our initial example, the main idea of flow typing is to introduce a
+condition at branch sites that narrows a value of type <code class="language-plaintext highlighter-rouge">T</code> to a type <code class="language-plaintext highlighter-rouge">U</code> in
+one branch (let’s call this the left branch), and to the type of <code class="language-plaintext highlighter-rouge">T</code> “without”
+<code class="language-plaintext highlighter-rouge">U</code> in the other branch (let’s call this the right branch).
+In our language, we only provide <code class="language-plaintext highlighter-rouge">if</code> expressions for branching, for which this
+idea might look something like</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// suppose Γ = {a: T}
+if &lt;some check to see if a is a U&gt;
+  then ... // a is a subtype of U in this branch
+  else ... // a is a subtype of (T "without" U) in this branch
+</code></pre></div></div>
+
+<p>We’ll use a type constructor called <code class="language-plaintext highlighter-rouge">Narrowed</code> to encapsulate the relationship
+between an expression and its narrowed types in left and right branches. In the
+example above, the <code class="language-plaintext highlighter-rouge">&lt;some check&gt;</code> condition would yield the type
+<code class="language-plaintext highlighter-rouge">Narrowed⟨a, U, T-U⟩</code>, where <code class="language-plaintext highlighter-rouge">T-U</code> signifies a type inhabited by values that
+inhabit <code class="language-plaintext highlighter-rouge">T</code> but do not inhabit <code class="language-plaintext highlighter-rouge">U</code><span class="note"><label for="subtract" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="subtract" class="margin-toggle"><span class="sidenote">This is one
+interpretation of what we described as <code class="language-plaintext highlighter-rouge">T</code> “without” <code class="language-plaintext highlighter-rouge">U</code> above, but there are many
+others. We have to be careful though, because only a few interpretations can be
+made sound <img class="emoji" title=":slightly_smiling_face:" alt=":slightly_smiling_face:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f642.png" height="20" width="20">.</span>.</p>
+
+<p>We have two things to figure out regarding <code class="language-plaintext highlighter-rouge">Narrowed</code> types:</p>
+
+<ul>
+  <li>figure out how to construct them</li>
+  <li>figure out how they influence the types of branching expressions</li>
+</ul>
+
+<p>Let’s do the latter first.</p>
+
+<h4 id="interaction-with-branching-expressions">
+<a class="anchor" href="#interaction-with-branching-expressions" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#interaction-with-branching-expressions"></a>Interaction with branching expressions</h4>
+
+<p>Take a look at the derivation rule for an <code class="language-plaintext highlighter-rouge">if</code> expression with a boolean
+condition:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{If-bool}\tag{If-bool}
+\frac{
+\begin{gather*}
+\Gamma\vdash \text{c}:\text{bool} \\
+\Gamma\vdash \text{left}:\text{T} \\
+\Gamma\vdash \text{right}:\text{U}
+\end{gather*}
+}{
+\Gamma\vdash \text{$\tt{if}$ c $\tt{then}$ left $\tt{else}$ right} :
+\text{T} \vee \text{U}
+}
+\end{equation}
+</script></div>
+
+<p>For those unfamiliar, <span>​<script type="math/tex">\text{T} \vee \text{U}</script></span> is called the <strong>join</strong> of $\text{T}$ and $\text{U}$,
+and represents their least upper bound (or least common supertype). As a derivation
+rule,</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Join}\tag{Join}
+\frac{
+\begin{gather*}
+\text{T} <: \text{J} \quad \text{U} <: \text{J} \\ % >
+\forall \text{K} \text{ s.t. } \text{T} <: \text{K}, \text{U} <: \text{K} % >
+\implies \text{J} <: \text{K} % >
+\end{gather*}
+}{
+\text{T} \vee \text{U} = \text{J}
+}
+\end{equation}
+</script></div>
+
+<p>The only modification we need to make for the derivation rule of <code class="language-plaintext highlighter-rouge">if</code> with a
+<code class="language-plaintext highlighter-rouge">Narrowed</code> condition is how the narrowed expression should be typed in the left
+and right branches.</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\require{cancel}
+\begin{equation}\label{If-narrowed}\tag{If-narrowed}
+\frac{
+\begin{gather*}
+\text{t} : \text{T} \in \Gamma \\
+\Gamma\vdash \text{c} : \text{Narrowed}\langle \text{t}, \text{U}, \text{W}\rangle \\
+% TODO: why do i need this hack for never?
+\text{U} \ne \text{$\tt{never}$} \ne \text{W} \\
+\Gamma_{\bcancel{\text{t}}} = \Gamma \setminus \left\{\text{t : T}\right\} \\
+\Gamma_{\bcancel{\text{t}}}, \text{t} : \text{U} \vdash \text{left} : \text{L} \\
+\Gamma_{\bcancel{\text{t}}}, \text{t} : \text{W} \vdash \text{right} : \text{R}
+\end{gather*}
+}{
+\Gamma\vdash \text{$\tt{if}$ c $\tt{then}$ left $\tt{else}$ right} :
+\text{L} \vee \text{R}
+}
+\end{equation}
+</script></div>
+
+<p>First, we verify that the narrowed term <code class="language-plaintext highlighter-rouge">t</code> is in the typing context. If it
+is not (for example, if it is a literal) the expression would not be
+referenceable in either branch anyway; we assume this is a programming error.
+Next, we validate that neither narrowed type of <code class="language-plaintext highlighter-rouge">t</code> is <code class="language-plaintext highlighter-rouge">never</code>; if it were, the
+branch associated with that narrowed type would never be taken, and hence the
+branch is vacuous; we assume this also is a programming error.</p>
+
+<p>Then, we remove the binding for <code class="language-plaintext highlighter-rouge">t</code> from
+the typing context, determine the type of each branch with the addition of
+the relevant narrowed type of <code class="language-plaintext highlighter-rouge">t</code> to its context, and yield the type of the <code class="language-plaintext highlighter-rouge">if</code> expression as the
+join of both branches’ types. Notice that the context of the resulting type
+contains the unnarrowed type of <code class="language-plaintext highlighter-rouge">t</code>.</p>
+
+<p>The restrictions we have imposed, namely that <code class="language-plaintext highlighter-rouge">t</code> must be a variable
+and that neither narrowed type can evaluate to <code class="language-plaintext highlighter-rouge">never</code>, are not actually
+necessary for the soundness of the derivation rule. However, their inclusion
+helps catch programming mistakes, and the restriction against
+<code class="language-plaintext highlighter-rouge">never</code>-narrowed branches effectively makes <span>​<script type="math/tex">\ref{If-narrowed}</script></span>
+applicable only when <code class="language-plaintext highlighter-rouge">T</code> is a union type. This can simplify a typechecking
+implementation significantly.</p>
+
+<p>And that’s all for <code class="language-plaintext highlighter-rouge">Narrowed</code> types in branches. Now, onto how to construct
+<code class="language-plaintext highlighter-rouge">Narrowed</code> types!</p>
+
+<h4 id="the-is-narrowing-expression">
+<a class="anchor" href="#the-is-narrowing-expression" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-is-narrowing-expression"></a>The <code class="language-plaintext highlighter-rouge">is</code> narrowing expression</h4>
+
+<p>In our language, the <code class="language-plaintext highlighter-rouge">is</code> expression constructs a <code class="language-plaintext highlighter-rouge">Narrowed</code> type from an
+expression and a subtype of the expression type. For example, the expression</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// suppose Γ = {a: string|nat|bool}
+a is string|bool
+</code></pre></div></div>
+
+<p>has the type <code class="language-plaintext highlighter-rouge">Narrowed⟨a, string|bool, nat⟩</code>. We define the derivation rule for
+<code class="language-plaintext highlighter-rouge">is</code> expressions the following way:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Is}\tag{Is}
+\frac{
+\begin{gather*}
+\text{W} = \text{T} - \text{U} \\
+\end{gather*}
+}{
+\Gamma \vdash \text{t $\tt{is}$ T}: \text{Narrowed}\langle\text{t}, \text{U}, \text{W}\rangle
+}
+\end{equation}
+</script></div>
+
+<p>where the subtraction rule $\text{T} - \text{U}$ is given by</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Union-subtract}\tag{Union-subtract}
+\frac{
+\begin{gather*}
+\text{T} = \text{T}_1 ~|~ \dots ~|~ \text{T}_n \\
+\text{U} = \text{U}_1 ~|~ \dots ~|~ \text{U}_m \\
+\text{W} = \text{W}_1 ~|~ \dots ~|~ \text{W}_p \\
+\text{W } <: \text{T} \\ % >
+\bbox[border: 1px solid grey]{
+   \begin{gather*}
+   \forall i=1,\dots,n \text{ s.t. } \forall j=1,\dots,m \\
+   \text{T}_i \ne \text{U}_j \implies
+   \exists \text{W}_k = \text{T}_i
+   \end{gather*}
+}
+\end{gather*}
+}{
+\text{T} - \text{U} = \text{W}
+}
+\end{equation}
+</script></div>
+
+<p>Notice that <span>​<script type="math/tex">\ref{Union-subtract}</script></span> elides from <code class="language-plaintext highlighter-rouge">T</code> only those
+types that equivalent to a variant of <code class="language-plaintext highlighter-rouge">U</code> (up to permutation of record
+fields). For example, <code class="language-plaintext highlighter-rouge">{a: nat, b: bool} - {a: nat}</code> yields <code class="language-plaintext highlighter-rouge">{a: nat, b: bool}</code>,
+not <code class="language-plaintext highlighter-rouge">never</code>.</p>
+
+<p>If the restrictions of <span>​<script type="math/tex">\ref{Union-subtract}</script></span> seem a bit limiting or unnecessary, we will discuss a
+language that avoids them at the expense of greater runtime costs in <a href="#lang_extends"><code class="language-plaintext highlighter-rouge">lang_extends</code></a>.
+However, I suspect these restrictions are reasonable for most general-purpose programming,
+as it is always possible to refine a union type annotation with a type variant
+that one may later want to narrow.</p>
+
+<h4 id="the-in-narrowing-expression">
+<a class="anchor" href="#the-in-narrowing-expression" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-in-narrowing-expression"></a>The <code class="language-plaintext highlighter-rouge">in</code> narrowing expression</h4>
+
+<p>Consider the function</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn readBOrC(obj: {a: nat, b: nat}|{a: nat, c: nat}|{b: nat, d: nat}|{c: nat, d: nat}): nat {
+  if obj is {a: nat, b: nat}|{b: nat, d: nat}
+     then obj.b
+     else obj.c
+}
+</code></pre></div></div>
+
+<p>This works, but is a bit bulky; we don’t care that <code class="language-plaintext highlighter-rouge">obj</code> is a union of records
+possibly containing <code class="language-plaintext highlighter-rouge">a</code> or <code class="language-plaintext highlighter-rouge">d</code>, we just care whether or not it’s a subtype of
+<code class="language-plaintext highlighter-rouge">{b: nat}</code>. Because <span>​<script type="math/tex">\ref{Union-subtract}</script></span> excludes types by
+equivalence rather than subtyping relation, if we were to try <code class="language-plaintext highlighter-rouge">obj is {b: nat}</code>,
+the left narrowing type would be <code class="language-plaintext highlighter-rouge">never</code>. So to elegantly handle narrowing of
+records, we can reformulate <span>​<script type="math/tex">\ref{Union-subtract}</script></span> accordingly, as we do for <a href="#lang_extends"><code class="language-plaintext highlighter-rouge">lang_extends</code></a>, or introduce
+a special case for records, as we will do here with the <code class="language-plaintext highlighter-rouge">in</code> expression.</p>
+
+<p><code class="language-plaintext highlighter-rouge">in</code> takes a field name <code class="language-plaintext highlighter-rouge">f</code> and an expression of type <code class="language-plaintext highlighter-rouge">T</code>,
+constructing a <code class="language-plaintext highlighter-rouge">Narrowed</code> instance with subtypes of <code class="language-plaintext highlighter-rouge">T</code> that are records containing <code class="language-plaintext highlighter-rouge">f</code> on the left
+and all other subtypes of <code class="language-plaintext highlighter-rouge">T</code> on the right. For example,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// suppose: obj :: {a: nat, b: nat}|{a: nat, c: nat}|{b: nat, d: nat}|{c: nat, d: nat}
+b in obj
+</code></pre></div></div>
+
+<p>has the type</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Narrowed⟨obj, {a: nat, b: nat}|{b: nat, d: nat}, {a: nat, c: nat}|{c: nat, d: nat}⟩
+</code></pre></div></div>
+
+<p>We define the derivation rule for <code class="language-plaintext highlighter-rouge">in</code> expressions the following way:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\require{bbox}
+
+\begin{equation}\label{In}\tag{In}
+\frac{
+\begin{gather*}
+\Gamma\vdash \text{t} : \text{T}_1 ~|~ \dots ~|~ \text{T}_n \\
+\text{U} = \text{U}_1 ~|~ \dots ~|~ \text{U}_m \\
+\text{U } <: \text{T} \\ % >
+\bbox[border: 1px solid grey]{
+   \begin{gather*}
+   \forall i=1,\dots,n \text{ s.t. } \text{T}_i = \left\{\text{f}_1: \text{T}_{i1}, \dots, \text{f}_j : \text{T}_{ij} \right\} \\
+   \text{and } \exists \text{f}_k = \text{f} \implies \exists \text{U}_l = \text{T}_i
+   \end{gather*}
+} \\
+\text{W} = \text{T} - \text{U} \\
+\end{gather*}
+}{
+\Gamma \vdash \text{f $\tt{in}$ t}: \text{Narrowed}\langle\text{t}, \text{U}, \text{W}\rangle
+}
+\end{equation}
+</script></div>
+
+<p>Notice that the extraction of record types containing the field $\text{f}$ distributes over
+the union type $\text{T}$, rather than operating on the type as a whole. This is
+similar to the behavior of TypeScript’s <a href="https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types">distributed conditional types</a>.</p>
+
+<h3 id="a-runtime-implementation">
+<a class="anchor" href="#a-runtime-implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#a-runtime-implementation"></a>A runtime implementation</h3>
+
+<p>A <a href="https://github.com/ayazhafiz/lang_narrow/blob/base/src/typecheck.ml">typechecking implementation</a>
+of <code class="language-plaintext highlighter-rouge">lang_narrow</code> is a pretty straightforward encoding of the presented
+typing rules. What is more interesting is the implementation of expressions like
+<code class="language-plaintext highlighter-rouge">is</code> in the evaluation of a <code class="language-plaintext highlighter-rouge">lang_narrow</code> program, as these require auxiliary
+type information.</p>
+
+<p>Actually, if the language is <a href="https://github.com/ayazhafiz/lang_narrow/blob/base/src/eval.ml">interpreted</a>,
+evaluating type-dependent expressions is straightforward – we reduce the expression-to-be-checked to a
+value, invoke the typechecker, and get our result.</p>
+
+<p>But if the language is <a href="https://github.com/ayazhafiz/lang_narrow/blob/base/src/codegenC.ml">compiled</a>,
+we have a bit more work to do in encoding type tags and measuring type compatibility.
+In the rest of this section, we will discuss this work for <code class="language-plaintext highlighter-rouge">lang_narrow</code>
+programs compiled to C.</p>
+
+<p>A sufficiently advanced compiler could determine precisely which values are used
+in expressions that read type tags, and attach tags only to those. For the ease of
+implementation, we generate C code with all values having type tags.</p>
+
+<p>In our <a href="https://github.com/ayazhafiz/lang_narrow/blob/base/src/codegenC.ml">code generator</a>,
+we encode every value as an instance of a <code class="language-plaintext highlighter-rouge">tagged_any</code> struct.
+The struct includes a type tag that discerns a value’s true type to
+runtime functions, and <code class="language-plaintext highlighter-rouge">val</code> field that contains the raw, type-safe value.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">tagged_any</span> <span class="n">tagged_any</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">record</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">numFields</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">**</span> <span class="n">fields</span><span class="p">;</span>
+  <span class="n">tagged_any</span><span class="o">*</span> <span class="n">values</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">record</span><span class="p">;</span>
+<span class="k">union</span> <span class="n">any</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">nat</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">string</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">bool</span><span class="p">;</span>
+  <span class="n">record</span> <span class="n">record</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">any</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">tagged_any</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">tag</span><span class="p">;</span>
+  <span class="k">union</span> <span class="n">any</span> <span class="n">val</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>The most interesting runtime function using <code class="language-plaintext highlighter-rouge">tagged_any</code>s is the pseudo-polymorphic
+<code class="language-plaintext highlighter-rouge">print</code>:<span class="note"><label for="print" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="print" class="margin-toggle"><span class="sidenote"><code class="language-plaintext highlighter-rouge">_print</code> writes values without a newline, and is useful for recurring when
+printing a record. <code class="language-plaintext highlighter-rouge">print</code> is a user-facing entry point that terminates a printed
+value with a newline.</span></p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">_print</span><span class="p">(</span><span class="n">tagged_any</span> <span class="n">any</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">is</span><span class="p">(</span><span class="n">any</span><span class="p">,</span> <span class="n">NAT</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">any</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">nat</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">is</span><span class="p">(</span><span class="n">any</span><span class="p">,</span> <span class="n">STRING</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">any</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">string</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">is</span><span class="p">(</span><span class="n">any</span><span class="p">,</span> <span class="n">BOOL</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">any</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">bool</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="s">"true"</span> <span class="o">:</span> <span class="s">"false"</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">is</span><span class="p">(</span><span class="n">any</span><span class="p">,</span> <span class="n">RECORD</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">record</span> <span class="n">r</span> <span class="o">=</span> <span class="n">any</span><span class="p">.</span><span class="n">val</span><span class="p">.</span><span class="n">record</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"{"</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">.</span><span class="n">numFields</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"%s: "</span><span class="p">,</span> <span class="n">r</span><span class="p">.</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">_print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">r</span><span class="p">.</span><span class="n">numFields</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">", "</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"}"</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Runtime error: no matching tag %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">any</span><span class="p">.</span><span class="n">tag</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="n">tagged_any</span> <span class="n">any</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">_print</span><span class="p">(</span><span class="n">any</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Having encoded all values as <code class="language-plaintext highlighter-rouge">tagged_any</code>s, performing <code class="language-plaintext highlighter-rouge">is</code> and <code class="language-plaintext highlighter-rouge">in</code> checks
+becomes trivial. In the case of <code class="language-plaintext highlighter-rouge">is</code>, we take an array of type tags
+(constituting a union) and check if a value’s type tag is in that array. If we
+need to check a record, we verify that all field names coincide and
+recurse on checking corresponding field values. In the case of <code class="language-plaintext highlighter-rouge">in</code>, if a value is not a record the check is
+immediately false; otherwise, we walk the fields of the record and check if one
+corresponds with the predicated field.</p>
+
+<h3 id="performance-concerns-and-what-to-do-about-them">
+<a class="anchor" href="#performance-concerns-and-what-to-do-about-them" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#performance-concerns-and-what-to-do-about-them"></a>Performance concerns, and what to do about them</h3>
+
+<p>The introduction of type tags and runtime typecheckers introduces
+costs that may not be immediately obvious to users of the language, and are
+something that we would like to avoid. Type tags on their own aren’t
+so bad to deal with; since they are constant, one can inline them and the
+downstream C compiler will likely replace identical tags with a common
+reference to a static; if not, an interner can be added without much difficulty.</p>
+
+<p>On the other hand, the costs incurred by evaluating <code class="language-plaintext highlighter-rouge">is</code> expressions are harder
+to deal with, primarily because of the explosive cost of checking deeply nested
+records for equivalence.</p>
+
+<p>To avoid this, perhaps the best strategy is to employ flow typing
+in a language with nominal types, rather than the structural ones we have
+presented in this language. This way, checks for type equivalence are simply the
+comparison of two type names (or even better, two memory addresses).</p>
+
+<h2 id="lang_extends">
+<a class="anchor" href="#lang_extends" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#lang_extends"></a><code class="language-plaintext highlighter-rouge">lang_extends</code>
+</h2>
+
+<p>As mentioned earlier, it may appear that the restrictions imposed by <span>​<script type="math/tex">\ref{Is}</script></span> and <span>​<script type="math/tex">\ref{In}</script></span>
+are superfluous. In some sense they are; we can generalize over
+both with a rule that constructs a <code class="language-plaintext highlighter-rouge">Narrowed</code> type by testing against an
+arbitrary subtype of a union.
+Let’s direct such a rule with an expression called <code class="language-plaintext highlighter-rouge">extends</code>:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Extends}\tag{Extends}
+\frac{
+\begin{gather*}
+\Gamma\vdash \text{t} : \text{T} \\
+\text{W} = \text{T} \setminus \text{U}
+\end{gather*}
+}{
+\Gamma \vdash \text{t $\tt{extends}$ U}: \text{Narrowed}\langle\text{t}, \text{U}, \text{W}\rangle
+}
+\end{equation}
+</script></div>
+
+<p>We’ll define the exclusion <span>​<script type="math/tex">\text{T}\setminus\text{U}</script></span> the following
+way:</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{equation}\label{Union-exclude-ST}\tag{Union-exclude-ST}
+\frac{
+\begin{gather*}
+\text{T} = \text{T}_1 ~|~ \dots ~|~ \text{T}_n \\
+\text{U} = \text{U}_1 ~|~ \dots ~|~ \text{U}_m \\
+\text{U } <: \text{T} \\ % >
+\text{W} = \text{W}_1 ~|~ \dots ~|~ \text{W}_p \\
+\bbox[border: 1px solid grey]{
+   \begin{gather*}
+   \forall i=1,\dots,n \text{ s.t. } \forall j=1,\dots,m \\
+   \text{T}_i \cancel{<:} \text{U}_j \implies
+   \exists \text{W}_k = \text{T}_i % >
+   \end{gather*}
+}
+\end{gather*}
+}{
+\text{T}\setminus\text{U} = \text{W}
+}
+\end{equation}
+</script></div>
+
+<p>Now we can write the well-typed function</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn go(p: nat|bool|{a: nat, b: nat}|{b: nat, c: nat}): nat {
+  if p extends {b: nat}
+     then p.b
+     else if p extends bool
+          then if p then 1 else 0
+          else p
+}
+</code></pre></div></div>
+
+<p>using a single <code class="language-plaintext highlighter-rouge">extends</code> expression where we would have had to use a combination
+of <code class="language-plaintext highlighter-rouge">in</code> and <code class="language-plaintext highlighter-rouge">is</code> expressions in <code class="language-plaintext highlighter-rouge">lang_narrow</code>.</p>
+
+<h3 id="performance-concerns-and-what-to-do-about-them-1">
+<a class="anchor" href="#performance-concerns-and-what-to-do-about-them-1" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#performance-concerns-and-what-to-do-about-them-1"></a>Performance concerns, and what to do about them</h3>
+
+<p>Of course, the flexibility of <span>​<script type="math/tex">\ref{Extends}</script></span> does
+not come without its costs. Like <code class="language-plaintext highlighter-rouge">lang_narrow</code>, a <code class="language-plaintext highlighter-rouge">lang_extends</code> runtime needs
+to check type tags and read record fields, but the conditions of <span>​<script type="math/tex">\ref{Union-exclude-ST}</script></span>
+also suggests that the runtime needs to carry around a subtyping checker!</p>
+
+<p>Obviously, having both a compile-time and runtime subtyping checker is not ideal, and
+the runtime penalties can be severe especially in the presence of large union,
+record, or recursive types (if we had introduced them).</p>
+
+<p>There are several techniques to mitigate the runtime penalties; one approach may
+be to populate, at compile time, a table of type relations amongst all known
+types in the program, and perform subtyping queries by searching the table.
+Costs of searches can be further reduced by storing the type relations in a tree
+and making queries union-finds.</p>
+
+<p>My impression is that, in general, the power of a typing rule like <span>​<script type="math/tex">\ref{Extends}</script></span>
+is not worth the additional runtime complexity, cost, and code size its
+implementation must introduce.</p>
+
+<h2 id="going-further-an-algorithm-for-narrowed-contexts-in-imperative-programs">
+<a class="anchor" href="#going-further-an-algorithm-for-narrowed-contexts-in-imperative-programs" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#going-further-an-algorithm-for-narrowed-contexts-in-imperative-programs"></a>Going further: an algorithm for narrowed contexts in imperative programs</h2>
+
+<p>The implementation of typing contexts in <code class="language-plaintext highlighter-rouge">lang_narrow</code> (and <code class="language-plaintext highlighter-rouge">lang_extends</code>) is
+straightforward; since each program is one large
+continuation, we never end up “jumping out” of the control flow (and the typing
+context) we are currently in. Contrast this to an imperative version of
+<code class="language-plaintext highlighter-rouge">lang_narrow</code>, wherein we may write a program like</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn is_number_like(p: bool|{numberish: nat|string}|nat|string): bool {
+   if p is bool then {
+      return false;
+   }
+
+   var n: nat|string = if numberish in p then { // (1)
+      p.numberish
+   } else {
+      p
+   };
+
+   return if p is number then {
+      true // (2)
+   } else {
+      String.regex_matches(RE_NUMBER, p) // (3)
+   };
+}
+</code></pre></div></div>
+
+<p>At <code class="language-plaintext highlighter-rouge">(1)</code> we would like the typing context to associate <code class="language-plaintext highlighter-rouge">p: {numberish: nat|string}|nat|string</code>,
+at <code class="language-plaintext highlighter-rouge">(2)</code> associate <code class="language-plaintext highlighter-rouge">p: number</code>, and at <code class="language-plaintext highlighter-rouge">(3)</code> associate <code class="language-plaintext highlighter-rouge">p: string</code>.</p>
+
+<p>It may not be obvious how to design an efficient algorithm to update
+the typing context in a control flow with the presence of
+jumps (like that of the first branch, which immediately returns). But
+actually, it’s not so bad; I will give a quick sketch of a couple things
+you may want to consider, and leave you to fill out the algorithm if you are
+interested.</p>
+
+<ul>
+  <li>First, define what it means for the typing context when the program hits a
+local termination point (like a <code class="language-plaintext highlighter-rouge">return</code> statement, which jumps out of the local function);
+one idea is to then mark everything in the local context as uninhabited.</li>
+  <li>Keep track of the typing context after the completion of each statement in the
+program. For example, if a statement <code class="language-plaintext highlighter-rouge">I</code> is of the form <code class="language-plaintext highlighter-rouge">if Cond then L else R</code>,
+and the typing contexts of <code class="language-plaintext highlighter-rouge">L</code> and <code class="language-plaintext highlighter-rouge">R</code> as induced by <code class="language-plaintext highlighter-rouge">Cond</code> are $\Gamma_{\tt L}$ and $\Gamma_{\tt R}$,
+respectively, what are $\Gamma_{\text{post}({\tt L})}$ and $\Gamma_{\text{post}({\tt R})}$?
+What is the the typing context $\Gamma_{\text{post}({\tt I})}$ in relation to $\Gamma_{\text{post}({\tt L})}$ and $\Gamma_{\text{post}({\tt R})}$?</li>
+</ul>
+
+<h2 id="summary">
+<a class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#summary"></a>Summary</h2>
+
+<p>In this cc, we derived a simple language with support for structural type
+narrowing of record and union types via flow typing. Our language and its type system are small
+and intuitive enough to design and implement in an afternoon, but additional
+work not presented here is needed to formulate soundness and completeness of the
+type system.</p>
+
+<p>To learn more about flow typing, you may be interested in the <a href="https://en.wikipedia.org/wiki/Flow-sensitive_typing">Wikipedia entry</a> and
+<a href="https://ecs.wgtn.ac.nz/foswiki/pub/Main/TechnicalReportSeries/ECSTR12-20.pdf">Pearce’s 2012 paper</a> on
+a flow calculus with proofs of correctness.</p>
+
+<p>As always, thanks for reading. I hope you had fun, and that this cc inspires
+you to design more interesting type systems.</p>
+
+</article>
+
+<section class="footer">
+  
+  <a href="/articles/21/hot-code-reloading">« Hot Code Reloading, With Libc or in the Browser</a>
+  
+  <span><img class="emoji" title=":door:" alt=":door:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f6aa.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        \tt{>>=}\;\cong\;\tt{<*>}
+      </script></span>
+  </span>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+  });
+</script>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
