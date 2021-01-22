@@ -511,16 +511,17 @@ li[data-domain="musings"] {
 li[data-domain="chemistry"] {
   list-style: square; }
 
-.post-name-line {
+.flex-space-between {
   display: flex;
   justify-content: space-between; }
-  .post-name-line .post-draft {
-    color: rgba(0, 0, 0, 0.5); }
-    .post-name-line .post-draft::before {
-      content: "[DRAFT] "; }
-  .post-name-line .date {
-    flex-basis: 8em;
-    text-align: right; }
+
+.post-name-line .post-draft {
+  color: rgba(0, 0, 0, 0.5); }
+  .post-name-line .post-draft::before {
+    content: "[DRAFT] "; }
+.post-name-line .date {
+  flex-basis: 8em;
+  text-align: right; }
 
 .fly {
   -o-object-fit: contain;
