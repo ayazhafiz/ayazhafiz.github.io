@@ -1,4 +1,4 @@
-personal_ws-1.1 en 421 
+personal_ws-1.1 en 438 
 ABI
 ADT
 ADTs
@@ -6,6 +6,7 @@ AFields
 API
 APIs
 AST
+Aint
 Akibab's
 AllTheSues
 Angular's
@@ -29,6 +30,8 @@ Cond
 Ctor
 DOM
 DSL
+Dawg
+Dei
 Dolan's
 Epi
 FFI
@@ -36,15 +39,20 @@ GTTest
 GitHub
 Grande
 GreaterThan
+Hahaha
+Hahahaha
 HotReload
 HotReloadProgram
 Hypervalent
 IDEs
+Im
 Init
 InitArr
 IsTheSue
+Jamilah
 Kirov's
 Kythe
+LGBTQ
 LTTest
 LessThan
 LibHello
@@ -78,9 +86,11 @@ SueCheckFieldsGreater
 SueCheckFieldsLesser
 SuesCheckedWithNames
 SuesWithNames
+Sus
 TheSue
 TheSueChecked
 TheSueMatcher
+Theomatic
 ThoughtThoughts
 Trello
 Tup
@@ -157,6 +167,7 @@ covid
 cpp
 createElement
 ddeb
+de
 defaultNat
 dehydrogenase
 del
@@ -224,6 +235,7 @@ hMail
 healthcare
 hella
 heterolytic
+heteronormative
 hexavalent
 hh
 hoc
@@ -234,6 +246,7 @@ href
 html
 hydrogens
 hydronium
+hypermasculinity
 hypervalencies
 i'm
 iframe
@@ -255,6 +268,7 @@ interner
 interoperability
 interpolant
 interpolationproof
+intersectional
 intersectionalities
 intersectionality
 invariants
@@ -280,6 +294,7 @@ mL
 macOS
 maincolumn
 marginnote
+masculinities
 mathbb
 meetHere
 memoizable
@@ -321,11 +336,13 @@ pre
 printf
 productionization
 programmatically
+progressivism
 propogates
 protonated
 px
 qd
 qquad
+queerbaiting
 quo
 racemate
 readBOrC
