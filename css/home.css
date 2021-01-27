@@ -232,9 +232,11 @@ section.nav {
   .gist .gist-data {
     border-bottom: none !important; }
 
-@media only screen and (max-width: 760px) {
-  .mathblock {
-    width: 100%; } }
+.mathblock {
+  overflow-x: scroll; }
+  @media only screen and (max-width: 760px) {
+    .mathblock {
+      width: 100%; } }
 
 .resp-iframe {
   border: 0;
