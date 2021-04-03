@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+
+<link rel="alternate" type="application/atom+xml" title="cc - Ayaz Hafiz" href="/feed-rrs2.xml">
+
+
+<title>
+  
+    Representability, Coproducts, and Reflective Subcategories
+  
+</title>
+<meta name="description" content="Write-ups of interesting problems from Riehl's Category Theory in Context, sections 4.5 and 4.6." />
+
+<link
+  rel="canonical"
+  href="/articles/21/representability-coproducts-reflective-subcategories"
+/>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+></script>
+
+
+
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/post.css?1617425812808548227"
+    />
+  </head>
+
+  <style></style>
+
+  <body>
+    <div class="container post">
+      <div class="panel">
+        <div class="column-right representability, coproducts, and reflective subcategories-main">
+          <section class="nav">
+  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+</section>
+ <h1 class="title">Representability, Coproducts, and Reflective Subcategories</h1>
+<p class="byline">April 2, 2021</p>
+
+<article class="post">
+  <p>In this cc, I want to write up a couple problems from Emily Riehl’s text
+<a href="https://math.jhu.edu/~eriehl/context/">Category Theory in Context</a> that I’ve
+found particularly interesting over the last week. In some sense they feel
+“fundamental”, and while their conclusions seem to be well-known I have had
+difficulty finding other proofs of these propositions from online searches.</p>
+
+<p>The first problem is 4.6.iii in the text, which shows that representable functors
+from categories with all coproducts are described exactly by their left
+adjoints.</p>
+
+<p>The second problem is 4.5.vii in the text, which has to do with the
+characterization of reflective subcategories, their adjoints, the notion of an
+essential image, and what it means to be a localization.</p>
+
+<p>Unfortunately, I will assume some background with category theory in the
+discussion of these problems. Perhaps in the future I will try to make a
+digestible introduction to category theory, but at this point I am too naive to
+attempt anything like that <img class="emoji" title=":slightly_smiling_face:" alt=":slightly_smiling_face:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f642.png" height="20" width="20">.</p>
+
+<h2 id="46iii-representable-functors-from-categories-with-coproducts-are-described-exactly-by-a-left-adjoint">
+<a class="header-anchor" href="#46iii-representable-functors-from-categories-with-coproducts-are-described-exactly-by-a-left-adjoint"></a>(4.6.iii) Representable functors from categories with coproducts are described exactly by a left adjoint</h2>
+
+<p>This lemma is exciting and beautiful! In one direction the conclusion is
+trivial; in the other, some construction is needed. It reminds me heavily of the
+Yoneda lemma, with mathematical objects sitting at different orders of magnitude
+ending up encoding the same information.</p>
+
+<p>$\text{Lemma.}$ Suppose $C$ is a locally small category with coproducts. Show
+that a functor $F\colon C\to\text{Set}$ is representable if and only if it
+admits a left adjoint.</p>
+
+<p>$\text{Proof.}$ Suppose first that $F$ admits a left adjoint $L$. Then, denoting
+$\star$ to be the terminal object in $\text{Set}$<span class="note"><label for="star" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="star" class="margin-toggle"><span class="sidenote">Equivalently, $\star$ is the singleton set (up to unique isomorphism, of course).</span>,
+the adjunction $L\vdash F$ yields the natural isomorphism</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+C(L\star, -)\cong \text{Set}(\star, F-)\cong F
+</script></div>
+
+<p>Where $C(L\star, -), \text{Set}(\star, F-)\colon C\to Set$ are the evident
+hom-functors. Indeed, the natural isomorphism $C(L\star, -)\cong F$ stipulates
+that $F$ is represented by $L\star$.</p>
+
+<p>Conversely, suppose that $F$ is represented by an object $c\in C$. Let us define
+a functor $L\colon \text{Set}\to C$ as follows. Given a set $A$, $LA :=
+\coprod_{a\in A} c$, the colimit of the discrete diagram indexed by $A$ into $C$
+at the constant object $c$. Indeed this definition is admissible, for $C$ admits
+all coproducts.</p>
+
+<p>For a set morphism $f\colon A\to B$, $Lf\colon \coprod_{a\in A}c\to \coprod_{b\in B}c$
+is the unique morphism factoring the $A$-indexed cocone $c\Rightarrow \prod_{b\in B} c$ given by
+$\left\{\iota_{fa}\colon fa\hookrightarrow LB \right\}_{a\in A}$
+through $LA$. For a morphism $f: A\to B$ where $A= \left\{a_1,a_2\right\}$,
+this can be visualized by the diagram</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/l-morphisms.png" width="30%"><figcaption></figcaption></figure>
+
+<p>Indeed $L$ preserves identities, for $L 1_A$ uniquely factors the colimit cone
+under a particular diagram through that diagram’s colimit, and hence $L 1_A$ must be
+the identity morphism on the colimit $FA$. Uniqueness of the universal
+property of colimits ensures that $Lg\circ Lf = L(g\circ f)$ for appropriate
+$f\colon A\to B, g\colon B\to D\in \text{Set}$ as well; $Lg\circ Lf$ and $L(g\circ f)$ both factor an $A$-indexed cone
+given by $\left\{\iota_{gfa}\right\}_{a\in A}$ through $LA$, but this factorization is unique.</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/lcomp-morphisms.png" width="40%"><figcaption></figcaption></figure>
+
+<p>Thus, $L$ as defined is functorial. We are left to show $L\vdash F$. To this
+end, we will define the unit $\eta\colon 1_{\text{Set}}\Rightarrow FL$ and show
+$\eta$ observes a certain universal property yielding an isomorphism ${\eta_d}^{*}\circ F\colon C(LA, d)\cong \text{Set}(A, Fd)$
+natural in $d\in C$<span class="note"><label for="naturalind" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="naturalind" class="margin-toggle"><span class="sidenote">In fact, naturality in $d$ is
+immediate because $\eta$ is a natural transformation.</span>. For a set $A$, the
+arrow $\eta_A\colon A\to FLA$ is equivalently represented by an arrow $A\to
+C(c, \coprod_{a\in A} c)$. This characterization forces the action of $\eta_A$
+to be given by $\eta_A(a\in A) = \iota_a\colon c\hookrightarrow \coprod_{a\in A} c$.
+Furthermore, we claim $\eta_A$ is an isomorphism. Clearly, $\eta_A$ is
+injective. To see that this map is surjective, observe that any morphism $f\colon c\to \coprod_{a\in A}$
+constitutes a cocone under an particular diagram with coproduct $\coprod_{a\in A}$.
+This cocone has nadir $\coprod_{a\in A}$ and must factor uniquely through the
+colimit cone given by $\coprod_{a\in A}$; this factorization must be given by
+the identity on the colimit, and in particular we have that $f=1_{\coprod_{a\in A}}\circ i_{a’}=i_{a’}$ for some
+$a’\in A$. Reiterated, $f$ must be a leg of the colimit cone given by $\coprod_{a\in A}$, given exactly by an element
+of $A$.</p>
+
+<p>Having defined $\eta$ and shown it is an natural isomorphism, showing the
+composite</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+C(LA, d)\xrightarrow{F} \text{Set}(FLA, Fd)\xrightarrow{ {\eta_A}^*}\text{Set}(A, Fd)
+</script></div>
+
+<p>is an isomorphism for $A\in \text{Set}$, $d\in C$ boils down to showing
+that the arrow $F: C(LA, d)\to \text{Set}(FLA, Fd)$ is an isomorphism. Applying
+the representability of $F$ and the behavior of $L$, we see that this arrow is
+valued equivalently as</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+C(\coprod_{a\in A} c, d)\xrightarrow{C(c, -)} \text{Set}(C(c, \coprod_{a\in A} c), C(c, d))
+</script></div>
+
+<p>For convenience, let us denote $\bar{A}\colon A\to C$ to be the diagram with colimit $\coprod_{a\in A} c$.
+Now, consider an arrow in the hom-set $\text{Set}(C(c, \coprod_{a\in A} c), C(c, d))$.
+As we have already seen, any hom-set in the codomain of such an arrow yields the
+colimit cone under $\bar{A}$, up to unique isomorphism. Therefore, all arrows $C(c, \coprod_{a\in A} c)\to C(c, d)$
+define cocones under $\bar{A}$ with nadir $d$, factoring uniquely through the colimit
+cone under $\bar{A}$. Furthermore, all cones under $\bar{A}$ with nadir $d$ must
+factor uniquely through the colimit cocone under $\bar{A}$, so the hom-set $\text{Set}(C(c, \coprod_{a\in A} c), C(c, d))$
+is exactly the set of cocones $\text{Cone}(\bar{A}, d)$. But a colimit is
+a representation for a certain cone functor; in particular, $\coprod_{a\in A} c$
+represents $Cone(\bar{A}, -)$. Hence</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+C(\coprod_{a\in A} c, d)\cong Cone(\bar{A}, d)\cong \text{Set}(C(c, \coprod_{a\in A} c), C(c, d))
+</script></div>
+
+<p>By the Yoneda lemma, this isomorphism is given precisely by $C(c, -)\cong F$. $\square$</p>
+
+<h2 id="45vii-characterizations-of-reflective-subcategories">
+<a class="header-anchor" href="#45vii-characterizations-of-reflective-subcategories"></a>(4.5.vii) Characterizations of reflective subcategories</h2>
+
+<p>$\text{Premise}.$ Consider a reflective subcategory inclusion $D\hookrightarrow{}C$ with
+reflector $L\colon C\rightarrow D$.</p>
+
+<p>Recall that a $D$ is a reflective subcategory of $C$ if $D$ is a <a href="https://ncatlab.org/nlab/show/full+subcategory">full
+subcategory</a> and the inclusion
+of $D$ admits a left adjoint $L$, which we call a reflector. This is definition
+4.5.12 in Riehl.</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/reflective-subcategory.png" width="15%"><figcaption></figcaption></figure>
+
+<p>Let us denote the unit of this adjunction by $\eta\colon 1_{C}\Rightarrow L$ and the counit
+by $\epsilon\colon L\Rightarrow 1_D$; for now we elide the inclusion functor, for its
+presence in the domain definitions of the unit and counit acts as the identity.</p>
+
+<p>Note also that because the inclusion $D\hookrightarrow C$ is fully faithful,
+<a href="https://ncatlab.org/nlab/show/adjoint+functor#FullyFaithfulAndInvertibleAdjoints">$\epsilon$ is a natural isomorphism</a>.</p>
+
+<p>Okay, let’s get started.</p>
+
+<p><br></p>
+
+<p>$\text{Part (i).}$ Show that $\eta L = L\eta$, and that these natural transformations are isomorphisms.</p>
+
+<p>$\text{Proof.}$ By the <a href="https://ncatlab.org/nlab/show/triangle+identities">triangle identities</a>,
+$1_L = \epsilon L \circ L\eta$. Since $1_L$ and $\epsilon L$ are natural isomorphisms,
+we must have that $L\eta$ is a natural isomorphism.</p>
+
+<p>Now consider the following triple of squares, each of which commutes either by
+the naturality of the unit or the counit.</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/commute-triple.png" width="100%"><figcaption></figcaption></figure>
+
+<p>Commutativity of the first square, which holds for all objects $c\in C$, tells
+us that $\epsilon L = L\epsilon$. Commutativity of the second and third squares
+imply $\epsilon L \circ L\eta = L \epsilon \circ \eta L = \epsilon L \circ \eta
+L$, and so $L\eta = \eta L$. Furthermore, $\eta L$ is a natural transformation
+because $L\eta$ is. $\square$</p>
+
+<p><br></p>
+
+<p>$\text{Part (ii).}$ Show that an object $c\in C$ is in the <a href="https://ncatlab.org/nlab/show/essential+image"><strong>essential image</strong></a> of the inclusion
+$D\hookrightarrow C$, meaning that it is isomorphic to an object in the subcategory $D$,
+if and only if $\eta_c$ is an isomorphism.</p>
+
+<p>$\text{Proof.}$ First, suppose $C\ni c\cong d\in D$, and that this isomorphism
+is given by $\phi\colon c\to d$. For clarity, we will denote the inclusion functor $\iota\colon D\hookrightarrow C$.
+By the triangle identities, we have that $1_\iota = \iota\epsilon\circ\eta\iota$;
+this implies $\eta\iota$ is a natural isomorphism. Now consider the square</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/commute-phi-eta.png" width="30%"><figcaption></figcaption></figure>
+
+<p>which commutes by the naturality of $\eta$. $\eta_{\iota d}$, $\phi$, and $L\phi$ are
+isomorphisms, so $\eta_c$ is an isomorphism.</p>
+
+<p>Conversely, supposing $\eta_c\colon c\to Lc$ is an isomorphism, $\eta_c$ defines
+an isomorphism between $c$ and $Lc\in D$. $\square$</p>
+
+<p><br></p>
+
+<p>$\text{Part (iii).}$ Show that the essential image of $D$ consists of those
+objects $c$ that are <a href="https://ncatlab.org/nlab/show/local+object"><strong>local</strong></a> for
+the class of morphisms that are inverted by $L$. That is, $c$ is in the
+essential image if and only if the pre-composition functions</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+C(b,c)\xrightarrow{f^*} C(a,c)
+</script></div>
+
+<p>are isomorphisms for all maps $f\colon a\to b$ in $C$ for which $Lf$ is an
+isomorphism in $D$.</p>
+
+<p>$\text{Proof.}$ Suppose that the class of pre-composition functions as described
+above, consisting of those functions whose image under $L$ are isomorphisms, are
+isomorphisms in $C$. Taking $c\in C$, we have that $L\eta_c$ is an isomorphism
+by $\text{(i)}$, and hence in particular $C(Lc,c)\xrightarrow{\eta_c}C(c,c)$
+yields an isomorphism. This implies $\exists ! f\colon Lc\to c$ such that
+$f\eta_c = 1_c$. By the naturality of $\eta$, the square</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/commute-eta-f.png" width="30%"><figcaption></figcaption></figure>
+
+<p>commutes, yielding the equivalence</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+1_{Lc} = L(1_c) = L(f\circ\eta_c) = Lf\circ L\eta_c = Lf \circ\eta_{Lc}=\eta_c\circ f
+</script></div>
+
+<p>Hence $\eta_c$ and $f$ are inverse isomorphisms. But $\eta_c$ being an
+isomorphism implies $c$ is in the essential image of $D$.</p>
+
+<p>Conversely, supposing $c\in C$ is in the essential image of $D$, we have that
+$\exists d\in D$ with isomorphisms $\phi\colon c\leftrightarrows d\colon \phi^{-1}$.
+Let $f\colon a\to b\in C$ be such that $Lf$ is an isomorphism. Then by the
+definition of adjunction, the square</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/commute-iso-f.png" width="30%"><figcaption></figcaption></figure>
+
+<p>commutes. Since $Lf$ is an isomorphism, $(Lf)^*$ is an isomorphism, and so $f^*$
+must be an isomorphism as well. Hence</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+f^{*} = {\phi^{-1}}_{*}\circ f^{*}\circ\phi_{*}\colon\;C(b,c)\to C(a,c)
+</script></div>
+
+<p>is an isomorphism of hom-sets, satisfying the proposition
+hypothesis. $\square$</p>
+
+<p>As Riehl points out, this last construction indeed describes why the reflector
+$L$ can be described as a <strong>localization</strong>. Indeed, the left adjoint $L$
+determines the essential image of a reflective subcategory via a particular
+universal property that inverts local morphisms.</p>
+
+</article>
+
+<section class="footer">
+  
+  <a href="/articles/21/lang-narrow">« A Simple Language With Flow Typing</a>
+  
+  <span><img class="emoji" title=":cat:" alt=":cat:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f431.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        \sigma\sim\frac{1}{4}\text{-lipschitz}
+      </script></span>
+  </span>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+  });
+</script>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -7,6 +7,14 @@
 		<atom:link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Representability, Coproducts, and Reflective Subcategories</title>
+				<description>Write-ups of interesting problems from Riehl's Category Theory in Context, sections 4.5 and 4.6.</description>
+				<pubDate>Fri, 02 Apr 2021 03:00:00 -0500</pubDate>
+				<link>https://ayazhafiz.com/articles/21/representability-coproducts-reflective-subcategories</link>
+				<guid isPermaLink="true">https://ayazhafiz.com/articles/21/representability-coproducts-reflective-subcategories</guid>
+			</item>
+		
+			<item>
 				<title>A Simple Language With Flow Typing</title>
 				<description>We discuss a simple language and type system that provides for flow typing with records and union types. We also present an extension that generalizes to near-arbitrary narrowing of types at the expense of greater runtime costs.</description>
 				<pubDate>Thu, 21 Jan 2021 02:00:00 -0600</pubDate>
@@ -76,14 +84,6 @@
 				<pubDate>Sun, 29 Mar 2020 03:00:00 -0500</pubDate>
 				<link>https://ayazhafiz.com/articles/20/scaling-up</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/scaling-up</guid>
-			</item>
-		
-			<item>
-				<title>Satellites</title>
-				<description>Human productivity associated with the growth of an endeavour.</description>
-				<pubDate>Sat, 29 Feb 2020 02:00:00 -0600</pubDate>
-				<link>https://ayazhafiz.com/articles/20/satellites</link>
-				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/satellites</guid>
 			</item>
 		
 	</channel>

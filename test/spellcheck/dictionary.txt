@@ -1,4 +1,4 @@
-personal_ws-1.1 en 438 
+personal_ws-1.1 en 466 
 ABI
 ADT
 ADTs
@@ -54,7 +54,9 @@ Kirov's
 Kythe
 LGBTQ
 LTTest
+Lc
 LessThan
+Lf
 LibHello
 Lorde's
 MBP
@@ -76,6 +78,8 @@ RTLD
 Rado
 RateLimited
 Refactor
+Riehl
+Riehl's
 Runge
 Runge's
 SbF
@@ -105,10 +109,14 @@ YAKWTFGO
 Yamamotoa
 Yamamotoa's
 Yee
+Yoneda
 Zhu's
 abe
 abf
 acetaldehyde
+adjoint
+adjoints
+adjunction
 ae
 aec
 akitas
@@ -155,13 +163,21 @@ chunkc
 chunkwm
 circ
 clib
+cocone
+cocones
 codebase
 codebases
+codomain
+colimit
+colimits
 comparators
 compilable
 config
 const
+coproduct
+coproducts
 copypath
+counit
 covalent
 covid
 cpp
@@ -225,10 +241,12 @@ frac
 frameborder
 frontend
 fullwidth
+functorial
 functors
 futurecc
 getName
 getSound
+gfa
 gn
 goldie
 hMail
@@ -239,6 +257,7 @@ heteronormative
 hexavalent
 hh
 hoc
+hom
 hotkey
 hotkeys
 hotreload
@@ -259,6 +278,7 @@ incongruency
 init
 initArr
 initializer
+injective
 innerHTML
 instagram
 instantiation
@@ -272,6 +292,7 @@ intersectional
 intersectionalities
 intersectionality
 invariants
+isomorphisms
 javascript
 jj
 jpg
@@ -286,6 +307,7 @@ len
 lfloor
 libc
 libpath
+lipschitz
 loadtime
 lockfile
 lookup
@@ -303,11 +325,14 @@ methanium
 modularized
 modularizing
 monad
+morphism
+morphisms
 mozallowfullscreen
 mtime
 myProperty
 narrowBToNat
 nat
+naturality
 ne
 ness
 newFoo
@@ -353,6 +378,8 @@ recv
 refactorings
 referenceable
 reloadable
+representability
+representable
 req
 resurge
 rex
@@ -385,6 +412,7 @@ subtyping
 supercategory
 superimposable
 supertype
+surjective
 swe
 tess
 tex
