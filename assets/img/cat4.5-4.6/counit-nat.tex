@@ -1,0 +1,24 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+
+\begin{document}
+
+\Huge
+% https://q.uiver.app/?q=WzAsNixbMCwwLCJjIl0sWzEsMF0sWzEsMSwie1xcZGlzcGxheXN0eWxlXFxjb3Byb2Rfe0MoYyxkKX1jfSJdLFsxLDMsIntcXGRpc3BsYXlzdHlsZVxcY29wcm9kX3tDKGMsZCl9Y30iXSxbMywxLCJkIl0sWzMsMywiZSJdLFswLDIsIlxcaW90YV97Zl8xfSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsNCwiXFxlcHNpbG9uX2QiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCw0LCJmXzEiLDEseyJjdXJ2ZSI6LTJ9XSxbMyw1LCJcXGVwc2lsb25fZSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs0LDUsImciLDFdLFswLDMsIlxcaW90YV97Z1xcY2lyYyBmMX0iLDEseyJjdXJ2ZSI6Miwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwzLCJMRmciLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\begin{tikzcd}
+	c & {} \\
+	& {{\displaystyle\coprod_{C(c,d)}c}} && d \\
+	\\
+	& {{\displaystyle\coprod_{C(c,d)}c}} && e
+	\arrow["{\iota_{f_1}}"{description}, hook, from=1-1, to=2-2]
+	\arrow["{\epsilon_d}"{description}, dashed, from=2-2, to=2-4]
+	\arrow["{f_1}"{description}, curve={height=-50pt}, from=1-1, to=2-4]
+	\arrow["{\epsilon_e}"{description}, dashed, from=4-2, to=4-4]
+	\arrow["g"{description}, from=2-4, to=4-4]
+	\arrow["{\iota_{g\circ f1}}"{description}, curve={height=50pt}, hook, from=1-1, to=4-2]
+	\arrow["LFg"{description}, dashed, from=2-2, to=4-2]
+\end{tikzcd}
+
+\end{document} 
+

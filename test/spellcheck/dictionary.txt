@@ -465,3 +465,10 @@ xdvs
 xs
 yabai
 ynot
+LFd
+LFg
+bijection
+factorizations
+injectivity
+preimage
+surjectivity

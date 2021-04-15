@@ -45,7 +45,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1617977580613861615"
+      href="/css/post.css?1618516940185431464"
     />
   </head>
 
@@ -93,8 +93,8 @@ ending up encoding the same information.</p>
 that a functor $F\colon C\to\text{Set}$ is representable if and only if it
 admits a left adjoint.</p>
 
-<p>$\text{Proof.}$ Suppose first that $F$ admits a left adjoint $L$. Then, denoting
-$\star$ to be the terminal object in $\text{Set}$<span class="note"><label for="star" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="star" class="margin-toggle"><span class="sidenote">Equivalently, $\star$ is the singleton set (up to unique isomorphism, of course).</span>,
+<p>$\text{Proof.}$ $(\Rightarrow)$ Suppose first that $F$ admits a left adjoint $L$. Then, denoting
+$\star$ to be the terminal object in $\text{Set}$<span class="note"><label for="star" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="star" class="margin-toggle"><span class="sidenote">Equivalently, $\star$ is the singleton set (which itself is defined up to unique isomorphism, of course).</span>,
 the adjunction $L\vdash F$ yields the natural isomorphism</p>
 
 <div class="mathblock"><script type="math/tex; mode=display">
@@ -105,7 +105,7 @@ C(L\star, -)\cong \text{Set}(\star, F-)\cong F
 hom-functors. Indeed, the natural isomorphism $C(L\star, -)\cong F$ stipulates
 that $F$ is represented by $L\star$.</p>
 
-<p>Conversely, suppose that $F$ is represented by an object $c\in C$. Let us define
+<p>$(\Leftarrow)$ Conversely, suppose that $F$ is represented by an object $c\in C$. Let us define
 a functor $L\colon \text{Set}\to C$ as follows. Given a set $A$, $LA :=
 \coprod_{a\in A} c$, the colimit of the discrete diagram indexed by $A$ into $C$
 at the constant object $c$. Indeed this definition is admissible, for $C$ admits
@@ -117,7 +117,7 @@ $\left\{\iota_{fa}\colon fa\hookrightarrow LB \right\}_{a\in A}$
 through $LA$. For a morphism $f: A\to B$ where $A= \left\{a_1,a_2\right\}$,
 this can be visualized by the diagram</p>
 
-<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/l-morphisms.png" width="30%"><figcaption></figcaption></figure>
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/l-morphisms.png" width="35%"><figcaption></figcaption></figure>
 
 <p>Indeed $L$ preserves identities, for $L 1_A$ uniquely factors the colimit cone
 under a particular diagram through that diagram’s colimit, and hence $L 1_A$ must be
@@ -128,55 +128,59 @@ given by $\left\{\iota_{gfa}\right\}_{a\in A}$ through $LA$, but this factorizat
 
 <figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/lcomp-morphisms.png" width="40%"><figcaption></figcaption></figure>
 
-<p>Thus, $L$ as defined is functorial. We are left to show $L\vdash F$. To this
-end, we will define the unit $\eta\colon 1_{\text{Set}}\Rightarrow FL$ and show
-$\eta$ observes a certain universal property yielding an isomorphism ${\eta_d}^{*}\circ F\colon C(LA, d)\cong \text{Set}(A, Fd)$
-natural in $d\in C$<span class="note"><label for="naturalind" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="naturalind" class="margin-toggle"><span class="sidenote">In fact, naturality in $d$ is
-immediate because $\eta$ is a natural transformation.</span>. For a set $A$, the
-arrow $\eta_A\colon A\to FLA$ is equivalently represented by an arrow $A\to
-C(c, \coprod_{a\in A} c)$. This characterization forces the action of $\eta_A$
-to be given by $\eta_A(a\in A) = \iota_a\colon c\hookrightarrow \coprod_{a\in A} c$.
-Furthermore, we claim $\eta_A$ is an isomorphism. Clearly, $\eta_A$ is
-injective. To see that this map is surjective, observe that any morphism $f\colon c\to \coprod_{a\in A}$
-constitutes a cocone under an particular diagram with coproduct $\coprod_{a\in A}$.
-This cocone has nadir $\coprod_{a\in A}$ and must factor uniquely through the
-colimit cone given by $\coprod_{a\in A}$; this factorization must be given by
-the identity on the colimit, and in particular we have that $f=1_{\coprod_{a\in A}}\circ i_{a’}=i_{a’}$ for some
-$a’\in A$. Reiterated, $f$ must be a leg of the colimit cone given by $\coprod_{a\in A}$, given exactly by an element
-of $A$.</p>
-
-<p>Having defined $\eta$ and shown it is an natural isomorphism, showing the
-composite</p>
+<p>Thus, $L$ as defined is functorial. To show $L\dashv F$, we will construct the counit
+$\epsilon\colon LF\Rightarrow 1_{\text{C}}$ and demonstrate that it observes a
+certain universal property; namely, that it defines an isomorphism</p>
 
 <div class="mathblock"><script type="math/tex; mode=display">
-C(LA, d)\xrightarrow{F} \text{Set}(FLA, Fd)\xrightarrow{ {\eta_A}^*}\text{Set}(A, Fd)
+({\epsilon_d})_{*}\circ L\colon \text{Set}(A, Fd)\cong C(LA, d)\quad \forall A\in \text{Set}, d\in C
 </script></div>
 
-<p>is an isomorphism for $A\in \text{Set}$, $d\in C$ boils down to showing
-that the arrow $F: C(LA, d)\to \text{Set}(FLA, Fd)$ is an isomorphism. Applying
-the representability of $F$ and the behavior of $L$, we see that this arrow is
-valued equivalently as</p>
+<p>$\epsilon_d$ is an arrow $LFd\to d$, which is equivalently an arrow
+$\coprod_{C(c,d)} c\to d$. This description invites a natural construction; we
+will take $\epsilon_d$ to be the unique arrow factoring the cocone under the
+diagram $C(c,d)\to c$ with nadir $d$, whose components are given by the associated indexing arrows $c\to d$ 
+of the indexing category, through the coproduct $\coprod_{C(c,d)} c$. The universal property of this factorization yields the
+formula $\epsilon_d\circ\iota_{f_i\colon c\to d} = f_i$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/counit-action.png" width="35%"><figcaption></figcaption></figure>
+
+<p>Naturality of $\epsilon$ follows from a straightforward diagram chase. Fixing
+a morphism $g\colon d\to e\in C$ and an inclusion $\iota_{f_i\colon c\to d}\colon
+c\hookrightarrow \coprod_{C(c,d)} c$, we have that $g\circ \epsilon_d\circ\iota_{f_i} = g\circ f_i$
+and also $\epsilon_e \circ LFg\circ\iota_{f_i} = \epsilon_e\circ\iota_{g\circ f_i}=g\circ f_i$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/cat4.5-4.6/counit-nat.png" width="40%"><figcaption></figcaption></figure>
+
+<p>It remains to show the arrow $({\epsilon_d})_{*}\circ L\colon \text{Set}(A, Fd)\cong C(LA, d)$ is really a bijection.
+Representability of $F$ and the action of $L$ imply that $({\epsilon_d})_{*}\circ L$ is equivalently the composite</p>
 
 <div class="mathblock"><script type="math/tex; mode=display">
-C(\coprod_{a\in A} c, d)\xrightarrow{C(c, -)} \text{Set}(C(c, \coprod_{a\in A} c), C(c, d))
+\text{Set}(A, C(c, d))\xrightarrow{L} C(\coprod_A c, \coprod_{C(c,d)} c)\xrightarrow{ ({\epsilon_d})_{*} }C(\coprod_A c, d)
 </script></div>
 
-<p>For convenience, let us denote $\bar{A}\colon A\to C$ to be the diagram with colimit $\coprod_{a\in A} c$.
-Now, consider an arrow in the hom-set $\text{Set}(C(c, \coprod_{a\in A} c), C(c, d))$.
-As we have already seen, any hom-set in the codomain of such an arrow yields the
-colimit cone under $\bar{A}$, up to unique isomorphism. Therefore, all arrows $C(c, \coprod_{a\in A} c)\to C(c, d)$
-define cocones under $\bar{A}$ with nadir $d$, factoring uniquely through the colimit
-cone under $\bar{A}$. Furthermore, all cones under $\bar{A}$ with nadir $d$ must
-factor uniquely through the colimit cocone under $\bar{A}$, so the hom-set $\text{Set}(C(c, \coprod_{a\in A} c), C(c, d))$
-is exactly the set of cocones $\text{Cone}(\bar{A}, d)$. But a colimit is
-a representation for a certain cone functor; in particular, $\coprod_{a\in A} c$
-represents $Cone(\bar{A}, -)$. Hence</p>
+<p>First, let us see injectivity. Taking distinct $f,g\colon A\rightrightarrows
+C(c,d)$, we have that $Lf$, $Lg$ are the unique factorizations of certain distinct
+cocones under $A$; by the representability of cocones under $A$ and the Yoneda
+lemma, $Lf$ and $Lg$ are distinct. In another way, $f, g$ being distinct implies $\exists a\in A$
+such that $f(a)\ne g(a)$, and so $Lf\iota_a = \iota_{f(a)\colon c\to d} \ne \iota_{g(a)\colon c\to d} = Lg\iota_a$.
+But now</p>
 
 <div class="mathblock"><script type="math/tex; mode=display">
-C(\coprod_{a\in A} c, d)\cong Cone(\bar{A}, d)\cong \text{Set}(C(c, \coprod_{a\in A} c), C(c, d))
+\epsilon_d\circ Lf\iota_a = \epsilon_d\circ i_{f(a)} = f(a) \ne g(a) =
+\epsilon_d\circ i_{g(a)}=\epsilon_d\circ Lg\iota_a
 </script></div>
 
-<p>By the Yoneda lemma, this isomorphism is given precisely by $C(c, -)\cong F$. $\square$</p>
+<p>To see surjectivity, let us fix $f\colon \coprod_A c\to d$ and lift it
+along $({\epsilon_d})_{*}\circ L$ to an arrow $A\to C(c,d)$. $\coprod_A c$ is
+the representing object for $\text{Cone}(A, -)$, so $f$ corresponds to a unique
+cocone $\mu$ under $A$ with nadir $d$. But each $A$-indexed component of $\mu$
+is an arrow $c\to d$, and so we can define a function $\bar{f}\colon A\to
+C(c,d)$ given by $\bar{f}(a)=\mu_a$. Indeed, $\bar{f}$ lifts along the present
+injection to be in the preimage of $f$; explicitly, $L\bar{f}$ is the unique
+factorization of a cone whose components are $\left\{\iota_{\bar{f}(a)} = \iota_{\mu_a}\colon c\to \coprod_{C(c,d)} c\right\}_{a\in A}$,
+and ${\epsilon_d}\circ L\bar{f}$ hence yields the cone
+$\left\{\epsilon_d\iota_{\mu_a} = \mu_a\right\}_{a\in A}=\mu$; uniqueness of cocone factorization implies ${\epsilon_d}\circ L\bar{f} = f$. $\square$</p>
 
 <h2 id="45vii-characterizations-of-reflective-subcategories">
 <a class="header-anchor" href="#45vii-characterizations-of-reflective-subcategories"></a>(4.5.vii) Characterizations of reflective subcategories</h2>
@@ -249,7 +253,7 @@ essential image if and only if the pre-composition functions</p>
 C(b,c)\xrightarrow{f^*} C(a,c)
 </script></div>
 
-<p>are isomorphisms for all maps $f\colon a\to b$ in $C$ for which $Lf$ is an
+<p>are isomorphisms for all arrows $f\colon a\to b$ in $C$ for which $Lf$ is an
 isomorphism in $D$.</p>
 
 <p>$\text{Proof.}$ Suppose that the class of pre-composition functions as described
