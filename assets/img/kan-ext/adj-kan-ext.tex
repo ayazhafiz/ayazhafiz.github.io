@@ -1,0 +1,24 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsNixbMCwwLCJcXG1hdGhzZntDfSJdLFsyLDIsIlxcbWF0aHNme0R9Il0sWzQsMCwiXFxtYXRoc2Z7Q30iXSxbNiwwLCJcXG1hdGhzZntEfSJdLFsxMCwwLCJcXG1hdGhzZntEfSJdLFs4LDIsIlxcbWF0aHNme0N9Il0sWzAsMiwiMV9cXG1hdGhzZntDfSJdLFswLDEsIkYiLDJdLFsxLDIsIkc9XFxtYXRoc2Z7TGFufV9GIDFfXFxtYXRoc2Z7Q30iLDJdLFszLDUsIkciLDJdLFs1LDQsIkY9XFxtYXRoc2Z7UmFufV9HIDFfXFxtYXRoc2Z7RH0iLDJdLFszLDQsIjFfXFxtYXRoc2Z7RH0iXSxbNiwxLCJcXGV0YSIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH19XSxbNSwxMSwiXFxlcHNpbG9uIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfX1dXQ==
+\begin{tikzcd}
+	{\mathsf{C}} &&&& {\mathsf{C}} && {\mathsf{D}} &&&& {\mathsf{D}} \\
+	\\
+	&& {\mathsf{D}} &&&&&& {\mathsf{C}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{1_\mathsf{C}}", equal, from=1-1, to=1-5]
+	\arrow["F"', from=1-1, to=3-3]
+	\arrow["{G=\mathsf{Lan}_F 1_\mathsf{C}}"', from=3-3, to=1-5]
+	\arrow["G"', from=1-7, to=3-9]
+	\arrow["{F=\mathsf{Ran}_G 1_\mathsf{D}}"', from=3-9, to=1-11]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{1_\mathsf{D}}", equal, from=1-7, to=1-11]
+	\arrow["\eta", shorten <=15pt, shorten >=15pt, Rightarrow, from=0, to=3-3]
+	\arrow["\epsilon"', shorten <=15pt, shorten >=15pt, Rightarrow, from=3-9, to=1]
+\end{tikzcd}
+
+\end{document} 
+

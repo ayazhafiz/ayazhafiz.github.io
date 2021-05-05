@@ -1,0 +1,41 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsMTMsWzAsMCwiXFxtYXRoc2Z7Q30iXSxbNCwwLCJcXG1hdGhzZntDfSJdLFsyLDIsIlxcbWF0aHNme0R9Il0sWzUsMSwiPSJdLFs2LDAsIlxcbWF0aHNme0N9Il0sWzEwLDAsIlxcbWF0aHNme0N9Il0sWzgsMiwiXFxtYXRoc2Z7RH0iXSxbMSwzLCJcXG1hdGhzZntDfSJdLFs1LDMsIlxcbWF0aHNme0N9Il0sWzksMywiXFxtYXRoc2Z7Q30iXSxbMyw1LCJcXG1hdGhzZntEfSJdLFs3LDUsIlxcbWF0aHNme0R9Il0sWzAsNCwiPSJdLFswLDIsIkYiLDJdLFswLDEsIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMSwiRyIsMSx7ImN1cnZlIjoyfV0sWzQsNSwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw2LCJGIiwxLHsiY3VydmUiOi0zfV0sWzYsNSwiRyIsMl0sWzIsMSwiRyIsMSx7ImN1cnZlIjotM31dLFs0LDYsIkYiLDEseyJjdXJ2ZSI6M31dLFs3LDEwLCJGIiwxXSxbMTAsOCwiRyIsMV0sWzgsMTEsIkYiLDFdLFsxMSw5LCJHIiwxXSxbOCw5LCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxMCwxMSwiIiwxLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNyw4LCIiLDEseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxNiw2LCJcXGV0YSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMCwib2Zmc2V0IjotNSwic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjUwfX1dLFsxNCwyLCJcXGV0YSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMCwib2Zmc2V0Ijo1LCJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6NTB9fV0sWzE5LDE1LCIiLDEseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9LCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIwLDE3LCIiLDEseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9LCJjb2xvdXIiOlsyNDAsNjAsNjBdLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzI3LDEwLCJcXGV0YSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMCwic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjUwfSwiY29sb3VyIjpbMjQwLDYwLDYwXX0sWzI0MCw2MCw2MCwxXV0sWzI1LDExLCJcXGV0YSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMCwic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjUwfX1dLFsyNiw4LCJcXGVwc2lsb24iLDIseyJsYWJlbF9wb3NpdGlvbiI6NDAsInNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0Ijo1MH0sImNvbG91ciI6WzI0MCw2MCw2MF19LFsyNDAsNjAsNjAsMV1dXQ==
+\begin{tikzcd}
+	{\mathsf{C}} &&&& {\mathsf{C}} && {\mathsf{C}} &&&& {\mathsf{C}} \\
+	&&&&& {=} \\
+	&& {\mathsf{D}} &&&&&& {\mathsf{D}} \\
+	& {\mathsf{C}} &&&& {\mathsf{C}} &&&& {\mathsf{C}} \\
+	{=} \\
+	&&& {\mathsf{D}} &&&& {\mathsf{D}}
+	\arrow["F"', from=1-1, to=3-3]
+	\arrow[""{name=0, anchor=center, inner sep=0}, Rightarrow, no head, from=1-1, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "G"{description}, curve={height=12pt}, from=3-3, to=1-5]
+	\arrow[""{name=2, anchor=center, inner sep=0}, Rightarrow, no head, from=1-7, to=1-11]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "F"{description}, curve={height=-18pt}, from=1-7, to=3-9]
+	\arrow["G"', from=3-9, to=1-11]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "G"{description}, curve={height=-18pt}, from=3-3, to=1-5]
+	\arrow[""{name=5, anchor=center, inner sep=0}, "F"{description}, curve={height=18pt}, from=1-7, to=3-9]
+	\arrow["F"{description}, from=4-2, to=6-4]
+	\arrow["G"{description}, from=6-4, to=4-6]
+	\arrow["F"{description}, from=4-6, to=6-8]
+	\arrow["G"{description}, from=6-8, to=4-10]
+	\arrow[""{name=6, anchor=center, inner sep=0}, Rightarrow, no head, from=4-6, to=4-10]
+	\arrow[""{name=7, anchor=center, inner sep=0}, Rightarrow, no head, from=6-4, to=6-8]
+	\arrow[""{name=8, anchor=center, inner sep=0}, Rightarrow, no head, from=4-2, to=4-6]
+	\arrow["\eta"{pos=0.3}, shift left=5, shorten <=7pt, shorten >=19pt, Rightarrow, from=2, to=3-9]
+	\arrow["\eta"{pos=0.3}, shift right=5, shorten <=7pt, shorten >=19pt, Rightarrow, from=0, to=3-3]
+	\arrow[shorten <=5pt, shorten >=5pt, Rightarrow, no head, from=4, to=1]
+	\arrow[color={rgb,255:red,92;green,92;blue,214}, shorten <=6pt, shorten >=6pt, Rightarrow, no head, from=5, to=3]
+	\arrow["\eta"{pos=0.3}, color={rgb,255:red,92;green,92;blue,214}, shorten <=7pt, shorten >=19pt, Rightarrow, from=8, to=6-4]
+	\arrow["\eta"{pos=0.3}, shorten <=7pt, shorten >=19pt, Rightarrow, from=6, to=6-8]
+	\arrow["\epsilon"'{pos=0.4}, color={rgb,255:red,92;green,92;blue,214}, shorten <=7pt, shorten >=19pt, Rightarrow, from=7, to=4-6]
+\end{tikzcd}
+
+\end{document} 
+

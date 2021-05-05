@@ -1,0 +1,23 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsNixbMCwwLCJcXG1hdGhzZntDfSJdLFs0LDAsIlxcbWF0aHNme0R9Il0sWzIsMiwiXFxtYXRoc2Z7RH0iXSxbNSwxLCJcXGxlYWRzdG8iXSxbNiwxLCJcXG1hdGhzZntDfSJdLFs4LDEsIlxcbWF0aHNme0R9Il0sWzAsMiwiRiIsMl0sWzAsMSwiRiJdLFsyLDEsIkZHIiwyXSxbNCw1LCJGIiwwLHsiY3VydmUiOi0zfV0sWzUsNCwiRyIsMCx7ImN1cnZlIjotM31dLFs3LDIsIkZcXGV0YSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMCwic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjUwfX1dLFs5LDEwLCIiLDAseyJsZXZlbCI6MSwic3R5bGUiOnsibmFtZSI6ImFkanVuY3Rpb24ifX1dXQ==
+\begin{tikzcd}
+	{\mathsf{C}} &&&& {\mathsf{D}} \\
+	&&&&& \leadsto & {\mathsf{C}} && {\mathsf{D}} \\
+	&& {\mathsf{D}}
+	\arrow["F"', from=1-1, to=3-3]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", from=1-1, to=1-5]
+	\arrow["FG"', from=3-3, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "F", curve={height=-18pt}, from=2-7, to=2-9]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "G", curve={height=-18pt}, from=2-9, to=2-7]
+	\arrow["F\eta"{pos=0.3}, shorten <=7pt, shorten >=19pt, Rightarrow, from=0, to=3-3]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=2]
+\end{tikzcd}
+
+\end{document} 
+

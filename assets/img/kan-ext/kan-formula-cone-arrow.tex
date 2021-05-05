@@ -1,0 +1,33 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsNjAsWzMsMCwiRmNfMSJdLFs2LDAsIkZjXzIiXSxbOSwwLCJGY18zIl0sWzEyLDAsIlxcZG90cyIsWzAsMCw1MCwxXV0sWzAsMCwiXFxkb3RzIixbMCwwLDUwLDFdXSxbNiwyLCJcXG1hdGhzZntMYW59X0tGKGQpIl0sWzYsNSwiXFxtYXRoc2Z7TGFufV9LRihkJykiXSxbMSwxLCJcXHBoYW50b20xIl0sWzIsMSwiXFxwaGFudG9tMSJdLFszLDEsIlxccGhhbnRvbTEiXSxbNCwxLCJcXHBoYW50b20xIl0sWzUsMSwiXFxwaGFudG9tMSJdLFs2LDEsIlxccGhhbnRvbTEiXSxbNywxLCJcXHBoYW50b20xIl0sWzgsMSwiXFxwaGFudG9tMSJdLFs5LDEsIlxccGhhbnRvbTEiXSxbMTAsMSwiXFxwaGFudG9tMSJdLFsxMSwxLCJcXHBoYW50b20xIl0sWzExLDIsIlxccGhhbnRvbTEiXSxbMTEsMywiXFxwaGFudG9tMSJdLFsxMSw0LCJcXHBoYW50b20xIl0sWzExLDUsIlxccGhhbnRvbTEiXSxbMTAsNSwiXFxwaGFudG9tMSJdLFsxMCw0LCJcXHBoYW50b20xIl0sWzEwLDMsIlxccGhhbnRvbTEiXSxbMTAsMiwiXFxwaGFudG9tMSJdLFs5LDIsIlxccGhhbnRvbTEiXSxbOCwyLCJcXHBoYW50b20xIl0sWzgsMywiXFxwaGFudG9tMSJdLFs5LDMsIlxccGhhbnRvbTEiXSxbOSw0LCJcXHBoYW50b20xIl0sWzgsNCwiXFxwaGFudG9tMSJdLFs4LDUsIlxccGhhbnRvbTEiXSxbOSw1LCJcXHBoYW50b20xIl0sWzcsNSwiXFxwaGFudG9tMSJdLFs3LDQsIlxccGhhbnRvbTEiXSxbNywzLCJcXHBoYW50b20xIl0sWzcsMiwiXFxwaGFudG9tMSJdLFs2LDMsIlxccGhhbnRvbTEiXSxbNiw0LCJcXHBoYW50b20xIl0sWzUsNSwiXFxwaGFudG9tMSJdLFs1LDQsIlxccGhhbnRvbTEiXSxbNSwzLCJcXHBoYW50b20xIl0sWzUsMiwiXFxwaGFudG9tMSJdLFs0LDIsIlxccGhhbnRvbTEiXSxbNCwzLCJcXHBoYW50b20xIl0sWzQsNCwiXFxwaGFudG9tMSJdLFs0LDUsIlxccGhhbnRvbTEiXSxbMyw1LCJcXHBoYW50b20xIl0sWzMsNCwiXFxwaGFudG9tMSJdLFszLDMsIlxccGhhbnRvbTEiXSxbMywyLCJcXHBoYW50b20xIl0sWzIsMiwiXFxwaGFudG9tMSJdLFsyLDMsIlxccGhhbnRvbTEiXSxbMiw0LCJcXHBoYW50b20xIl0sWzIsNSwiXFxwaGFudG9tMSJdLFsxLDUsIlxccGhhbnRvbTEiXSxbMSw0LCJcXHBoYW50b20xIl0sWzEsMywiXFxwaGFudG9tMSJdLFsxLDIsIlxccGhhbnRvbTEiXSxbMCwxXSxbMSw1LCJcXGxhbWJkYV5kX3tmXFxjb2xvbiBLY18yXFx0byBkfSIsMV0sWzIsNSwiXFxsYW1iZGFeZF97ZlxcY29sb24gS2NfM1xcdG8gZH0iLDFdLFswLDUsIlxcbGFtYmRhXmRfe2ZcXGNvbG9uIEtjXzFcXHRvIGR9IiwxXSxbNCw1LCIiLDIseyJjb2xvdXIiOlswLDAsNTBdfV0sWzMsNSwiIiwyLHsiY29sb3VyIjpbMCwwLDUwXX1dLFswLDRdLFsxLDMsIiIsMSx7ImN1cnZlIjotNH1dLFsxLDYsIlxcYmFyXFxsYW1iZGFee2QnfV97ZlxcY29sb24gS2NfMlxcdG8gZH06PVxcbGFtYmRhXntkJ31fe2dmXFxjb2xvbiBLY18zXFx0byBkfSIsMSx7ImN1cnZlIjotNX1dLFs1LDYsIlxcbWF0aHNme0xhbn1GKGcpIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsNiwiIiwxLHsiY3VydmUiOi01LCJjb2xvdXIiOlswLDAsNTBdfV0sWzIsNiwiXFxiYXJcXGxhbWJkYV57ZCd9X3tmXFxjb2xvbiBLY18zXFx0byBkfTo9XFxsYW1iZGFee2QnfV97Z2ZcXGNvbG9uIEtjXzNcXHRvIGR9IiwwLHsiY3VydmUiOi0zfV0sWzQsNiwiIiwxLHsiY3VydmUiOjUsImNvbG91ciI6WzAsMCw1MF19XSxbMCw2LCJcXGJhclxcbGFtYmRhXntkJ31fe2ZcXGNvbG9uIEtjXzFcXHRvIGR9Oj1cXGxhbWJkYV57ZCd9X3tnZlxcY29sb24gS2NfMVxcdG8gZH0iLDIseyJjdXJ2ZSI6M31dXQ==
+\begin{tikzcd}
+	\textcolor{rgb,255:red,128;green,128;blue,128}{\dots} &&& {Fc_1} &&& {Fc_2} &&& {Fc_3} &&& \textcolor{rgb,255:red,128;green,128;blue,128}{\dots} \\
+	& \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 \\
+	& \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & {\mathsf{Lan}_KF(d)} & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 \\
+	& \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 \\
+	& \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 \\
+	& \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1 & {\mathsf{Lan}_KF(d')} & \phantom1 & \phantom1 & \phantom1 & \phantom1 & \phantom1
+	\arrow[from=1-4, to=1-7]
+	\arrow["{\lambda^d_{f\colon Kc_2\to d}}"{description}, from=1-7, to=3-7]
+	\arrow["{\lambda^d_{f\colon Kc_3\to d}}"{description}, from=1-10, to=3-7]
+	\arrow["{\lambda^d_{f\colon Kc_1\to d}}"{description}, from=1-4, to=3-7]
+	\arrow[color={rgb,255:red,128;green,128;blue,128}, from=1-1, to=3-7]
+	\arrow[color={rgb,255:red,128;green,128;blue,128}, from=1-13, to=3-7]
+	\arrow[from=1-4, to=1-1]
+	\arrow[curve={height=-24pt}, from=1-7, to=1-13]
+	\arrow["{\bar\lambda^{d'}_{f\colon Kc_2\to d}}"{description}, curve={height=-45pt}, from=1-7, to=6-7]
+	\arrow["{\mathsf{Lan}F(g)}"{description}, dashed, from=3-7, to=6-7]
+	\arrow[color={rgb,255:red,128;green,128;blue,128}, curve={height=-60pt}, from=1-13, to=6-7]
+	\arrow["{\bar\lambda^{d'}_{f\colon Kc_3\to d}:=\lambda^{d'}_{gf\colon Kc_3\to d'}}"{description}, curve={height=-40pt}, from=1-10, to=6-7]
+	\arrow[color={rgb,255:red,128;green,128;blue,128}, curve={height=60pt}, from=1-1, to=6-7]
+	\arrow["{\bar\lambda^{d'}_{f\colon Kc_1\to d}:=\lambda^{d'}_{gf\colon Kc_1\to d'}}"{description}, curve={height=40pt}, from=1-4, to=6-7]
+\end{tikzcd}
+
+\end{document} 
+

@@ -1,0 +1,28 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsOCxbMCwwLCJcXG1hdGhiZiBMRlFfXFxtYXRoc2YgQyJdLFsyLDAsIlFfXFxtYXRoc2YgREYiXSxbMiwyLCJRX1xcbWF0aHNmIEQgRkdGIl0sWzAsMiwiXFxtYXRoYmYgTEZRX1xcbWF0aHNmIENHRiJdLFswLDQsIlxcbWF0aGJmIExGXFxtYXRoYmYgUkdcXG1hdGhiZiBMRlFfXFxtYXRoc2YgQyJdLFsyLDQsIlxcbWF0aGJmIExGUV9cXG1hdGhzZiBDIl0sWzIsNiwiUV9cXG1hdGhzZiBERiJdLFswLDYsIlxcbWF0aGJmIExGXFxtYXRoYmYgUkdRX1xcbWF0aHNmIERGIl0sWzAsMSwiXFxwaGkiLDAseyJsZXZlbCI6Mn1dLFszLDIsIlxccGhpIEdGIiwyLHsibGV2ZWwiOjJ9XSxbMSwyLCJRX1xcbWF0aHNmIERGXFxiYXJcXGV0YSIsMCx7ImxldmVsIjoyfV0sWzAsMywiXFxtYXRoYmYgTEZRX1xcbWF0aHNmIENcXGJhclxcZXRhIiwyLHsibGV2ZWwiOjJ9XSxbNCw1LCJcXGVwc2lsb25cXG1hdGhiZiBMRlFfXFxtYXRoc2YgQyIsMCx7ImxldmVsIjoyfV0sWzUsNiwiXFxwaGkiLDAseyJsZXZlbCI6Mn1dLFs0LDcsIlxcbWF0aGJmIExGXFxtYXRoYmYgUkdcXHBoaSIsMix7ImxldmVsIjoyfV0sWzcsNiwiXFxlcHNpbG9uIFFfXFxtYXRoc2YgREYiLDIseyJsZXZlbCI6Mn1dXQ==
+\begin{tikzcd}
+	{\mathbf LFQ_\mathsf C} && {Q_\mathsf DF} \\
+	\\
+	{\mathbf LFQ_\mathsf CGF} && {Q_\mathsf D FGF} \\
+	\\
+	{\mathbf LF\mathbf RG\mathbf LFQ_\mathsf C} && {\mathbf LFQ_\mathsf C} \\
+	\\
+	{\mathbf LF\mathbf RGQ_\mathsf DF} && {Q_\mathsf DF}
+	\arrow["\phi", Rightarrow, from=1-1, to=1-3]
+	\arrow["{\phi GF}"', Rightarrow, from=3-1, to=3-3]
+	\arrow["{Q_\mathsf DF\bar\eta}", Rightarrow, from=1-3, to=3-3]
+	\arrow["{\mathbf LFQ_\mathsf C\bar\eta}"', Rightarrow, from=1-1, to=3-1]
+	\arrow["{\epsilon\mathbf LFQ_\mathsf C}", Rightarrow, from=5-1, to=5-3]
+	\arrow["\phi", Rightarrow, from=5-3, to=7-3]
+	\arrow["{\mathbf LF\mathbf RG\phi}"', Rightarrow, from=5-1, to=7-1]
+	\arrow["{\epsilon Q_\mathsf DF}"', Rightarrow, from=7-1, to=7-3]
+\end{tikzcd}
+
+\end{document} 
+

@@ -1,0 +1,813 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+
+<link rel="alternate" type="application/atom+xml" title="cc - Ayaz Hafiz" href="/feed-rrs2.xml">
+
+
+<title>
+  
+    A Flying Tour of Kan Extensions
+  
+</title>
+<meta name="description" content="A half-hour, flying tour of Kan extensions with examples and applications in other mathematics." />
+
+<link
+  rel="canonical"
+  href="/articles/21/a-flying-tour-of-kan-extensions"
+/>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    TeX: {
+      Macros: {
+        co: "\\colon",
+        msf: "\\mathsf",
+        Ra: "\\Rightarrow",
+        Def: "\\text{Definition.}",
+        Thm: "\\text{Theorem.}",
+        Pf: "\\text{Proof.}",
+        eps: "\\epsilon",
+        lam: "\\lambda",
+        
+        C: "\\msf{C}",
+        
+        D: "\\msf{D}",
+        
+        E: "\\msf{E}",
+        
+        J: "\\msf{J}",
+        
+        Set: "\\msf{Set}",
+        
+        Lan: "\\msf{Lan}",
+        
+        Ran: "\\msf{Ran}",
+        
+        HoC: "\\msf{HoC}",
+        
+        HoD: "\\msf{HoD}",
+        
+        1: "\\unicode{x1D7D9}",
+        
+        2: "\\unicode{x1D7DA}",
+        
+        S: "\\mathbb{S}",
+        
+        R: "\\mathbb{R}",
+        
+        dL: "\\mathbf{L}",
+        
+        dR: "\\mathbf{R}",
+        
+        xRa: "\\xRightarrow",
+        
+      },
+    }
+  });
+</script>
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+></script>
+
+
+
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/post.css?1620184298611497561"
+    />
+  </head>
+
+  <style></style>
+
+  <body>
+    <div class="container post">
+      <div class="panel">
+        <div class="column-right a flying tour of kan extensions-main">
+          <section class="nav">
+  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+</section>
+ <h1 class="title">A Flying Tour of Kan Extensions</h1>
+<p class="byline">April 27, 2021</p>
+
+<article class="post">
+  <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2">
+<a href="#a-definition-and-an-intuition">A definition and an intuition</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#kan-extensions-as-adjoints">Kan Extensions as Adjoints</a></li>
+<li class="toc-entry toc-h3"><a href="#when-extensions-are-not-kan-extensions">When Extensions are not Kan Extensions</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2">
+<a href="#building-kan-extensions">Building Kan Extensions</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#an-example-continuous-functions-in-the-reals">An example: Continuous functions in the reals</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#absolute-kan-extensions">Absolute Kan Extensions</a></li>
+<li class="toc-entry toc-h2"><a href="#adjoints-as-kan-extensions">Adjoints as Kan Extensions</a></li>
+<li class="toc-entry toc-h2"><a href="#kan-extensions-as-monads">Kan Extensions as Monads</a></li>
+<li class="toc-entry toc-h2"><a href="#an-application-in-homotopy">An Application in Homotopy</a></li>
+<li class="toc-entry toc-h2"><a href="#extension-problems">Extension Problems</a></li>
+<li class="toc-entry toc-h2"><a href="#resources">Resources</a></li>
+</ul>
+<p>There are all kinds of questions mathematicians (and computer scientists,
+and programmers, and hobbyists) are interested in asking about relationships
+between <a href="https://ncatlab.org/nlab/show/category+theory">categories</a>. Functors
+tell us how to embed one category in another, natural transformations
+tell us how to get from one functor-defined embedding to another, and on we
+climb to n-transformations. Adjunctions provide us a notion of weak equivalence<span class="note"><label for="weak-equivalence" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="weak-equivalence" class="margin-toggle"><span class="sidenote">That is, up
+to natural transformations $1_\C\Ra GF$, $FG\Ra1_\D$ which may not be equivalences, but “invertible” in the sense of
+the <a href="https://ncatlab.org/nlab/show/triangle+identities">triangle/zig-zag identities</a>.</span> between
+categories, and are pervasive as solutions to certain optimization problems<span class="note"><label for="adjoint-optimization" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="adjoint-optimization" class="margin-toggle"><span class="sidenote">For instance, there are a tremendous amount of
+$\text{Free}\dashv\text{Forgetful}$ adjunctions giving the “best lift” of a simpler object; a canonical example is the
+free functor $F\co \Set\to\Set_*$ introducing a freely adjoined pointed element to a set,
+and the forgetful functor $U\co \Set_*\to\Set$ that disregards
+pointedness. This adjunction induces the <code class="language-plaintext highlighter-rouge">Maybe</code> monad, familiar to programmers.</span>.
+Limits are a “best approximation” of a certain shape by a certain object “from
+the right”, and colimits are so “from the left”<span class="note"><label for="limit-best-approximation" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="limit-best-approximation" class="margin-toggle"><span class="sidenote">Impressing the idea that adjunctions are weak equivalences, for an indexing category $\J$,
+<a href="https://math.stackexchange.com/a/1090545">limits are a right adjoint to diagram functors</a> $\C\to\C^\J$, and colimits are
+a left adjoint.</span>.
+Monads give us a notion of closure operations on a category, and inform us of
+what information an adjunction preserves. <a href="https://ncatlab.org/nlab/show/Lawvere+theory">Lawvere theories</a>
+are an equivalent mechanism for describing the algebras encoded by a monad.</p>
+
+<p>Another question we may be interested in asking is, what does an extension of a
+functor <span>​<script type="math/tex">F\co \C\to\E</script></span> along a functor $K\co \C\to\D$ look like? And when
+no extension exists, how can we best approximate one in a reasonable way? In
+this cc, I will attempt to outline the answers to these questions and
+demonstrate some interesting applications, from what I hope is a relatively
+accessible view. In an effort to cover a lot of material in a
+short-ish post, we will sometimes gloss over the details of deep ideas. To recover their truth, check the resources at the bottom of
+this cc; in particular, most of our tour is adapted from Chapter 6 of <a href="https://math.jhu.edu/~eriehl/context/">Reihl</a>.
+I am not a mathematician, but I am enthusiastic about this, and am writing this
+for others who feel a similar way.</p>
+
+<h2 id="a-definition-and-an-intuition">
+<a class="anchor" href="#a-definition-and-an-intuition" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#a-definition-and-an-intuition"></a>A definition and an intuition</h2>
+
+<p>Suppose you have arrows $f\co X\to Z$, $i\co X\to Y$. We say that
+$h\co Y\to Z$ is an extension of $f$ along $i$ if $f = h\circ i$.</p>
+
+<p>Now, there is no reason that any arbitrary extension should exist in general. But suppose we
+are dealing with extensions of functors. In this case, we may be satisfied with
+an approximation of an extension, where our arrow $h$ is endowed
+with a natural transformation $f\Ra h\circ i$ or $h\circ i\Ra f$
+that is not necessarily yield an equivalence (or worse yet, equality).</p>
+
+<p>It was the interest of <a href="https://en.wikipedia.org/wiki/Daniel_Kan">Kan</a> to study
+such approximations<span class="note"><label for="kan-extensions-why" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="kan-extensions-why" class="margin-toggle"><span class="sidenote">As far as I can tell, Kan
+was looking to generalize the construction of certain adjoints for use in
+homotopy theory. We will discuss one application in this vein later on.</span>. Kan clearly
+embraced the <a href="https://ncatlab.org/nlab/show/nPOV">categorical point of view</a>,
+for he endowed the extensions of his namesake with a certain universal property
+as well.</p>
+
+<p>$\Def$ A <strong>left Kan extension</strong> of a functor $F\co\C\to\E$ along
+$K\colon \mathsf C\to\mathsf D$ consists of a functor $\Lan_K F\co \D\to\E$ and
+a unit natural transformation $\eta\colon F\Ra\Lan_K F\circ K$<label for="left-kan" class="margin-toggle">⊕</label><input type="checkbox" id="left-kan" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/left-kan.png"><br></span>
+such that for
+any other extension pair $(G\co \D\to\E, \gamma\co F\Ra G\circ K)$, there is a
+unique $\mu\co \Lan_K F\Ra G$
+yielding the factorization $\gamma = \mu K \circ \eta$. This can be visualized
+by the <a href="https://ncatlab.org/nlab/show/pasting+diagram">pasting
+diagram</a><span class="note"><label for="reading-pasting-diagram" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="reading-pasting-diagram" class="margin-toggle"><span class="sidenote">The way to read the right-hand diagram is as follows.
+First, the natural transformation $\eta$ (equivalently, a 2-morphism between morphisms of categories)
+takes the arrow $F$ to the composite $\Lan_K F\circ K$. Then, the 2-morphism $\mu K$ takes $\Lan_K F\circ K$
+to $G\circ K$. Importantly, $\mu K$ is a <a href="https://ncatlab.org/nlab/show/whiskering">whiskering</a> that yields a 2-morphism.</span></p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/left-kan-univ.png" width="100%"><figcaption></figcaption></figure>
+
+<p>What’s left is what’s on the right, and indeed there is a dual notion of a
+<strong>right Kan extension</strong>, consisting of a functor $\Ran_K F\co \D\to\E$ and counit natural
+transformation $\eps\co \Ran_K F\circ K\Ra F$<label for="right-kan" class="margin-toggle">⊕</label><input type="checkbox" id="right-kan" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/right-kan.png"><br></span>
+such that for any other extension pair $(G\co \D\to\E, \delta\co G\circ K\Ra
+F)$, there is a unique $\mu\co G\Ra \Lan_K F$ yielding the factorization $\delta
+= \eps\circ\mu K$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/right-kan-univ.png" width="100%"><figcaption></figcaption></figure>
+
+<p>As you may imagine, the universal property of the Kan extension is a very strong
+tool for use in constructions (like most universal properties are)<span class="note"><label for="kan-univ-cat" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="kan-univ-cat" class="margin-toggle"><span class="sidenote">It may be instructive to describe what category defines the universal property of Kan
+extensions. Furthermore, the idea that both (co)limits and Kan extensions are a “best approximation”
+of a particular shape suggests there is a tight relationship between them; how could
+a (co)limit be represented as a Kan extension? Both of these are <a href="#extension-problems">extension problems</a>.</span>. Indeed, we
+will see that the guarantee of these unique arrows drive the way in verification
+of some interesting propositions and applications.</p>
+
+<h3 id="kan-extensions-as-adjoints">
+<a class="anchor" href="#kan-extensions-as-adjoints" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#kan-extensions-as-adjoints"></a>Kan Extensions as Adjoints</h3>
+
+<p>To whet our appetite, let’s see how Kan extensions mesh nicely with another
+powerful concept in category theory - adjoints. Indeed, the universal property
+of Kan extensions admits a certain class of adjunctions.
+Fixing the “extension along” functor $K\co \C\to\D$, we can see that when all
+functors $F\co \C\to\E$ have a left and right Kan extension along $K$, these data
+assemble into parallel functors $\Lan_K, \Ran_K\co \E^\C\rightrightarrows\E^\D$
+that take a functor $\C\to\E$ to its left or right Kan extension $\D\to\E$ along $K$.</p>
+
+<p>$\Thm$ When they exist, $\Lan_K$ and $\Ran_K$ define left and right
+adjoints to the pre-composition functor $K^*\co \E^\D\to\E^\C$.<label for="lan-k-ran-adj" class="margin-toggle">⊕</label><input type="checkbox" id="lan-k-ran-adj" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/lan-k-ran-adj.png"><br></span></p>
+
+<p>$\Pf$ The universal property of the left Kan extension of $F$ along $K$ demands
+that for any $G\co\D\to\E$, a natural transformation $F\Ra GK$ corresponds
+exactly to a natural transformation $\Lan_K F \Ra G$. This correspondence
+assembles into a natural isomorphism $\E^\D\left(Lan_K F, G\right)\cong
+\E^\C\left(F, GK\right)$, which is exactly the family of bijections defining
+the adjunction $\Lan_K\dashv K^*$. That this family of bijections is natural in $F$ and $G$
+is relatively straightforward to check; the details are given in Riehl 6.1.5.
+The argument for $K^*\dashv\Ran_K$ is similar. $\square$</p>
+
+<h3 id="when-extensions-are-not-kan-extensions">
+<a class="anchor" href="#when-extensions-are-not-kan-extensions" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#when-extensions-are-not-kan-extensions"></a>When Extensions are not Kan Extensions</h3>
+
+<p>On the other hand, the
+demand of such a universal property may suggest that Kan extensions are
+relatively hard to come by, not unlike (co)limits in certain categories. It
+turns out that the presence of this universal property actually fails to
+lift extensions to Kan extensions in general.</p>
+
+<p>For example, consider the terminal
+category $\require{unicode}\1$ consisting of a single object,
+the discrete category $\bar{\2}$ with two objects, the inclusion
+functor $\iota\co \1\hookrightarrow\bar\2$, and the constant endofunctor $z\co
+\bar\2\to\bar\2$ into $0$. By our construction, it
+is the case that $\iota = z\circ\iota$, so $z$ is a proper extension of
+$\iota$ along $\iota$; perhaps we would expect that the pair $(z, 1_\iota\co
+\iota\Ra z\circ\iota)$ yields a left or right Kan extension. But it does
+neither; consider the pair $(1_\bar{\2}, 1_\iota\co \iota \Ra 1_\bar{\2}\circ
+\iota)$. If $z$ is a left Kan extension, we need a natural transformation $z\Ra
+1_\bar{\2}$, which demands an arrow $0 = z1 \to 1_\bar{\2}1 = 1\in\text{mor}\left(\bar\2\right)$, but
+no such arrow exists.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/ext-no-kan-ext.png" width="70%"><figcaption></figcaption></figure>
+
+<p>It would be nice to know how to build up certain Kan extensions, just as we
+know how to build up (co)limits in certain categories<span class="note"><label for="certain-colimits" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="certain-colimits" class="margin-toggle"><span class="sidenote">For example, we know products and coproducts in $\Set$,
+which are limits and colimits under a diagram indexed by a discrete category,
+are exactly the type- and set-theoretic notions of products and disjoint unions.</span>.
+Category theory never fails to reflect on itself, not the least with great coherence - we will see that certain
+Kan extensions can be built from certain (co)limits.</p>
+
+<h2 id="building-kan-extensions">
+<a class="anchor" href="#building-kan-extensions" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#building-kan-extensions"></a>Building Kan Extensions</h2>
+
+<p>We have already discussed the notion that Kan extensions are a kind-of
+approximation for a true extension, modulo a natural transformation<span class="note"><label for="intuition" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="intuition" class="margin-toggle"><span class="sidenote">The following intuition for the construction of Kan extensions comes from Riehl.</span>.
+In particular, a left Kan extension of $F\co \C\to\E$ along $K\co \C\to\D$ is the “best” approximation of
+an extension of $F$ along $K$ “from the left”, which is to say up to a natural
+transformation $\eta\co F\Ra\Lan_KF\circ K$ initial among all natural
+transformations $F\Ra GK$ via an arrow $\Lan_KF\Ra G$ “from the left”. Taking
+this idea of “approximating from the left” to
+heart, to define the action of $\Lan_KF$ on an object $d$ we may want to consider the
+action of $F$ on objects in $\C$ that “approximate” $d$. In the present context,
+there are two reasonable ways to determine what objects “approximate” $d$. One
+is to choose those objects $c\in\C$ such that $Kc\cong d$. Another is to choose
+objects $c\in\C$ whose image under $K$ can “get to” $d$, which is to say there
+is an arrow $Kc\to d$. Indeed, considering the idea of approximation most
+universally, the latter feels more appropriate. Such “approximating” arrows
+$Kc\to d$ are exactly the objects of the
+comma category $K\downarrow d$, which has a canonical projection functor
+$\Pi^d\co K\downarrow d\to\C$ that takes an arrow $Kc\to d$ defining an “approximation of $d$ from the left” to the
+“approximating object” $c$. We can then map each such
+object via $F$, defining a diagram $K\downarrow d\xrightarrow{\Pi^d}\C\xrightarrow{F}\E$
+whose image seemingly provides a number of approximations for the image of $d$
+“from the left”. How do we collapse these approximations into a single object? Take a colimit!</p>
+
+<p>$\Thm$ Consider $F\co \C\to\E$ and $K\co \C\to\D$. If $\forall d\in\D$ the
+colimit</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\text{colim}(K\downarrow d\xrightarrow{\Pi^d}\C\xrightarrow{F}\E) =: \Lan_K F(d)
+</script></div>
+
+<p>of the diagram $F\Pi^d$ exists, these data assemble into a functor
+$\Lan_K F\co \D\to\E$, and the colimit cones embed the unit $\eta\co F\Ra\Lan_K F\circ K$,
+such that $\Lan_K F, \eta$ define the left Kan extension of $F$ along $K$.</p>
+
+<p>Dually, if $\forall d\in\D$ the limit</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\text{lim}(d\downarrow K\xrightarrow{\Pi_d}\C\xrightarrow{F}\E) =: \Ran_K F(d)
+</script></div>
+
+<p>of the diagram $F\Pi_d$ exists, these data assemble into a functor
+$\Ran_K F\co \D\to\E$, and the limit cones embed the counit $\eps\co \Ran_K F\circ K\Ra F$,
+such that $\Ran_K F, \eps$ define the right Kan extension of $F$ along $K$.</p>
+
+<p>$\text{Sketch}.$ We will describe exactly what $\Lan_KF\co \D\to\E$ and the unit $\eta\co F\Ra\Lan_KF\circ K$ of
+the left Kan extension look like. First of all, let us denote the cocone of each colimit $\Lan_KF(d)$ as
+$\lam^d\co F\Pi^d\Ra\Lan_KF(d)$. Now, taking a morphism $g\co d\to d’\in \D$, we
+can define a cocone $\bar\lam^{d’}\co F\Pi^d\Ra\Lan_KF(d’)$ whose components are
+given by $\bar\lam^{d’}_{f\co Kc\to d} := \lam^{d’}_{gf\co Kc\to d’}$. By the
+universal property of the colimit $\Lan_KF(d)$, this induces a unique
+arrow $\Lan_KF(g)\co \Lan_KF(d)\to\Lan_KF(d’)$ factoring $\bar\lam^{d’}$ through
+$\lam^d$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/kan-formula-cone-arrow.png" width="100%"><figcaption></figcaption></figure>
+
+<p>Functoriality of $\Lan_KF$ follows from the uniqueness of this arrow<span class="note"><label for="uniqueness-functoriality" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="uniqueness-functoriality" class="margin-toggle"><span class="sidenote">If you have not verified a
+“functoriality-by-uniqueness” proof before, here is a good chance to do so.</span>.
+We recover the unit $\eta\co F\Ra\Lan_KF\circ K$ by defining</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\eta_c := \lam_{1_{Kc}\co Kc\to Kc}^{Kc}\co Fc\to\Lan_KF(Kc)\qquad\forall c\in\C
+</script></div>
+
+<p>The naturality of $\eta$ is straightforward to verify using the action of $\Lan_KF$ on
+morphisms, while proof of the universal property of the left Kan extension is
+given by Riehl 6.2.1. $\diamond$</p>
+
+<h3 id="an-example-continuous-functions-in-the-reals">
+<a class="anchor" href="#an-example-continuous-functions-in-the-reals" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#an-example-continuous-functions-in-the-reals"></a>An example: Continuous functions in the reals</h3>
+
+<p>$\text{Problem.}$ Suppose we are given some subset $\S$ of the reals<span class="note"><label for="real-subsets" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="real-subsets" class="margin-toggle"><span class="sidenote">Good
+options are $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{Q}$, or $\R$ itself.</span>.
+When does a <a href="https://en.wikipedia.org/wiki/Monotonic_function">monotonic function</a>
+$f\co (\S, \le)\to(\R, \le)$ have both a left and right Kan extension along the
+inclusion $\iota\co \S\hookrightarrow\R$, and when are these extensions equal?</p>
+
+<p>$\text{Solution.}$ Applying the colimit formula for left Kan extensions, we see that $\Lan_\iota f\co \R\to\R$
+exists when $\forall r\in\R$ the diagram $\iota\downarrow r\xrightarrow{\Pi^r}\S\xrightarrow{f}\R$
+admits a colimit. This diagram is indexed by arrows $\iota(n\in\S)\to r$, and
+the image of each such arrow is $f(n)\in\R$; that is to say, if the colimit of this
+diagram exists, it is the supremum<span class="note"><label for="supremum" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="supremum" class="margin-toggle"><span class="sidenote">All colimits in a poset category are suprema
+of bounded subsets.</span> of $\left\{f(n) ~|~ n\le r\right\}$. Indeed this
+colimit exists, for $\left\{f(n) ~|~ n\le r\right\}$ is bounded above in $\R$,
+and all non-empty sets bounded above in $\R$ <a href="https://www.math.ucdavis.edu/~hunter/m125b/ch2.pdf">have a supremum</a>.
+Denoting the colimit cone at $r$ $\lam^r\co (\iota\downarrow r\xrightarrow{\Pi^r}\S\xrightarrow{f}\R)\Ra \sup\left\{f(n)~|~ n\le r\right\}$,
+we have that the unit $\eta\co f\Ra \Lan_\iota f\circ \iota$ of the left Kan
+extension is given by the components $\eta_n = \lambda_{1_{\iota n}}^{\iota n}$,
+which in particular demands the relation $f(n)\le \Lan_\iota f(n)$, hence it must be that
+$f(n)\le\sup\left\{f(q) ~|~ q\le n\right\}$ $\forall
+n\in\S$. But $f$ is monotonic, so this strictly implies $f(n)=\sup\left\{f(q) ~|~ q\le n\right\}$.
+That is to say, $f$ admits a left Kan extension along $\S\hookrightarrow\R$
+when $f$ is continuous on the left.</p>
+
+<p>Applying the dual limit formula for right Kan extensions, we find that a right
+Kan extension of $f$ along $\S\hookrightarrow\R$ demands
+$f(n)=\inf\left\{f(q) ~|~ q\ge n\right\}$ $\forall n\in\S$, which is to
+say that $f$ is continuous on the right.</p>
+
+<p>Putting this together, $\Lan_{\iota}f = \Ran_{\iota}f$ exactly when $f$ is
+continuous.<span class="note"><label for="continuous-function" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="continuous-function" class="margin-toggle"><span class="sidenote"><a href="https://math.vanderbilt.edu/bohmanar/">Anna Marie Bohmann</a> says this is
+probably a terrible way to first introduce the notion of continuous functions.
+But I say, this is exactly the viewpoint the <a href="https://ncatlab.org/nlab/">nLab</a>
+would want us to embrace. I’ll leave you to decide whether a graduate-level
+course on category theory should be part of a high school math curriculum.</span> $\square$</p>
+
+<p>These demands make intuitive sense as well. A left Kan extension of $f$ along
+the inclusion into $\R$ is in some sense the “best approximation” of $f$ in $\R$ “from the left”,
+so it seems natural that $f$ should be continuous at least on the left for this
+to make any sense.</p>
+
+<h2 id="absolute-kan-extensions">
+<a class="anchor" href="#absolute-kan-extensions" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#absolute-kan-extensions"></a>Absolute Kan Extensions</h2>
+
+<p>Before we get to more fun applications, we have to introduce some auxiliary
+definitions relating to Kan extensions. The first is analogous the preservation
+of (co)limits by certain functors.</p>
+
+<p>$\Def$ A functor $L\co \E\to\J$ <strong>preserves</strong> left Kan extensions if, for all
+left Kan extensions $(\Lan_K F, \eta)$ of $F\co \C\to\E$ along $K\co \C\to\D$,
+$(L\Lan_K F, L\eta)$ is a left Kan extension of $LF$ along $K$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/preserve-kan-ext.png" width="100%"><figcaption></figcaption></figure>
+
+<p>The notion of preservation for right Kan extensions is similar.</p>
+
+<p>A natural to question to ask is whether adjoints preserve Kan extensions, like
+they preserve (co)limits. Indeed</p>
+
+<p>$\Thm$ Left adjoints preserve left Kan extensions. Dually, right adjoints
+preserve right Kan extensions.</p>
+
+<p>$\text{Sketch}.$ Hint: Use the natural isomorphism defining an adjunction and the universal
+property of Kan extensions to construct a chain of natural isomorphisms
+demonstrating that $(L\Lan_K F, L\eta)$ is a left Kan extension of $LF$ along $K$.
+For details, or a visual proof via pasting diagrams, see Riehl 6.3.2. $\diamond$</p>
+
+<p>There is a certain class of Kan extensions that turn out to be surprisingly
+useful, and whose definition depends on the notion of preservation.</p>
+
+<p>$\Def$ A right Kan extension $\Ran_K F\co \D\to\E$ is <strong>pointwise</strong> if it is preserved
+by representable functors $\E(e, -)$ $\forall e\in\E$.</p>
+
+<p>The definition of a pointwise left Kan extension is dual, but the arrows of
+2-morphisms are reversed rather than the arrows of 1-morphisms.
+It turns out that a Kan extension is pointwise exactly when it can be computed
+by the (co)limit formula given earlier (Riehl 6.3.6, 6.3.7).</p>
+
+<p>Here is an interesting fact regarding pointwise Kan extensions.</p>
+
+<p>$\Thm$ If $\E$ is small and admits all small copowers<span class="note"><label for="copowers" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="copowers" class="margin-toggle"><span class="sidenote">Iterated coproducts of a single object</span>, all right Kan extensions with
+codomain $\E$ are pointwise. Dually, if $\E$ is small and admits all small
+powers, all left Kan extensions with codomain $\E$ are pointwise.</p>
+
+<p>$\Pf$ When $\E$ admits all copowers, a functor $\E\to\Set$ is representable <a href="https://ayazhafiz.com/articles/21/representability-coproducts-reflective-subcategories#46iii-representable-functors-from-categories-with-coproducts-are-described-exactly-by-a-left-adjoint">iff
+it has a left adjoint</a>.
+Hence, all representable functors $\E(e,-)$ are right adjoints, and right
+adjoints preserve right Kan extensions. $\square$</p>
+
+<p>Preservation by representables may seem somewhat arbitrary, and indeed we may
+want to ask if there are Kan extensions that are preserved by everything.
+Certainly these are even more rare, but they do exist.</p>
+
+<p>$\Def$ A Kan extension is <strong>absolute</strong> if it is preserved by all functors.</p>
+
+<p>At this point, these definitions may seem well and good but unsatisfying. Where do Kan
+extensions arise, and what are they good for? To answer
+this, perhaps it is best to tie the knot with other concepts in Category
+Theory and see how Kan extensions provide a categorical point-of-view in other
+mathematics. As a first application, let us further explore the relationship
+between adjunctions and Kan extensions.</p>
+
+<h2 id="adjoints-as-kan-extensions">
+<a class="anchor" href="#adjoints-as-kan-extensions" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#adjoints-as-kan-extensions"></a>Adjoints as Kan Extensions</h2>
+
+<p>We have seen that Kan extensions give rise to a certain class of adjunctions
+($\Lan_K\dashv K^*\dashv\Ran_K$). Do adjunctions give rise to Kan extensions?
+Certainly!</p>
+
+<p>$\Thm$ If $F\dashv G$ is an adjunction with unit $\eta$ and counit $\eps$,
+$(G,\eta)$ defines a left Kan extension of the identity along $F$, and $(F,\eps)$ defines
+a right Kan extension of the identity along $G$. Furthermore, both Kan
+extensions are absolute.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/adj-kan-ext.png" width="100%"><figcaption></figcaption></figure>
+
+<p>$\Pf$ An adjunction $F\dashv G$ gives rise to an adjunction between their
+precomposition functors. Specifically in the case of precomposing functors with
+codomain $\C$, there is an adjunction</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/adj-kan-ext-precomp-adj.png" width="30%"><figcaption></figcaption></figure>
+
+<p>But $\Lan_F\dashv F^*$, so $G^*\cong \Lan_F$ because adjoints are unique up to
+unique isomorphism. After checking some details (Riehl 6.5.2, 4.4.6), this tell
+us that the left Kan extension of $1_\mathsf{C}$ along $F$ is given by $(G, \eta)$.
+To show that this Kan extension is absolute, consider another functor $L\co
+\C\to\E$ and let $(H\co \D\to\E, \gamma\co L\Ra HF)$ be an extension of $L$
+along $F$. We claim that this factors through the preserved left Kan extension
+$(LG, L\eta)$ of $L$ along $F$ via $H\eta\circ\gamma G$. A series of pasting
+diagram rewrites, given by the naturality of $\gamma$ and the zig-zag/triangle
+identity of the adjunction $F\dashv G$ verifies this.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/adj-kan-ext-absolute-verification.png" width="100%"><figcaption></figcaption></figure>
+
+<p>To see that this factorization is unique, suppose there is a $\mu\co LG\Ra H$
+such that $\gamma = \mu F\circ L\eta$. Then by this definition, the naturality
+of $\mu$, and the zig-zag/triangle identity of the adjunction $F\dashv G$,</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/adj-kan-ext-unique.png" width="100%"><figcaption></figcaption></figure>
+
+<p>we see that the factorization $\gamma = \mu F\circ L\eta$ is equally $\gamma =
+(H\eta\circ\gamma G)F\circ L\eta$. By uniqueness, this demands $\mu =
+H\eta\circ\gamma G$. $\square$</p>
+
+<p>Naturally, adjunctions may also be recovered from Kan extensions of identities.</p>
+
+<p>$\Thm$ If $(G, \eta\co 1_\C\Ra GF)$ is a left Kan extension of $1_\C$ along $F$ and
+furthermore $F$ preserves this Kan extension, $F\dashv G$ is an adjunction with
+unit $\eta$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/kan-ext-to-adj-fig.png" width="100%"><figcaption></figcaption></figure>
+
+<p>$\Pf$ If the left Kan extension $(G,\eta)$ is preserved by $F$, $(FG, F\eta\co
+F\Ra FGF)$ is a left Kan extension of $F$ along itself. Taking the extension pair
+$(1_\D, 1_F)$, the universal property of the left Kan extension demands a unique
+$\eps\co FG\Ra 1_\D$ such that $1_F = \eps F\circ F\eta$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/kan-ext-to-adj-tid1.png" width="100%"><figcaption></figcaption></figure>
+
+<p>Taking $\eps$ to be the counit of the proposed adjunction, this demonstrates one
+zig-zag/triangle identity. To see the other, consider the extension pair
+$(G,\eta)$ of $1_\C$ along $F$; clearly, this factors through the left Kan
+extension $(G,\eta)$ (itself) via the identity. Rewriting the factorization
+pasting diagram using the already-demonstrated identity $1_F = \eps F\circ F\eta$,</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/kan-ext-to-adj-tid2.png" width="100%"><figcaption></figcaption></figure>
+
+<p>which communicates that the $(G,\eta)$ is factored through itself by
+$G\eps\circ\eta G$. By uniqueness of the universal property of the left Kan
+extension, this demands $1_G = G\eps\circ\eta G$. $\square$</p>
+
+<p>Where there is an adjunction there is a monad, so we can keep the conversation
+going - when can we recover monads from Kan extensions?</p>
+
+<h2 id="kan-extensions-as-monads">
+<a class="anchor" href="#kan-extensions-as-monads" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#kan-extensions-as-monads"></a>Kan Extensions as Monads</h2>
+
+<p>It turns out the demands to find a canonical monad from a Kan extension are
+looser than those of finding an adjunction in the manner presented above. In
+particular, there is no requirement of preservation.</p>
+
+<p>$\Thm$ When the right Kan extension of $G\co \D\to\C$ along itself exists<label for="codensity-monad" class="margin-toggle">⊕</label><input type="checkbox" id="codensity-monad" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/kan-ext-to-monad-tvis.png"><br></span>,
+this Kan extension induces a monad over $\C$, termed the <strong>codensity</strong><span class="note"><label for="codensity" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="codensity" class="margin-toggle"><span class="sidenote">We say
+a functor is <strong>dense</strong> if its left Kan extension along itself is the identity;
+dually, it is <strong>codense</strong> if its right Kan extension along itself is the identity. Applying the
+colimit formula for left Kan extensions, this says that given a dense functor $F\co\mathsf{S}\to\C$
+where $\mathsf{S}$ is a subcategory of $\C$, all objects in $\C$ are colimits of certain
+diagrams from $\mathsf{S}$. There is much more to this topic outside the scope of this
+post, including relationships to the <a href="https://ncatlab.org/nlab/show/co-Yoneda+lemma">(co)Yoneda Lemma</a>; the nLab provides a <a href="https://ncatlab.org/nlab/show/dense+functor">good
+overview</a>.</span> <strong>monad</strong> of
+$G$.
+In particular, defining $T:=\Ran_G G$, $\eps\co TG\Ra G$ as the counit of the right Kan extension, $\eta\co 1_C\Ra T$ as the unique
+factorization of $(1_\C, 1_G)$ through $(T,\eps)$, and $\mu\co T^2\Ra T$ as the
+unique factorization of $(T^2, \eps\circ T\eps)$ through $(T,\eps)$, the triple
+$(T, \eta, \mu)$ defines a monad on $C$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/kan-ext-to-monad-unit.png" width="100%"><figcaption></figcaption></figure>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/kan-ext-to-monad-multiplication.png" width="100%"><figcaption></figcaption></figure>
+
+<p>$\Pf$ First, we show the monadic commutativity condition $\mu\circ\mu T =
+\mu\circ T\mu$.<label for="monad-mult-commutativity" class="margin-toggle">⊕</label><input type="checkbox" id="monad-mult-commutativity" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/kan-ext-to-monad-mult-com.png"><br></span>
+Consider the extension pair $(T^3, \eps\circ T\eps\circ T^2\eps\co T^3G\Ra G)$.
+Applying the factorization defining $\mu$ two different ways,</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/kan-ext-to-monad-mult-com-proof.png" width="100%"><figcaption></figcaption></figure>
+
+<p>we see that both $\mu\circ\mu T$ (above left) and $\mu\circ T\mu$ (above right)
+factor $\eps\circ T\eps\circ T^2\eps$ through the right Kan extension. Uniqueness
+of this factorization demands $\mu\circ\mu T = \mu\circ T\mu$.</p>
+
+<p>For the monadic commutativity condition $\mu\circ\eta T = 1_T = \mu\circ T\eta$<label for="monad-mult-commutativity" class="margin-toggle">⊕</label><input type="checkbox" id="monad-mult-commutativity" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/kan-ext-to-monad-id-com.png"><br></span>,
+consider the extension pair $(T,\eps)$, which factors uniquely through itself
+via $1_T$. Applying the factorizations defining $\eta$ and $\mu$ two different
+ways,</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/kan-ext-to-monad-id-com-proof.png" width="100%"><figcaption></figcaption></figure>
+
+<p>we see that both $\mu\circ\eta T$ (above left) and $\mu\circ T\eta$ (above right)
+factor $\eps$ through itself. Again, uniqueness of this factorization demands $\mu\circ\eta T = \mu\circ T\eta$,
+and furthermore both composites must also equal $1_T$. $\square$</p>
+
+<p>Not only are codensity monads canonical, they are canonically canonical.</p>
+
+<p>$\Thm$ If $G$ admits a left adjoint $F$, then $G$ admits a codensity monad, and
+furthermore the codensity monad of $G$ is the canonical monad $(GF, \eta,
+G\epsilon F)$ induced by $F\dashv G$ where $\eta$, $\epsilon$ are the unit and
+counit of the adjunction, respectively.</p>
+
+<p>$\Pf$ When $F\dashv G$, $(F, \eta)$ is a right Kan extension of $1_\D$ along $G$.
+Right adjoints preserve right Kan extensions, so $(GF, G\eta)$ is a right Kan
+extension of $G$ along itself, which is to say the codensity monad of $G$ is
+given by $GF$. This is exactly the endofunctor of the canonical monad induced by
+$F\dashv G$. $G\eps \circ \eta G = 1_G$ by one triangle identity, so $\eta$ is
+the multiplication of the condensity monad. By the naturality of $G\eps$, $G\eps\circ GFG\eps = G\eps\circ
+G\eps FG$<label for="naturality-Ge" class="margin-toggle">⊕</label><input type="checkbox" id="naturality-Ge" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/kan-ext-monad-canonical-nat.png"><br></span>, so $G\eps F$ is the
+multiplication of the codensity monad. $\square$</p>
+
+<h2 id="an-application-in-homotopy">
+<a class="anchor" href="#an-application-in-homotopy" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#an-application-in-homotopy"></a>An Application in Homotopy</h2>
+
+<p>To finish off this tour, let’s see a role Kan extensions play in the field they
+first arose from. To start, we need to define a weak notion of isomorphism.</p>
+
+<p>$\Def$ A class of morphisms $M$ in a category $\C$ satisfies the <strong>2-of-6 property</strong> if for any
+composable triple $f,g,h\in \text{mor}(\C)$, $hg, gf\in M\implies f,g,h,hgf\in M$.</p>
+
+<p>$\Def$ For a category $\C$, a class of <strong>weak equivalences</strong> is a class of morphisms $W\subseteq
+\text{mor}(\C)$ containing all the identities and satisfying the 2-of-6
+property.</p>
+
+<p>It is straightforward to show that all isomorphisms are weak equivalences. Now,
+here’s where the homotopy comes in.</p>
+
+<p>$\Def$ A category equipped with a class of weak equivalences is a <strong>homotopical
+category</strong>.</p>
+
+<p>$\Def$ A functor is <strong>homotopical</strong> if it is between homotopical categories, and
+it preserves weak equivalences.</p>
+
+<p>It is similarly straightforward to show that an endofunctor $F$ on a
+homotopical category $\C$ is a homotopical functor if it is equipped with a natural
+weak equivalence<span class="note"><label for="nat-weak-eq" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="nat-weak-eq" class="margin-toggle"><span class="sidenote">That is, a natural transformation whose components are all weak equivalences.</span>
+to ($\require{extpfeil}\Newextarrow{\xRightarrow}{5,5}{0x21D2}F\xRightarrow{\sim}1_\C$) or from ($1_\C\xRightarrow{\sim}F$)
+the identity.</p>
+
+<p>Now suppose that $\C$ is a homotopical category, and there is some functor
+$F\co \C\to\D$ taking the weak equivalences to isomorphisms. It turns out that
+such functors arise frequently in homotopy, and so it may be natural to ask what
+it means to have an initial or final object in the category of such functors.
+The final object is not that interesting<span class="note"><label for="final-localization" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="final-localization" class="margin-toggle"><span class="sidenote">what is
+it?</span>, but the universal property of the initial object certainly is.</p>
+
+<p>$\Def$ For any homotopical category $\C$, there is a <a href="https://ncatlab.org/nlab/show/homotopy+category"><strong>homotopy category</strong></a>
+$\HoC$ and a universal <strong>localization functor</strong> $Q_\C\co \C\to\HoC$ that is initial in the category of functors that takes weak
+equivalences in $\C$ to isomorphisms.</p>
+
+<p>What a homotopy category looks like doesn’t matter too much for us, but a good
+intuition for its shape is given by the homotopical notion that many arrows can
+be seen as equivalent or invertible up to homotopy. For more details, <a href="https://en.wikipedia.org/wiki/Localization_of_a_category">Wikipedia</a>
+has a nice construction, as does <a href="https://people.math.rochester.edu/faculty/doug/otherpapers/GZ.pdf">Gabriel and Zisman, 67</a>.</p>
+
+<p>Now suppose we have a homotopical functor $\C\to\D$. We may be interested in
+the “localization” of this functor; that is, does this functor induce a
+functor $\HoC\to\HoD$ between homotopy categories, and if so, what does such a
+functor look like? Maybe you already see where this is going - we can phrase
+these questions as extension problems.</p>
+
+<p>$\Def$ Let $F\co \C\to\D$ be a homotopical functor. When it exists, the right
+Kan extension $\dL F:=\Ran_{Q_\C}Q_\D F$ of $Q_\D F$ along $Q_\C$ defines
+the <strong>total left derived functor</strong> of $F$.</p>
+
+<p>Dually, when it exists, the left Kan extension $\dR F:=\Lan_{Q_\C}Q_\D F$
+defines the <strong>total right derived functor</strong> of $F$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/derived-functor-vis.png" width="100%"><figcaption></figcaption></figure>
+
+<p>Since total derived functors are in some sense an approximation of a homotopical
+functor, it is reasonable to ask if a total derived functor observes the same
+functorial properties as the functor it was derived from. More generally, we
+could pose this question for any Kan extension; indeed in general there is no
+reason this should be true, but <a href="https://pdf.sciencedirectassets.com/272266/1-s2.0-S1631073X07X01195/1-s2.0-S1631073X07001045/main.pdf?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEgaCXVzLWVhc3QtMSJHMEUCIBA8%2Bhe%2Fwolh%2BgVj1HrkBCFR1sJmKraNzbOEAdeyHJ2EAiEAr90Aq498yRp7mySYPyiSBxP9oufr%2FrzWq8%2BP6XTEMh8qvQMIwP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwNTkwMDM1NDY4NjUiDD2aAC%2FjZCkdUjfmyCqRA%2FmgZRsr51e4dOSUVpJdTAEtyY1o%2BL444sxo3Go9hwMjTMcQ0QbYnzCIrttJc1eVc3khR26h8xqRjoH5aoJ%2Bt2L2%2BsaCmKo62wJzKoDzD6iAZ0NKDNdvoYYrRnXVaRr0HFhmUa2PK8kc%2BJXQOppmiG6KnGTkz9FvLNv86KLCj4GqUddyZAM3fijzR76IHei4C%2BlZZpkizlq4q6JiO3E9SC3L9%2F26ad%2FAR3qNiJ3815taTqz2oWzXg9EJtg76TU72FeP40mWH6SxD6PEbwHd6D5teDrLu%2FuqK3Xl9g%2FwaXwcb3%2BtWrRAbJcHQr39lGkykCmTd82rD01JyEHEzwUrc62R7A3Jh91O9TkgQVTbY4akYXR21IDGLGc4QCTj9M5EGgQ8Qep8yUbtsPHKJH6Hi4ga1WQkn%2BWy%2FSHOu1tDHtLZ%2FewNkXYXLAWxaVDBNfPA44rBnT3qkVBd2FDl7KyTaJ%2B0OBOtPWfkvSgJ0N5Rtc3P6Lx0ZGvc2Qkbi%2BRYdG0GOHbuFfacDy1crZ%2BSG74gqnqNcML%2BEu4QGOusBgSGJiNPa%2FOnFKeMsvEYCm0Y0lQTuRI40mM0OW%2FbLPjAZldJG0t87VZfkHQqswkd4tbMEn5g5sdobIOnCP5%2BqqWnRiWnh5ZV6rBy4gTjLKAq8NpJxcMgthpJMLzrvIdoMZkX4Q15WKLMd06xDoxQLjcERjibxyuuUR24JHERQLrPQ%2BWkjk4laFWZXFO6ihUO5XAky%2FDHCsa2QVNDLI1XrWP4siUzDOmOwFXFFusqJXi9Xt3qNoARd0ZILSwm%2FGBj0ALhlsWDoywOH%2F43qJVW3Q4uhzvUaP6Rl1OQJNaM8gy1cBFVKb5%2FYhW69Jg%3D%3D&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20210502T165001Z&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Expires=300&amp;X-Amz-Credential=ASIAQ3PHCVTYWE6KRSVG%2F20210502%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Signature=76097881aa89c6b5cc0e732f2a55d58ee7f2a01aee3603d7a1b90b8f2064e414&amp;hash=4f750508a13b8fc69bffb7f61ac6ac9245656bc45686c7676450eb59797123ec&amp;host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&amp;pii=S1631073X07001045&amp;tid=spdf-b31a761f-213c-4eec-97a6-43b88b1d81e9&amp;sid=5f61f1133d98494bf35b0bf3724d535aa0abgxrqa&amp;type=client">Maltsiniotis</a>
+has found a preservation in the former case.</p>
+
+<p>$\Thm$ Let $F\co \C\leftrightarrows\D \co G$ be homotopical functors where
+$F\dashv G$. Suppose furthermore that $F$ has a total left derived functor $\dL F$
+and $G$ has a total right derived functor $\dR G$, where both total derived
+functors are absolute Kan extensions. Then there is an adjunction $\dL
+F\dashv\dR G$.</p>
+
+<p>$\Pf$ Let $Q_\C\co \C\to\HoC$ and $Q_\D\co \D\to\HoD$ be the appropriate
+localization functors, $(\dL F, \phi)$ be the absolute right Kan extension of $Q_\D F$
+along $Q_\C$ constituting the total left derived functor of $F$, and $(\dR G,
+\psi)$ be the absolute left Kan extension of $Q_\C G$ along $Q_\D$ constituting the total
+right derived functor of $G$.<label for="left-kan" class="margin-toggle">⊕</label><input type="checkbox" id="left-kan" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/derived-functor-lf-rg-vis.png"><br></span> Furthermore, let $\bar\eta$ and $\bar\eps$ be the
+unit and counit of the adjunction $F\dashv G$, respectively.</p>
+
+<p>Consider the extension pair $\displaystyle\left(1_\HoC, Q_\C\xRightarrow{Q_\C\bar\eta}Q_\C GF\xRightarrow{\psi F}\dR GQ_\D F\right)$.
+Since $(\dL F, \phi)$ is an absolute right Kan extension, $(\dR G\dL F, \dR
+G\phi)$ is a right Kan extension of $\dR GQ_\D F$ along $Q_\C$. By the
+universal property of this Kan extension, $\exists! \eta\co 1_\HoC\Ra\dR G\dL F$
+such that $\dR G\phi\circ\eta Q_\C = \psi F\circ Q_\C\bar\eta$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/derived-functor-unit.png" width="100%"><figcaption></figcaption></figure>
+
+<p>Consider the extension pair $\displaystyle\left(1_\HoD, \dL FQ_\C G\xRightarrow{\phi G}Q_\D FG\xRightarrow{Q_\D\bar\eps}Q_\D\right)$.
+$(\dL F\dR G, \dL F\psi)$ is a left Kan extension of $\dL FQ_\C G$ along
+$Q_\D$, and by the universal property of this Kan extension $\exists! \eps\co
+\dL F\dR G\Ra 1_\HoD$ such that $\eps Q_\D\circ\dL F\psi =
+Q_\D\bar\eps\circ\phi G$.</p>
+
+<figure class="fullwidth"><img src="/assets/img/kan-ext/derived-functor-counit.png" width="100%"><figcaption></figcaption></figure>
+
+<p>We claim that $\eta$, $\eps$ form the unit and counit of an adjunction $\dL
+F\dashv\dR G$. To verify the zig-zag identity $\eps \dL F\circ\dL F\eta =
+1_{\dL F}$, consider that $1_{\dL F}$ is the unique 2-morphism factoring the
+right Kan extension $(\dL F, \phi)$ through itself; that is, $\phi = \phi\circ
+1_{\dL F}Q_\C$. But also,<label for="nat-of-phi-epsilon" class="margin-toggle">⊕</label><input type="checkbox" id="nat-of-phi-epsilon" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/kan-ext/derived-functor-nat-of-phi-epsilon.png"><br></span></p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align}
+\phi&=\dL FQ_\C\xRa{\phi}Q_\D F\xRa{Q_\D 1_F}Q_\D F\\
+&=\dL FQ_\C\xRa{\phi}Q_\D F\xRa{Q_\D F\bar\eta}Q_\D FGF\xRa{Q_\D \bar\eps F}Q_\D F && \text{(by zig-zag identity)}\\
+&=\dL FQ_\C\xRa{\dL FQ_\C\bar\eta}\dL FQ_\C GF\xRa{\phi GF}Q_\D FGF\xRa{Q_\D \bar\eps F}Q_\D F && \text{(by naturality of $\phi$)}\\
+&=\dL FQ_\C\xRa{\dL FQ_\C\bar\eta}\dL FQ_\C GF\xRa{\dL F\psi F}\dL F\dR GQ_\D F\xRa{\eps Q_\D F}Q_\D F && \text{(by $\eps Q_\D\circ\dL F\psi = Q_\D\bar\eps\circ\phi G$)}\\
+&=\dL FQ_\C\xRa{\dL F\eta Q_\C}\dL F\dR G\dL F Q_\C\xRa{\dL F\dR G\phi}\dL F\dR GQ_\D F\xRa{\eps Q_\D F}Q_\D F && \text{(by $\dR G\phi\circ\eta Q_\C = \psi F\circ Q_\C\bar\eta$)}\\
+&=\dL FQ_\C\xRa{\dL F\eta Q_\C}\dL F\dR G\dL F Q_\C\xRa{\eps\dL FQ_\C}\dL FQ_\C\xRa{\phi}Q_\D F && \text{(by naturality of $\eps$)}\\
+&= \phi\circ(\eps\dL F\circ\dL F\eta)Q_\C
+\end{align}
+</script></div>
+
+<p>Uniqueness of this factorization demands $\eps\dL F\circ\dL F\eta = 1_{\dL F}$.
+Verification of the zig-zag identity $\dR G\eps\circ\eta\dR G= 1_{\dR G}$
+proceeds similarly. $\square$</p>
+
+<h2 id="extension-problems">
+<a class="anchor" href="#extension-problems" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#extension-problems"></a>Extension Problems</h2>
+
+<ol>
+  <li>
+    <p>Describe (co)limits in terms of Kan extensions. (There are at least two ways
+to do so; see Riehl 6.3.10 and 6.5.1).</p>
+  </li>
+  <li>
+    <p>Choose your favorite functor $K\co \C\to\Set$ that admits both a left and right
+adjoint. Express that functor as a precomposition functor between functor
+categories<span class="note"><label for="precomposition-functor" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="precomposition-functor" class="margin-toggle"><span class="sidenote">Hint: think about mapping out
+of the terminal category $\1$.</span>, and compute the left and right adjoints
+of $K$ using the (co)limit formulas for Kan extensions and the fact that
+$\Lan_K\dashv K^*\dashv\Ran_K$.</p>
+  </li>
+  <li>
+    <p>Find an absolute Kan extension that is different from the Kan extensions
+induced by an adjunction.</p>
+  </li>
+  <li>
+    <p>State the universal property of Kan extensions precisely - that is, what is
+the category in which left Kan extensions are initial, and what is the
+category in which right Kan extensions are final?</p>
+  </li>
+  <li>
+    <p>Continuing from (4), over what diagrams are Kan extensions (co)limits?</p>
+  </li>
+  <li>
+    <p>Show that the 2-of-6 property implies the <strong>2-of-3 property</strong>: If any two of $f$, $g$,
+or $gf$ are weak equivalences, so is the third. Use this to complete the proofs
+mentioned as “straightforward” in the homotopy section.</p>
+  </li>
+  <li>
+    <p>(For the programmers in the room.) Well-type what it means for a functor to a
+be a (left/right) Kan extension in your favorite functional language, making
+sure to encode the universal property. Then, choose your favorite functor,
+an extension, a Kan extension along that functor, and write a procedure to
+extract the universal property of the extension given any other functor.</p>
+  </li>
+</ol>
+
+<h2 id="resources">
+<a class="anchor" href="#resources" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#resources"></a>Resources</h2>
+
+<p>I hope you enjoyed this quick introduction to Kan extensions. For further
+context, you may be interested in any of the resources below.</p>
+
+<ul>
+  <li><a href="https://math.jhu.edu/~eriehl/context/">Riehl, <em>Category Theory in Context</em></a></li>
+  <li><a href="https://www.springer.com/gp/book/9780387984032">Mac Lane, <em>Categories for the Working Mathematician</em></a></li>
+  <li>The <a href="https://ncatlab.org/nlab/show/Kan+extension">nLab</a>
+</li>
+  <li><a href="https://bartoszmilewski.com/2017/04/17/kan-extensions/">Bartosz Milewski’s Programming Cafe</a></li>
+</ul>
+
+</article>
+
+<section class="footer">
+  
+  <a href="/articles/21/representability-coproducts-reflective-subcategories">« Representability, Coproducts, and Reflective Subcategories</a>
+  
+  <span><img class="emoji" title=":goat:" alt=":goat:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f410.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        N\lambda M\alpha = M^2\alpha
+      </script></span>
+  </span>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+  });
+</script>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

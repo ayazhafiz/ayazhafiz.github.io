@@ -1,0 +1,64 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsMzIsWzEsMCwiXFxtYXRoc2Z7Q30iXSxbNywwLCJcXG1hdGhzZntFfSJdLFs0LDMsIlxcbWF0aHNme0R9Il0sWzEsNSwiXFxtYXRoc2Z7Q30iXSxbNyw1LCJcXG1hdGhzZntFfSJdLFswLDYsIj0iXSxbMSw2LCJcXG1hdGhzZntDfSJdLFs0LDYsIlxcbWF0aHNme0R9Il0sWzQsNywiXFxtYXRoc2Z7RH0iXSxbNyw2LCJcXG1hdGhzZntFfSJdLFsxLDcsIlxcbWF0aHNme0N9Il0sWzcsNywiXFxtYXRoc2Z7RX0iXSxbNCw4LCJcXG1hdGhzZntEfSJdLFsxMCw2XSxbOSw1LCJMIl0sWzExLDUsIkhGIl0sWzExLDcsIkhGR0YiXSxbOSw3LCJMR0YiXSxbOCw2LCJcXHRleHR7Ynl9Il0sWzEsMTAsIlxcbWF0aHNme0N9Il0sWzcsMTAsIlxcbWF0aHNme0V9Il0sWzQsMTMsIlxcbWF0aHNme0R9Il0sWzgsMTEsIlxcdGV4dHtieX0iXSxbOSwxMCwiRiJdLFs5LDEyLCJGR0YiXSxbMTEsMTIsIkYiXSxbMCwxMSwiPSJdLFs4LDEsIlxcdGV4dHsgIH0iXSxbOSwwLCIgIl0sWzksMiwiICJdLFsxMSwwLCIgIl0sWzExLDIsIiAiXSxbMCwyLCJGIiwyXSxbMiwxLCJMRyIsMSx7ImN1cnZlIjotNX1dLFswLDEsIkwiXSxbMiwxLCJIRkciLDFdLFsyLDEsIkgiLDEseyJjdXJ2ZSI6NX1dLFszLDQsIkwiXSxbMyw2LCIiLDIseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs3LDQsIkgiLDJdLFszLDcsIkYiLDJdLFs2LDgsIkYiLDJdLFs3LDgsIkhGXFxldGEiLDAseyJsZXZlbCI6Mn1dLFs4LDksIkhGRyIsMl0sWzQsOSwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNiwxMCwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbOSwxMSwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMTAsMTIsIkYiLDJdLFsxMiwxMSwiRiIsMl0sWzgsMTIsIkhcXGVwc2lsb24gRiIsMCx7ImxldmVsIjoyfV0sWzE0LDE3LCJMXFxldGEiLDIseyJsZXZlbCI6Mn1dLFsxNCwxNSwiXFxnYW1tYSIsMCx7ImxldmVsIjoyfV0sWzE3LDE2LCJcXGdhbW1hIEdGIiwyLHsibGV2ZWwiOjJ9XSxbMTUsMTYsIkhGXFxldGEiLDAseyJsZXZlbCI6Mn1dLFsxOSwyMCwiTCJdLFsxOSwyMSwiRiIsMl0sWzIxLDIwLCJIIiwyLHsiY3VydmUiOjN9XSxbMjEsMjAsIkgiLDAseyJjdXJ2ZSI6LTN9XSxbMjMsMjQsIkZcXGV0YSIsMix7ImxldmVsIjoyfV0sWzI0LDI1LCJcXGVwc2lsb24gRiIsMix7ImxldmVsIjoyfV0sWzIzLDI1LCIxX0YiLDAseyJsZXZlbCI6Mn1dLFsyOCwyOSwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszMCwzMSwiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszNCwyLCJMXFxldGEiLDAseyJsYWJlbF9wb3NpdGlvbiI6MzAsIm9mZnNldCI6NSwic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjYwfX1dLFszMywzNSwiXFxnYW1tYSBHIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFszNSwzNiwiSFxcZXBzaWxvbiIsMix7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XSxbMzcsNywiXFxnYW1tYSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMH19XSxbNTcsNTYsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH0sInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNTQsMjEsIlxcZ2FtbWEiLDAseyJsYWJlbF9wb3NpdGlvbiI6MzAsIm9mZnNldCI6NSwic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjYwfX1dXQ==
+\begin{tikzcd}
+	& {\mathsf{C}} &&&&&& {\mathsf{E}} && { } && { } \\
+	&&&&&&&& {\text{\phantom{by}}} \\
+	&&&&&&&&& {\phantom{ABC}} && {\phantom{DE}} \\
+	&&&& {\mathsf{D}} \\
+	\\
+	& {\mathsf{C}} &&&&&& {\mathsf{E}} && L && HF \\
+	{=} & {\mathsf{C}} &&& {\mathsf{D}} &&& {\mathsf{E}} & {\text{by}} && {} \\
+	& {\mathsf{C}} &&& {\mathsf{D}} &&& {\mathsf{E}} && LGF && HFGF \\
+	&&&& {\mathsf{D}} \\
+	\\
+	& {\mathsf{C}} &&&&&& {\mathsf{E}} && F \\
+	{=} &&&&&&&& {\text{by}} \\
+	&&&&&&&&& FGF && F \\
+	&&&& {\mathsf{D}}
+	\arrow["F"', from=1-2, to=4-5]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "LG"{description}, curve={height=-45pt}, from=4-5, to=1-8]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "L", from=1-2, to=1-8]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "HFG"{description}, from=4-5, to=1-8]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "H"{description}, curve={height=45pt}, from=4-5, to=1-8]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "L", from=6-2, to=6-8]
+	\arrow[Rightarrow, no head, from=6-2, to=7-2]
+	\arrow["H"', from=7-5, to=6-8]
+	\arrow["F"', from=6-2, to=7-5]
+	\arrow["F"', from=7-2, to=8-5]
+	\arrow["HF\eta", Rightarrow, from=7-5, to=8-5]
+	\arrow["HFG"', from=8-5, to=7-8]
+	\arrow[Rightarrow, no head, from=6-8, to=7-8]
+	\arrow[Rightarrow, no head, from=7-2, to=8-2]
+	\arrow[Rightarrow, no head, from=7-8, to=8-8]
+	\arrow["F"', from=8-2, to=9-5]
+	\arrow["F"', from=9-5, to=8-8]
+	\arrow["{H\epsilon F}", Rightarrow, from=8-5, to=9-5]
+	\arrow["L\eta"', Rightarrow, from=6-10, to=8-10]
+	\arrow["\gamma", Rightarrow, from=6-10, to=6-12]
+	\arrow["{\gamma GF}"', Rightarrow, from=8-10, to=8-12]
+	\arrow["HF\eta", Rightarrow, from=6-12, to=8-12]
+	\arrow[""{name=5, anchor=center, inner sep=0}, "L", from=11-2, to=11-8]
+	\arrow["F"', from=11-2, to=14-5]
+	\arrow[""{name=6, anchor=center, inner sep=0}, "H"', curve={height=18pt}, from=14-5, to=11-8]
+	\arrow[""{name=7, anchor=center, inner sep=0}, "H", curve={height=-18pt}, from=14-5, to=11-8]
+	\arrow["F\eta"', Rightarrow, from=11-10, to=13-10]
+	\arrow["{\epsilon F}"', Rightarrow, from=13-10, to=13-12]
+	\arrow["{1_F}", Rightarrow, from=11-10, to=13-12]
+	\arrow[Rightarrow, draw=none, from=1-10, to=3-10]
+	\arrow[Rightarrow, draw=none, from=1-12, to=3-12]
+	\arrow["L\eta"{pos=0.3}, shift right=10, shorten <=12pt, shorten >=48pt, Rightarrow, from=1, to=4-5]
+	\arrow["{\gamma G}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=2]
+	\arrow["H\epsilon"', shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=3]
+	\arrow["\gamma", shorten <=3pt, Rightarrow, from=4, to=7-5]
+	\arrow[shorten <=6pt, shorten >=6pt, Rightarrow, no head, from=7, to=6]
+	\arrow["\gamma"{pos=0.3}, shift right=10, shorten <=12pt, shorten >=48pt, Rightarrow, from=5, to=14-5]
+\end{tikzcd}
+
+\end{document} 
+

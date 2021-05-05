@@ -1,0 +1,19 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsMixbMCwwLCJcXG1hdGhzZntFfV57XFxzZiBDfSJdLFsyLDAsIntcXHNmIEV9XntcXHNmIER9Il0sWzEsMCwiS14qIiwxXSxbMCwxLCJ7XFxzZiBMYW59X0siLDEseyJjdXJ2ZSI6LTR9XSxbMCwxLCJcXHRleHRzZntSYW59X0siLDEseyJjdXJ2ZSI6NH1dLFszLDIsIiIsMSx7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV0sWzIsNCwiIiwxLHsibGV2ZWwiOjEsInN0eWxlIjp7Im5hbWUiOiJhZGp1bmN0aW9uIn19XV0=
+\begin{tikzcd}
+	{\mathsf{E}^{\sf C}} && {{\sf E}^{\sf D}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{K^*}"{description}, from=1-3, to=1-1]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{{\sf Lan}_K}"{description}, curve={height=-24pt}, from=1-1, to=1-3]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{\textsf{Ran}_K}"{description}, curve={height=24pt}, from=1-1, to=1-3]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=2]
+\end{tikzcd}
+
+\end{document} 
+

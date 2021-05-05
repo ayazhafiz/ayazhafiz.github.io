@@ -1,0 +1,7 @@
+#!/bin/bash
+
+FILE="${1%.*}"
+DENSITY="${2:-300}"
+xelatex $FILE.tex
+rm $FILE.{aux,log}
+convert -density $DENSITY $FILE.pdf $FILE.png

@@ -7,6 +7,14 @@
 		<atom:link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>A Flying Tour of Kan Extensions</title>
+				<description>A half-hour, flying tour of Kan extensions with examples and applications in other mathematics.</description>
+				<pubDate>Tue, 27 Apr 2021 03:00:00 -0500</pubDate>
+				<link>https://ayazhafiz.com/articles/21/a-flying-tour-of-kan-extensions</link>
+				<guid isPermaLink="true">https://ayazhafiz.com/articles/21/a-flying-tour-of-kan-extensions</guid>
+			</item>
+		
+			<item>
 				<title>Representability, Coproducts, and Reflective Subcategories</title>
 				<description>Write-ups of interesting problems from Riehl's Category Theory in Context, sections 4.5 and 4.6.</description>
 				<pubDate>Fri, 02 Apr 2021 03:00:00 -0500</pubDate>
@@ -76,14 +84,6 @@
 				<pubDate>Thu, 16 Apr 2020 03:00:00 -0500</pubDate>
 				<link>https://ayazhafiz.com/articles/20/beauty</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/beauty</guid>
-			</item>
-		
-			<item>
-				<title>Scaling Up</title>
-				<description>We need to think about how to scale up effectively.</description>
-				<pubDate>Sun, 29 Mar 2020 03:00:00 -0500</pubDate>
-				<link>https://ayazhafiz.com/articles/20/scaling-up</link>
-				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/scaling-up</guid>
 			</item>
 		
 	</channel>

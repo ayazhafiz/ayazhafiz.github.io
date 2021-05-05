@@ -1,0 +1,35 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsMTEsWzAsMCwiXFxtYXRoc2Z7RH0iXSxbMiwyLCJcXG1hdGhzZntEfSJdLFsyLDAsIlxcbWF0aHNme0N9Il0sWzQsMiwiXFxtYXRoc2Z7SG9EfSJdLFs0LDAsIlxcbWF0aHNme0hvQ30iXSxbNiwwLCJcXG1hdGhzZntIb0R9Il0sWzcsMCwiXFxtYXRoc2Z7RH0iXSxbOSwwLCJcXG1hdGhzZntDfSJdLFsxMSwwLCJcXG1hdGhzZntIb0N9Il0sWzEzLDAsIlxcbWF0aHNme0hvRH0iXSxbOSwyLCJcXG1hdGhzZntIb0R9Il0sWzAsMSwiMV97XFxtYXRoc2Z7RH19IiwyLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwyLCJHIl0sWzIsMSwiRiJdLFsyLDQsIlFfXFxtYXRoc2YgQyJdLFsxLDMsIlFfXFxtYXRoc2YgRCIsMl0sWzQsMywiXFxtYXRoYmYgTEYiXSxbNCw1LCJcXG1hdGhiZiBMIEYiXSxbMyw1LCIxX3tcXG1hdGhzZntIb0R9fSIsMix7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsMSwiXFxwaGkiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6NDB9LCJsZXZlbCI6Mn1dLFs2LDcsIkYiXSxbNyw4LCJRX1xcbWF0aHNmIEMiXSxbOCw5LCJcXG1hdGhiZiBMRiJdLFs2LDEwLCJRX1xcbWF0aHNmIEQiLDJdLFsxMCw5LCJcXG1hdGhiZiBMRlxcbWF0aGJmIFJHIiwxLHsiY3VydmUiOi0zfV0sWzEwLDksIjFfXFxtYXRoc2Z7SG9EfSIsMSx7ImN1cnZlIjozLCJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs3LDEwLCJcXHF1YWRcXG1hdGhiZiBMRlxccHNpIiwwLHsibGFiZWxfcG9zaXRpb24iOjMwLCJvZmZzZXQiOjMsInNob3J0ZW4iOnsic291cmNlIjoxMCwidGFyZ2V0Ijo2MH0sImxldmVsIjoyfV0sWzI0LDI1LCJcXGV4aXN0cyEgXFxlcHNpbG9uIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFsyLDExLCJcXGJhclxcZXBzaWxvbiIsMCx7InNob3J0ZW4iOnsic291cmNlIjozMCwidGFyZ2V0IjozMH19XSxbMTgsMjMsIiIsMix7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0Ijo0MH0sInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+\begin{tikzcd}
+	{\mathsf{D}} && {\mathsf{C}} && {\mathsf{HoC}} && {\mathsf{HoD}} & {\mathsf{D}} && {\mathsf{C}} && {\mathsf{HoC}} && {\mathsf{HoD}} \\
+	\\
+	&& {\mathsf{D}} && {\mathsf{HoD}} &&&&& {\mathsf{HoD}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{1_{\mathsf{D}}}"', Rightarrow, no head, from=1-1, to=3-3]
+	\arrow["G", from=1-1, to=1-3]
+	\arrow["F", from=1-3, to=3-3]
+	\arrow["{Q_\mathsf C}", from=1-3, to=1-5]
+	\arrow["{Q_\mathsf D}"', from=3-3, to=3-5]
+	\arrow["{\mathbf LF}", from=1-5, to=3-5]
+	\arrow["{\mathbf L F}", from=1-5, to=1-7]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{1_{\mathsf{HoD}}}"', Rightarrow, no head, from=3-5, to=1-7]
+	\arrow["\phi", shorten <=22pt, shorten >=22pt, Rightarrow, from=1-5, to=3-3]
+	\arrow["F", from=1-8, to=1-10]
+	\arrow["{Q_\mathsf C}", from=1-10, to=1-12]
+	\arrow["{\mathbf LF}", from=1-12, to=1-14]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{Q_\mathsf D}"', from=1-8, to=3-10]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{\mathbf LF\mathbf RG}"{description}, curve={height=-18pt}, from=3-10, to=1-14]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "{1_\mathsf{HoD}}"{description}, curve={height=18pt}, Rightarrow, no head, from=3-10, to=1-14]
+	\arrow["{\quad\mathbf LF\psi}"{pos=0.3}, shift right=3, shorten <=3pt, shorten >=19pt, Rightarrow, from=1-10, to=3-10]
+	\arrow["{\exists! \epsilon}"', shorten <=5pt, shorten >=5pt, Rightarrow, from=3, to=4]
+	\arrow["\bar\epsilon", shorten <=8pt, shorten >=8pt, Rightarrow, from=1-3, to=0]
+	\arrow[shorten <=52pt, shorten >=52pt, Rightarrow, no head, from=1, to=2]
+\end{tikzcd}
+
+\end{document} 
+

@@ -1,0 +1,17 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsMixbMCwwLCJcXG1hdGhzZntDfV5cXG1hdGhzZntEfSJdLFsyLDAsIlxcbWF0aHNme0N9XlxcbWF0aHNme0N9Il0sWzAsMSwiRl4qIiwyLHsiY3VydmUiOjN9XSxbMSwwLCJHXioiLDIseyJjdXJ2ZSI6M31dLFszLDIsIiIsMix7ImxldmVsIjoxLCJzdHlsZSI6eyJuYW1lIjoiYWRqdW5jdGlvbiJ9fV1d
+\begin{tikzcd}
+	{\mathsf{C}^\mathsf{D}} && {\mathsf{C}^\mathsf{C}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{F^*}"', curve={height=18pt}, from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{G^*}"', curve={height=18pt}, from=1-3, to=1-1]
+	\arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=1, to=0]
+\end{tikzcd}
+
+\end{document} 
+

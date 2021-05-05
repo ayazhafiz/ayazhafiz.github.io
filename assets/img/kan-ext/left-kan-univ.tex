@@ -1,0 +1,25 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsNyxbMCwwLCJcXG1hdGhzZntDfSJdLFsyLDIsIlxcbWF0aHNme0R9Il0sWzQsMCwiXFxtYXRoc2Z7RX0iXSxbNSwxLCI9Il0sWzYsMCwiXFxtYXRoc2YgQyJdLFsxMCwwLCJcXG1hdGhzZiBFIl0sWzgsMiwiXFxtYXRoc2YgRCJdLFswLDIsIkYiXSxbMCwxLCJLIiwyXSxbMSwyLCJHIiwyXSxbNCw2LCJLIiwyXSxbNCw1LCJGIl0sWzYsNSwiXFxtYXRoc2Z7TGFufV9LIEYiLDEseyJjdXJ2ZSI6LTN9XSxbNiw1LCJHIiwyLHsiY3VydmUiOjN9XSxbNywxLCJcXGdhbW1hIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfX1dLFsxMSw2LCJcXGV0YSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMCwib2Zmc2V0Ijo1LCJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6NjB9fV0sWzEyLDEzLCJcXGV4aXN0cyFcXG11IiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+\begin{tikzcd}
+	{\mathsf{C}} &&&& {\mathsf{E}} && {\mathsf C} &&&& {\mathsf E} \\
+	&&&&& {=} \\
+	&& {\mathsf{D}} &&&&&& {\mathsf D}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", from=1-1, to=1-5]
+	\arrow["K"', from=1-1, to=3-3]
+	\arrow["G"', from=3-3, to=1-5]
+	\arrow["K"', from=1-7, to=3-9]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "F", from=1-7, to=1-11]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{\mathsf{Lan}_K F}"{description}, curve={height=-18pt}, from=3-9, to=1-11]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "G"', curve={height=18pt}, from=3-9, to=1-11]
+	\arrow["\gamma", shorten <=15pt, shorten >=15pt, Rightarrow, from=0, to=3-3]
+	\arrow["\eta"{pos=0.3}, shift right=5, shorten <=7pt, shorten >=22pt, Rightarrow, from=1, to=3-9]
+	\arrow["{\exists!\mu}"', shorten <=6pt, shorten >=6pt, Rightarrow, from=2, to=3]
+\end{tikzcd}
+
+\end{document} 
+

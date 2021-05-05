@@ -1,0 +1,26 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsNyxbMCwwLCJcXG1hdGhzZntEfSJdLFs0LDAsIlxcbWF0aHNme0N9Il0sWzIsMiwiXFxtYXRoc2Z7Q30iXSxbNSwxLCI9Il0sWzYsMCwiXFxtYXRoc2Z7RH0iXSxbMTAsMCwiXFxtYXRoc2Z7Q30iXSxbOCwyLCJcXG1hdGhzZntDfSJdLFswLDEsIkciXSxbMCwyLCJHIiwyXSxbMiwxLCIiLDIseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDUsIkciXSxbNCw2LCJHIiwyXSxbNiw1LCJUIiwxLHsiY3VydmUiOi0zfV0sWzYsNSwiIiwxLHsiY3VydmUiOjMsImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsNywiMV9HIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfX1dLFs2LDEwLCJcXGVwc2lsb24iLDIseyJsYWJlbF9wb3NpdGlvbiI6NzAsIm9mZnNldCI6LTUsInNob3J0ZW4iOnsic291cmNlIjo2MCwidGFyZ2V0IjoyMH19XSxbMTMsMTIsIlxcZXhpc3RzIVxcZXRhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+\begin{tikzcd}
+	{\mathsf{D}} &&&& {\mathsf{C}} && {\mathsf{D}} &&&& {\mathsf{C}} \\
+	&&&&& {=} \\
+	&& {\mathsf{C}} &&&&&& {\mathsf{C}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "G", from=1-1, to=1-5]
+	\arrow["G"', from=1-1, to=3-3]
+	\arrow[Rightarrow, no head, from=3-3, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "G", from=1-7, to=1-11]
+	\arrow["G"', from=1-7, to=3-9]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "T"{description}, curve={height=-18pt}, from=3-9, to=1-11]
+	\arrow[""{name=3, anchor=center, inner sep=0}, curve={height=18pt}, Rightarrow, no head, from=3-9, to=1-11]
+	\arrow["{1_G}"', shorten <=15pt, shorten >=15pt, Rightarrow, from=3-3, to=0]
+	\arrow["\epsilon"'{pos=0.7}, shift left=5, shorten <=22pt, shorten >=7pt, Rightarrow, from=3-9, to=1]
+	\arrow["{\exists!\eta}", shorten <=6pt, shorten >=6pt, Rightarrow, from=3, to=2]
+\end{tikzcd}
+
+\end{document} 
+

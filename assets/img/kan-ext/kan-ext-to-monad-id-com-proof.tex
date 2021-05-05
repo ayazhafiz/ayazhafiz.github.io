@@ -1,0 +1,90 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsNDYsWzMsMCwiXFxtYXRoc2Z7RH0iXSxbNywwLCJcXG1hdGhzZntDfSJdLFs1LDIsIlxcbWF0aHNme0N9Il0sWzYsNCwiXFxtYXRoc2Z7RH0iXSxbMTAsNCwiXFxtYXRoc2Z7Q30iXSxbMTAsNiwiXFxtYXRoc2Z7Q30iXSxbOCw2LCJcXG1hdGhzZntDfSJdLFs2LDgsIlxcbWF0aHNme0R9Il0sWzEwLDgsIlxcbWF0aHNme0N9Il0sWzEwLDEwLCJcXG1hdGhzZntDfSJdLFs4LDEwLCJcXG1hdGhzZntDfSJdLFs4LDgsIlxccGhhbnRvbTEiXSxbNiwxMiwiXFxtYXRoc2Z7RH0iXSxbMTAsMTIsIlxcbWF0aHNme0N9Il0sWzEwLDE0LCJcXG1hdGhzZntDfSJdLFs4LDE0LCJcXG1hdGhzZntDfSJdLFs4LDEzLCJcXHBoYW50b20xIl0sWzgsMTIsIlxccGhhbnRvbTEiXSxbMCw0LCJcXG1hdGhzZntEfSJdLFs0LDYsIlxcbWF0aHNme0N9Il0sWzIsNiwiXFxtYXRoc2Z7Q30iXSxbMCw4LCJcXG1hdGhzZntEfSJdLFs0LDgsIlxcbWF0aHNme0N9Il0sWzIsMTAsIlxcbWF0aHNme0N9Il0sWzAsMTIsIlxcbWF0aHNme0R9Il0sWzQsMTIsIlxcbWF0aHNme0N9Il0sWzQsMTQsIlxcbWF0aHNme0N9Il0sWzIsMTQsIlxcbWF0aHNme0N9Il0sWzksOSwiXFxwaGFudG9tMSJdLFs5LDgsIlxccGhhbnRvbTEiXSxbOSw1LCJcXHBoYW50b20xIl0sWzksNCwiXFxwaGFudG9tMSJdLFs0LDEwLCJcXG1hdGhzZntDfSJdLFszLDksIlxccGhhbnRvbTEiXSxbMyw4LCJcXHBoYW50b20xIl0sWzQsNCwiXFxtYXRoc2Z7Q30iXSxbMyw1LCJcXHBoYW50b20xIl0sWzMsNCwiXFxwaGFudG9tMSJdLFsyLDgsIlxccGhhbnRvbTEiXSxbMiw0LCJcXHBoYW50b20xIl0sWzIsMTIsIlxccGhhbnRvbTEiXSxbOCw0LCJcXHBoYW50b20xIl0sWzQsMTMsIlxccGhhbnRvbTEiXSxbNCw5LCJcXHBoYW50b20xIl0sWzksMTAsIlxccGhhbnRvbTEiXSxbOSwxNCwiXFxwaGFudG9tMSJdLFswLDEsIkciXSxbMCwyLCJHIiwyXSxbMiwxLCJUIiwxLHsiY3VydmUiOi0zfV0sWzIsMSwiVCIsMSx7ImN1cnZlIjozfV0sWzMsNSwiRyIsMSx7ImN1cnZlIjotM31dLFszLDQsIkciXSxbNSw0LCJUIiwyXSxbMyw2LCJHIiwyXSxbNiw1LCIiLDIseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs3LDgsIkciXSxbOSw4LCJUIiwyXSxbNywxMCwiRyIsMl0sWzEwLDksIiIsMix7ImN1cnZlIjo0LCJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxMCw5LCJUIiwxXSxbMTUsMTQsIlQiLDFdLFsxNSwxNCwiIiwyLHsiY3VydmUiOjQsImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEyLDE1LCJHIiwyXSxbMTQsMTMsIlQiLDJdLFsxMiwxMywiRyJdLFsxNSwxMywiVCIsMV0sWzE4LDIwLCJHIiwyXSxbMjAsMTksIlQiLDJdLFsyNiwyNSwiVCIsMV0sWzI3LDI2LCJUIiwyXSxbMjYsMjUsIiIsMSx7ImN1cnZlIjo0LCJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyNywyNSwiVCJdLFsyNCwyNywiRyIsMl0sWzI0LDI1LCJHIl0sWzI4LDI5LCJcXGVwc2lsb24iLDIseyJvZmZzZXQiOjUsImxldmVsIjoyfV0sWzIxLDMyLCJHIiwxLHsiY3VydmUiOi0zfV0sWzIxLDIzLCJHIiwyXSxbMjMsMzIsIlQiLDJdLFsyMSwyMiwiRyJdLFsyMiwzMiwiVCIsMV0sWzMzLDM0LCJcXGVwc2lsb24iLDIseyJvZmZzZXQiOjUsImxldmVsIjoyfV0sWzMyLDIyLCIiLDIseyJjdXJ2ZSI6NCwibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMTgsMzUsIkciXSxbMzUsMTksIiIsMCx7ImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzE4LDE5LCJHIiwxLHsiY3VydmUiOi0zfV0sWzM2LDM3LCIxX0ciLDIseyJvZmZzZXQiOjUsImxldmVsIjoyfV0sWzcsOSwiRyIsMSx7ImN1cnZlIjotM31dLFszMCwzMSwiXFxlcHNpbG9uIiwyLHsib2Zmc2V0Ijo1LCJsZXZlbCI6Mn1dLFsyMywzOCwiXFxlcHNpbG9uIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwLCJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6NTB9LCJsZXZlbCI6Mn1dLFsyMCwzOSwiXFxlcHNpbG9uIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwLCJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6NTB9LCJsZXZlbCI6Mn1dLFsyNyw0MCwiXFxlcHNpbG9uIiwyLHsibGFiZWxfcG9zaXRpb24iOjcwLCJzaG9ydGVuIjp7InNvdXJjZSI6NjAsInRhcmdldCI6MjB9LCJsZXZlbCI6Mn1dLFs2LDQxLCIxX0ciLDIseyJsYWJlbF9wb3NpdGlvbiI6NDAsInNob3J0ZW4iOnsic291cmNlIjozMCwidGFyZ2V0Ijo1MH0sImxldmVsIjoyfV0sWzEwLDExLCJcXGVwc2lsb24iLDIseyJsYWJlbF9wb3NpdGlvbiI6NDAsInNob3J0ZW4iOnsic291cmNlIjozMCwidGFyZ2V0Ijo1MH0sImxldmVsIjoyfV0sWzE1LDE3LCJcXGVwc2lsb24iLDIseyJsYWJlbF9wb3NpdGlvbiI6NzAsInNob3J0ZW4iOnsic291cmNlIjo2MCwidGFyZ2V0IjoyMH0sImxldmVsIjoyfV0sWzIzLDQwLCIiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6NDB9LCJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyMCwzOCwiIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNiwxMSwiIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMTAsMTcsIiIsMix7InNob3J0ZW4iOnsic291cmNlIjozMCwidGFyZ2V0Ijo0MH0sImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQ4LDQ5LCIiLDEseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9LCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsNDYsIlxcZXBzaWxvbiIsMix7ImxhYmVsX3Bvc2l0aW9uIjo3MCwib2Zmc2V0IjotNSwic2hvcnRlbiI6eyJzb3VyY2UiOjYwLCJ0YXJnZXQiOjIwfX1dLFsyNiw3MSwiXFxtdSIsMCx7InNob3J0ZW4iOnsic291cmNlIjozMCwidGFyZ2V0IjozMH19XSxbMTQsNjUsIlxcbXUiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6MzB9fV0sWzIsODIsIiIsMix7InNob3J0ZW4iOnsic291cmNlIjozMCwidGFyZ2V0Ijo0MH0sInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw1MSwiIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjQwfSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs4MSw0MywiXFxldGEiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9fV0sWzcwLDQyLCJcXGV0YSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMH19XSxbNTgsNDQsIlxcZXRhIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwfX1dLFs2MSw0NSwiXFxldGEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9fV1d
+\begin{tikzcd}
+	&&& {\mathsf{D}} &&&& {\mathsf{C}} \\
+	\\
+	&&&&& {\mathsf{C}} \\
+	\\
+	{\mathsf{D}} && \phantom1 & \phantom1 & {\mathsf{C}} && {\mathsf{D}} && \phantom1 & \phantom1 & {\mathsf{C}} \\
+	&&& \phantom1 &&&&&& \phantom1 \\
+	&& {\mathsf{C}} && {\mathsf{C}} &&&& {\mathsf{C}} && {\mathsf{C}} \\
+	\\
+	{\mathsf{D}} && \phantom1 & \phantom1 & {\mathsf{C}} && {\mathsf{D}} && \phantom1 & \phantom1 & {\mathsf{C}} \\
+	&&& \phantom1 & \phantom1 &&&&& \phantom1 \\
+	&& {\mathsf{C}} && {\mathsf{C}} &&&& {\mathsf{C}} & \phantom1 & {\mathsf{C}} \\
+	\\
+	{\mathsf{D}} && \phantom1 && {\mathsf{C}} && {\mathsf{D}} && \phantom1 && {\mathsf{C}} \\
+	&&&& \phantom1 &&&& \phantom1 \\
+	&& {\mathsf{C}} && {\mathsf{C}} &&&& {\mathsf{C}} & \phantom1 & {\mathsf{C}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "G", from=1-4, to=1-8]
+	\arrow["G"', from=1-4, to=3-6]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "T"{description}, curve={height=-18pt}, from=3-6, to=1-8]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "T"{description}, curve={height=18pt}, from=3-6, to=1-8]
+	\arrow["G"{description}, curve={height=-18pt}, from=5-7, to=7-11]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "G", from=5-7, to=5-11]
+	\arrow["T"', from=7-11, to=5-11]
+	\arrow["G"', from=5-7, to=7-9]
+	\arrow[Rightarrow, no head, from=7-9, to=7-11]
+	\arrow["G", from=9-7, to=9-11]
+	\arrow["T"', from=11-11, to=9-11]
+	\arrow["G"', from=9-7, to=11-9]
+	\arrow[""{name=4, anchor=center, inner sep=0}, curve={height=24pt}, Rightarrow, no head, from=11-9, to=11-11]
+	\arrow["T"{description}, from=11-9, to=11-11]
+	\arrow["T"{description}, from=15-9, to=15-11]
+	\arrow[""{name=5, anchor=center, inner sep=0}, curve={height=24pt}, Rightarrow, no head, from=15-9, to=15-11]
+	\arrow["G"', from=13-7, to=15-9]
+	\arrow["T"', from=15-11, to=13-11]
+	\arrow["G", from=13-7, to=13-11]
+	\arrow[""{name=6, anchor=center, inner sep=0}, "T"{description}, from=15-9, to=13-11]
+	\arrow["G"', from=5-1, to=7-3]
+	\arrow["T"', from=7-3, to=7-5]
+	\arrow["T"{description}, from=15-5, to=13-5]
+	\arrow["T"', from=15-3, to=15-5]
+	\arrow[""{name=7, anchor=center, inner sep=0}, curve={height=24pt}, Rightarrow, no head, from=15-5, to=13-5]
+	\arrow[""{name=8, anchor=center, inner sep=0}, "T", from=15-3, to=13-5]
+	\arrow["G"', from=13-1, to=15-3]
+	\arrow["G", from=13-1, to=13-5]
+	\arrow["\epsilon"', shift right=5, Rightarrow, from=10-10, to=9-10]
+	\arrow["G"{description}, curve={height=-18pt}, from=9-1, to=11-5]
+	\arrow["G"', from=9-1, to=11-3]
+	\arrow["T"', from=11-3, to=11-5]
+	\arrow["G", from=9-1, to=9-5]
+	\arrow["T"{description}, from=9-5, to=11-5]
+	\arrow["\epsilon"', shift right=5, Rightarrow, from=10-4, to=9-4]
+	\arrow[""{name=9, anchor=center, inner sep=0}, curve={height=24pt}, Rightarrow, no head, from=11-5, to=9-5]
+	\arrow[""{name=10, anchor=center, inner sep=0}, "G", from=5-1, to=5-5]
+	\arrow[Rightarrow, no head, from=5-5, to=7-5]
+	\arrow["G"{description}, curve={height=-18pt}, from=5-1, to=7-5]
+	\arrow["{1_G}"', shift right=5, Rightarrow, from=6-4, to=5-4]
+	\arrow["G"{description}, curve={height=-18pt}, from=9-7, to=11-11]
+	\arrow["\epsilon"', shift right=5, Rightarrow, from=6-10, to=5-10]
+	\arrow["\epsilon"'{pos=0.4}, shorten <=10pt, shorten >=16pt, Rightarrow, from=11-3, to=9-3]
+	\arrow["\epsilon"'{pos=0.4}, shorten <=10pt, shorten >=16pt, Rightarrow, from=7-3, to=5-3]
+	\arrow["\epsilon"'{pos=0.7}, shorten <=19pt, shorten >=6pt, Rightarrow, from=15-3, to=13-3]
+	\arrow["{1_G}"'{pos=0.4}, shorten <=10pt, shorten >=16pt, Rightarrow, from=7-9, to=5-9]
+	\arrow["\epsilon"'{pos=0.4}, shorten <=10pt, shorten >=16pt, Rightarrow, from=11-9, to=9-9]
+	\arrow["\epsilon"'{pos=0.7}, shorten <=19pt, shorten >=6pt, Rightarrow, from=15-9, to=13-9]
+	\arrow[shorten <=10pt, shorten >=13pt, Rightarrow, no head, from=11-3, to=13-3]
+	\arrow[shorten <=10pt, shorten >=13pt, Rightarrow, no head, from=7-3, to=9-3]
+	\arrow[shorten <=10pt, shorten >=13pt, Rightarrow, no head, from=7-9, to=9-9]
+	\arrow[shorten <=10pt, shorten >=13pt, Rightarrow, no head, from=11-9, to=13-9]
+	\arrow[shorten <=6pt, shorten >=6pt, Rightarrow, no head, from=1, to=2]
+	\arrow["\epsilon"'{pos=0.7}, shift left=5, shorten <=22pt, shorten >=7pt, Rightarrow, from=3-6, to=0]
+	\arrow["\mu", shorten <=8pt, shorten >=8pt, Rightarrow, from=15-5, to=8]
+	\arrow["\mu", shorten <=8pt, shorten >=8pt, Rightarrow, from=15-11, to=6]
+	\arrow[shorten <=27pt, shorten >=36pt, Rightarrow, no head, from=3-6, to=10]
+	\arrow[shorten <=27pt, shorten >=36pt, Rightarrow, no head, from=3-6, to=3]
+	\arrow["\eta", shorten <=3pt, Rightarrow, from=9, to=10-5]
+	\arrow["\eta", shorten <=3pt, Rightarrow, from=7, to=14-5]
+	\arrow["\eta"', shorten <=2pt, Rightarrow, from=4, to=11-10]
+	\arrow["\eta"', shorten <=2pt, Rightarrow, from=5, to=15-10]
+\end{tikzcd}
+
+\end{document} 
+

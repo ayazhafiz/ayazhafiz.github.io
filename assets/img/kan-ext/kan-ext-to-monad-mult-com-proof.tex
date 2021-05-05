@@ -1,0 +1,81 @@
+\documentclass[tikz]{standalone}
+\usepackage{quiver}
+\usepackage{tikz-cd}
+\usepackage{unicode-math}
+
+\begin{document}
+
+% https://q.uiver.app/?q=WzAsNTAsWzQsMCwiXFxMYXJnZVxcbWF0aHNme0R9Il0sWzEwLDAsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFs1LDIsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFs5LDIsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFs3LDAsIlxccGhhbnRvbXsxfSJdLFs3LDMsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFs1LDAsIlxccGhhbnRvbXsxfSJdLFs3LDEsIlxccGhhbnRvbXsxfSJdLFs1LDEsIlxccGhhbnRvbXsxfSJdLFs4LDIsIlxccGhhbnRvbXsxfSJdLFs4LDAsIlxccGhhbnRvbXsxfSJdLFswLDEwLCJcXExhcmdlXFxtYXRoc2Z7RH0iXSxbNiwxMCwiXFxMYXJnZVxcbWF0aHNme0N9Il0sWzEsMTIsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFs1LDEyLCJcXExhcmdlXFxtYXRoc2Z7Q30iXSxbMywxMywiXFxMYXJnZVxcbWF0aHNme0N9Il0sWzIsMTIsIlxccGhhbnRvbXsxfSJdLFsyLDEwLCJcXHBoYW50b217MX0iXSxbMywxMSwiXFxwaGFudG9tezF9Il0sWzUsMTEsIlxccGhhbnRvbXsxfSJdLFswLDUsIlxcTGFyZ2VcXG1hdGhzZntEfSJdLFs2LDUsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFsxLDcsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFszLDgsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFs1LDcsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFsxLDYsIlxccGhhbnRvbXsxfSJdLFszLDcsIlxccGhhbnRvbXsxfSJdLFs1LDYsIlxccGhhbnRvbSAxIl0sWzMsMTAsIlxccGhhbnRvbXsxfSJdLFs4LDUsIlxcTGFyZ2VcXG1hdGhzZntEfSJdLFsxNCw1LCJcXExhcmdlXFxtYXRoc2Z7Q30iXSxbOSw3LCJcXExhcmdlXFxtYXRoc2Z7Q30iXSxbMTEsOCwiXFxMYXJnZVxcbWF0aHNme0N9Il0sWzEzLDcsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFsxMCw3LCJcXHBoYW50b217MX0iXSxbMTAsNSwiXFxwaGFudG9tezF9Il0sWzEyLDcsIlxccGhhbnRvbXsxfSJdLFsxMiw1LCJcXHBoYW50b217MX0iXSxbOCwxMCwiXFxMYXJnZVxcbWF0aHNme0R9Il0sWzksMTIsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFsxMSwxMywiXFxMYXJnZVxcbWF0aHNme0N9Il0sWzEzLDEyLCJcXExhcmdlXFxtYXRoc2Z7Q30iXSxbMTQsMTAsIlxcTGFyZ2VcXG1hdGhzZntDfSJdLFsxMCwxMiwiXFxwaGFudG9tezF9Il0sWzEwLDEwLCJcXHBoYW50b217MX0iXSxbMTIsMTIsIlxccGhhbnRvbXsxfSJdLFsxMiwxMCwiXFxwaGFudG9tezF9Il0sWzExLDEwLCJcXHBoYW50b217MX0iXSxbMTEsMTIsIlxccGhhbnRvbXsxfSJdLFsxMSw3LCJcXHBoYW50b217MX0iXSxbMCwxLCJcXExhcmdlIEciXSxbMCwyLCJcXExhcmdlIEciLDJdLFszLDEsIlxcTGFyZ2UgVCIsMl0sWzIsNSwiXFxMYXJnZSBUIiwyXSxbNSwzLCJcXExhcmdlIFQiLDJdLFswLDUsIlxcTGFyZ2UgRyIsMSx7ImN1cnZlIjotMn1dLFswLDMsIlxcTGFyZ2UgRyIsMV0sWzUsNywiXFxMYXJnZSBcXGVwc2lsb24iLDIseyJsYWJlbF9wb3NpdGlvbiI6NjAsInNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0IjoyMH0sImxldmVsIjoyfV0sWzIsOCwiXFxMYXJnZSBcXGVwc2lsb24iLDIseyJvZmZzZXQiOjUsImxldmVsIjoyfV0sWzksMTAsIlxcTGFyZ2UgXFxlcHNpbG9uIiwyLHsibGFiZWxfcG9zaXRpb24iOjcwLCJvZmZzZXQiOjUsInNob3J0ZW4iOnsic291cmNlIjo1MCwidGFyZ2V0IjoxMH0sImxldmVsIjoyfV0sWzExLDEyLCJcXExhcmdlIEciXSxbMTEsMTMsIlxcTGFyZ2UgRyIsMl0sWzEzLDE1LCJcXExhcmdlIFQiLDJdLFsxNSwxNCwiXFxMYXJnZSBUIiwyXSxbMTQsMTIsIlxcTGFyZ2UgVCIsMl0sWzE1LDEyLCJcXExhcmdlIFQiLDEseyJjdXJ2ZSI6LTJ9XSxbMTMsMTIsIlxcTGFyZ2UgVCIsMV0sWzE2LDE3LCJcXExhcmdlIFxcZXBzaWxvbiIsMix7ImxhYmVsX3Bvc2l0aW9uIjo3MCwib2Zmc2V0IjotNSwic2hvcnRlbiI6eyJzb3VyY2UiOjUwLCJ0YXJnZXQiOjEwfSwibGV2ZWwiOjJ9XSxbMTUsMTgsIlxcTGFyZ2VcXG11IiwyLHsibGFiZWxfcG9zaXRpb24iOjYwLCJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6MjB9LCJsZXZlbCI6Mn1dLFsxNCwxOSwiXFxMYXJnZVxcbXUiLDIseyJvZmZzZXQiOi01LCJsZXZlbCI6Mn1dLFsyMCwyMSwiXFxMYXJnZSBHIl0sWzIwLDIyLCJcXExhcmdlIEciLDJdLFsyMiwyMywiXFxMYXJnZSBUIiwyXSxbMjMsMjQsIlxcTGFyZ2UgVCIsMl0sWzI0LDIxLCJcXExhcmdlIFQiLDJdLFsyMywyMSwiXFxMYXJnZSBUIiwxLHsiY3VydmUiOi0yfV0sWzIwLDIzLCJcXExhcmdlIEciLDEseyJjdXJ2ZSI6LTJ9XSxbMjIsMjUsIlxcTGFyZ2UgXFxlcHNpbG9uIiwyLHsib2Zmc2V0Ijo1LCJsZXZlbCI6Mn1dLFsyNCwyNywiXFxMYXJnZVxcbXUiLDIseyJvZmZzZXQiOi01LCJsZXZlbCI6Mn1dLFsyMywyOCwiIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMjksMzAsIlxcTGFyZ2UgRyJdLFsyOSwzMSwiXFxMYXJnZSBHIiwyXSxbMzEsMzIsIlxcTGFyZ2UgVCIsMl0sWzMyLDMzLCJcXExhcmdlIFQiLDJdLFszMywzMCwiXFxMYXJnZSBUIiwyXSxbMjksMzMsIlxcTGFyZ2UgRyIsMV0sWzMxLDMzLCJcXExhcmdlIFQiLDFdLFszNCwzNSwiXFxMYXJnZSBcXGVwc2lsb24iLDIseyJsYWJlbF9wb3NpdGlvbiI6MzAsIm9mZnNldCI6LTUsInNob3J0ZW4iOnsic291cmNlIjoxMCwidGFyZ2V0Ijo1MH0sImxldmVsIjoyfV0sWzM2LDM3LCJcXExhcmdlIFxcZXBzaWxvbiIsMix7ImxhYmVsX3Bvc2l0aW9uIjo3MCwib2Zmc2V0Ijo1LCJzaG9ydGVuIjp7InNvdXJjZSI6NTAsInRhcmdldCI6MTB9LCJsZXZlbCI6Mn1dLFszOCw0MiwiXFxMYXJnZSBHIl0sWzM4LDM5LCJcXExhcmdlIEciLDJdLFszOSw0MCwiXFxMYXJnZSBUIiwyXSxbNDAsNDEsIlxcTGFyZ2UgVCIsMl0sWzQxLDQyLCJcXExhcmdlIFQiLDJdLFszOSw0MSwiVCIsMV0sWzM5LDQyLCJcXExhcmdlIFQiLDFdLFs0Myw0NCwiXFxMYXJnZSBcXGVwc2lsb24iLDIseyJsYWJlbF9wb3NpdGlvbiI6NzAsIm9mZnNldCI6LTUsInNob3J0ZW4iOnsic291cmNlIjo1MCwidGFyZ2V0IjoxMH0sImxldmVsIjoyfV0sWzQ1LDQ2LCJcXExhcmdlXFxtdSIsMix7ImxhYmVsX3Bvc2l0aW9uIjozMCwib2Zmc2V0Ijo1LCJzaG9ydGVuIjp7InNvdXJjZSI6MTAsInRhcmdldCI6NTB9LCJsZXZlbCI6Mn1dLFszMiw0NywiIiwyLHsic2hvcnRlbiI6eyJzb3VyY2UiOjQwLCJ0YXJnZXQiOjQwfSwibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNDAsNDgsIlxcTGFyZ2VcXG11IiwyLHsibGV2ZWwiOjJ9XSxbMzIsNDksIlxcTGFyZ2VcXG11IiwyLHsibGV2ZWwiOjJ9XSxbMjYsNzAsIlxcTGFyZ2UgXFxlcHNpbG9uIiwyLHsibGFiZWxfcG9zaXRpb24iOjYwLCJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6MjB9fV0sWzUsNzAsIiIsMix7Im9mZnNldCI6NSwic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjMwfSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDgwLCIiLDIseyJvZmZzZXQiOi01LCJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6MzB9LCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\begin{tikzcd}
+	&&&& {\mathsf{D}} & {\phantom{1}} && {\phantom{1}} & {\phantom{1}} && {\mathsf{C}} \\
+	&&&&& {\phantom{1}} && {\phantom{1}} \\
+	&&&&& {\mathsf{C}} &&& {\phantom{1}} & {\mathsf{C}} \\
+	&&&&&&& {\mathsf{C}} \\
+	\\
+	{\mathsf{D}} &&&&&& {\mathsf{C}} && {\mathsf{D}} && {\phantom{1}} && {\phantom{1}} && {\mathsf{C}} \\
+	& {\phantom{1}} &&&& {\phantom 1} \\
+	& {\mathsf{C}} && {\phantom{1}} && {\mathsf{C}} &&&& {\mathsf{C}} & {\phantom{1}} & {\phantom{1}} & {\phantom{1}} & {\mathsf{C}} \\
+	&&& {\mathsf{C}} &&&&&&&& {\mathsf{C}} \\
+	\\
+	{\mathsf{D}} && {\phantom{1}} & {\phantom{1}} &&& {\mathsf{C}} && {\mathsf{D}} && {\phantom{1}} & {\phantom{1}} & {\phantom{1}} && {\mathsf{C}} \\
+	&&& {\phantom{1}} && {\phantom{1}} \\
+	& {\mathsf{C}} & {\phantom{1}} &&& {\mathsf{C}} &&&& {\mathsf{C}} & {\phantom{1}} & {\phantom{1}} & {\phantom{1}} & {\mathsf{C}} \\
+	&&& {\mathsf{C}} &&&&&&&& {\mathsf{C}}
+	\arrow["{G}", from=1-5, to=1-11]
+	\arrow["{G}"', from=1-5, to=3-6]
+	\arrow["{T}"', from=3-10, to=1-11]
+	\arrow["{T}"', from=3-6, to=4-8]
+	\arrow["{T}"', from=4-8, to=3-10]
+	\arrow["{G}"{description}, curve={height=-12pt}, from=1-5, to=4-8]
+	\arrow["{G}"{description}, from=1-5, to=3-10]
+	\arrow["{\text{\normalsize$\epsilon$}}"'{pos=0.6}, shorten <=13pt, shorten >=6pt, Rightarrow, from=4-8, to=2-8]
+	\arrow["{\text{\normalsize$\epsilon$}}"', shift right=5, Rightarrow, from=3-6, to=2-6]
+	\arrow["{\text{\normalsize$\epsilon$}}"'{pos=0.7}, shift right=5, shorten <=16pt, shorten >=3pt, Rightarrow, from=3-9, to=1-9]
+	\arrow["{G}", from=11-1, to=11-7]
+	\arrow["{G}"', from=11-1, to=13-2]
+	\arrow["{T}"', from=13-2, to=14-4]
+	\arrow["{T}"', from=14-4, to=13-6]
+	\arrow["{T}"', from=13-6, to=11-7]
+	\arrow["{T}"{description}, curve={height=-12pt}, from=14-4, to=11-7]
+	\arrow["{T}"{description}, from=13-2, to=11-7]
+	\arrow["{\text{\normalsize$\epsilon$}}"'{pos=0.7}, shift left=5, shorten <=16pt, shorten >=3pt, Rightarrow, from=13-3, to=11-3]
+	\arrow["\text{\normalsize$\mu$}"'{pos=0.6}, shorten <=13pt, shorten >=6pt, Rightarrow, from=14-4, to=12-4]
+	\arrow["\text{\normalsize$\mu$}"', shift left=5, Rightarrow, from=13-6, to=12-6]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{G}", from=6-1, to=6-7]
+	\arrow["{G}"', from=6-1, to=8-2]
+	\arrow["{T}"', from=8-2, to=9-4]
+	\arrow["{T}"', from=9-4, to=8-6]
+	\arrow["{T}"', from=8-6, to=6-7]
+	\arrow["{T}"{description}, curve={height=-12pt}, from=9-4, to=6-7]
+	\arrow["{G}"{description}, curve={height=-12pt}, from=6-1, to=9-4]
+	\arrow["{\text{\normalsize$\epsilon$}}"', shift right=5, Rightarrow, from=8-2, to=7-2]
+	\arrow["\text{\normalsize$\mu$}"', shift left=5, Rightarrow, from=8-6, to=7-6]
+	\arrow[shorten <=13pt, shorten >=13pt, Rightarrow, no head, from=9-4, to=11-4]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{G}", from=6-9, to=6-15]
+	\arrow["{G}"', from=6-9, to=8-10]
+	\arrow["{T}"', from=8-10, to=9-12]
+	\arrow["{T}"', from=9-12, to=8-14]
+	\arrow["{T}"', from=8-14, to=6-15]
+	\arrow["{G}"{description}, from=6-9, to=8-14]
+	\arrow["{T}"{description}, from=8-10, to=8-14]
+	\arrow["{\text{\normalsize$\epsilon$}}"'{pos=0.3}, shift left=5, shorten <=3pt, shorten >=25pt, Rightarrow, from=8-11, to=6-11]
+	\arrow["{\text{\normalsize$\epsilon$}}"'{pos=0.7}, shift right=5, shorten <=16pt, shorten >=3pt, Rightarrow, from=8-13, to=6-13]
+	\arrow["{G}", from=11-9, to=11-15]
+	\arrow["{G}"', from=11-9, to=13-10]
+	\arrow["{T}"', from=13-10, to=14-12]
+	\arrow["{T}"', from=14-12, to=13-14]
+	\arrow["{T}"', from=13-14, to=11-15]
+	\arrow["T"{description}, from=13-10, to=13-14]
+	\arrow["{T}"{description}, from=13-10, to=11-15]
+	\arrow["{\text{\normalsize$\epsilon$}}"'{pos=0.7}, shift left=5, shorten <=16pt, shorten >=3pt, Rightarrow, from=13-11, to=11-11]
+	\arrow["\text{\normalsize$\mu$}"'{pos=0.3}, shift right=5, shorten <=3pt, shorten >=25pt, Rightarrow, from=13-13, to=11-13]
+	\arrow[shorten <=13pt, shorten >=13pt, Rightarrow, no head, from=9-12, to=11-12]
+	\arrow["\text{\normalsize$\mu$}"', Rightarrow, from=14-12, to=13-12]
+	\arrow["\text{\normalsize$\mu$}"', Rightarrow, from=9-12, to=8-12]
+	\arrow["{\text{\normalsize$\epsilon$}}"'{pos=0.6}, shorten <=15pt, shorten >=7pt, Rightarrow, from=8-4, to=0]
+	\arrow[shift right=5, shorten <=36pt, shorten >=36pt, Rightarrow, no head, from=4-8, to=0]
+	\arrow[shift left=5, shorten <=36pt, shorten >=36pt, Rightarrow, no head, from=4-8, to=1]
+\end{tikzcd}
+
+\end{document} 
+
