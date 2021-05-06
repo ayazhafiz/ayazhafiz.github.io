@@ -58,7 +58,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1620184298611497561"
+      href="/css/post.css?1620335190074674594"
     />
   </head>
 
@@ -423,10 +423,10 @@ these two either.</p>
 
 <p>Notice that it is
 impractical for us to deduce that a value of type <code class="language-plaintext highlighter-rouge">T</code> is of a union type that is a
-strict supertype of <code class="language-plaintext highlighter-rouge">T</code> without explicit annotations. For example, it is only
-sound to type the literal <code class="language-plaintext highlighter-rouge">1</code> as a <code class="language-plaintext highlighter-rouge">nat</code>, rather than <code class="language-plaintext highlighter-rouge">nat|string</code> or any other
-number of union types. However, we would also like to express the fact that a
-<code class="language-plaintext highlighter-rouge">nat</code> fits in a <code class="language-plaintext highlighter-rouge">nat|string</code>; for example</p>
+strict supertype of <code class="language-plaintext highlighter-rouge">T</code> without explicit annotations. For example, we would
+certainly prefer to type the literal <code class="language-plaintext highlighter-rouge">1</code> as a <code class="language-plaintext highlighter-rouge">nat</code>, rather than <code class="language-plaintext highlighter-rouge">nat|string</code> or any other
+number of union types - indeed, the only two reasonable choices here are <code class="language-plaintext highlighter-rouge">nat</code> or <code class="language-plaintext highlighter-rouge">top</code>.
+Nevertheless, we would like to express the fact that a <code class="language-plaintext highlighter-rouge">nat</code> is a <code class="language-plaintext highlighter-rouge">nat|string</code>; for example</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn id(a: nat|string): nat|string { a }
 id(1)
