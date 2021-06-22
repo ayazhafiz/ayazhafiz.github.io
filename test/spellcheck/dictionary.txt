@@ -1,4 +1,4 @@
-personal_ws-1.1 en 536 
+personal_ws-1.1 en 582 
 ABI
 ADT
 ADTs
@@ -10,6 +10,8 @@ Aint
 Akibab's
 AllTheSues
 Angular's
+Annot
+Annotated's
 AoC
 AsFromPick
 AsFromRaw
@@ -61,6 +63,9 @@ IDEs
 Im
 Init
 InitArr
+IrDone
+IrNewline
+IrText
 IsTheSue
 Jamilah
 KF
@@ -76,6 +81,9 @@ Lc
 LessThan
 Lf
 LibHello
+Lindig
+Lindig's
+Linearizing
 Lorde's
 MBP
 MacLane
@@ -126,6 +134,8 @@ TypeScript
 TypeScript's
 UI
 WWWWWH
+Walder
+Walder's
 WebSocket
 WolframAlpha
 YAKWTFGO
@@ -154,6 +164,7 @@ allowtransparency
 ambiguates
 amines
 amongst
+annots
 another's
 api
 artisanally
@@ -190,6 +201,7 @@ chunkc
 chunkwm
 circ
 clib
+cmp
 cocone
 cocones
 codebase
@@ -215,8 +227,10 @@ covalent
 covid
 cpp
 createElement
+curline
 dL
 dR
+datatypes
 ddeb
 de
 defaultNat
@@ -237,8 +251,12 @@ dually
 dup
 dx
 dylib
+eax
 ebd
+ebx
 ec
+ecx
+edi
 ee
 eecf
 ef
@@ -255,7 +273,9 @@ endofunctor
 enum
 enzymic
 eps
+equational
 equirecursive
+esi
 esque
 et
 ethanium
@@ -271,9 +291,12 @@ fc
 fd
 fdcaba
 fft
+fibonacci
 figcaption
 fn
 formalizations
+formatter
+formatters
 formulaically
 fprintf
 frac
@@ -340,10 +363,13 @@ intersectionalities
 intersectionality
 invariants
 invertible
+ir
 ish
 isomorphisms
 javascript
+jge
 jj
+jmp
 jpg
 jy
 kan
@@ -359,6 +385,7 @@ lfloor
 libc
 libpath
 lim
+linearize
 lipschitz
 loadtime
 lockfile
@@ -371,6 +398,7 @@ marginnote
 masculinities
 mathbb
 mathbf
+mathcal
 meetHere
 memoizable
 meso
@@ -383,12 +411,14 @@ monads
 mor
 morphism
 morphisms
+mov
 mozallowfullscreen
 msf
 mtime
 myProperty
 nLab
 narrowBToNat
+nasm
 nat
 naturality
 ne
@@ -403,8 +433,10 @@ nullptr
 numFields
 numberish
 numberlike
+ocaml
 ok
 onmessage
+ons
 optimizations
 oxygens
 parameterized
@@ -416,16 +448,19 @@ pointedness
 pointwise
 polymorphism
 pomeranians
+pos
 pre
 precomposing
 precomposition
 preimage
+preorder
 printf
 productionization
 programmatically
 progressivism
 propogates
 protonated
+provers
 px
 qd
 qquad
@@ -445,6 +480,7 @@ representable
 representables
 req
 resurge
+ret
 rex
 rfloor
 rideshare
@@ -452,7 +488,11 @@ runtime
 runtimes
 samoyeds
 scalability
+sdoc
+seenbrk
+sep
 setminus
+sg
 sidenote
 skhd
 softwares
@@ -466,6 +506,7 @@ stereocenters
 stereochemical
 stereoisomer
 stereoisomers
+strlen
 struct
 subseteq
 substituents
@@ -482,6 +523,8 @@ swe
 tess
 tex
 texas
+textspaces
+textterms
 th
 tmux
 toc
@@ -502,6 +545,7 @@ undecavalent
 undesiring
 undirected
 unergonomically
+unformatted
 unicode
 uninstantiated
 unknownnever
@@ -518,6 +562,8 @@ vimtutor
 vizslas
 volunteerings
 walkthrough
+waterfalled
+waterfalling
 webkitallowfullscreen
 websocket
 wf

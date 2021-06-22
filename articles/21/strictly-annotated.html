@@ -1,0 +1,678 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+
+<link rel="alternate" type="application/atom+xml" title="cc - Ayaz Hafiz" href="/feed-rrs2.xml">
+
+
+<title>
+  
+    Strictly Annotated: A Pretty-Printer With Support for Annotations
+  
+</title>
+<meta name="description" content="We present an extension of Lindig's Strictly Prettier (2000) pretty-printer with support for harmoniously formatting a document and arbitrary annotations attached to its terms." />
+
+<link
+  rel="canonical"
+  href="/articles/21/strictly-annotated"
+/>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    TeX: {
+      Macros: {
+        co: "\\colon",
+        msf: "\\mathsf",
+        Ra: "\\Rightarrow",
+        Def: "\\text{Definition.}",
+        Thm: "\\text{Theorem.}",
+        Pf: "\\text{Proof.}",
+        eps: "\\epsilon",
+        lam: "\\lambda",
+        
+        depth: "\\msf{depth}",
+        
+        s: "\\msf{s}",
+        
+        Gr: "\\msf{Gr}",
+        
+        vert: "\\msf{vert}",
+        
+        O: "\\mathcal{O}",
+        
+      },
+    }
+  });
+</script>
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+></script>
+
+
+
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/post.css?1624371305504113871"
+    />
+  </head>
+
+  <style></style>
+
+  <body>
+    <div class="container post">
+      <div class="panel">
+        <div class="column-right Strictly Annotated: A pretty-printer with support for annotations-main">
+          <section class="nav">
+  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+</section>
+ <h1 class="title">Strictly Annotated: A Pretty-Printer With Support for Annotations</h1>
+<p class="byline">June 17, 2021</p>
+
+<article class="post">
+  <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2">
+<a href="#problem-statement">Problem Statement</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#opinions-we-will-make">Opinions we will make</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2">
+<a href="#the-design">The Design</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#lindigs-printing-of-semantic-terms">Lindig’s printing of semantic terms</a></li>
+<li class="toc-entry toc-h3">
+<a href="#printing-annotations">Printing annotations</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#annotation-placement">Annotation placement</a></li>
+<li class="toc-entry toc-h4"><a href="#annotations-and-layout-decisions">Annotations and layout decisions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2">
+<a href="#an-implementation">An Implementation</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#choosing-a-layout">Choosing a layout</a></li>
+<li class="toc-entry toc-h3"><a href="#linearizing-a-document">Linearizing a document</a></li>
+<li class="toc-entry toc-h3"><a href="#aligning-annotations-and-printing-lines">Aligning annotations and printing lines</a></li>
+<li class="toc-entry toc-h3"><a href="#is-it-efficient">Is it efficient?</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#history-of-lindigs-printer">History of Lindig’s Printer</a></li>
+</ul>
+<blockquote>
+  <p>The source code for Strictly Annotated is available at
+<a href="https://github.com/ayazhafiz/strictly-annotated">gh:ayazhafiz/strictly-annotated</a>.</p>
+</blockquote>
+
+<h2 id="problem-statement">
+<a class="anchor" href="#problem-statement" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#problem-statement"></a>Problem Statement</h2>
+
+<p>Suppose we are working on a system that emits some kind of human-readable
+documents. Natural examples here are compilers of all kinds, static analyzers,
+term rewriting systems, automated theorem provers, grammar checkers, among
+others. We would like the presentation an emitted document to reflect its semantic
+structure, so this emission will involve the use of a pretty-printer (formatter)
+of some sort.</p>
+
+<p>Now suppose that in addition to an intuitive formatting of the semantic terms
+composing the document, we would like to attach arbitrary, nicely-rendered
+annotations at certain locations in the document. For example, we may want to annotate source code with generated
+comments, or annotate the input to an analysis tool with discoveries made by the
+analyzer. Concretely, we may imagine a pedagogical C compiler that annotates
+assembly with its generating source code:</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">fibonacci</span><span class="p">(</span><span class="nv">int</span> <span class="nv">n</span><span class="p">):</span>
+   <span class="nf">mov</span>   <span class="nb">eax</span><span class="p">,</span> <span class="mi">1</span>    <span class="c1">; int nth = 1</span>
+   <span class="nf">xor</span>   <span class="nb">ebx</span><span class="p">,</span> <span class="nb">ebx</span>  <span class="c1">; int last = 0</span>
+   <span class="nf">mov</span>   <span class="nb">ecx</span><span class="p">,</span> <span class="mi">1</span>    <span class="c1">; int i = 1</span>
+<span class="nl">L1:</span>
+   <span class="nf">cmp</span>   <span class="nb">ecx</span><span class="p">,</span> <span class="nb">edi</span>  <span class="c1">; while (i &lt; n)</span>
+   <span class="nf">jge</span>   <span class="nv">L2</span>
+   <span class="nf">mov</span>   <span class="nb">esi</span><span class="p">,</span> <span class="nb">eax</span>  <span class="c1">; int next = nth</span>
+   <span class="nf">add</span>   <span class="nb">esi</span><span class="p">,</span> <span class="nb">ebx</span>  <span class="c1">;            + last</span>
+   <span class="nf">mov</span>   <span class="nb">ebx</span><span class="p">,</span> <span class="nb">eax</span>  <span class="c1">; last = nth</span>
+   <span class="nf">mov</span>   <span class="nb">eax</span><span class="p">,</span> <span class="nb">esi</span>  <span class="c1">; nth = next</span>
+   <span class="nf">inc</span>   <span class="nb">ecx</span>       <span class="c1">; ++i</span>
+   <span class="nf">jmp</span>   <span class="nv">L1</span>
+<span class="nl">L2:</span>
+   <span class="nf">ret</span>             <span class="c1">; return nth</span>
+</code></pre></div></div>
+
+<p>or a computer algebra system that communicates rewrite steps:</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d/dx [x<span class="p">^</span>3 + 6x<span class="p">^</span>2 + 12x - 2]
+  =    3x<span class="p">^</span>2     <span class="c">%(by the power rule)</span>
+    + 12x       <span class="c">%(by the power rule)</span>
+    + 12        <span class="c">%(by d/dx x = 1)</span>
+    - 0         <span class="c">%(by d/dx c = 0   when c is independent of x)</span>
+  = 3x<span class="p">^</span>2 + 12x + 12  <span class="c">%(by simplification)</span>
+  = 3(x<span class="p">^</span>2 + 4x + 4)  <span class="c">%(by gcd(3, 12, 12) = 3)</span>
+  = 3(x + 2)<span class="p">^</span>2       <span class="c">%(by factorization in \Z)</span>
+</code></pre></div></div>
+
+<p>Indeed such applications are common. It is not too difficult to imagine how we
+might implement the pedagogical C compiler’s printer. The semantic structure of
+the computer algebra system’s output is more involved, but an ad-hoc design for
+its printer does not take much additional work. But as we increase the
+complexity of a document’s structure, it becomes more difficult to imagine how
+a standard pretty-printer should treat annotations when trying to layout the
+semantically-relevant parts of the document.</p>
+
+<p>This cc will describe Strictly Annotated’s solution to this challenge. In a
+nutshell, our approach will be to format semantic terms and annotations
+independently, with few layout decisions involving both terms and annotations.
+Our pretty-printing library is general-purpose, not unlike formatting modules in
+the standard libraries of OCaml and Haskell, but with a bold opinion that
+annotations are independent of other content in a document, and less important
+to layout.</p>
+
+<p>I think that Strictly Annotated does a pretty good job; here is an example of
+a research language source code with typechecker annotations, printed by the
+library:</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fn f(x: any) =  <span class="c">% =&gt; int | (int, int)</span>
+  if x is int   <span class="c">% if .. ~&gt; int | (int, int)</span>
+  then 1
+  else (0, 0)   <span class="c">% (int, int)</span>
+in
+  (f 1,         <span class="c">% f .. ~&gt; int</span>
+   f            <span class="c">% f .. ~&gt; (int, int)</span>
+     (1, 2)     <span class="c">% (int, int)</span>
+  )             <span class="c">% (int, (int, int))</span>
+</code></pre></div></div>
+
+<h3 id="opinions-we-will-make">
+<a class="anchor" href="#opinions-we-will-make" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#opinions-we-will-make"></a>Opinions we will make</h3>
+
+<p>It is important to note that our library distinguishes annotations from any
+other kind of term in a document. As mentioned above, we are saying
+that annotations are less important to the semantic structure of a document and
+should only serve as “add-ons” to a regular document.</p>
+
+<p>What this means is that Strictly Annotated does not make for a good <em>code
+formatter</em>, without additional guidance from the library user. Indeed, most code
+formatters for programming languages treat comments in source code as semantic
+terms themselves<span class="note"><label for="comments-in-formatters" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="comments-in-formatters" class="margin-toggle"><span class="sidenote">For code formatters, layout
+of comments is a <a href="https://github.com/rust-lang/rustfmt/issues?q=is%3Aissue+label%3Aa-comments+">common</a> and <a href="http://journal.stuffwithstuff.com/2015/09/08/the-hardest-program-ive-ever-written/">tricky</a> problem.</span>, aligning comments in certain locations and adapting layouts to
+ensure that comments “look nice”. Our opinion is that the layout of comments
+in this way is domain-specific, and we would rather lay
+out annotations just by saying “this note is associated with
+this term, place it somewhere reasonable but don’t worry about it too much”.</p>
+
+<h2 id="the-design">
+<a class="anchor" href="#the-design" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-design"></a>The Design</h2>
+
+<p>We now present an overview of the design of our library. We first briefly
+recount the base pretty-printer design given by Lindig, then elaborate our
+contribution in supporting and printing annotations.</p>
+
+<h3 id="lindigs-printing-of-semantic-terms">
+<a class="anchor" href="#lindigs-printing-of-semantic-terms" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#lindigs-printing-of-semantic-terms"></a>Lindig’s printing of semantic terms</h3>
+
+<p>Lindig’s 2000 note <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.34.2200"><em>Strictly Annotated</em></a>
+describes an eager implementation of the algebra-based pretty-printer designed in a
+<a href="https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf"><em>A prettier printer</em></a> (Walder, 1999).
+As we have already mentioned, our pretty-printer is a fork of Lindig’s. While it
+is useful to read the entirety of Lindig’s short and pleasant note, we will
+briefly recap the key ideas for those that do not wish a diversion, and so that
+it is clear how our additions modify the basic design.</p>
+
+<p>Per Walder’s algebra<span class="note"><label for="walder-algebra" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="walder-algebra" class="margin-toggle"><span class="sidenote">We will not discuss Walder’s
+algebraic results here, as it is much better explained by Walder himself and not
+necessary for understanding the essence of the pretty-printing idea.</span> and
+Lindig’s note, there are six constructors for a document (here presented in
+OCaml):</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">doc</span> <span class="o">=</span> <span class="nc">Nil</span>
+         <span class="o">|</span> <span class="nc">Text</span>  <span class="k">of</span> <span class="kt">string</span>
+         <span class="o">|</span> <span class="nc">Break</span> <span class="k">of</span> <span class="kt">string</span>
+         <span class="o">|</span> <span class="nc">Cons</span>  <span class="k">of</span> <span class="n">doc</span> <span class="o">*</span> <span class="n">doc</span>
+         <span class="o">|</span> <span class="nc">Nest</span>  <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">doc</span>
+         <span class="o">|</span> <span class="nc">Group</span> <span class="k">of</span> <span class="n">doc</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Nil</code> and <code class="language-plaintext highlighter-rouge">Text</code> constructors are straightforward. <code class="language-plaintext highlighter-rouge">Cons(x, y)</code> concatenates
+documents <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>. <code class="language-plaintext highlighter-rouge">Group doc</code> describes a “group” in a document that a
+pretty-printer may choose to layout either horizontally or vertically. <code class="language-plaintext highlighter-rouge">Break
+sep</code> is a directive to the pretty-printer that a newline should be inserted
+if the enclosing group is in is laid out vertically, or else <code class="language-plaintext highlighter-rouge">sep</code> should be
+printed. <code class="language-plaintext highlighter-rouge">Nest(indent, d)</code> instructs the pretty-printer to indent text following
+a newline in <code class="language-plaintext highlighter-rouge">d</code> by <code class="language-plaintext highlighter-rouge">indent</code> spaces.</p>
+
+<p>A simple example comes from pages 3 and 7 of Lindig’s note. Taking $[\dots]$
+as the <code class="language-plaintext highlighter-rouge">Group</code> constructor, ${}^n\langle d \rangle$ as <code class="language-plaintext highlighter-rouge">Nest(n, d)</code>, $\cdot$ as <code class="language-plaintext highlighter-rouge">Cons</code>, and $-$ as <code class="language-plaintext highlighter-rouge">Break " "</code>,
+the document</p>
+
+<div class="mathblock"><script type="math/tex; mode=display">
+\left[
+   \begin{align*}
+       &\left[ {}^2\left\langle {\tt "if"} \cdot - \cdot \left[ {}^2\left\langle {\tt "maybe"} \cdot - \cdot {\tt "x"}\right\rangle\right] \right\rangle \right]\\
+       &\cdot - \cdot\left[ {}^2\left\langle {\tt "then"} \cdot - \cdot {\tt "pos()"}\right\rangle \right]\\
+       &\cdot - \cdot\left[ {}^2\left\langle {\tt "else"} \cdot - \cdot {\tt "neg()"}\right\rangle \right]
+   \end{align*}
+\right]
+</script></div>
+
+<p>may be printed at different widths as</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if maybe x then pos() else neg()        if maybe x        if
+                                        then pos()          maybe x
+                                        else neg()        then
+                                                            pos()
+                                                          else
+                                                            neg()
+</code></pre></div></div>
+
+<p>The principal decision to be made in the pretty-printing process is whether a
+group should be laid out horizontally or vertically. Unsurprisingly, Lindig
+proposes that this decision be made by first checking if a group can be laid
+out entirely horizontally without surpassing a maximum line width; if this check
+fails, the group should be laid out vertically (Lindig, 5-6). Lindig implements
+this check via an algorithm <code class="language-plaintext highlighter-rouge">fits</code>, invoked during a function <code class="language-plaintext highlighter-rouge">format</code> that
+performs a top-down traversal of a document to decide the layout of its subgroups.</p>
+
+<p>Lindig does not mention it, but his <code class="language-plaintext highlighter-rouge">format</code> procedure observes the property
+that if a group is given a vertical layout, all its parent groups are given
+vertical layouts. We will call this property <strong>waterfalling</strong>.</p>
+
+<p>$\Def$ Let $D$ be a $\texttt{doc}$ and $\Gr(D)$ denote the $\tt Group$s of $D$, endowed with
+a strict preorder given by $g &lt; h \iff g \in h %&gt;$.
+Let $\vert(g)$ be true only when $g$ has a vertical layout.
+$D$ is a <strong>waterfall</strong> if $\forall g\in \Gr(D)\ \ \vert(g)\implies \left(\forall h\in \Gr(D)\ \ g &lt; h\implies \vert(h)\right)%&gt;$.</p>
+
+<p>Waterfalling is an important property because it gives the user some guarantees
+about the behavior of the pretty-printer. To see why, suppose the example above
+was instead given a <strong>cascading</strong> layout, where the outer group has a horizontal
+layout but every other group has a vertical layout. Then the document would be
+printed as</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if
+  maybe
+    x then
+  pos() else
+  neg()
+</code></pre></div></div>
+
+<p>While cascading printers are more expressive than waterfalling printers, they
+are also more complex:</p>
+
+<ul>
+  <li>
+    <p>A cascading printing library must provide mechanisms to force horizontal or
+  vertical layouts to be of any use.</p>
+  </li>
+  <li>
+    <p>A cascading printing library may explore as many as $2^g$ layouts, where $g$
+  is the number of groups in a document, clobbering efficiency of the
+  library.<span class="note"><label for="cascading-efficiency" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="cascading-efficiency" class="margin-toggle"><span class="sidenote">A cascading printer could decide
+  parent layouts once and never revisit them based off child layouts, but this
+  would result in very poor document layouts in general.</span></p>
+  </li>
+  <li>
+    <p>The user is burdened with understanding and dealing with the fact that their
+  document may be printed in an exponential number of ways, as opposed to a
+  linear number of ways with a waterfalling printer.</p>
+  </li>
+  <li>
+    <p>A developer of a cascading printer has more cases to prove or test in
+  verifying its correctness.</p>
+  </li>
+</ul>
+
+<p>These issues only worsen with the introduction of a variable number of annotations,
+so Strictly Annotated will stick working with waterfalling printer.</p>
+
+<h3 id="printing-annotations">
+<a class="anchor" href="#printing-annotations" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#printing-annotations"></a>Printing annotations</h3>
+
+<p>We will allow users to attach arbitrary annotations to <code class="language-plaintext highlighter-rouge">Text</code> terms<span class="note"><label for="textterms" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="textterms" class="margin-toggle"><span class="sidenote">We could permit annotations attached to any term, but I do not
+believe this increases expressiveness and only complicates the discussion here.</span>.
+Our library datatypes are now</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">annotation</span> <span class="o">=</span> <span class="nc">Annot</span> <span class="k">of</span> <span class="kt">string</span>
+
+<span class="k">type</span> <span class="n">doc</span> <span class="o">=</span> <span class="o">...</span>
+         <span class="o">|</span> <span class="nc">Text</span> <span class="k">of</span> <span class="kt">string</span> <span class="o">*</span> <span class="n">annotation</span> <span class="n">option</span>
+         <span class="o">|</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<p>There are two questions to answer in the design of annotation layout.</p>
+
+<h4 id="annotation-placement">
+<a class="anchor" href="#annotation-placement" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#annotation-placement"></a>Annotation placement</h4>
+
+<p>Where should we place annotations when printing a document? We have already
+expressed the opinion that annotations are not semantic terms, and so they
+should be separated from the rest of a formatted document in some way.</p>
+
+<p>The most natural choice here is place annotations at the end of the formatted
+line containing the term they are attached to. For example, attaching
+annotations to the $\tt if$, $\tt then$, and $\tt else$ terms in our running
+example may yield the printed document</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if         // new conditional              if maybe x  // new conditional
+  maybe x                                  then pos()  // true branch
+then       // true branch          or      else neg()  // false branch
+  pos()
+else       // false branch
+  neg()
+</code></pre></div></div>
+
+<p>as demonstrated above, we may align annotations as well - either with
+nearby annotations, or with all annotations in the document.</p>
+
+<p>Dealing with multi-line annotations is straightforward. When printing a line, we
+split an annotation by newlines and then print multiple lines with appropriate
+alignment. For example, a multi-line annotation on the $\tt if$ term could yield
+the printed document</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if         // new conditional
+           // likely path: true branch
+  maybe x
+then       // true branch
+  pos()
+else       // false branch
+  neg()
+</code></pre></div></div>
+
+<h4 id="annotations-and-layout-decisions">
+<a class="anchor" href="#annotations-and-layout-decisions" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#annotations-and-layout-decisions"></a>Annotations and layout decisions</h4>
+
+<p>Unfortunately, we cannot make all layout decisions independently of annotations.
+Consider if $\tt maybe$, $\tt pos()$, and $\tt neg()$ were also given annotations.
+In the most compact layout presented above, these annotations would be printed
+reasonably:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if         // new conditional
+  maybe x  // -&gt; bool
+then       // true branch
+  pos()    // -&gt; T
+else       // false branch
+  neg()    // -&gt; U
+</code></pre></div></div>
+
+<p>but how are we to print these annotations in three-line layout we saw earlier?
+One option is to push all annotations to the end of the printed line and treat
+them as a multi-line annotation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if maybe x  // new conditional
+            // -&gt; bool
+then pos()  // true branch
+            // -&gt; T
+else neg()  // false branch
+            // -&gt; U
+</code></pre></div></div>
+
+<p>but the problem with this is we lose some information about the terms
+annotations are attached to, and indeed we may expect that the document be split
+across 6 lines as in the most compact layout to better preserve term-annotation
+relationships.</p>
+
+<p>This leads us to the idea of distinguishing between <strong>compact</strong> and <strong>sparse</strong>
+groups.</p>
+
+<p>$\Def$ A group is <strong>compact</strong> if it is has a horizontal layout and at least two
+annotations with a <code class="language-plaintext highlighter-rouge">Break</code> between them.</p>
+
+<p>That is, a group is compact if we could have laid it out vertically to split up
+annotations but decided not to.</p>
+
+<p>$\Def$ A group is <strong>sparse</strong> if it is not compact.</p>
+
+<p>Our goal be to make all groups sparse so as to preserve a reasonable
+relationship between terms and annotations. When we end up with multiple
+annotations at the end of a line anyway (e.g. because there are no breaks
+between annotations), we will print annotations using the multi-line approach.</p>
+
+<h2 id="an-implementation">
+<a class="anchor" href="#an-implementation" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#an-implementation"></a>An Implementation</h2>
+
+<p>Now that we have a design in place, we are ready to complete an implementation.
+As we will see, the simple design lends to a very straightforward encoding.</p>
+
+<h3 id="choosing-a-layout">
+<a class="anchor" href="#choosing-a-layout" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#choosing-a-layout"></a>Choosing a layout</h3>
+
+<p>Recall that we want to ensure two conditions when choosing a layout for a
+document’s groups: waterfalling and sparseness. Our <code class="language-plaintext highlighter-rouge">layout</code> procedure traverse
+a document top-down, choosing a layout for groups as it encounters them. <code class="language-plaintext highlighter-rouge">layout</code>
+takes a list of triples <code class="language-plaintext highlighter-rouge">(i, m, doc)</code> consisting of the cumulative
+indentation, the layout mode of the current group, and the document itself. As
+part of the layout process, we lower a document to a simpler <code class="language-plaintext highlighter-rouge">doc_ir</code> form:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type doc_ir = IrDone
+            | IrText    of string * annotation list * doc_ir
+            | IrNewline of int * doc_ir
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">IrDone</code> marks the end of a document. <code class="language-plaintext highlighter-rouge">IrText</code> denotes some text, with
+annotations attached to it, and the rest of the document. <code class="language-plaintext highlighter-rouge">IrNewline</code> denotes a
+newline with some indentation, and the rest of the document.</p>
+
+<p><code class="language-plaintext highlighter-rouge">doc_ir</code> is exactly Lindig’s <code class="language-plaintext highlighter-rouge">sdoc</code> with a different name and support for
+annotations. The rest of <code class="language-plaintext highlighter-rouge">layout</code> is exactly Lindig’s pretty, with an added call
+to <code class="language-plaintext highlighter-rouge">sparse</code> during the choosing of a group’s layout.</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">mode</span> <span class="o">=</span> <span class="nc">Horizontal</span> <span class="o">|</span> <span class="nc">Vertical</span>
+
+<span class="k">let</span> <span class="n">layout</span> <span class="n">w</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">go</span> <span class="n">l</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="nc">IrDone</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">_</span><span class="o">,</span> <span class="n">_</span><span class="o">,</span> <span class="nc">Nil</span><span class="p">)</span>                 <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">go</span> <span class="n">l</span> <span class="n">rest</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">_</span><span class="o">,</span> <span class="n">_</span><span class="o">,</span> <span class="nc">Text</span> <span class="p">(</span><span class="n">s</span><span class="o">,</span> <span class="n">a</span><span class="p">))</span>         <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span>
+         <span class="nc">IrText</span> <span class="p">(</span><span class="n">s</span><span class="o">,</span> <span class="nn">Option</span><span class="p">.</span><span class="n">to_list</span> <span class="n">a</span><span class="o">,</span> <span class="n">go</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">strlen</span> <span class="n">s</span><span class="p">)</span> <span class="n">rest</span><span class="p">)</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">_</span><span class="o">,</span> <span class="nc">Horizontal</span><span class="o">,</span> <span class="nc">Break</span> <span class="n">s</span><span class="p">)</span>    <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="nc">IrText</span> <span class="p">(</span><span class="n">s</span><span class="o">,</span> <span class="bp">[]</span><span class="o">,</span> <span class="n">go</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">strlen</span> <span class="n">s</span><span class="p">)</span> <span class="n">rest</span><span class="p">)</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="nc">Vertical</span><span class="o">,</span> <span class="nc">Break</span> <span class="n">_</span><span class="p">)</span>      <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="nc">IrNewline</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">go</span> <span class="n">i</span> <span class="n">rest</span><span class="p">)</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="nc">Cons</span> <span class="p">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="p">))</span>         <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">go</span> <span class="n">l</span> <span class="p">((</span><span class="n">i</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">::</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">::</span> <span class="n">rest</span><span class="p">)</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="nc">Nest</span> <span class="p">(</span><span class="n">j</span><span class="o">,</span> <span class="n">x</span><span class="p">))</span>         <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">go</span> <span class="n">l</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">,</span> <span class="n">m</span><span class="o">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">::</span> <span class="n">rest</span><span class="p">)</span>
+    <span class="o">|</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">_</span><span class="o">,</span> <span class="nc">Group</span> <span class="n">x</span><span class="p">)</span>             <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span>
+        <span class="k">if</span> <span class="n">sparse</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">fits</span> <span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span> <span class="p">[</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="nc">Horizontal</span><span class="o">,</span> <span class="n">x</span><span class="p">)</span> <span class="p">]</span> <span class="k">then</span>
+          <span class="n">go</span> <span class="n">l</span> <span class="p">((</span><span class="n">i</span><span class="o">,</span> <span class="nc">Horizontal</span><span class="o">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">::</span> <span class="n">rest</span><span class="p">)</span>
+        <span class="k">else</span> <span class="n">go</span> <span class="n">l</span> <span class="p">((</span><span class="n">i</span><span class="o">,</span> <span class="nc">Vertical</span><span class="o">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">::</span> <span class="n">rest</span><span class="p">)</span>
+  <span class="k">in</span>
+  <span class="n">go</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">fits</code> is exactly Lindig’s <code class="language-plaintext highlighter-rouge">fits</code> (page 5); we will not regurgitate it here.
+<code class="language-plaintext highlighter-rouge">sparse</code> is defined as follows:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">sparse</span> <span class="n">d</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">check</span> <span class="n">annots</span> <span class="n">seenbrk</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+    <span class="o">|</span> <span class="nc">Nil</span>              <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">check</span> <span class="n">annots</span> <span class="n">seenbrk</span> <span class="n">rest</span>
+    <span class="o">|</span> <span class="nc">Cons</span> <span class="p">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="p">)</span>      <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">check</span> <span class="n">annots</span> <span class="n">seenbrk</span> <span class="p">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">y</span> <span class="o">::</span> <span class="n">rest</span><span class="p">)</span>
+    <span class="o">|</span> <span class="nc">Nest</span> <span class="p">(</span><span class="n">_</span><span class="o">,</span> <span class="n">x</span><span class="p">)</span>      <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">check</span> <span class="n">annots</span> <span class="n">seenbrk</span> <span class="p">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">rest</span><span class="p">)</span>
+    <span class="o">|</span> <span class="nc">Text</span> <span class="p">(</span><span class="n">_</span><span class="o">,</span> <span class="nc">None</span><span class="p">)</span>   <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">check</span> <span class="n">annots</span> <span class="n">seenbrk</span> <span class="n">rest</span>
+    <span class="o">|</span> <span class="nc">Text</span> <span class="p">(</span><span class="n">_</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">_</span><span class="p">)</span> <span class="o">::</span> <span class="n">_</span> <span class="k">when</span> <span class="n">annots</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">seenbrk</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+    <span class="o">|</span> <span class="nc">Text</span> <span class="p">(</span><span class="n">_</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">_</span><span class="p">)</span> <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">check</span> <span class="p">(</span><span class="n">annots</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">seenbrk</span> <span class="n">rest</span>
+    <span class="o">|</span> <span class="nc">Break</span> <span class="n">_</span>          <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">check</span> <span class="n">annots</span> <span class="bp">true</span> <span class="n">rest</span>
+    <span class="o">|</span> <span class="nc">Group</span> <span class="n">x</span>          <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span> <span class="n">check</span> <span class="n">annots</span> <span class="n">seenbrk</span> <span class="p">(</span><span class="n">x</span> <span class="o">::</span> <span class="n">rest</span><span class="p">)</span>
+  <span class="k">in</span>
+  <span class="n">check</span> <span class="mi">0</span> <span class="bp">false</span> <span class="n">d</span>
+</code></pre></div></div>
+
+<p>$\text{Proposition.}$ $\tt layout$ yields a waterfalled document.</p>
+
+<p>$\text{Proof.}$ Straightforward by inspection of $\tt fits$ (Lindig, 5) and $\tt sparse$.
+$\tt fits\ g$ descends into subgroups of $\tt g$, so if $\tt fits\ sg = false$ for
+any subgroup $\tt sg$, it must be that $\tt fits\ g = false$. The argument for $\tt
+sparse$ is similar.</p>
+
+<p>$\text{Proposition.}$ $\tt layout$ yields a sparse document.</p>
+
+<p>$\text{Proof.}$ Straightforward by inspection of $\tt sparse$.</p>
+
+<h3 id="linearizing-a-document">
+<a class="anchor" href="#linearizing-a-document" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#linearizing-a-document"></a>Linearizing a document</h3>
+
+<p>After determining a document’s layout and lowering it to a <code class="language-plaintext highlighter-rouge">doc_ir</code>, we
+convert the document into a list of lines to print. Each line consists of its
+indentation, its text, and the annotation (if any) that should be printed at its
+end:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">line</span> <span class="o">=</span> <span class="nc">Line</span> <span class="k">of</span> <span class="kt">int</span> <span class="o">*</span> <span class="kt">string</span> <span class="o">*</span> <span class="n">annotation</span> <span class="n">option</span>
+</code></pre></div></div>
+
+<p>Linearizing a <code class="language-plaintext highlighter-rouge">doc_ir</code> is straightforward. The only interesting bit is the
+splitting of a line with multiple or multi-line annotations into multiple lines
+aligned with the first-line annotation.</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">linearize</span> <span class="n">ir</span> <span class="o">=</span>
+  <span class="k">let</span> <span class="n">distribute_line</span> <span class="p">(</span><span class="n">indent</span><span class="o">,</span> <span class="n">text</span><span class="o">,</span> <span class="n">annots</span><span class="p">)</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">annots</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="bp">[]</span> <span class="o">-&gt;</span> <span class="p">[</span> <span class="nc">Line</span> <span class="p">(</span><span class="n">indent</span><span class="o">,</span> <span class="n">text</span><span class="o">,</span> <span class="nc">None</span><span class="p">)</span> <span class="p">]</span>
+    <span class="o">|</span> <span class="n">a</span> <span class="o">::</span> <span class="n">rest</span> <span class="o">-&gt;</span>
+        <span class="k">let</span> <span class="n">textspaces</span> <span class="o">=</span> <span class="n">spaces</span> <span class="p">(</span><span class="n">strlen</span> <span class="n">text</span><span class="p">)</span> <span class="k">in</span>
+        <span class="nc">Line</span> <span class="p">(</span><span class="n">indent</span><span class="o">,</span> <span class="n">text</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">a</span><span class="p">)</span>
+        <span class="o">::</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="p">(</span><span class="k">fun</span> <span class="n">a</span> <span class="o">-&gt;</span> <span class="nc">Line</span> <span class="p">(</span><span class="n">indent</span><span class="o">,</span> <span class="n">textspaces</span><span class="o">,</span> <span class="nc">Some</span> <span class="n">a</span><span class="p">))</span> <span class="n">rest</span>
+  <span class="k">in</span>
+  <span class="k">let</span> <span class="k">rec</span> <span class="n">linear</span> <span class="n">lines</span> <span class="n">curline</span> <span class="o">=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="nc">IrDone</span> <span class="o">-&gt;</span> <span class="n">lines</span> <span class="o">@</span> <span class="n">distribute_line</span> <span class="n">curline</span>
+    <span class="o">|</span> <span class="nc">IrNewline</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">ir</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="n">linear</span> <span class="p">(</span><span class="n">lines</span> <span class="o">@</span> <span class="n">distribute_line</span> <span class="n">curline</span><span class="p">)</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="s2">""</span><span class="o">,</span> <span class="bp">[]</span><span class="p">)</span> <span class="n">ir</span>
+    <span class="o">|</span> <span class="nc">IrText</span> <span class="p">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">annots1</span><span class="o">,</span> <span class="n">ir</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="k">let</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span><span class="o">,</span> <span class="n">annots</span> <span class="o">=</span> <span class="n">curline</span> <span class="k">in</span>
+        <span class="n">linear</span> <span class="n">lines</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="o">^</span> <span class="n">s1</span><span class="o">,</span> <span class="n">annots</span> <span class="o">@</span> <span class="n">annots1</span><span class="p">)</span> <span class="n">ir</span>
+  <span class="k">in</span>
+  <span class="n">linear</span> <span class="bp">[]</span> <span class="p">(</span><span class="mi">0</span><span class="o">,</span> <span class="s2">""</span><span class="o">,</span> <span class="bp">[]</span><span class="p">)</span> <span class="n">ir</span>
+</code></pre></div></div>
+
+<h3 id="aligning-annotations-and-printing-lines">
+<a class="anchor" href="#aligning-annotations-and-printing-lines" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#aligning-annotations-and-printing-lines"></a>Aligning annotations and printing lines</h3>
+
+<p>Finally, we may want to align annotations locally among other nearby
+annotations, or globally among all annotations in the document.</p>
+
+<p>After annotation alignment, we complete the formatting by simply printing
+the list of produced lines as a string.</p>
+
+<p>Both annotation alignment and line printing are very straightforward;
+the interested reader can check out the <a href="https://github.com/ayazhafiz/strictly-annotated/blob/d032e2bb6f5380ce5ab0662c7a6c1e171e08d0cf/strictly_annotated.ml">implementation</a>.</p>
+
+<h3 id="is-it-efficient">
+<a class="anchor" href="#is-it-efficient" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#is-it-efficient"></a>Is it efficient?</h3>
+
+<p>Let $\depth(d)$ be the total number of terms in a <code class="language-plaintext highlighter-rouge">doc</code> $d$. It is clear that
+${\tt fits}$ and ${\tt sparse}$ explore each term in a document at most
+once, and hence ${\tt input}(d), {\tt sparse}(d) = \O(d)$. <code class="language-plaintext highlighter-rouge">layout</code> explores
+each term in a document at most once, but in the pathological case we end up
+calling $\tt fits$ and $\tt sparse$ for each term, so ${\tt layout}(d) =
+\O(\depth(d)^2)$.</p>
+
+<p>Let us now denote $\s(d)$ to be the total number of string characters in a document
+$d$. In the pathological case every term in a document is lowered and every
+annotation needs to be put on a separate line, so ${\tt linearize}(ir_d) =
+\O(d + \s(d))$.</p>
+
+<p>Alignment of annotations may require appending ${\s(d)}$ characters to every line
+in the pathological case, so ${\tt align}(lines_d) = \O(\s(d)^2)$. Done well,
+printing lines after alignment will be linear in the number of characters, so
+${\tt print}({\tt align}(lines_d)) = \O(\s(d)^2)$.</p>
+
+<p>Putting these passes all together yields a procedure $\texttt{pretty-print}(d) = \O(\depth(d)^2 + \s(d)^2)$.
+There need not be an ordering relation between $\depth(d)$ and $\s(d)$, but
+actual uses of this library suggest that in general $\depth(d) &lt; \s(d) %&gt;$.</p>
+
+<p>I think this is reasonably efficient, as it seems impossible to choose the best
+layout for a document without considering each group at least once, and it is impossible
+to align annotations without introducing at most $\s(d)$ additional characters
+to each line.</p>
+
+<p>There are simple ways to improve constants of proportionality in the
+implementation presented here - for example, $\tt fits$ and $\tt sparse$ could
+be combined into one procedure.</p>
+
+<h2 id="history-of-lindigs-printer">
+<a class="anchor" href="#history-of-lindigs-printer" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#history-of-lindigs-printer"></a>History of Lindig’s Printer</h2>
+
+<p>Lindig wrote his 2000 note <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.34.2200"><em>Strictly Pretty</em></a>
+following Walder’s 1999 paper <a href="https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf"><em>A prettier printer</em></a>.
+Walder designed a pretty-printing algebra, proving equational laws that led to
+an expressive and efficient implementation in the lazy language Haskell.
+Walder’s algebra was inspired by Hughes’s 1995 <a href="http://belle.sourceforge.net/doc/hughes95design.pdf"><em>The Design of a Pretty-printing Library</em></a>.
+Both Walder’s and Hughes’s libraries necessitated lazy execution - their
+implementations described all possible layouts and then evaluated a small amount
+to find “the best”. Having to eagerly expand all layouts would be a
+non-starter. Lindig was aware of this, and in his note attempted to translate
+the essence of Walder’s pretty-printing system for use in an eager evaluation.</p>
+
+</article>
+
+<section class="footer">
+  
+  <a href="/articles/21/a-flying-tour-of-kan-extensions">« A Flying Tour of Kan Extensions</a>
+  
+  <span><img class="emoji" title=":door:" alt=":door:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f6aa.png" height="20" width="20"> 
+    <span>​
+      <script type="math/tex">
+        \texttt{s}\lt\co\texttt{t}\iff\texttt{s}\land\lnot\texttt{t} = \texttt{never}
+      </script></span>
+  </span>
+  
+</section>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+  });
+</script>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
