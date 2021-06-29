@@ -1,4 +1,4 @@
-personal_ws-1.1 en 582 
+personal_ws-1.1 en 621 
 ABI
 ADT
 ADTs
@@ -33,9 +33,11 @@ Cliquer
 Codensity
 Cond
 Ctor
+DNF
 DOM
 DSL
 Dawg
+DeMorgan
 Dei
 Dolan's
 Dually
@@ -44,6 +46,8 @@ FFI
 FG
 FGF
 FQ
+FTS
+FTmx
 Functoriality
 GF
 GFG
@@ -60,7 +64,9 @@ HotReload
 HotReloadProgram
 Hypervalent
 IDEs
+IDG
 Im
+Inferty
 Init
 InitArr
 IrDone
@@ -98,9 +104,11 @@ Parreaux
 PartialAnimal
 PartialDog
 PartialUnconstrained
+Pearce
 Pearce's
 PickA
 PickFieldA
+Pmx
 Pottier's
 Proj
 RTLD
@@ -113,6 +121,7 @@ Runge
 Runge's
 SbF
 Siraphob
+SolOrder
 SueCandidates
 SueCheckFields
 SueCheckFieldsGreater
@@ -132,6 +141,7 @@ Tup
 TupToNum
 TypeScript
 TypeScript's
+UB
 UI
 WWWWWH
 Walder
@@ -174,6 +184,7 @@ backends
 backoff
 barycentric
 bbox
+bcancel
 bddce
 bijection
 bijections
@@ -265,6 +276,7 @@ efd
 el
 electronegative
 emoji
+emptyset
 enantiomer
 enantiomers
 endMarginnote
@@ -293,6 +305,7 @@ fdcaba
 fft
 fibonacci
 figcaption
+finitary
 fn
 formalizations
 formatter
@@ -339,16 +352,23 @@ i'm
 iff
 iframe
 ij
+ik
 img
 impactful
 impl
 inCircle
 incongruency
+inferer
+inferers
+infimum
+infvars
 init
 initArr
 initializer
 injective
 injectivity
+inlined
+inlining
 innerHTML
 instagram
 instantiation
@@ -366,6 +386,7 @@ invertible
 ir
 ish
 isomorphisms
+ivars
 javascript
 jge
 jj
@@ -387,10 +408,12 @@ libpath
 lim
 linearize
 lipschitz
+lmtt
 loadtime
 lockfile
 lookup
 lorde
+lt
 mL
 macOS
 maincolumn
@@ -402,7 +425,9 @@ mathcal
 meetHere
 memoizable
 meso
+metatitle
 methanium
+minimality
 modularized
 modularizing
 monad
@@ -415,6 +440,7 @@ mov
 mozallowfullscreen
 msf
 mtime
+multimap
 myProperty
 nLab
 narrowBToNat
@@ -427,6 +453,7 @@ newFoo
 nf
 ngmodule
 nike
+nn
 notitleize
 nsfk
 nullptr
@@ -463,6 +490,7 @@ protonated
 provers
 px
 qd
+qout
 qquad
 queerbaiting
 quo
@@ -471,6 +499,7 @@ readBOrC
 readNat
 reasonings
 recurse
+recurses
 recv
 refactorings
 referenceable
@@ -484,6 +513,7 @@ ret
 rex
 rfloor
 rideshare
+roadmap
 runtime
 runtimes
 samoyeds
@@ -510,6 +540,7 @@ strlen
 struct
 subseteq
 substituents
+subt
 subtype
 subtypes
 subtyping
@@ -525,6 +556,7 @@ tex
 texas
 textspaces
 textterms
+texttt
 th
 tmux
 toc
@@ -532,6 +564,7 @@ toml
 tuple
 tuple's
 tuples
+typable
 typecheck
 typechecker
 typecheckers
@@ -541,21 +574,26 @@ typedef
 typename
 typeof
 typesystem
+typings
 undecavalent
 undesiring
 undirected
 unergonomically
 unformatted
 unicode
+uninferrable
+uninferred
 uninstantiated
 unknownnever
 unnarrowed
 unserious
 unsustainability
 unsyncs
+untypable
 untyped
 userbase
 ust
+varnothing
 versa
 vims
 vimtutor
@@ -573,6 +611,7 @@ wm
 workflow
 workspace
 workstreams
+xFT
 xRa
 xRightarrow
 xdvs

@@ -7,6 +7,14 @@
 		<atom:link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Type Inference for &lt;em&gt;Sound and Complete Flow Typing&lt;/em&gt;</title>
+				<description>We design a type inference algorithm for the FT calculus of &amp;qout;Sound and Complete Flow Typing with Unions, Intersections, and Negations&amp;qout; (Pearce 2012), proving that it infers minimal types where they are expressible and infers all minimal user-typable types.</description>
+				<pubDate>Mon, 28 Jun 2021 03:00:00 -0500</pubDate>
+				<link>https://ayazhafiz.com/articles/21/type-inference-for-flow-typing</link>
+				<guid isPermaLink="true">https://ayazhafiz.com/articles/21/type-inference-for-flow-typing</guid>
+			</item>
+		
+			<item>
 				<title>Strictly Annotated: A Pretty-Printer With Support for Annotations</title>
 				<description>We present an extension of Lindig's Strictly Prettier (2000) pretty-printer with support for harmoniously formatting a document and arbitrary annotations attached to its terms.</description>
 				<pubDate>Thu, 17 Jun 2021 03:00:00 -0500</pubDate>
@@ -76,14 +84,6 @@
 				<pubDate>Mon, 21 Sep 2020 03:00:00 -0500</pubDate>
 				<link>https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering</guid>
-			</item>
-		
-			<item>
-				<title>On Understanding</title>
-				<description>On understanding</description>
-				<pubDate>Sat, 16 May 2020 03:00:00 -0500</pubDate>
-				<link>https://ayazhafiz.com/articles/20/on-understanding</link>
-				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/on-understanding</guid>
 			</item>
 		
 	</channel>

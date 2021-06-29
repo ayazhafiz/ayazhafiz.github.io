@@ -175,6 +175,20 @@ figcaption {
     outline: 1px dashed black; }
   .math.problem {
     outline: 1px solid black; }
+  .math.prop, .math.lemma, .math.cor {
+    position: relative; }
+    .math.prop::after, .math.lemma::after, .math.cor::after {
+      font-size: 1.8em;
+      content: "\25FB";
+      position: absolute;
+      bottom: 0;
+      right: 0; }
+  .math.algorithm {
+    overflow: scroll; }
+    .math.algorithm blockquote {
+      opacity: 1; }
+    .math.algorithm li {
+      font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
 
 blockquote {
   opacity: 0.8; }
