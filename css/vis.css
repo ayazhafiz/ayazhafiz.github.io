@@ -1,5 +1,6 @@
 html {
-  font-size: 12px; }
+  font-size: 12px;
+  height: 100%; }
   @media screen and (min-width: 350px) {
     html {
       font-size: 13px; } }
@@ -15,7 +16,6 @@ html {
 
 body,
 html {
-  height: 100%;
   margin: 0;
   width: 100%; }
 
@@ -31,8 +31,10 @@ body {
   font-weight: 300;
   line-height: 2em;
   margin: auto;
+  min-height: 100%;
   text-align: justify;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  position: relative; }
 
 h1,
 h2,
@@ -149,6 +151,23 @@ section.nav {
     margin-right: 2em; }
   .nav-link:not(*) {
     color: #0366d6; }
+
+.bottom-bar {
+  padding: 0 1em;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 0.7em; }
+  .bottom-bar details[open] > summary {
+    font-weight: bold; }
+  .bottom-bar details > summary {
+    color: rgba(0, 0, 0, 0.6);
+    cursor: help;
+    list-style-type: none;
+    outline: none; }
+  .bottom-bar details > summary::-webkit-details-marker {
+    display: none; }
 
 span.newthought {
   font-size: 1.2em;
