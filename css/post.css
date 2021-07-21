@@ -756,8 +756,14 @@ section.footer {
   width: 100%;
   z-index: 100; }
 
+.utterances {
+  margin-top: 1em; }
+
 pre {
   overflow-x: scroll; }
+
+.container.post {
+  padding-bottom: 4em; }
 
 .post {
   transition: width 0.2s ease-in-out; }
