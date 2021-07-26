@@ -59,7 +59,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1627321097504450745"
+  href="/css/shiki.css?1627321599739265099"
 />
 
 
@@ -68,7 +68,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1627321097504450745"
+      href="/css/post.css?1627321599739265099"
     />
   </head>
 
@@ -89,7 +89,58 @@
 
 <article class="post">
   
-  
+  <p>I recently performed a <a href="https://pubchem.ncbi.nlm.nih.gov/compound/Sodium_dichromate">sodium dichromate</a>
+oxidation of 2-butanol to 2-butanone<label for='butanoloxd' class='margin-toggle'>⊕</label><input type='checkbox' id='butanoloxd' class='margin-toggle'/><span class='marginnote'><img class='fullwidth' src='/assets/img/oxidation-2-butanol.png'/><br></span>.</p>
+<p>For reasons soon to be mentioned, I thought my attempt at this reaction had
+failed miserably, and so I decided to accept and forget. But a few days later I
+examined my experimental data - where I expected an alcohol proton in my NMR,
+there was none to be found!</p>
+<h2 id="h%3A-the-experiment" tabindex="-1"><a class="header-anchor" href="#h%3A-the-experiment" aria-hidden="true"></a><span class='el'>H:</span>  The Experiment</h2>
+<p>The oxidation was performed via fractional distillation, with 2-butanone
+expected to distill in the 77-85°C range. I used 2.5mL butanol as my limiting
+reagent, and anticipated a modest ~2mL crude distillate.</p>
+<p>I collected less than 0.5mL. Perhaps my setup was just very low-yielding? I ran
+an IR and submitted an NMR sample. The IR suggested the collected <em>&quot;product&quot;</em>
+was almost entirely 2-butanol. I decided to run the experiment again,
+double-checking each step of the procedure.</p>
+<p>Again, less than 0.5mL product was collected. I sighed, and st-</p>
+<p><span class='newthought'>What the hell?</span>
+Gas was evolving from my apparatus! Turns out, the distillation head had a small
+hole at the bottom of its thermometer joint<span class="note"><label for="thrm" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="thrm" class="margin-toggle" /><span class="sidenote">Likely from someone
+attaching a thermometer too violently.</span>. This explained the lack of
+product, but this time I could not run the reaction again - less than an hour
+remained in the lab period, there were no spare distillation heads, and I would
+still have to purify my product and collecting a melting point.</p>
+<p>I cleaned up and headed out, forgetting to retract my bad NMR sample.</p>
+<h2 id="he%3A-the-data" tabindex="-1"><a class="header-anchor" href="#he%3A-the-data" aria-hidden="true"></a><span class='el'>He:</span>  The Data</h2>
+<p>A couple days later, I received the NMR spectra for my submitted product, which
+I knew was actually 2-butanol. And that's when it got interesting.</p>
+<figure class='fullwidth'><img src='/assets/img/nmr-2-butanol.png' width='100%'/><figcaption><code>1H NMR (400 MHz, CDCl3) δ ppm:</code><br><code>2.45 (t, 2H), 2.14 (s, 3H), 1.70 (s, 1H), 1.06(d, 3H)</code></figcaption></figure>
+<br>
+Do you see it? Almost every hydrogen is accounted for - the signals at `2.14`ppm
+and `1.06`ppm correspond to the molecule's methyl groups, at `1.70`ppm is the hydrogen adjacent
+the alcohol<span class="note"><label for="upfield" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="upfield" class="margin-toggle" /><span class="sidenote">This proton should actually be further downfield.<br><br></span>,
+and at `2.45`ppm are the protons of the third carbon<span class="note"><label for="solvent" class="margin-toggle">&#8853;</label></span><input type="checkbox" id="solvent" class="margin-toggle" /><span class="marginnote">The minute rise at <code>7.27</code> is the solvent, CDCl<sub>3</sub>.</span> -
+but the alcohol proton is missing!
+<p>So where did it go? An argument could be made that the NMR sample was
+impure, producing a bad spectra. While this may be true, even in a poor
+spectrum one can expect the protons of the sample to have at least a small
+presence<label for='goodnmr' class='margin-toggle'>⊕</label><input type='checkbox' id='goodnmr' class='margin-toggle'/><span class='marginnote'><img class='fullwidth' src='/assets/img/nmr-2-butanol-PURE.png'/><br>For completeness, here is a spectrum of pure 2-butanol.</span>.</p>
+<p>In fact, there is a far more interesting solution this puzzle.</p>
+<h2 id="li%3A-hydrogen-bonding-and--oh-shifts" tabindex="-1"><a class="header-anchor" href="#li%3A-hydrogen-bonding-and--oh-shifts" aria-hidden="true"></a><span class='el'>Li:</span>  Hydrogen Bonding and -OH Shifts</h2>
+<p>The alcohol group of 2-butanol is susceptible to hydrogen bonding, but
+hydrogen bonds are dynamic and constantly changing. This produces a fairly large
+variability in electron density around the alcohol proton, leading to a broad
+range of potential chemical shifts<span class="note"><label for="addit" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="addit" class="margin-toggle" /><span class="sidenote">This type of behavior
+extends to most functional groups exhibiting hydrogen or other dynamic
+bonding, including amines.</span> (roughly between 2 and 5 ppm).</p>
+<p>It may seems crazy, but this suggests that the alcohol proton is really just
+hidden amongst the doublet or triplet at <code>2.45</code>ppm and <code>2.14</code>ppm, respectively.
+At least, that's my best theory<span class="note"><label for="better" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="better" class="margin-toggle" /><span class="sidenote">If you know of a better
+one, please <a href="mailto:ayaz.hafiz.1@gmail.com?subject=A theory for the missing alcohol">let me know</a>.</span>,
+and it blows my mind.</p>
+
+
 </article>
 
 <section class="footer">

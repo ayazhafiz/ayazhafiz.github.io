@@ -59,7 +59,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1627321097504450745"
+  href="/css/shiki.css?1627321599739265099"
 />
 
 
@@ -68,7 +68,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1627321097504450745"
+      href="/css/post.css?1627321599739265099"
     />
   </head>
 
@@ -89,8 +89,258 @@
 
 <article class="post">
    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#the-framework-language">The framework language</a></li>
+<li class="toc-entry toc-h2"><a href="#the-native-backend">The native backend</a></li>
+<li class="toc-entry toc-h2"><a href="#the-browser-backend">The browser backend</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#appendix%3A-hot-module-reloading">Appendix: Hot Module Reloading</a></li>
+</ul>
+</li>
 </ul> 
-  
+  <blockquote>
+<p>The full source code for the framework described here is available at
+<a href="https://github.com/ayazhafiz/hotreload">gh:ayazhafiz/hotreload</a>.</p>
+</blockquote>
+<p>In this cc, we will develop a small framework for executing software programs
+with support for <a href="https://en.wikipedia.org/wiki/Dynamic_software_updating">hot code reloading</a>.
+Hot code reloading permits dynamic changes to part of a program's implementation
+without interfering with the active state of the program or requiring a full recompilation,
+permitting faster iteration cycles during software development. As a small
+example, here is our framework hot-reloading parts of a
+simple counter program without changing its state:</p>
+<figure><img src='https://github.com/ayazhafiz/hotreload/blob/base/examples/demo_native.gif?raw=true'/><figcaption>Demo of hot code reloading for a simple counter program with the native backend</figcaption></figure>
+<figure><img src='https://github.com/ayazhafiz/hotreload/blob/base/examples/demo_browser.gif?raw=true'/><figcaption>Demo of hot code reloading for a simple counter program with the browser backend</figcaption></figure>
+<p>This is not just live code reloading. When <code>scale</code> or <code>shift</code> are reloaded,
+<code>i</code> is not affected.</p>
+<p>To show how we could implement hot code reloading for both machine-code programs
+and those running in a browser (both of which are shown in the examples above), we will
+implement two backends. One will compile
+our software to machine code and execute it in a
+two-sided runtime; this is called the native backend. The other will compile our software to JavaScript code and
+execute it in the browser with a client/server runtime; this is the browser
+backend.</p>
+<p>But first, it will be helpful to mention the framework language, which has been
+designed to provide a common frontend for both runtimes.</p>
+<h2 id="the-framework-language" tabindex="-1"><a class="header-anchor" href="#the-framework-language" aria-hidden="true"></a>The framework language</h2>
+<p>Here's the source code of the counter example we saw above<span class="note"><label for="program" class="margin-toggle">⊕</label></span><input type="checkbox" id="program" class="margin-toggle" /><span class="marginnote">The code shown in the example above is actually an earlier version of
+the framework language, but the presented code works all the same.</span>:</p>
+<pre class="shiki light-plus twoslash lsp" style="background-color: #FFFFFF; color: #000000"><div class="language-id">ts</div><div class='code-container'><code><div class='line'><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080"><data-lsp lsp='(alias) function hotreload(_target: any, _dummy_for_decorator: string): void&#10;import hotreload' >hotreload</data-lsp></span><span style="color: #000000">, </span><span style="color: #001080"><data-lsp lsp='(alias) class HotReloadProgram&#10;import HotReloadProgram' >HotReloadProgram</data-lsp></span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">"../runtime/runtime"</span><span style="color: #000000">;</span></div><div class='line'>&nbsp;</div><div class='line'><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99"><data-lsp lsp='class Counter' >Counter</data-lsp></span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99"><data-lsp lsp='(alias) class HotReloadProgram&#10;import HotReloadProgram' >HotReloadProgram</data-lsp></span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #000000">  @</span><span style="color: #001080"><data-lsp lsp='(alias) function hotreload(_target: any, _dummy_for_decorator: string): void&#10;import hotreload' >hotreload</data-lsp></span></div><div class='line'><span style="color: #000000">  </span><span style="color: #795E26"><data-lsp lsp='(method) Counter.scale(a: number): number' >scale</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='(parameter) a: number' >a</data-lsp></span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">): </span><span style="color: #267F99">number</span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080"><data-lsp lsp='(parameter) a: number' >a</data-lsp></span><span style="color: #000000"> * </span><span style="color: #098658">1</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">  }</span></div><div class='line'>&nbsp;</div><div class='line'><span style="color: #000000">  @</span><span style="color: #001080"><data-lsp lsp='(alias) function hotreload(_target: any, _dummy_for_decorator: string): void&#10;import hotreload' >hotreload</data-lsp></span></div><div class='line'><span style="color: #000000">  </span><span style="color: #795E26"><data-lsp lsp='(method) Counter.shift(a: number): number' >shift</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='(parameter) a: number' >a</data-lsp></span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">): </span><span style="color: #267F99">number</span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080"><data-lsp lsp='(parameter) a: number' >a</data-lsp></span><span style="color: #000000"> + </span><span style="color: #098658">0</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">  }</span></div><div class='line'>&nbsp;</div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26"><data-lsp lsp='(method) Counter.main(): Promise&lt;number>' >main</data-lsp></span><span style="color: #000000">(): </span><span style="color: #267F99"><data-lsp lsp='Represents the completion of an asynchronous operation&#10;&#10;interface Promise&lt;T>' >Promise</data-lsp></span><span style="color: #000000">&lt;</span><span style="color: #267F99">number</span><span style="color: #000000">&gt; {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080"><data-lsp lsp='let i: number' >i</data-lsp></span><span style="color: #000000"> = </span><span style="color: #098658">0</span><span style="color: #000000">; ; ++</span><span style="color: #001080"><data-lsp lsp='let i: number' >i</data-lsp></span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080"><data-lsp lsp='let n: number' >n</data-lsp></span><span style="color: #000000"> = </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26"><data-lsp lsp='(method) Counter.shift(a: number): number' >shift</data-lsp></span><span style="color: #000000">(</span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26"><data-lsp lsp='(method) Counter.scale(a: number): number' >scale</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='let i: number' >i</data-lsp></span><span style="color: #000000">));</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26"><data-lsp lsp='(method) HotReloadProgram.print(num: number): void' >print</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='let n: number' >n</data-lsp></span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26"><data-lsp lsp='(method) HotReloadProgram.sleep_seconds(seconds: number): Promise&lt;void>' >sleep_seconds</data-lsp></span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">    }</span></div><div class='line'><span style="color: #000000">  }</span></div><div class='line'><span style="color: #000000">}</span></div></code></div></pre>
+<p>This is just TypeScript code, which is checked by the TypeScript compiler and
+then translated to either C++ (for the native backend) or JavaScript (for the
+browser backend).</p>
+<p>Each program is described by a single class that extends from
+<code>HotReloadProgram</code>; the entry point is the <code>main</code> method of that class. Some
+standard functions (<code>print</code>, <code>sleep_seconds</code>) are provided by the base class.
+The most important thing here is the <code>@hotreload</code> decorator, which marks
+methods whose implementations should be watched and reloaded as needed by the
+runtime.</p>
+<p>When targeting the browser runtime, the input program can contain any code
+admissible by the TypeScript compiler. When targeting the native backend,
+only a subset of TypeScript code is admissible, as I would like this to be an
+exploration of hot-code reloading rather than that of TS-&gt;C++
+code generation. Adding support for translation of more constructs should be
+trivial, but the language really isn't the point here.</p>
+<p>Our choice of TypeScript as a high-level DSL works well
+because it is trivial to translate to both target languages, and all we need is
+something that we can input into either backend to check if our hot-reloading
+implementation &quot;just works&quot;. We could talk more about programming language interfaces
+if we were implementing some production system based on this work. In fact, I am
+of the opinion that it should be
+programming language compilers/interpreters that provide support for hot code
+reloading, not external frameworks.</p>
+<p>But okay, I digress. Let's get on with what we're really here for -- hot code
+reloading! First up, the native backend and runtime.</p>
+<h2 id="the-native-backend" tabindex="-1"><a class="header-anchor" href="#the-native-backend" aria-hidden="true"></a>The native backend</h2>
+<p>So let's say we have some program that we know how to compile to machine code,
+load, and execute. What extra work do we need to do to support hot code reloading
+within the executable?</p>
+<p>The main thing to figure out is how the executable be composed. It's clear that in order
+to change the implementation of a function on the fly without changing the state
+of a running binary, we cannot statically link the function routine with that
+binary; otherwise, we would need to re-link (and thus restart) the entire
+binary when the function changes. So we need to be able to dynamically load, link, and unload the function
+symbol as needed. And that's just it -- we'll compile our <code>@hotreload</code>-annotated
+functions as dynamic libraries (also known as shared libraries) and give our main program
+executable some information on how to load and link those libraries. Then, when
+a <code>@hotreload</code> function implementation changes, we recompile its dynamic
+library and instruct the main program to reload and re-link the library.</p>
+<p>To me, there is nothing really tricky or even interesting about this idea; it just
+makes sense! Turns out, shared libraries are how pretty much all plugin systems
+works, and thankfully <code>libc</code> has a series of functions devoted
+to loading/unloading/reading from dynamic libraries (see <code>man 6 dlopen</code>). So
+knowing the path forward, the remaining work we have is to actually set up
+the runtime in the aforementioned manner.</p>
+<p>First, let's design a system to load and link dynamic libraries associated with
+<code>@hotreload</code> functions in the user program (we'll call this the program runtime).
+For each <code>@hotreload</code> function, we'll have the framework compiler instantiate a
+<code>HotReload</code> object to manage this work. Let's walk through what that
+object looks like<span class="note"><label for="c" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="c" class="margin-toggle" /><span class="sidenote">By the way, I use C++ as the target language
+here to make some things like memory allocation easier than would be in C, where
+a lot of boilerplate may distract from the more interesting things. Writing this
+same runtime in C would be straightforward.</span>.</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">cpp</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">template</span><span style="color: #000000"> &lt;</span><span style="color: #0000FF">typename</span><span style="color: #000000"> </span><span style="color: #267F99">T</span><span style="color: #000000">&gt;</span></div><div class='line'><span style="color: #0000FF">struct</span><span style="color: #000000"> </span><span style="color: #267F99">HotReload</span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #000000"> </span><span style="color: #0000FF">public:</span></div><div class='line'><span style="color: #008000">  // ...snipped constructor</span></div><div class='line'></div><div class='line'><span style="color: #000000">  </span><span style="color: #267F99">T</span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #795E26">get</span><span style="color: #000000">() {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">assure_loaded</span><span style="color: #000000">();</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> loaded;</span></div><div class='line'><span style="color: #000000">  }</span></div></code></div></pre>
+<p>The only public API of the object is the <code>get</code> method, which retrieves the
+function pointer associated with the <code>@hotreload</code> function. The signature of the
+function is described by <code>T</code>, which we instantiate with a concrete type during
+compilation of the input program to C++ (we'll see what that looks like in a bit).</p>
+<p>Before we get to <code>assure_loaded</code>, let's take a look at the data we associate
+with each <code>HotReload</code> instance.</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">cpp</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">template</span><span style="color: #000000"> &lt;</span><span style="color: #0000FF">typename</span><span style="color: #000000"> </span><span style="color: #267F99">T</span><span style="color: #000000">&gt;</span></div><div class='line'><span style="color: #0000FF">struct</span><span style="color: #000000"> </span><span style="color: #267F99">HotReload</span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #008000">  // ...snipped</span></div><div class='line'></div><div class='line'><span style="color: #000000"> </span><span style="color: #0000FF">private:</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0000FF">char</span><span style="color: #000000">* api;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0000FF">char</span><span style="color: #000000">* libpath;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0000FF">char</span><span style="color: #000000">* copypath;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0000FF">char</span><span style="color: #000000">* lockfile;</span></div><div class='line'></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">void</span><span style="color: #000000">* handle = </span><span style="color: #0000FF">nullptr</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">  T* loaded = </span><span style="color: #0000FF">nullptr</span><span style="color: #000000">;</span></div><div class='line'></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">time_t</span><span style="color: #000000"> loadtime = </span><span style="color: #098658">0</span><span style="color: #000000">;</span></div></code></div></pre>
+<p>There are comments in the <a href="https://github.com/ayazhafiz/hotreload/blob/base/runtime/runtime.cpp">source code</a>
+describing what each of these members does, but for exposition let's enumerate
+them here:</p>
+<ul>
+<li><code>api</code>: the name of the function symbol to be loaded from the
+shared library containing the <code>@hotreload</code> function implementation.</li>
+<li><code>libpath</code>: the file path of the dynamic library the <code>@hotreload</code> function
+routine is defined in. When the function implementation changes, it is
+recompiled with output at this path.</li>
+<li><code>copypath</code>: consider the case in which we go to access a function routine
+while a new implementation is being recompiled to <code>libpath</code>. If the
+compilation process touches the contents of <code>libpath</code> non-atomically (which it almost certainly does), we would have
+to spin until the compilation is finished. To avoid this,
+whenever we detect a change to <code>libpath</code> we first copy its contents to
+<code>copypath</code> and then read the function routine from there. This way, the
+user program can continue to use a stale function implementation while the
+library at <code>libpath</code> is recompiling.</li>
+<li><code>lockfile</code>: in general we want to reload the function symbol for <code>api</code>
+whenever we detect a change to <code>libpath</code>, but <code>libpath</code> may be modified
+non-atomically during the compilation process, in which case the library contents may be incomplete and non-loadable.
+To deal with this problem, we check for the
+presence of <code>lockfile</code>, which exists on the file system when <code>libpath</code> is
+being written to and is removed once its contents are complete.</li>
+<li><code>handle</code>: an opaque handle to the associated dynamic library provided by <code>dlopen</code>.</li>
+<li><code>loaded</code>: a pointer to the function symbol <code>api</code> represents.</li>
+<li><code>loadtime</code>: the last time we loaded and linked the dynamic library. If the
+library object file is modified after this time, we know we should reload it
+again.</li>
+</ul>
+<p>Maybe you already see how the loading of symbols is going to work:</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">cpp</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">template</span><span style="color: #000000"> &lt;</span><span style="color: #0000FF">typename</span><span style="color: #000000"> </span><span style="color: #267F99">T</span><span style="color: #000000">&gt;</span></div><div class='line'><span style="color: #0000FF">struct</span><span style="color: #000000"> </span><span style="color: #267F99">HotReload</span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #008000">  // ...snipped</span></div><div class='line'><span style="color: #000000"> </span><span style="color: #0000FF">private:</span></div><div class='line'><span style="color: #008000">  // ...snipped</span></div><div class='line'></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">void</span><span style="color: #000000"> </span><span style="color: #795E26">assure_loaded</span><span style="color: #000000">() {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #0000FF">struct</span><span style="color: #000000"> </span><span style="color: #267F99">stat</span><span style="color: #000000"> </span><span style="color: #001080">lib</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">stat</span><span style="color: #000000">(libpath, &lib);</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (loadtime != </span><span style="color: #001080">lib</span><span style="color: #000000">.</span><span style="color: #001080">st_mtime</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">lockfile_exists</span><span style="color: #000000">()) {</span></div><div class='line'><span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">      }</span></div><div class='line'></div><div class='line'><span style="color: #000000">      </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (handle != </span><span style="color: #0000FF">nullptr</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">        </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">dlclose</span><span style="color: #000000">(handle)) {</span></div><div class='line'><span style="color: #000000">          </span><span style="color: #795E26">die</span><span style="color: #000000">(</span><span style="color: #A31515">"dlclose failed: %s</span><span style="color: #EE0000">\n</span><span style="color: #A31515">"</span><span style="color: #000000">, </span><span style="color: #795E26">dlerror</span><span style="color: #000000">());</span></div><div class='line'><span style="color: #000000">        }</span></div><div class='line'><span style="color: #000000">        handle = </span><span style="color: #0000FF">nullptr</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">      }</span></div><div class='line'></div><div class='line'><span style="color: #000000">      </span><span style="color: #795E26">copy_file</span><span style="color: #000000">(libpath, copypath);</span></div><div class='line'></div><div class='line'><span style="color: #000000">      handle = </span><span style="color: #795E26">dlopen</span><span style="color: #000000">(copypath, RTLD_NOW | RTLD_LOCAL);</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (handle == </span><span style="color: #0000FF">nullptr</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">        </span><span style="color: #795E26">die</span><span style="color: #000000">(</span><span style="color: #A31515">"dlopen failed: %s</span><span style="color: #EE0000">\n</span><span style="color: #A31515">"</span><span style="color: #000000">, </span><span style="color: #795E26">dlerror</span><span style="color: #000000">());</span></div><div class='line'><span style="color: #000000">      }</span></div><div class='line'><span style="color: #000000">      loadtime = </span><span style="color: #001080">lib</span><span style="color: #000000">.</span><span style="color: #001080">st_mtime</span><span style="color: #000000">;</span></div><div class='line'></div><div class='line'><span style="color: #000000">      </span><span style="color: #795E26">dlerror</span><span style="color: #000000">();</span><span style="color: #008000">  // clear errors</span></div><div class='line'><span style="color: #000000">      loaded = (T*)</span><span style="color: #795E26">dlsym</span><span style="color: #000000">(handle, api);</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0000FF">char</span><span style="color: #000000">* err = </span><span style="color: #795E26">dlerror</span><span style="color: #000000">();</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (err != </span><span style="color: #0000FF">nullptr</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">        </span><span style="color: #795E26">die</span><span style="color: #000000">(</span><span style="color: #A31515">"dlsym failed: %s</span><span style="color: #EE0000">\n</span><span style="color: #A31515">"</span><span style="color: #000000">, err);</span></div><div class='line'><span style="color: #000000">      }</span></div><div class='line'><span style="color: #000000">    }</span></div><div class='line'><span style="color: #000000">  }</span></div><div class='line'><span style="color: #000000">};</span></div></code></div></pre>
+<p>First, we check if <code>libpath</code> has been modified since we last used the function
+symbol associated with it. If it has and the <code>lockfile</code> associated with active
+compilation is not present, we proceed with reloading the function symbol.
+We close our active handle to <code>copypath</code> (remember, this is where we actually
+read the symbols from, since a handle to <code>libpath</code> would already be
+invalidated at this point). Then we copy the shared library to our target
+<code>copypath</code> site. We call <code>dlopen</code> on the shared library which loads and links
+it, and store the returned library handle in <code>handle</code>. Finally, we grab the actual function
+routine we're looking for by calling <code>dlsym</code> with the handle and the
+function name.</p>
+<p>You may be wondering, why is <code>handle</code> a data member if its state does not
+need to persist between multiple calls to <code>assure_loaded</code>? The reason is that the destructor of
+a <code>HotReload</code> instance should also call <code>dlclose</code> on the shared library handle,
+because handles to shared libraries are reference counted (when there are no
+references, the library is unloaded). Of course, since the lifetime of a
+<code>HotReload</code> instance is exactly that of the user program it's not like we
+can introduce memory leaks this way, but hey.</p>
+<p>Another thing to mention is the use of the <code>RTLD_NOW</code> and <code>RTLD_LOCAL</code> flags
+in the call to <code>dlopen</code>. <code>RTLD_NOW</code> instructs libc to bind all external symbols
+in the library immediately rather than lazily on usage. Since for us, each
+shared library contains only one function routine which is about to be used,
+there's not much point to delaying symbol resolution. <code>RTLD_LOCAL</code> means
+that symbols in the library are accessible only by the handle returned from
+<code>dlopen</code>, which is clearly what we want.</p>
+<p>Note that our approach here is lazy in the sense that we cache the function
+symbol address from the shared library and try to reload the library only when a call
+to <code>HotReload#get</code> is made. The expectation is that the cost of
+file copying/loading/linking is amortized across many calls to <code>get()</code>, thus
+keeping the performance and behavior of the program similar to what it would be
+without a hot reload runtime. It also avoids a bunch of complexity we might have
+introduced through background threads listening to file changes or spinning in
+place of a lockfile.</p>
+<p>Now, let's take at what the counter program we showed earlier looks like when
+compiled with this runtime.</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">cpp</div><div class='code-container'><code><div class='line'><span style="color: #008000">// /private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/7f828395e1611cb8b3e64ee8c7536f35.cpp</span></div><div class='line'><span style="color: #0000FF">extern</span><span style="color: #000000"> </span><span style="color: #A31515">"C"</span><span style="color: #000000"> </span><span style="color: #0000FF">int</span><span style="color: #000000"> </span><span style="color: #795E26">scale</span><span style="color: #000000">(</span><span style="color: #0000FF">int</span><span style="color: #000000"> a) {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> a * </span><span style="color: #098658">1</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">}</span></div><div class='line'></div><div class='line'><span style="color: #008000">// /private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/2872612167e7943ceea64b36d17c89d4.cpp</span></div><div class='line'><span style="color: #0000FF">extern</span><span style="color: #000000"> </span><span style="color: #A31515">"C"</span><span style="color: #000000"> </span><span style="color: #0000FF">int</span><span style="color: #000000"> </span><span style="color: #795E26">shift</span><span style="color: #000000">(</span><span style="color: #0000FF">int</span><span style="color: #000000"> a) {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> a + </span><span style="color: #098658">0</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">}</span></div><div class='line'></div><div class='line'><span style="color: #008000">// /private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/fc2d242f0363b851a0b2efd6b9db7df8.cpp</span></div><div class='line'><span style="color: #008000">/* &lt;runtime snipped&gt; */</span></div><div class='line'><span style="color: #267F99">HotReload</span><span style="color: #000000">&lt;</span><span style="color: #0000FF">int</span><span style="color: #000000">(</span><span style="color: #0000FF">int</span><span style="color: #000000">)&gt; </span><span style="color: #795E26">scale</span><span style="color: #000000">(</span><span style="color: #A31515">"scale"</span><span style="color: #000000">, </span><span style="color: #A31515">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/40d1e496db6a6655b65c5d73458b6373"</span><span style="color: #000000">, </span><span style="color: #A31515">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/2d8885948a7d8c9abf321e4f3f6912c1"</span><span style="color: #000000">, </span><span style="color: #A31515">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/ef5a9921ce0030c42054ec3fb658b3ad"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #267F99">HotReload</span><span style="color: #000000">&lt;</span><span style="color: #0000FF">int</span><span style="color: #000000">(</span><span style="color: #0000FF">int</span><span style="color: #000000">)&gt; </span><span style="color: #795E26">shift</span><span style="color: #000000">(</span><span style="color: #A31515">"shift"</span><span style="color: #000000">, </span><span style="color: #A31515">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/fad7d0510a897b50c8f8aec4efc8155e"</span><span style="color: #000000">, </span><span style="color: #A31515">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/d02eecf94ddeb3592470ff6959fdcaba"</span><span style="color: #000000">, </span><span style="color: #A31515">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/f3176b0204c187f47b4d0f1cef1a5e37"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #0000FF">int</span><span style="color: #000000"> </span><span style="color: #795E26">main</span><span style="color: #000000">() {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">auto</span><span style="color: #000000"> i = </span><span style="color: #098658">0</span><span style="color: #000000">; ; ++i) {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #0000FF">auto</span><span style="color: #000000"> n = </span><span style="color: #001080">shift</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">()(</span><span style="color: #001080">scale</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">()(i));</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">print</span><span style="color: #000000">(n);</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">sleep_seconds</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  }</span></div><div class='line'><span style="color: #000000">}</span></div></code></div></pre>
+<p>Pretty straightforward -- for each <code>@hotreload</code>-annotated function (<code>scale</code> and
+<code>shift</code>) the framework runtime allocates some unique, temporary files for <code>libpath</code>, <code>copypath</code>,
+<code>lockfile</code>, and an implementation file to house the function source code. Then the
+framework writes the <code>@hotreload</code> function implementations to their implementation files, compiles those
+files as shared libraries at their <code>libpath</code>s, and generates
+<code>HotReload</code> instances referencing those functions, type-parameterized by their
+function signatures, in the main program. Finally, we rewrite the raw calls to <code>shift</code> and <code>scale</code> to
+be <code>shift.get()</code> and <code>scale.get()</code>. If you're wondering why we label the
+definitions of <code>scale</code> and <code>shift</code> as <code>extern &quot;C&quot;</code>, it's to ensure conformance
+with the C ABI as expected by <code>dlsym</code> (otherwise a C++ compiler may mangle the names).</p>
+<p>The presence of an additional <a href="https://github.com/ayazhafiz/hotreload/blob/base/src/runtime_native.ts">runtime on the framework side</a>
+is why I refer to the native backend as having a two-sided runtime. As well as
+compiling and executing the resulting C++ code, the framework runtime is
+responsible for listening to changes in the input program and
+recompiling the shared libraries associated with <code>@hotreload</code> functions as
+needed.</p>
+<p>And that's all there is to it! We've implemented a DSL and framework for running
+programs with no formal dependencies other than that of libc, and in very little
+time. Get rid of the DSL, and the runtime alone can be modified to fit any
+project that doesn't mind a dependency on libc.</p>
+<p>Our fun isn't over yet -- now, let's show how to perform hot code reloading with
+programs in the browser, where program state is abound and there certainly is no
+libc, let alone the concept of machine code loading and linking.</p>
+<h2 id="the-browser-backend" tabindex="-1"><a class="header-anchor" href="#the-browser-backend" aria-hidden="true"></a>The browser backend</h2>
+<p>Obviously, the approach we described above cannot be readily translated to the
+execution of JavaScript programs by JavaScript engines in the browser. But
+thanks to the dynamic nature of JavaScript, changing implementations arbitrarily
+during a program's execution is startlingly easy. The key idea is that we can
+inject arbitrary JavaScript code via fresh <code>&lt;script&gt;</code> elements inserted in the
+DOM, which will immediately execute any code they contain.</p>
+<p>In general this is kind of arbitrary code injection is a great way to introduce security vulnerabilities, but since we expect hot
+code reloading to be used only in local development environments, we'll wave our
+hands at that and instead accept it as a huge boon to the ease of our
+implementation.</p>
+<p>Since our program is defined entirely in a class, and hot-reloadable functions
+are just methods on that class, we can apply new changes just by changing the
+definition of the method on an instance of the class. And in JavaScript, class
+methods are just properties. For example:</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">html</div><div class='code-container'><code><div class='line'><span style="color: #800000">&lt;body&gt;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #008000">&lt;!-- some html --&gt;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #800000">&lt;script&gt;</span></div><div class='line'><span style="color: #000000FF">    </span><span style="color: #0000FF">class</span><span style="color: #000000FF"> </span><span style="color: #267F99">Counter</span><span style="color: #000000FF"> {</span></div><div class='line'><span style="color: #000000FF">      </span><span style="color: #008000">// the counter example above</span></div><div class='line'><span style="color: #000000FF">    }</span></div><div class='line'><span style="color: #000000FF">    </span><span style="color: #0000FF">const</span><span style="color: #000000FF"> </span><span style="color: #0070C1">program</span><span style="color: #000000FF"> </span><span style="color: #000000">=</span><span style="color: #000000FF"> </span><span style="color: #0000FF">new</span><span style="color: #000000FF"> </span><span style="color: #795E26">Counter</span><span style="color: #000000FF">();</span></div><div class='line'><span style="color: #000000FF">    </span><span style="color: #001080">program</span><span style="color: #000000FF">.</span><span style="color: #795E26">main</span><span style="color: #000000FF">(); </span><span style="color: #008000">// execute the program</span></div><div class='line'><span style="color: #000000FF">  </span><span style="color: #800000">&lt;/script&gt;</span></div><div class='line'></div><div class='line'><span style="color: #000000">  </span><span style="color: #800000">&lt;script&gt;</span></div><div class='line'><span style="color: #000000FF">    </span><span style="color: #001080">program</span><span style="color: #000000FF">.</span><span style="color: #001080">scale</span><span style="color: #000000FF"> </span><span style="color: #000000">=</span><span style="color: #000000FF"> (</span><span style="color: #0000FF">function</span><span style="color: #000000FF"> </span><span style="color: #795E26">scale</span><span style="color: #000000FF">(</span><span style="color: #001080">a</span><span style="color: #000000FF">) {</span></div><div class='line'><span style="color: #000000FF">      </span><span style="color: #AF00DB">return</span><span style="color: #000000FF"> </span><span style="color: #001080">a</span><span style="color: #000000FF"> </span><span style="color: #000000">*</span><span style="color: #000000FF"> </span><span style="color: #098658">2</span><span style="color: #000000FF">;</span></div><div class='line'><span style="color: #000000FF">    }).</span><span style="color: #795E26">bind</span><span style="color: #000000FF">(</span><span style="color: #001080">program</span><span style="color: #000000FF">);</span></div><div class='line'><span style="color: #000000FF">  </span><span style="color: #800000">&lt;/script&gt;</span></div><div class='line'><span style="color: #800000">&lt;/body&gt;</span></div></code></div></pre>
+<p>The second <code>&lt;script&gt;</code> element executes in the same context as the first, so it
+overwrites the <code>scale</code> method of the program with an implementation that scales
+the input variable by 2 rather than 1. Calls to <code>program.scale</code> will immediately begin referencing
+this implementation<span class="note"><label for="bind" class="margin-toggle">⊕</label></span><input type="checkbox" id="bind" class="margin-toggle" /><span class="marginnote">For those unfamiliar, <code>fn.bind(obj)</code> updates
+the <code>this</code> reference in <code>fn</code> to be that of <code>obj</code>. By default, the <code>this</code>
+reference in a free function is just that function. Of course, in this example
+it doesn't matter because <code>scale</code> does not use <code>this</code>.</span>.</p>
+<p>Knowing how to apply changes, the other thing we need to figure out is how to
+inform the running program of new changes. Since we have no file system access
+from the browser, it seems we need a web server. And that's exactly what
+we'll do -- the framework runtime will spin up a web server (we'll call this the
+server runtime) that serves a web page with the user program and a runtime for
+applying changes to <code>@hotreload</code> methods of the active program (we'll call this
+the client runtime). The client runtime will open a websocket with the server
+runtime, over which the server will send code patches (of the form <code>program.foo = newFoo.bind(program)</code> we saw above) to the client whenever it detects changes
+to the implementation of <code>@hotreload</code> methods in the input program.</p>
+<p>Let's quickly walk through the <a href="https://github.com/ayazhafiz/hotreload/blob/base/runtime/runtime.html">client runtime</a>
+to make sure we're on the same page<span class="note"><label for="server-runtime" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="server-runtime" class="margin-toggle" /><span class="sidenote">The <a href="https://github.com/ayazhafiz/hotreload/blob/base/src/runtime_browser.ts">server runtime</a>
+is not that interesting, but I have attempted to leave it well-commented if you
+are interesting in reading through it.</span>.</p>
+<pre class="shiki light-plus twoslash lsp" style="background-color: #FFFFFF; color: #000000"><div class="language-id">js</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080"><data-lsp lsp='let _π_reload_id: number' >_π_reload_id</data-lsp></span><span style="color: #000000"> = </span><span style="color: #098658">0</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1"><data-lsp lsp='const _π_resolve_reload: {}' >_π_resolve_reload</data-lsp></span><span style="color: #000000"> = {};</span></div><div class='line'><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26"><data-lsp lsp='function πhotreload(patch: any): Promise&lt;void>' >πhotreload</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='(parameter) patch: any' >patch</data-lsp></span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1"><data-lsp lsp='const s: HTMLScriptElement' >s</data-lsp></span><span style="color: #000000"> = </span><span style="color: #001080"><data-lsp lsp='var document: Document' >document</data-lsp></span><span style="color: #000000">.</span><span style="color: #795E26"><data-lsp lsp='Creates an instance of the element for the specified tag.&#10;&#10;(method) Document.createElement&lt;"script">(tagName: "script", options?: ElementCreationOptions | undefined): HTMLScriptElement (+2 overloads)' >createElement</data-lsp></span><span style="color: #000000">(</span><span style="color: #A31515">"script"</span><span style="color: #000000">);</span></div><div class='line'>&nbsp;</div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1"><data-lsp lsp='const reload_id: number' >reload_id</data-lsp></span><span style="color: #000000"> = </span><span style="color: #001080"><data-lsp lsp='let _π_reload_id: number' >_π_reload_id</data-lsp></span><span style="color: #000000">++;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1"><data-lsp lsp='const wait_hotreload: Promise&lt;any>' >wait_hotreload</data-lsp></span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99"><data-lsp lsp='Creates a new Promise.&#10;&#10;var Promise: PromiseConstructor&#10;new &lt;any>(executor: (resolve: (value: any) => void, reject: (reason?: any) => void) => void) => Promise&lt;any>' >Promise</data-lsp></span><span style="color: #000000">((</span><span style="color: #001080"><data-lsp lsp='(parameter) resolve: (value: any) => void' >resolve</data-lsp></span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #001080"><data-lsp lsp='const _π_resolve_reload: {}' >_π_resolve_reload</data-lsp></span><span style="color: #000000">[</span><span style="color: #001080"><data-lsp lsp='const reload_id: number' >reload_id</data-lsp></span><span style="color: #000000">] = </span><span style="color: #001080"><data-lsp lsp='(parameter) resolve: (value: any) => void' >resolve</data-lsp></span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">  });</span></div><div class='line'>&nbsp;</div><div class='line'><span style="color: #000000">  </span><span style="color: #001080"><data-lsp lsp='const s: HTMLScriptElement' >s</data-lsp></span><span style="color: #000000">.</span><span style="color: #001080"><data-lsp lsp='(property) InnerHTML.innerHTML: string' >innerHTML</data-lsp></span><span style="color: #000000"> = [</span><span style="color: #001080"><data-lsp lsp='(parameter) patch: any' >patch</data-lsp></span><span style="color: #000000">, </span><span style="color: #A31515">`_π_resolve_reload[</span><span style="color: #0000FF">${</span><span style="color: #001080"><data-lsp lsp='const reload_id: number' >reload_id</data-lsp></span><span style="color: #0000FF">}</span><span style="color: #A31515">]();`</span><span style="color: #000000">].</span><span style="color: #795E26"><data-lsp lsp='Adds all the elements of an array into a string, separated by the specified separator string.&#10;&#10;(method) Array&lt;any>.join(separator?: string | undefined): string' >join</data-lsp></span><span style="color: #000000">(</span><span style="color: #A31515">"</span><span style="color: #EE0000">\n</span><span style="color: #A31515">"</span><span style="color: #000000">);</span></div><div class='line'>&nbsp;</div><div class='line'><span style="color: #000000">  </span><span style="color: #001080"><data-lsp lsp='var document: Document' >document</data-lsp></span><span style="color: #000000">.</span><span style="color: #001080"><data-lsp lsp='Specifies the beginning and end of the document body.&#10;&#10;(property) Document.body: HTMLElement' >body</data-lsp></span><span style="color: #000000">.</span><span style="color: #795E26"><data-lsp lsp='(method) Node.appendChild&lt;HTMLScriptElement>(newChild: HTMLScriptElement): HTMLScriptElement' >appendChild</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='const s: HTMLScriptElement' >s</data-lsp></span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080"><data-lsp lsp='const wait_hotreload: Promise&lt;any>' >wait_hotreload</data-lsp></span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #001080"><data-lsp lsp='var document: Document' >document</data-lsp></span><span style="color: #000000">.</span><span style="color: #001080"><data-lsp lsp='Specifies the beginning and end of the document body.&#10;&#10;(property) Document.body: HTMLElement' >body</data-lsp></span><span style="color: #000000">.</span><span style="color: #795E26"><data-lsp lsp='(method) Node.removeChild&lt;HTMLScriptElement>(oldChild: HTMLScriptElement): HTMLScriptElement' >removeChild</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='const s: HTMLScriptElement' >s</data-lsp></span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">}</span></div><div class='line'>&nbsp;</div><div class='line'><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1"><data-lsp lsp='module πrecv&#10;const πrecv: WebSocket' >πrecv</data-lsp></span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26"><data-lsp lsp='Provides the API for creating and managing a WebSocket connection to a server, as well as for sending and receiving data on the connection.&#10;&#10;var WebSocket: new (url: string, protocols?: string | string[] | undefined) => WebSocket' >WebSocket</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='any' >πHR_ROUTE</data-lsp></span><span style="color: #000000">);</span></div><div class='line'><span style="color: #001080"><data-lsp lsp='module πrecv&#10;const πrecv: WebSocket' >πrecv</data-lsp></span><span style="color: #000000">.</span><span style="color: #795E26"><data-lsp lsp='(property) WebSocket.onmessage: ((this: WebSocket, ev: MessageEvent&lt;any>) => any) | null' >onmessage</data-lsp></span><span style="color: #000000"> = </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #001080"><data-lsp lsp='(parameter) event: any' >event</data-lsp></span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #795E26"><data-lsp lsp='function πhotreload(patch: any): Promise&lt;void>' >πhotreload</data-lsp></span><span style="color: #000000">(</span><span style="color: #001080"><data-lsp lsp='(parameter) event: any' >event</data-lsp></span><span style="color: #000000">.</span><span style="color: #001080"><data-lsp lsp='any' >data</data-lsp></span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">};</span></div></code></div></pre>
+<p>When we receive a message over the <code>πrecv</code> websocket, we assume that the message
+is a well-formed and complete patch to the class instance containing the main
+program (the patch is <a href="https://github.com/ayazhafiz/hotreload/blob/08bff15d21d4786da4a79a4ad371f0d9072cb62d/src/compile.ts#L134-L184">assembled in the compiler</a>). We chuck the patch over to <code>πhotreload</code>,
+which will actually load it in the active session. First, we allocate a
+new <code>&lt;script&gt;</code> element to hold the patch. It's
+polite to clean up after yourself, we also allocate a fresh <code>Promise</code> that will
+be resolved by code in the <code>&lt;script&gt;</code> element after the patch has been
+evaluated. We inject the <code>&lt;script&gt;</code> element into the DOM, await the promise, and
+then remove the <code>&lt;script&gt;</code> element.</p>
+<p>It's that easy! Now we can go to work on web applications without the annoyance
+of a full recompilation, refresh, and re-navigation to the state we were at every time
+we want to make a change.</p>
+<h3 id="appendix%3A-hot-module-reloading" tabindex="-1"><a class="header-anchor" href="#appendix%3A-hot-module-reloading" aria-hidden="true"></a>Appendix: Hot Module Reloading</h3>
+<p>Most modern JavaScript bundlers employ a hot code reloading technique called
+&quot;hot module reloading&quot; that is more general, but less granular than the
+per-function hot reloading we have presented here.</p>
+<p>Hot module reloading reloads entire modules (i.e. on the granularity of files)
+when they are changed. This provides for an even simpler runtime implementation
+than that presented here, since you can just load up a static file from the
+runtime server whenever something changes. It also doesn't tie you down to the
+opinionated and somewhat contrived framework language we used here; all you need
+is a project that is relatively well-modularized. Of course, the downside
+is that the time and resources associated with recompilation/reloading will now
+be proportional to the number of modules in your project.</p>
+<p>Anyway, hope this has been fun. I doubt this is something most of us will need
+to think about, let alone implement, on a frequent basis, but it doesn't hurt to
+know how to do it -- especially when it's so easy, and looks so nice!</p>
+
+
 </article>
 
 <section class="footer">

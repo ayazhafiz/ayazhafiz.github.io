@@ -59,7 +59,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1627321097504450745"
+  href="/css/shiki.css?1627321599739265099"
 />
 
 
@@ -68,7 +68,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1627321097504450745"
+      href="/css/post.css?1627321599739265099"
     />
   </head>
 
@@ -89,7 +89,78 @@
 
 <article class="post">
   
-  
+  <h2 id="h%3A-some-definitions" tabindex="-1"><a class="header-anchor" href="#h%3A-some-definitions" aria-hidden="true"></a><span class='el'>H:</span>  Some Definitions</h2>
+<p>Be advised the equilibrium constant, <span>​<script type="math/tex">K</script></span><span class="note"><label for="eq-constant" class="margin-toggle">⊕</label></span><input type="checkbox" id="eq-constant" class="margin-toggle" /><span class="marginnote">The equilibrium constant relates reactant and product concentrations,
+representing the position of equilibrium for a reaction.</span>, of a weak acid:</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+K_a = \frac{[\mathrm H^+][\mathrm A^-]}{[\mathrm H\mathrm A]}
+</script></div>
+<p>where <span>​<script type="math/tex">\mathrm H^+</script></span> is the hydrogen ion, <span>​<script type="math/tex">\mathrm A^-</script></span>
+is the conjugate base, and <span>​<script type="math/tex">\mathrm H\mathrm A</script></span> is the weak acid.
+If <span>​<script type="math/tex">x</script></span> is the concentration of the hydronium, then because
+<span>​<script type="math/tex">\mathrm H\mathrm A</script></span> is monoprotic,</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+x = [\mathrm H^+] = [\mathrm A^-] ,
+</script></div>
+<p>and because <span>​<script type="math/tex">\mathrm H\mathrm A</script></span> is a weak acid,</p>
+<p><span class="note"><label for="what-is-ha0" class="margin-toggle">⊕</label></span><input type="checkbox" id="what-is-ha0" class="margin-toggle" /><span class="marginnote">Where $[\mathrm H\mathrm A]_0$ is the
+initial acid concentration.</span></p>
+<div class="mathblock"><script type="math/tex; mode=display">
+[\mathrm H^+] = [\mathrm A^-] = x \ll [\mathrm H\mathrm A]_0\ .
+</script></div>
+<p>This leads to</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+[\mathrm H\mathrm A] = [\mathrm H\mathrm A]_0 - x \approx [\mathrm H\mathrm A]_0\ \leadsto
+</script></div>
+<div class="mathblock"><script type="math/tex; mode=display">
+K_a \approx \frac{x^2}{[\mathrm H\mathrm A]_0} = \frac{[\mathrm H^+]^2}{[\mathrm H\mathrm A]_0}
+</script></div>
+<p>Exciting stuff, I know! But this is where the fun starts. Firstly, note two
+things:</p>
+<ol>
+<li>The equilibrium constant is roughly the square of the hydronium concentration,
+divided by initial acid concentration.</li>
+<li>The reaction of the weak acid can be said to have some active describer
+∂ representing the percent of the acid dissociated at equilibrium.</li>
+</ol>
+<p>Okay. So consider the following:</p>
+<h2 id="he%3A-what-will-happen-to-%E2%88%82-if-we-dilute-the-solution%3F" tabindex="-1"><a class="header-anchor" href="#he%3A-what-will-happen-to-%E2%88%82-if-we-dilute-the-solution%3F" aria-hidden="true"></a><span class='el'>He:</span>  What will happen to ∂ if we dilute the solution?</h2>
+<p><span class='newthought'>Hastily, most will say</span> ,</p>
+<blockquote>
+<p>Well, that's obvious, clearly the percent dissociation must decrease!</p>
+</blockquote>
+<p>Why?</p>
+<blockquote>
+<p>If it's diluted, the solution is less concentrated with hydronium ions, so
+a lesser percentage of the acid dissociates.</p>
+</blockquote>
+<p>In a haste, this makes sense - a sort-of <em>'duh'</em> derivation. <strong>Unfortunately,
+it's a fallacy.</strong></p>
+<h2 id="li%3A-percent-dissociation-is-inversely-proportional-to-the-concentration." tabindex="-1"><a class="header-anchor" href="#li%3A-percent-dissociation-is-inversely-proportional-to-the-concentration." aria-hidden="true"></a><span class='el'>Li:</span>  Percent dissociation is inversely proportional to the concentration.</h2>
+<p>With some thought, we can understand why this is - first intuitively, then
+mathematically. When we dilute an acid, we are essentially adding more area upon
+which the acid can react, thus leading to a higher rate of dissociation. To
+prove this:</p>
+<p>Let's say we dilute our solution by a factor of ten. The reaction quotient
+<span>​<script type="math/tex">Q</script></span> <span class="note"><label for="whatQ" class="margin-toggle">⊕</label></span><input type="checkbox" id="whatQ" class="margin-toggle" /><span class="marginnote">The reaction quotient describes the
+direction a reaction will proceed to establish equilibrium.</span> can then be
+described as</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+Q = \frac{\frac{[\mathrm H^+]}{10}\frac{[\mathrm A^-]}{10}}{\frac{[\mathrm H\mathrm A]}{10}} \approx \frac{\frac{[\mathrm H^+]}{10}\frac{[\mathrm H^+]}{10}}{\frac{[\mathrm H\mathrm A]_0}{10}} = \frac{1}{10}\frac{[\mathrm H^+]^2}{[\mathrm H\mathrm A]_0} = \frac{1}{10}K_a
+</script></div>
+<div class="mathblock"><script type="math/tex; mode=display">
+Q \approx \frac{1}{10}K_a
+</script></div>
+<p>Because the reaction quotient is an order of magnitude less than the equilibrium
+constant, the reaction will shift to the right <span class="note"><label for="shift-right" class="margin-toggle">⊕</label></span><input type="checkbox" id="shift-right" class="margin-toggle" /><span class="marginnote">The
+acid will dissociate further, increasing the numerator of the reaction
+quotient.</span> in order to reach equilibrium.</p>
+<p>QED - diluting a weak acid shifts the concentration of a reaction's products to
+the left, leading the acid to dissociate more in order to reestablish
+equilibrium, thus <strong>increasing the percent dissociation</strong>.</p>
+<p>Phew!</p>
+
+
 </article>
 
 <section class="footer">

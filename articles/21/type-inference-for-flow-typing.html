@@ -131,7 +131,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1627321097504450745"
+  href="/css/shiki.css?1627321599739265099"
 />
 
 
@@ -140,7 +140,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1627321097504450745"
+      href="/css/post.css?1627321599739265099"
     />
   </head>
 
@@ -161,8 +161,593 @@
 
 <article class="post">
    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#the-ft-calculus">The FT calculus</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#pearce's-subtyping-algorithm">Pearce&#39;s subtyping algorithm</a></li>
+<li class="toc-entry toc-h3"><a href="#%24%5Cinfer%24%3A-type-inference-for-ft">$\infer$: type inference for FT</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#preliminaries">Preliminaries</a></li>
+<li class="toc-entry toc-h2"><a href="#inferring-single-variables">Inferring single variables</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#bounds">Bounds</a></li>
+<li class="toc-entry toc-h3"><a href="#solution-sets">Solution sets</a></li>
+<li class="toc-entry toc-h3"><a href="#existence-and-construction-of-%24%5Cinfer1%24">Existence and construction of $\infer1$</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#dealing-with-cycles">Dealing with cycles</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#solution-orders">Solution orders</a></li>
+<li class="toc-entry toc-h3"><a href="#solving-for-minimal-types">Solving for minimal types</a></li>
+<li class="toc-entry toc-h3"><a href="#putting-it-all-together">Putting it all together</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#conclusion">Conclusion</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#takeaways">Takeaways</a></li>
+</ul>
+</li>
 </ul> 
-  
+  <blockquote>
+<p>An implementation of the type inferer can be found on <a href="https://github.com/ayazhafiz/skittles/blob/base/ft/infer.ml">GitHub</a>.
+We have also provided a <a href="https://ayazhafiz.com/skittles/ft/www/index.html">playground</a> that infers and checks FT programs.</p>
+</blockquote>
+<h2 id="the-ft-calculus" tabindex="-1"><a class="header-anchor" href="#the-ft-calculus" aria-hidden="true"></a>The FT calculus</h2>
+<p>David Pearce's 2012 paper <a href="https://ecs.wgtn.ac.nz/foswiki/pub/Main/TechnicalReportSeries/ECSTR12-20.pdf"><em>Sound and Complete Flow Typing with Unions,
+Intersections and Negations</em></a>
+develops a subtyping operator for a simple FT (<a href="https://en.wikipedia.org/wiki/Flow-sensitive_typing">flow typing</a>) calculus, consisting
+of the <strong>proper types</strong></p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align*}
+\T ::= \any ~|~ \never ~|~ \int ~|~ \left(\T_1, \ldots, \T_n\right) ~|~ \lnot \T ~|~ \T_1 \land \ldots \land \T_n ~|~ \T_1 \lor \ldots \lor \T_n
+\end{align*}
+</script></div>
+<p>$\any$ is the top type, $\never$ is the bottom type, $\int$ is the type of
+integers, and $\left(\T_1, \ldots, \T_n\right)$ is a tuple type.
+$\lnot\T$ is a negation type, inhabited by all values in the universe not inhabited in $\T$.
+$\T_1 \land \ldots \land \T_n$ is an intersection type, inhabited by values of type $\T_1$ and $\T_2$ and $\ldots$ and $\T_n$.
+$\T_1 \lor \ldots \lor \T_n$ is a union type, inhabited by values of type $\T_1$ or $\T_2$ or $\ldots$ or $\T_n$.</p>
+<p>The syntax of FT is defined on page 4 of Pearce's paper, and restated
+below<span class="note"><label for="syntax" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="syntax" class="margin-toggle" /><span class="sidenote">Our syntactic specification differs mildly from
+Pearce's in that we permit declarations with multiple formals and use a post-fix
+type annotation syntax.</span>:</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\renewcommand{\sfdefault}{lmtt}
+\begin{align*}
+\tt t ::&=                                                  &&\textit{terms:}\\
+  &|~\tt v                                                  &&\textit{value}\\
+  &|~\tt x                                                  &&\textit{variable}\\
+  &|~\tt f\ t_1\ \ldots\ t_n                                &&\textit{application}\\
+  &|~\tt f(x_1\co \T_1, \ldots, x_n\co \T_n) = t_1\ in\ t_2 &&\textit{declaration}\\
+  &|~\tt if\ x\ is\ \T\ then\ t_1\ else\ t_2                &&\textit{type test}\\
+  \\
+\tt v ::&=                                                  &&\textit{values:}\\
+  &|~\tt i                                                  &&\textit{integer}\\
+  &|~\tt (t_1, \ldots, t_n)                                 &&\textit{tuple}
+\end{align*}
+</script></div>
+<p>All types except $\never$ and $\lnot \T$ are typable by the user; the
+latter two are generated during flow typechecking. The flow typechecker narrows
+variable types at checked sites; the $\tt if\ x\ is\ \T$ construct above, for
+example, narrows $x$ to $\T$ in the $\tt then$ branch, and to &quot;everything except
+$\T$&quot;, $\typeof\ x\ \land\ \lnot\T$, in the $\tt else$ branch. Another unique
+feature of the flow typechecker is that applications are checked by inlining
+argument types into a function body and then checking that body, rather than
+computing a universal return type once.</p>
+<p>As a larger example, consider the FT program</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn f(x: any) =
+  if x is int|(int, int)
+  then 9
+  else x
+in (f 1, f (1, 2, 3))
+</span></div></code></div></pre>
+<p>First we check the declaration <code>f</code>, where <code>x</code> will be typed as $\int\lor(\int,\int)$ in the <code>then</code> branch, and $\any\land\lnot(\int\lor(\int,\int))$ in the
+the <code>else</code> branch. When checking the application <code>f 1</code>, we
+first check if $\typeof\ \mathtt{1}$ is a subtype of $\any$ (using a subtyping operator $\st$, described below), then check the body
+of <code>f</code> with $x\co\typeof\ \mathtt{1}$ to determine the resulting type of the
+application. At the conditional, we check if $\typeof\ x$ is a subtype of
+$\int\lor(\int,\int)$. According to the result, we update the environment and check the appropriate branch.</p>
+<h3 id="pearce's-subtyping-algorithm" tabindex="-1"><a class="header-anchor" href="#pearce's-subtyping-algorithm" aria-hidden="true"></a>Pearce's subtyping algorithm</h3>
+<p>The crucial contribution of Pearce's paper is the construction of a subtyping
+operator we will call $\st$, under which all of the following hold:</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align*}
+\int &\st \any\\
+\int &\st \any\\
+\any &\st \int\lor\lnot\int\\
+(\int\lor \left(\int, \int\right), \int) &\st (\int, \int)\lor ((\int,\int), \int)
+\end{align*}
+</script></div>
+<p>Designing $\st$ to be sound<span class="note"><label for="soundness" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="soundness" class="margin-toggle" /><span class="sidenote">Soundness means no term is illegaly subtyped: $\T_1\st\T_2\implies\forall x\co\T_1, x\co\T_2$.</span>
+and complete<span class="note"><label for="completeness" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="completeness" class="margin-toggle" /><span class="sidenote">Completeness means the subtyping operator admits all subtypable terms: $\forall x\co\T_1, x\co\T_2\implies\T_1\st\T_2$.</span>
+is not trivial, and Pearce's paper is a
+very well-written account of constructing a (semi-)practical<span class="note"><label for="semi-practical" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="semi-practical" class="margin-toggle" /><span class="sidenote">$\st$ requires rewriting types to their <a href="https://en.wikipedia.org/wiki/Disjunctive_normal_form">Disjunctive Normal Form</a>,
+which can require an exponential amount of time. This is catastrophic in the
+presence of large or nested tuples, whose DNF rewriting experiences a tremendous
+explosion in the number of steps. For example, our implementation has been
+unable to terminate normalization of
+$(((\int,\int)\land\lnot\int, (\int,\int)\land\lnot\int),
+((\int,\int)\land\lnot\int, (\int,\int)\land\lnot\int))$
+even after several minutes. Nevertheless, $\st$ is more than suitable for less
+pathological types.</span> algorithm that is exactly so.</p>
+<h3 id="%24%5Cinfer%24%3A-type-inference-for-ft" tabindex="-1"><a class="header-anchor" href="#%24%5Cinfer%24%3A-type-inference-for-ft" aria-hidden="true"></a>$\infer$: type inference for FT</h3>
+<p>In this cc, we will design a type inference algorithm $\infer$
+that &quot;fills in&quot; omitted type annotations in an FT program. Rather than being
+a component of the typechecker, $\infer$ is an out-of-band tool that does its best to
+complete a FT program with annotations demanded by the syntax, which a
+developer may find cumbersome to write. Indeed, we will prove that $\infer$ is complete,
+being able to infer every typable FT program; sound, annotating only those programs that are typable;
+and minimal, always inferring the smallest legal type. In the most extreme case,
+like ML, $\infer$ can type a program with no annotations at all.</p>
+<p>It is not necessary to understand the operation of $\st$<span class="note"><label for="read" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="read" class="margin-toggle" /><span class="sidenote">However, we will again mention that Pearce's paper is a pleasant, worthwhile read.</span> to understand our type
+inference algorithm, only to believe that</p>
+<ul>
+<li>$\st$ is sound and complete</li>
+<li>$\st$ induces a partial order over the universe of FT types</li>
+<li>the universe of FT types, partially ordered by $\st$, is a lattice</li>
+</ul>
+<h2 id="preliminaries" tabindex="-1"><a class="header-anchor" href="#preliminaries" aria-hidden="true"></a>Preliminaries</h2>
+<p>$\Def$ Let $\FT$ be the set of all well-typed FT programs, adhering
+to the syntax and types stated by the definitions of $\T$ and $\tt t$.</p>
+<p>$\Def$ Let $\T^\delta ::= ([\T\to\T^\delta]\T) ~+\!\!|~ \msf{infer}\ n $ denote a <strong>type shape</strong> that is
+either a type inference variable distinguished by an integer $n$, or a proper
+type form where references to proper types may be type shapes.</p>
+<p>$\Def$ Let ${\tt t}^\delta ::= [t\to t^\delta, \T\rightarrow\T^\delta] {\tt t}$ denote the syntax
+of a FT <strong>term shape</strong> or <strong>program shape</strong>. In a ${\tt t}^\delta$, type annotations may be
+type shapes than proper types<span class="note"><label for="parser-insert" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="parser-insert" class="margin-toggle" /><span class="sidenote">In practice, a parser
+can admit a term without type annotations entirely, inserting fresh inference
+variables as needed.</span>, and references to other terms maybe term shapes.</p>
+<p>$\Def$ Let $\FTS$ be the set of all valid FT program shapes, adhering to
+the syntax ${\tt t}^\delta$. For simplicity of our conversation, we will demand
+also that $\FTS$ consists only of program shapes where all
+type annotations of form $\msf{infer}\ n$ are unique, and furthermore all
+function and formal names are unique<span class="note"><label for="uniqueness" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="uniqueness" class="margin-toggle" /><span class="sidenote">Formalizing both
+these demands is cumbersome and not relevant to our discussion.</span>.</p>
+<p>$\Def$ Let $\require{cancel}\xFT = \left\{\untypable\right\}$ be the singleton set,
+symbolically marking an program shape as untypable.</p>
+<p>We can describe $\infer$ as a function
+$\require{cancel}\FTS\to\FT\sqcup\xFT$, yielding either a well-typed FT program
+or a marker that a program shape is untypable<span class="note"><label for="partial" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="partial" class="margin-toggle" /><span class="sidenote">We could have also defined $\infer$ as a partial function.</span>.
+Let $\iota_\FT$ and $\iota_\xFT$ denote the canonical projections in the codomain of $\infer$.</p>
+<p>Per the FT syntax, we see that type annotations need appear only the formal
+parameters of a function declaration; hence, formals are also the only place
+inference variables may appear in a program shape. Our conversation will assume
+that we are always discussing type annotations on formals.</p>
+<h2 id="inferring-single-variables" tabindex="-1"><a class="header-anchor" href="#inferring-single-variables" aria-hidden="true"></a>Inferring single variables</h2>
+<p>As a first step in approaching this problem, we will examine the simple case of
+resolving a single inference variable in an otherwise completely-typed program.</p>
+<p>$\Def$ Let $x$ be a formal with a inference variable annotation $\msf{infer}\ n$
+in a program shape $\PS\in\FTS$. Then $x^?$ denotes the inference variable
+$\msf{infer}\ n$.</p>
+<p>Since we are supposing that all formals and inference variables in program
+shapes are unique, $x^?$ is unique for the unique variable $x$.</p>
+<p>$\Def$ Let $\infvars(\PS\in\FTS)$ denote the set of inference variables
+$\left\{x_1^?, \ldots, x_n^?\right\}$ attached to all formals $\left\{x_1,\ldots,x_n \right\}$ in $\PS$.</p>
+<p>Now, we will describe an algorithm $\infer1\co (x\to\FTS)\to\FTS\sqcup\xFT$ that resolves
+a program shape $\FTS$ and an inference variable $x^?$ in it to a shape wherein $x^?$ is replaced
+with the minimal type among all types, if any, satisfying a set of constraints
+placed on the type of $x$. We recover these constraints from <strong>definitions</strong> and
+<strong>uses</strong> of $x$:</p>
+<ul>
+<li>A definition $x\leftarrow y$ demands $\typeof\ x \supt \typeof\ y$</li>
+<li>A use $y\leftarrow x$ demands $\typeof\ x \subt \typeof\ y$</li>
+</ul>
+<h3 id="bounds" tabindex="-1"><a class="header-anchor" href="#bounds" aria-hidden="true"></a>Bounds</h3>
+<p>Definition/use constraints on a variable bound that variable's type, a notion we
+formalize in two definitions below.</p>
+<div class="math def">
+<p>$\text{Definition}(\LB).$ Define $\LB(x, \PS) := \left\{ \typeof\ s_1, \ldots, \typeof\ s_n \right\} \setminus \left\{\typeof\ x\right\}$ to be
+the set of <b>lower bounds</b> on $\typeof\ x$, recovered from all definitions $x\leftarrow s_1,
+\ldots, x\leftarrow s_n \in \PS$.</p>
+</div>
+<div class="math def">
+<p>$\text{Definition}(\UB).$ Define $\UB(x, \PS) := \left\{ \typeof\ t_1, \ldots, \typeof\ t_n \right\} \setminus \left\{\typeof\ x\right\}$ to be
+the set of <b>upper bounds</b> on $\typeof\ x$, recovered from all uses $t_1\leftarrow x,
+\ldots, t_n\leftarrow x \in \PS$.</p>
+</div>
+<h3 id="solution-sets" tabindex="-1"><a class="header-anchor" href="#solution-sets" aria-hidden="true"></a>Solution sets</h3>
+<p>Upper and lower boundaries in the universe of types form a (possibly empty)
+region of types assignable to a constrained variable. We call this region the
+solution set of an inference variable.</p>
+<div class="math def">
+<p>$\Def$ $x^?$ <b>is solvable</b> in $\PS\in\FTS$ if $x^?\in\infvars(\PS)$ and $\LB(x, \PS)$,
+$\UB(x, \PS)$ both contain no inference variables.</p>
+</div>
+<p>When $x^?$ is solvable in $\PS$, $\LB(x,\PS)$ and $\UB(x,\PS)$ yield a set of
+proper types $\T$, for which $\st$ is well-defined.</p>
+<div class="math def">
+<p>$\Def$ When $x^?$ is solvable in $\PS$, define</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align*}
+\Sol(x, \PS) := \{ \T ~|~ &\forall \S\in\LB(x,\PS)  \;\T\supt\S \\
+                    &\land \forall \U\in\UB(x,\PS)\;\T\subt\U \}
+\end{align*}
+</script></div>
+<p>to be the <b>solution set</b> of $x^?$.</p>
+</div>
+<div class="math prop">
+<p>$\text{Proposition 1}.$ Let $x_1^?$ be solvable in $\PS$. Then</p>
+<ol>
+<li>
+<p>If there exists a set of types $\T_1,\ldots,\T_n$ such that $[x_1^?\to\T_1,\ldots,x_n^?\to\T_n]\PS$
+yields a well-typed program in $\FT$, $\forall\U\in\Sol(x_1,\PS)\quad [x_1^?\to\U,x_2^?\to\T_2,\ldots,x_n^?\to\T_n]\PS\in\FT$.</p>
+</li>
+<li>
+<p>If $\Sol(x_1, \PS)=\emptyset$, $\nexists\T_1,\ldots,\T_n$ such that $[x_1^?\to\T_1,\ldots,x_n^?\to\T_n]\PS\in\FT$.</p>
+</li>
+</ol>
+<p>$\Pf$ The key is that $\T_1$ does not depend on $\T_2,\ldots,\T_n$.</p>
+<ol>
+<li>
+<p>The only typing rules the formal $x_1\co \T_1$ is involved with are subtyping checks
+at definitions and uses. At a definition $x_1\leftarrow y$ we demand $\T_1\supt
+\typeof\ y$; if $y=x_1$ this holds by reflexivity of $\st$, otherwise
+$\T_1\supt\typeof\ y$ for all $x_1\leftarrow y$ where $x\ne y$ implies $\forall\S\in\LB(x,P);\T_1\supt\S$. The argument for uses similarly demands
+$\forall\U\in\UB(x_1,P);\T_1\subt\U$. If there exist $\T_1,\ldots,\T_n$ such that $[x_1^?\to \T_1,\ldots,x_n^?\to\T_n]\PS\in\FT$,
+$\T_1$ need only satisfy the above conditions; all types in $\Sol(x, \PS)$ satisfy these conditions.</p>
+</li>
+<li>
+<p>By 1, if there exist $\T_1,\ldots,\T_n$ such that $[x_1^?\to\T_1,\ldots,x_n^?\to\T_n]\PS\in\FT$, $\T_1\in\Sol(x_1,\PS)$.</p>
+</li>
+</ol>
+</div>
+<h3 id="existence-and-construction-of-%24%5Cinfer1%24" tabindex="-1"><a class="header-anchor" href="#existence-and-construction-of-%24%5Cinfer1%24" aria-hidden="true"></a>Existence and construction of $\infer1$</h3>
+<p>Proposition 1 tells us that finding the solution set for a variable
+completely tells us whether that variable is typable, and gives us valid typings
+for it in the case that it is. We can now formally define what it means to infer
+the type of a variable, give conditions on the existence of an inferred type,
+and give a precise formula for inferring one variable in a program.</p>
+<div class="math def">
+<p>$\text{Definition}(\Minimal).$ When $x^?$ is solvable in $\PS$, define</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\Minimal(x, \PS\in\FTS) := \inf_{\st}\;\Sol(x, \PS)
+</script></div>
+<p>to be the <b>minimal inferred type</b> of $x$ in $\PS$, when it exists.</p>
+</div>
+<div class="math prop">
+<p>$\text{Proposition 2}.$ When $\Sol(x, \PS)$ is non-empty, $\Minimal(x,\PS)$ exists
+and is given by</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\never \vee \bigvee\LB(x,\PS)=
+\begin{cases}
+\never          &\text{ when } \LB(x,\PS)=\emptyset\\
+\bigvee\LB(x,\PS) &\text{ otherwise}
+\end{cases}
+</script></div>
+<p>$\Pf$ First of all, the equality is correct as $\never$ is uninhabited. The case when
+$\LB(x,\PS)=\emptyset$ is trivial. For the other, let $\T\in\Sol(x,\PS)$. Then $\forall \S\in\LB(x,\PS)  ;\T\supt\S$, so $\T\supt\bigvee\LB(x,\PS)$. Hence</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\forall \S\in\LB(x,\PS)\quad\T\supt\bigvee\LB(x,\PS)\supt\S\\
+\forall \U\in\UB(x,\PS)\quad\bigvee\LB(x,\PS)\subt\T\subt\U
+</script></div>
+<p>both hold, so $\bigvee\LB(x,\PS)\in\Sol(x,\PS)$ and is its infimum under $\st$.</p>
+</div>
+<div class="math cor">
+<p>$\text{Corollary 1}.$ $\Minimal(x, \PS)$ exists iff
+$\never\vee\bigvee\LB(x,P)\st\bigwedge\UB(x,P)$.</p>
+</div>
+<div class="math cor">
+<p>$\text{Corollary 2}.$ When it exists,
+$\Minimal(x, \PS) = \never\vee\bigvee\LB(x,\PS)$.</p>
+</div>
+<div class="math def">
+<p>$\text{Definition}(\infer1).$ When $x^?$ is solvable in $\PS$, define $\T_x = \never\vee\bigvee\LB(x,\PS)$ and</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\infer1(x, \PS) := \begin{cases}
+\iota_\FTS[\displaystyle x\to\T_x]\;\PS &\text{ when }\T_x\st\bigwedge\UB(x,\PS)\\
+\iota_\xFT\untypable &\text{ otherwise}
+\end{cases}
+</script></div>
+<p>When $\infer1(x, \PS) = \iota_\FTS P^{\delta+x}$, we say that $P^{\delta+x}$ is <b>$\PS$ inferred with $x\co \T_x$</b>.</p>
+</div>
+<div class="math lemma">
+<p>$\text{Lemma 1(Properties of $\infer1$)}.$ Let $x_1^?$ be solvable in $\PS$. Then</p>
+<ol>
+<li>
+<p>If $\exists \T_1, \ldots, \T_n$ such that $[x_1^?\to\T_1,\ldots,x_n^?\to\T_n]\PS\in\FT$,
+then $\infer1(x_1,\PS) = \iota_\FTS P^{\delta+x}$ and</p>
+<ol>
+<li>$[x_2^?\to\T_2,\ldots,x_n^?\to\T_n]P^{\delta+x}\in\FT$</li>
+<li>Taking $P^{\delta+x}$ as $\PS$ inferred with $x\co \T_x$, $\T_x\st\T_1$
+for all satisfying sequences $\T_1,\ldots,\T_n$.</li>
+</ol>
+</li>
+<li>
+<p>$\nexists \T_1, \ldots, \T_n$ such that $[x_1^?\to\T_1,\ldots,x_n^?\to\T_n]\PS\in\FT$,
+iff $\infer1(x_1,\PS) = \iota_\xFT\untypable$.</p>
+</li>
+</ol>
+<p>$\Pf$ By application of Proposition 1, 2, and Corollaries 1, 2.</p>
+</div>
+<h2 id="dealing-with-cycles" tabindex="-1"><a class="header-anchor" href="#dealing-with-cycles" aria-hidden="true"></a>Dealing with cycles</h2>
+<p>At this point, it may seem that $\infer1$ gives us a constructive, sound,
+and complete algorithm for inferring the minimal type of an inference variable
+in a program shape. Indeed, we may attempt write a complete $\infer$ algorithm
+the following way:</p>
+<p>$\text{Definition($\infer$: No Cycles)}$</p>
+<div class="math algorithm"><blockquote>
+<ol>
+<li> $\text{Algorithm $\infer$($\PS$):}$  
+<li> $\qquad\text{if }\PS\in\FT$  
+<li> $\qquad\text{then return }\iota_\FT\PS$  
+<li> $\qquad\text{else}$  
+<li> <span>&#8203;<script type="math/tex">\qquad\qquad ivars \leftarrow \left\{ x\in \infvars(\PS) ~|~ x\text{ is solvable in } \PS \right\}</script></span>  
+<li> $\qquad\qquad\text{if }ivars=\emptyset$  
+<li> $\qquad\qquad\text{then return }\iota_\xFT\untypable$  
+<li> $\qquad\qquad\text{else}$  
+<li> $\qquad\qquad\qquad x\leftarrow x\in ivars$  
+<li> $\qquad\qquad\qquad\text{if }\infer1(x,\PS) = \iota_\FTS(P^{\delta+x})$  
+<li> $\qquad\qquad\qquad\text{then }\text{Solve}(P^{\delta+x})$  
+<li> $\qquad\qquad\qquad\text{else return }\iota_\xFT\untypable$  
+</ol>
+</blockquote></div>
+<p>The issue with this algorithm lies on lines 5 and 6: if we have a program shape with
+inference variables, none of which are solvable, we cannot progress. This means
+that while $\infer1$ is complete for
+solvable variables, this definition of $\infer$ is not complete for program shapes!</p>
+<p>As an example of a program shape for which the definition above is incomplete, consider</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn f(x: infer 1) = x in
+fn g(y: infer 2) = f y in
+g (f 1)
+</span></div></code></div></pre>
+<p>we have that $\LB(x, \PS) = \left\{y^?,\int\right\}$ and $\LB(y, \PS) =
+\left\{x^?\right\}$, so no variable is solvable. But $[x^?\to\int,
+y^?\to\int]\PS$ yields the following well-typed program</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn f(x: int) = x in
+fn g(y: int) = f y in
+g (f 1)
+</span></div></code></div></pre>
+<p>Throughout the rest of this section, we describe how to resolve inference variables in
+the presence of cycles, and prove that our updated method is complete. Our roadmap will be to</p>
+<ul>
+<li>partition inference variables into strongly connected components</li>
+<li>prove that all inference variables in a strongly connected component have a
+single, unique minimal solution, if any</li>
+<li>show that potential solutions and verification of solutions can be done in two
+passes</li>
+<li>wrap everything up in a sound, complete, and minimal $\infer$ algorithm</li>
+</ul>
+<h3 id="solution-orders" tabindex="-1"><a class="header-anchor" href="#solution-orders" aria-hidden="true"></a>Solution orders</h3>
+<p>$\Def$ Let $\PS\in\FTS$. The <strong>inference dependency graph</strong> $\IDG(\PS)$ of $\PS$
+is a directed graph where</p>
+<ul>
+<li>
+<p>the vertices are the inference variables $\infvars(\PS)$</p>
+</li>
+<li>
+<p>there is an edge $x^?\to y^?$ exactly when $x^?\in\LB(y, \PS)$</p>
+</li>
+</ul>
+<p>$\text{Definition($\SolOrder$)}.$ Let $\PS\in\FTS$. Let $S_1, \ldots, S_n$ denote the
+connected components of $\IDG(\PS)$, ordered arbitrarily. Let $C_{i1}, \ldots, C_{in_i}$
+denote the strongly connected components of $\S_i$, ordered topologically under <a href="https://en.wikipedia.org/wiki/Strongly_connected_component#Definitions">condensation</a>.</p>
+<p>Then the <strong>solution order</strong> $\SolOrder(\PS)$ is the strict preorder given by $C_{11} \lt \ldots \lt C_{1n_1}\ldots \lt C_{n1}\ldots \lt C_{nn_n}$.</p>
+<div class="math prop">
+<p>$\text{Proposition 3}.$ For a given strongly connected component $C_{ij} \in \SolOrder(\PS)$,
+for any vertex $v\in C_{ij}$, there exists an edge $u\to v$ only if $u\in
+C_{i1} \lor \ldots \lor u\in C_{ij}$.</p>
+<p>$\Pf$ The strongly connected components $C_{11},\ldots, C_{(i-1)n_{i-1}},
+C_{(i+1)n_{i+1}},\ldots, C_{n n_n}$ cannot contain any vertices that have an edge to $v$
+because they come from disjoint connected components in $\IDG(\PS)$.</p>
+<p>For the other components, suppose by way of contradiction there is an edge $u\to v$
+where $u\in C_{ik}, k &gt; j$. Then since the
+condensation of $S_i$ is given by the graph $C_{i1}\to\ldots\to C_{ij}\to\ldots\to C_{ik}\to\ldots\to C_{in_i}$,
+there is a cycle $C_{ij}\to\ldots\to C_{ik}\to C_{ij}$. But then
+$C_{ij},\ldots,C_{ik}$ are not maximal, a contradiction.</p>
+</div>
+<p>For example, suppose we have a program shape with the following inference
+dependency graph:</p>
+<figure class='fullwidth'><img src='/assets/img/type-inf-ft/graph-simple.png' width='100%'/><figcaption></figcaption></figure>
+<p>then its connected components and their condensations are given by:</p>
+<figure class='fullwidth'><img src='/assets/img/type-inf-ft/graph-grouped.png' width='100%'/><figcaption></figcaption></figure>
+<p>yielding the solution order $C_{11}\lt C_{12}\lt C_{21}$.</p>
+<h3 id="solving-for-minimal-types" tabindex="-1"><a class="header-anchor" href="#solving-for-minimal-types" aria-hidden="true"></a>Solving for minimal types</h3>
+<div class="math def">
+<p>$\Def$ Let $\TS$ be a type shape. The <b>disjunctive normal form</b> $\DNF(\TS)$ of
+$\TS$ is a type shape of form $\displaystyle\bigvee_i\bigwedge_j {\TS}^*_{i, j}$, where</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align*}
+{\TS}^* &::= {\TS}^+ ~|~ {\TS}^-\\
+{\TS}^- &::= \lnot{\TS}^+\\
+{\TS}^+ &::= \any~|~\never~|~\int~|~({\TS}^+_1, \ldots, {\TS}^+_n)~|~\msf{infer}\ x
+\end{align*}
+</script></div>
+<p>and $\TS$ and $\DNF(\TS)$ are equivalent under $\st$.</p>
+</div>
+<p>An algorithmic account of $\DNF$ and proof of the properties we claim is given in
+Pearce's paper (Definition 6, Lemmas 4-6).</p>
+<div class="math def">
+<p>$\Def$ Let $\SolOrder(\PS) = C_{1}\lt\ldots\lt C_n$. Then $C_1$ is the
+<b>first-solvable component</b> of $\PS$.</p>
+</div>
+<div class="math def">
+<p>$\text{Definition($\Reify$).}$ Let $C$ be the first-solvable component of $\PS$
+and $x^?\in \vert(C)$. Then $\Reify$ is a function defined as</p>
+<div class="math algorithm"><blockquote>
+<ol>
+<li>$\text{Algorithm $\Reify$($x$, $\PS$):}$</li>
+<li>$\quad \text{Algorithm $\Step$($\TS$, $seen$): match $\DNF(\TS)$ with}$</li>
+<li>$\quad\quad \ldots\land\TS_i\land y^?\land\TS_j,\ldots \text{ if } y\notin seen\Ra \Step(\ldots\land\TS_i\land(\bigvee\LB(y, \PS))\land\TS_j\land\ldots,\;seen\cup\{y\})$</li>
+<li>$\quad\quad \ldots\land\TS_i\land y^?\land\TS_j,\ldots \text{ if } y\in seen\Ra \Step(\ldots\land\TS_i\land\TS_j\land\ldots,\;seen)$</li>
+<li>$\quad\quad \ldots\land\TS_i\land\ldots \text{ if } y^?\subset\TS_i\Ra\Step(\ldots\land[y^?\to\never]\TS_i\land\ldots,\;seen)$</li>
+<li> </li>
+<li>$\quad\quad \ldots\lor\TS_i\lor y^?\lor\TS_j,\ldots \text{ if } y\notin seen\Ra \Step(\ldots\lor\TS_i\lor(\bigvee\LB(y, \PS))\lor\TS_j\lor\ldots,\;seen\cup\{y\})$</li>
+<li>$\quad\quad \ldots\lor\TS_i\lor y^?\lor\TS_j,\ldots \text{ if } y\in seen\Ra \Step(\ldots\lor\TS_i\lor\TS_j\lor\ldots,\;seen)$</li>
+<li>$\quad\quad \ldots\lor\TS_i\lor\ldots \text{ if } \TS_i \supseteq \TS_j = (\US_1,\ldots,\US_n) \text{ and } y^?\subset\TS_j$</li>
+<li>$\quad\quad\quad\quad \Ra\Step(\ldots\lor[y^?\to\never]\TS_i\lor\ldots,\;seen)$</li>
+<li>$\quad\quad \ldots\lor\TS_i\lor\ldots \text{ if } y^?\subset\TS_i\Ra\Step(\ldots\lor[y^?\to\any]\TS_i\lor\ldots,\;seen)$</li>
+<li>$\quad\quad \text{else }\Ra\TS$</li>
+<li>$\quad \Step(\bigvee\LB(x,\PS), \left\{x\right\})$</li>
+</ol>
+</blockquote></div>
+<p>where lines 3-5 match a intersection type being the singleton variant of the
+union form yielded by $\DNF$, matching of $y^?$ is variable in $y \in \infvars$.
+The abuse of notation $y^?\subset\TS$ means that $y^?$ appears in $\TS$, and $y^?\subseteq\TS$ means that $\TS=y^?$ or
+$y^?\subset\TS$, all under syntactic equality. Lastly, $\ldots\lor\T\lor\ldots$
+should be considered a finite type; we omit terminal types for space.</p>
+</div>
+<div class="math prop">
+<p>$\text{Proposition 4.}$ $\Reify(x, \PS)$ terminates and yields a proper type for
+all suitable $x$ and $\PS$, as described in the definition.</p>
+<p>$\Pf$ For termination, observe that $\Step(\TS,\ seen)$ recurses so long
+as there is an inference variable in $\TS$ matched by a rewrite rule, but each
+rule decreases the number of
+inference variables in the next iteration's type. The only exceptions are line 7 and 12, but those rules are reached at most once each for a finite number of
+inference variables. As for yielding a proper type, it is enough to see that
+all cases in which an inference variable can appear in a DNF-normalized type are
+covered by the left-hand sides of lines 7, 8, and 11; all other rules are
+special cases.</p>
+</div>
+<div class="math lemma" id="reify">
+<p>$\text{Lemma 2.}$ Let $C$ be the first-solvable component of $\PS$
+and $x_1^?\in \vert(C)$. Let
+$\left\{x_1^?,\ldots,x_n^?\right\}=\infvars(\PS)$. If there exists a set of
+types $\T_1,\ldots,\T_n$ such that
+$[x_1^?\to\T_1,\ldots,x_n^?\to\T_n]\PS\in\FT$, then $[x_1^?\to\Reify(x,\PS),\ldots,x_n^?\to\T_n]\PS\in\FT$,
+and furthermore, $\Reify(x,\PS)\st\T_1$ among all such sets of types
+$\T_1,\ldots,\T_n$.</p>
+<p>$\Pf$ As in Lemma 1 and its preliminaries, the minimal type (when it exists) of
+an inference variable $x^?$ is the union of its lower bounds. Line 14 of
+$\Reify$ computes this; it remains only to show that $\Step$ retains the
+minimality of a type in the FT calculus. Intuitively, the thing to keep in
+mind is that recursive unions &quot;grow&quot; a type and recursive intersections &quot;shrink&quot;
+a type. We will prove minimality by case analysis on lines 7-12; lines 3-5 are
+analogous special cases for when there are no unions in $\TS$.</p>
+<ul>
+<li>
+<p>Line 7: Since $y^?$ is a lower bound of $x$, inlining the lower bounds of $y$
+does not change the resolved type of $x$.</p>
+</li>
+<li>
+<p>Line 8: Having already inlined the lower bounds of a inference variable,
+inlining them again in the presence of a union would not modify the total
+type, as $\T\lor\ldots\lor\T\lor\ldots = \T\lor\ldots$.</p>
+</li>
+<li>
+<p>Line 9: This is the case of a recursive tuple type, for example
+$x^? = \T_1\lor\ldots\lor\T_i\lor(\ldots,x^?,\ldots)\lor\T_j\lor\ldots\lor\T_n$. Clearly this is a type of
+infinite depth bounded by $\any$ at position $x$ when constructed positively; this yields the finitary
+type $\T_x = \T_1\lor\ldots\lor\T_i\lor(\ldots,\any,\ldots)\lor\T_j\lor\ldots\lor\T_n$. We need to show also that there is no bounding finitary type $\W$ at
+position $x$ consisting of negations (&quot;approaching from the top&quot;). By way of
+contradiction, suppose there is such a finitary type; since it is bounded
+above by $\any$, $\W$ is of the form $\any\land\lnot\S_1\land\ldots\land\lnot\S_n$.
+Either $\T_1\lor\ldots\lor\T_i\lor\T_j\lor\ldots\lor\T_n \supt \any$ or else
+$\S = \T_1\lor\ldots\lor\T_i\lor\T_j\lor\ldots\lor\T_n \subt \any$. In the former
+case $\W$ must resolve to $\any$. In the latter case each nested level of
+the recursive tuple in $x^?$ induces at least one additional negation in
+$\W$, so $\W$ must be infinite.</p>
+</li>
+<li>
+<p>Line 11: This is like the case on line 9, but covers the remaining cases of
+recursive intersections and negations. The argument for intersections is
+similar to that of tuples above, except that a recursive intersection
+continuously constricts the total type, bounding it to $\never$. This is not
+the case for intersections that recurse flatly on themselves; for example,
+$\T = \T\land\int$ is bound by $\int$, not $\never$. However, $\DNF$
+normalization of $\PS$ ensures that in the case on line 9, the recursion is
+not flat. Flat recursion of intersections is handled on line 4.</p>
+<p>Recursive negations can be reduced to a special form of intersections, where
+the above argument then applies. The reduction is due to DeMorgan; $x^? =
+\lnot x^?\lor\T \implies x^? = \lnot (\lnot x^?\lor\T)\lor\T = (x^?\land\lnot\T)\lor\T$.</p>
+</li>
+<li>
+<p>Line 12: Trivial, does not modify the type.</p>
+</li>
+</ul>
+<p>Thus, we have shown if there is any finitary type representing the minimal type
+of inference variable, $\Reify$ finds it.</p>
+</div>
+<h3 id="putting-it-all-together" tabindex="-1"><a class="header-anchor" href="#putting-it-all-together" aria-hidden="true"></a>Putting it all together</h3>
+<p>$\text{Definition($\infer$)}$ $\infer$ is a function $\FTS\to\FT\sqcup\xFT$,
+defined below.</p>
+<div class="math algorithm"><blockquote>
+<ol>
+<li> $\text{Algorithm Infer($\PS$):}$  
+<li> $\qquad P\leftarrow\PS$  
+<li> $\qquad \text{for $C$ in $\SolOrder(P)$}:$  
+<li> $\qquad\qquad \text{for $x^?$ in $\vert(C)$}:$  
+<li> $\qquad\qquad\qquad \T_x\leftarrow\Reify(x, \PS)$  
+<li> $\qquad\qquad\qquad P\leftarrow \left([x^?\to\T_x] P\right)$  
+<li> $\qquad \text{for $x^?$ in $\infvars(\PS)$}:$  
+<li> $\qquad\qquad \T_x\leftarrow \typeof\ x \text{ in } P$  
+<li> $\qquad\qquad \U\leftarrow\bigwedge\UB(x, P)$  
+<li> $\qquad\qquad \text{if } \T_x\not\lt:\U \text{ then return } \iota_\xFT\untypable$
+<li> $\qquad \text {return } \iota_\FT P$
+</ol>
+</blockquote></div>
+<p>Lines 3-6 of the algorithm find potential solutions to the inference variables
+of $\PS$, and lines 7-10 verify those solutions by comparing them to the
+(now-resolved) upper bounds of corresponding variables. If verification
+succeeds, a well-typed program in $\FT$ is returned; otherwise we mark the
+program shape as uninferrable, and hence untypable.</p>
+<p>Note that $\infer$ is well-defined; the only thing that may be of concern is the
+call to $\Reify(x,P)$, as $\Reify$ is only defined $x\in C$ where $C$ is
+first-solvable in $P$. But since reification is done in linear solution order
+$C_1,\ldots,C_n$, once all inference variables in $C_1$ are reified in $P$, $C_2$ becomes first-solvable
+in $P$.</p>
+<div class="math lemma">
+<p>$\text{Lemma 3(Soundness of $\infer$)}.$ If $\infer(\PS) = \iota_\FT P$, it is indeed the case that $P\in\FT$.</p>
+<p>$\Pf$ By Lemma 2, lines 3-6 rewrite every inference variable $x^?$ with its minimal
+legal type $\T_x = \bigvee \LB(x, \PS)$, if one exists. The condition of existence is the same as
+that in Proposition 1 and Corollary 1; namely, $T_x \st \UB(x, P)$, which is
+verified for all possible solutions of inference variables on lines 7-10.</p>
+</div>
+<div class="math lemma">
+<p>$\text{Lemma 4(Completeness of $\infer$)}.$ Let $\PS\in\FTS$ where
+$\infvars(\PS)=\left\{x_1^?,\ldots,x_n^?\right\}$. If there exists as set of
+proper types $\T_1,\ldots,\T_n$ such that $[x_1^?\to\T_1,\ldots,x_n^?\to\T_n]\PS
+\in \FT$, $\infer(\PS) = \iota_\FT P$.</p>
+<p>$\Pf$ Corollary of Lemma 2.</p>
+</div>
+<div class="math lemma"1>
+<p>$\text{Lemma 5(Minimalism of $\infer$)}.$ Let $\PS\in\FTS$ where
+$\infvars(\PS)=\left\{x_1^?,\ldots,x_n^?\right\}$ and $\infer(\PS) = \iota_\FT P$.
+Let $\T_1,\ldots,\T_n$ such that $[x_1^?\to\T_1,\ldots,x_n^?\to\T_n]\PS = P$.
+Then among all sets of types $\U_1,\ldots,\U_n$ such that $[x_1^?\to\U_1,\ldots,x_n^?\to\U_n]\PS\in\FT$,
+$\T_1\st\U_1,\ldots,\T_n\st\U_n$.</p>
+<p>$\Pf$ Corollary of Lemma 2.</p>
+</div>
+<h2 id="conclusion" tabindex="-1"><a class="header-anchor" href="#conclusion" aria-hidden="true"></a>Conclusion</h2>
+<p>In this cc, we have presented a sound, complete, and minimal algorithm for type
+inference of mandatory type annotations in the flow-typing type calculus
+developed by Pearce, 2012. Our algorithm is constructive and syntax-directed,
+resolving inference variables from types demanded at definition sites and
+verifying the legality from types demanded at usage sites.</p>
+<p>Our approach to type inference is similar to the classic methods
+(a la Algorithm W) - collect some constraints and perform unification.
+Our unification step is more appropriately called
+resolution, and is more involved than classical unification. In our case, the fact that the
+FT type universe forms a complete lattice is particularly important.</p>
+<p>The finitary nature of the FT calculus complicates the resolution process in the
+presence of type variable cycles, as an inference variable can incur cyclic
+constraints that result in a type of infinite depth. Our approach resolves such
+types to their &quot;closest&quot; legal finitary type by translation to
+disjunctive normal form, a process that Pearce has noted is exponential in the
+depth of a type in the worst case (Pearce 2012, section 3.2), and then applying
+a rewrite procedure whose time and space complexities are linear in variables
+and type depths but whose rewrite rules are somewhat tricky. The addition of
+(mutually) recursive types to the FT calculus would trivialize the solution to
+this issue, though of course would come with its own set of challenges (e.g.
+type simplification and reformulating $\st$ to be sound and complete).</p>
+<h3 id="takeaways" tabindex="-1"><a class="header-anchor" href="#takeaways" aria-hidden="true"></a>Takeaways</h3>
+<p>This is a small problem I toyed with for a couple days, and then took far longer
+to write up as in this cc. I think it is rather interesting,
+because type inference in the presence of subtyping is generally considered
+difficult (though that is usually because of record types and such, not present
+in FT), and because the FT calculus does not make resolution of certain issues
+trivial (e.g. cycles cannot be resolved as recursive types).</p>
+<p>Designing a compiler with a type inferer out-of-band of the typechecker, as we
+did here, is also interesting. While the inferer will need to depend a lot on
+the checker, this decoupling means that multiple inferers for different purposes
+could be designed. Some ideas include:</p>
+<ul>
+<li>A sound, complete, and minimal inferer, like the one presented here</li>
+<li>An inferer that optimizes for readability of types, avoiding deep nesting</li>
+<li>An inferer that optimizes for a minimal number of unique types</li>
+<li>An inferer that solves for maximal types (principal types in functional languages)</li>
+</ul>
+
+
 </article>
 
 <section class="footer">

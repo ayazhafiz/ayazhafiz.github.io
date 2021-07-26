@@ -59,7 +59,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1627321097504450745"
+  href="/css/shiki.css?1627321599739265099"
 />
 
 
@@ -68,7 +68,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1627321097504450745"
+      href="/css/post.css?1627321599739265099"
     />
   </head>
 
@@ -89,7 +89,141 @@
 
 <article class="post">
   
-  
+  <blockquote>
+<p><em>Update</em>: Development of <a href="https://github.com/koekeishiya/chunkwm"><code>chunkwm</code></a>
+has ceased in favor of <a href="https://github.com/koekeishiya/yabai"><code>yabai</code></a>. It's
+recommended you now use <code>yabai</code> for your macOS tiling needs.</p>
+</blockquote>
+<h2 id="0%3A-prelude" tabindex="-1"><a class="header-anchor" href="#0%3A-prelude" aria-hidden="true"></a><span class='el'>0:</span>  Prelude</h2>
+<blockquote>
+<p><strong><em>I speak for myself</em></strong>: The softwares and configurations I present here work
+great for my workflow but may not necessarily carry over to yours. I encourage
+you to use this article as one perspective to pick-and-choose from in your
+configuration development.</p>
+</blockquote>
+<blockquote>
+<p><strong><em>Learning curve</em></strong>: All the tools I mention here have a learning curve, the
+magnitude of which varies but is largely due to learning keybindings. I will
+say that once one learns to work with <code>vim</code> effectively, most other
+keyboard-based softwares are fairly easy to pick up, as many have similar
+semantics to <code>vim</code>. Tips from personal experience can be found in
+<a href="#31--vims-learning-curve">section 3.1</a>.</p>
+</blockquote>
+<h3 id="0.1%3A-motivation" tabindex="-1"><a class="header-anchor" href="#0.1%3A-motivation" aria-hidden="true"></a><span class='el'>0.1:</span>  Motivation</h3>
+<p>I work on a 15&quot; 2016 MBP. It's a really nice machine I was fortunate enough to
+buy with scholarship money a couple years back, and does nicely pretty much
+everything one buys a Mac for.</p>
+<p>As I've become more productive, I've increasingly turned to power tools like
+<code>vim</code>, <a href="https://github.com/tmux/tmux"><code>tmux</code></a>, and most recently,
+<a href="https://github.com/koekeishiya/chunkwm"><code>chunkwm</code></a><span class="note"><label for="chunkwm" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="chunkwm" class="margin-toggle" /><span class="sidenote">A tiling window manager for macOS</span>.
+<code>chunkwm</code> in particular has been a big jump for me in terms of productivity and
+workspace aesthetic. This post discusses my macOS configuration, motivated by my
+setup of <code>chunkwm</code>.</p>
+<p>My configuration files are available on GitHub at
+<a href="https://github.com/ayazhafiz/hmcd">ayazhafiz/hmcd</a>.</p>
+<h3 id="0.2%3A-screens" tabindex="-1"><a class="header-anchor" href="#0.2%3A-screens" aria-hidden="true"></a><span class='el'>0.2:</span>  Screens</h3>
+<figure class='fullwidth'><img src='/assets/img/neovim_start.jpg' width='100%'/><figcaption>neovim start screen</figcaption></figure>
+<br />
+<figure class='fullwidth'><img src='/assets/img/vim_tmux_chunkwm.jpg' width='100%'/><figcaption>neovim in tmux, chunkwm-tiled windows</figcaption></figure>
+<br />
+<figure class='fullwidth'><img src='/assets/img/ranger_qutebrowser.jpg' width='100%'/><figcaption>ranger in tmux, qutebrowser</figcaption></figure>
+<h2 id="1%3A-chunkwm-and-skhd-for-tiling-windows" tabindex="-1"><a class="header-anchor" href="#1%3A-chunkwm-and-skhd-for-tiling-windows" aria-hidden="true"></a><span class='el'>1:</span>  <code>chunkwm</code> and <code>skhd</code> for tiling windows</h2>
+<p>First, a definition - <strong>tiling window managers</strong> organize windows in
+compartmentalized buffers on a desktop, and often support handling windows on
+multiple desktops and monitors. I find this management useful for multitasking
+because the wm will automatically attempt to place new windows in an optimal
+spot, with the user having to adjust window sizes and locations only ad-hoc. A
+side effect of these managers is the orthogonal aesthetic they provide to one's
+desktop, though the value of that may vary by taste. I quite like it.</p>
+<p><a href="https://github.com/koekeishiya/chunkwm"><code>chunkwm</code></a> is a tiling wm for macOS. On
+its own it's pretty nice, but its full potential comes out with a hotkey daemon
+like <a href="https://github.com/koekeishiya/skhd"><code>skhd</code></a>, which maps keystrokes to
+arbitrary system actions. <code>skhd</code> can be used for mapping hotkeys to
+<code>chunkc</code><span class="note"><label for="chunkc" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="chunkc" class="margin-toggle" /><span class="sidenote">the program that sends messages to <code>chunkwm</code></span>
+commands, enabling window management via just the keyboard.</p>
+<figure class='fullwidth'><img src='/assets/img/skhd-chunkwm.gif' width='100%'/><figcaption>manipulating windows with skhd</figcaption></figure>
+<p><code>chunkwm</code> provides a configuration file for setting window gaps, border offsets,
+border colors, and other aesthetic features; <code>skhd</code> has a configuration file for
+hotkey
+bindings<span class="note"><label for="skhdrc-more" class="margin-toggle">⊕</label></span><input type="checkbox" id="skhdrc-more" class="margin-toggle" /><span class="marginnote">The nice thing about <code>skhd</code> is keybindings can act on more than just <code>chunkc</code> - for instance, I have bindings for opening a terminal and web browser.</span>.
+I've made public my personal
+<a href="https://github.com/ayazhafiz/hmcd/blob/master/.chunkwmrc"><code>.chunkwmrc</code></a> and
+<a href="https://github.com/ayazhafiz/hmcd/blob/master/.skhdrc"><code>.skhdrc</code></a>.</p>
+<h2 id="2%3A-alacritty-as-a-terminal-and-tmux-as-its-multiplexer" tabindex="-1"><a class="header-anchor" href="#2%3A-alacritty-as-a-terminal-and-tmux-as-its-multiplexer" aria-hidden="true"></a><span class='el'>2:</span>  <code>alacritty</code> as a terminal and <code>tmux</code> as its multiplexer</h2>
+<p>Right now I use <a href="https://github.com/jwilm/alacritty"><code>alacritty</code></a> as my terminal
+emulator<span class="note"><label for="alacritty" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="alacritty" class="margin-toggle" /><span class="sidenote">For a while I used <a href="https://hyper.is/"><code>hyper</code></a>, but people are right about the Electron bloat. I've heard good things about <a href="https://github.com/kovidgoyal/kitty"><code>kitty</code></a>, but haven't had the chance to use it.</span>.
+It's great -- fast as hell, not a battery leech, and has nice configuration
+options with extensible keybindings (you can see my configuration
+<a href="https://github.com/ayazhafiz/hmcd/blob/master/.config/alacritty/alacritty.yml">here</a>).
+Especially with a transparent background and color palettes generated by
+<a href="https://github.com/dylanaraps/pywal"><code>wal</code></a>, it's easily the most beautiful
+application on my machine.</p>
+<p>Why <a href="https://github.com/tmux/tmux"><code>tmux</code></a>? It may seem ridiculous to nest
+terminal sessions within windows within a window manager, but I use <code>tmux</code> to
+have just one terminal window open and manage various sessions inside it. <code>tmux</code>
+sessions persist independently of the emulator they are run in, so you can enter
+and exit them anytime you want.</p>
+<figure class='fullwidth'><img src='/assets/img/tmux.gif' width='100%'/><figcaption>working with multiple tmux sessions</figcaption></figure>
+<p><code>tmux</code> allows for aesthetic and keybinding configurations via a <code>.tmux.conf</code>. Of
+course, I've made mine
+<a href="https://github.com/ayazhafiz/hmcd/blob/master/.tmux.conf">publicly avaliable</a>.</p>
+<h2 id="3%3A-power-tools%3A-vim-and-ranger" tabindex="-1"><a class="header-anchor" href="#3%3A-power-tools%3A-vim-and-ranger" aria-hidden="true"></a><span class='el'>3:</span>  Power tools: <code>vim</code> and <code>ranger</code></h2>
+<p>For a while, I thought <code>vim</code> was a needlessly cumbersome tool, as I'm sure most
+do initially. Once I began to seriously use it though, I realized my enhancement
+in productivity, and now I use <code>vim</code> for pretty much
+everything<span class="note"><label for="neovim" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="neovim" class="margin-toggle" /><span class="sidenote">More accurately, I use <a href="https://github.com/neovim/neovim"><code>neovim</code></a>.</span>.
+Working with only a keyboard certainly imposed a learning curve, but has paid
+off in a a tremendous speedup for literally everything I do on my machine. In
+fact, the productivity benefits <code>vim</code> has provided me are the primary reason I
+switched to a key-bound tiling wm and and now do 90% of my work in a terminal
+emulator.</p>
+<p>On a similar note, the <a href="https://github.com/ranger/ranger"><code>ranger</code> filemanager</a>
+provides <code>vim</code>-like key bindings for browsing file systems. This is a boon for
+productivity -- at least over <code>Finder</code>, in my experience.</p>
+<p>If you're looking for a beautiful, extensible text editor to replace your IDEs
+and speedup your workflow, I cannot recommend <code>vim</code>
+enough<span class="note"><label for="vim" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="vim" class="margin-toggle" /><span class="sidenote"><code>emacs</code> is also really nice, if that's more your thing. Regardless, the advantage of keybindings is undeniable -- there's a reason <code>VS Code</code> and <code>Atom</code> have command palettes.</span>.
+And once you get hooked on that, check out <code>ranger</code>. And if you're trying to get
+really deep, maybe you even want a command-line email client like
+<a href="http://www.mutt.org/"><code>mutt</code></a>. There's an entire world out there for you to
+discover <img class='emoji' alt='smile' src='https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f604.png' height=20 width=20></img>.</p>
+<h3 id="3.1%3A-vim's-learning-curve" tabindex="-1"><a class="header-anchor" href="#3.1%3A-vim's-learning-curve" aria-hidden="true"></a><span class='el'>3.1:</span>  <code>vim</code>'s Learning Curve</h3>
+<p><code>vim</code>'s learning curve kinda sucks if you haven't worked much with key-bound
+applications before. Getting over that hill is a personal journey, but I have
+two tips from personal experience:</p>
+<ol>
+<li>
+<p><code>vimtutor</code> is your best friend. Launch it up in your command line and go
+through all of it; the tutorial isn't very long and will teach you everything
+you need to be functional in <code>vim</code>.</p>
+</li>
+<li>
+<p>Actually use <code>vim</code>. Make it the exclusive workspace for your next few
+projects, homework assignments, papers, whatever else. At first it might
+really suck and you might want to switch back editors, but soon <em>it'll click</em>
+and you'll begin to experience why it's raved about so much. Non-toy usage of
+<code>vim</code> will also teach you all the tricks <code>vimtutor</code> doesn't and force you to
+configure the editor to your liking.</p>
+</li>
+</ol>
+<p>Speaking of configuration,
+<a href="https://github.com/ayazhafiz/hmcd/blob/master/.vimrc">here's my <code>.vimrc</code></a>. Like
+the other configurations I've made public, you should use it only to pick and
+choose what you need - my preferences and plugins probably don't exactly align
+with your needs, and it's useful to know what the commands you're including
+actually mean.</p>
+<h2 id="00%3A-postlude" tabindex="-1"><a class="header-anchor" href="#00%3A-postlude" aria-hidden="true"></a><span class='el'>00:</span>  Postlude</h2>
+<p>I hope this article has provided you with an additional perspective on macOS
+configuration options. If you choose to incorporate any of the tools I've
+discussed in your own workflow, that's awesome! Though of course, my
+configuration is by no means is the &quot;right&quot; way to setup a workspace -- hell,
+this one constantly evolves as my needs and preferences change.</p>
+<p>If you find my configurations useful, have comments about this discussion, have
+another perspective you'd like share, or anything else related, [please ping
+me](mailto:ayaz.hafiz.1@gmail.com?subject=Re: Your macOS workspace with a tiling
+wm). I'd love to chat.</p>
+
+
 </article>
 
 <section class="footer">

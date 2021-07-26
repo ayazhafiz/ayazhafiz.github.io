@@ -59,7 +59,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1627321097504450745"
+  href="/css/shiki.css?1627321599739265099"
 />
 
 
@@ -68,7 +68,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1627321097504450745"
+      href="/css/post.css?1627321599739265099"
     />
   </head>
 
@@ -89,7 +89,75 @@
 
 <article class="post">
   
-  
+  <p>Most algorithms are designed for computation in a Turing machine. But Turing
+machines don't encompass the physics of the universe, and of course there are
+algorithms designed to operate with other mechanics. Let's call these other
+algorithms Analog Algorithms. Here's one that claims to sort a set of numbers in
+linear time<span class="note"><label for="Turing-linear" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="Turing-linear" class="margin-toggle" /><span class="sidenote">If executed on a simulating Turing machine.</span>.</p>
+<blockquote>
+<h4 id="algorithm-spaghetti-sort" tabindex="-1"><a class="header-anchor" href="#algorithm-spaghetti-sort" aria-hidden="true"></a>Algorithm <a href="https://en.wikipedia.org/wiki/Spaghetti_sort">Spaghetti Sort</a></h4>
+<p>Given an unsorted set of $n$ rational numbers
+$S = \{s_1, \ldots, s_n\}\quad s_i \in \mathbb{Q}$:</p>
+<ol>
+<li>
+<p>Obtain a set of spaghetti rods
+$R = \{r_1, \ldots, r_n\}\quad len(r_i) = s_i$. Form a fist around the
+rods.</p>
+</li>
+<li>
+<p>Repeat until there are no more rods in the fist:</p>
+<ul>
+<li>Hit one end of the spaghetti rods perpendicularly against a table, such
+that the rods are aligned on that end.</li>
+<li>Lower a hand on the other side of the rods until it touches a spaghetti
+rod $r_i$.</li>
+<li>Remove the rod $r_i$ from the fist and place it at the end of the sorted
+output set.</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p>Parts of this sort may seem decidedly non-linear<span class="note"><label for="not-Turing" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="not-Turing" class="margin-toggle" /><span class="sidenote">Or at least very expensive, since we're not necessarily dealing with Turing machines.</span>.
+What is the time bound for lowering a hand? How do we decide where to lower the hand
+from? If the hand placement is decided visually, what is the cost of synaptic transmission?
+And what is the cost of sensory response from the other hand touching the longest
+rod? How do we account for the size of a hand needed to hold a very large number
+of rods?</p>
+<p>Still, the spaghetti sort seems reasonable, in at least the sense that this is
+how I would sort a set of spaghetti rods. And in celebration of the New Year, I
+propose another analog algorithm, this one solving the
+NP-complete<span class="note"><label for="def-NP-complete" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="def-NP-complete" class="margin-toggle" /><span class="sidenote">Problems in the class NP are those whose solutions can be verified in polynomial time by a non-deterministic Turing machine. <a href="https://en.wikipedia.org/wiki/NP-completeness">NP-completeness</a> refers to the class of problems hardest in NP. Every problem in NP can be transformed to an equivalent NP-complete problem.</span> <a href="https://en.wikipedia.org/wiki/Clique_problem">clique problem</a>.</p>
+<blockquote>
+<h4 id="algorithm-new-year's-cliquer" tabindex="-1"><a class="header-anchor" href="#algorithm-new-year's-cliquer" aria-hidden="true"></a>Algorithm New Year's Cliquer</h4>
+<p>Given an undirected graph $G$ with vertices $V = \{v_1, \ldots, v_n\}$ and
+edges $E = \{v_i \leftrightarrow v_j, \ldots\}$:</p>
+<ol>
+<li>
+<p>Gather a group of people $P = \{p_1, \ldots, p_n\}$ and for each edge
+$v_i \leftrightarrow v_j = e \in E$, introduce $p_i$ and $p_j$. Ensure that
+each introduction results in an equivalent-strength friendship.</p>
+</li>
+<li>
+<p>Institute a universal aid policy that provides each person the opportunity
+to visit their new friends for the New Year.</p>
+</li>
+<li>
+<p>On New Year's Day, let each person $p_i$ mingle until they find a group of
+individuals $R_i$ where each individual in $R_i$ knows every other
+individual in $R_i$, and $R_i$ is the largest of all such groups. By nature
+of the friendships, this is guaranteed to happen.</p>
+</li>
+<li>
+<p>Count the size of each group $R_j$ formed. All cliques of size $n$ in $P$
+for any $n \in \mathbb{N}$ are now known. Mapping the cliques in the graph
+$G$ is trivial.</p>
+</li>
+</ol>
+</blockquote>
+<p>Have we proved $P = NP$? Definitely not. Is a New Year universal aid policy a
+great idea? Absolutely. Anyway, I wish you a fulfilling New Year!</p>
+
+
 </article>
 
 <section class="footer">
