@@ -46,6 +46,9 @@
       },
     }
   });
+  MathJax.Hub.Queue(function () {
+    document.body.setAttribute('render-done', '');
+  });
 </script>
 
 <script
@@ -53,13 +56,19 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
 ></script>
 
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/shiki.css?1627321097504450745"
+/>
+
 
 
 
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1626885286687102800"
+      href="/css/post.css?1627321097504450745"
     />
   </head>
 
@@ -68,115 +77,47 @@
   <body>
     <div class="container post">
       <div class="panel">
-        <div class="column-right impact vs innovation &amp; industry vs academia-main">
+        <div class="column-right impact vs innovation & industry vs academia-main">
           <section class="nav">
-  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+  <a class="nav-link" href="/about">about</a
+  ><a class="nav-link" href="/cc">cc</a
+  ><a class="nav-link" href="/vis">vis</a
+  ><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
- <h1 class="title">Impact vs Innovation &amp; Industry vs Academia</h1>
+ <h1 class="title">Impact vs Innovation & Industry vs Academia</h1>
 <p class="byline">December 1, 2020</p>
 
 <article class="post">
-  <p>I was recently reading Evan Martin’s blog post on his <a href="http://neugierig.org/software/blog/2020/05/ninja.html">takeaways from developing
-the ninja build system</a>,
-and one thing Evan mentions is his frustration at engineers that don’t look at
-related work when designing systems. This reminded me of Rado Kirov’s posts on
-<a href="https://rkirov.github.io/posts/incremental_computation_3/">incremental computation</a>,
-where Rado argues that a lot of work in the space of incremental software is
-underdeveloped because of the lack of cooperation between academic and industry
-actors. Which isn’t a novel realization in general, but recently was a novel
-realization to me, and has me thinking about something more general. So first a
-motivating comment on that, and then we’ll specialize back to the “divide” between
-academic and industry work.</p>
-
-<p>A large thing I have been struggling with in my (so far incredibly short) career is
-a frequent incongruency between what I believe is impactful and what I believe
-is innovative work in an opportunity. Though “impactful” and “innovative”
-are broad and personal terms, in general I mean “impactful” work to be that
-which improves the quality of products broader than the work itself<span class="note"><label for="impactful" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="impactful" class="margin-toggle"><span class="sidenote">For example, reducing store waiting lines by 20% is impactful to
-a business and its consumers</span>, and “innovative” work to be that which is
-novel in its domain<span class="note"><label for="innovative" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="innovative" class="margin-toggle"><span class="sidenote">For example, the derivation of a
-theorem.</span>. Now, I certainly don’t mean to claim there is no overlap in
-impactful and innovative opportunities, or even that some overlap is uncommon,
-but I do argue that opportunities with a large degree of impact and innovation
-in the steady state<span class="note"><label for="steady" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="steady" class="margin-toggle"><span class="sidenote">because certainly, anything can one day
-be made into an innovation or induce a great impact!</span> are not all that
-common.</p>
-
-<p>Now back to the note we started this discussion with – I think the clearest
-place where this divide comes up is in this distinction between industry work
-(impact by way of application) and academic work (innovation by way of theory).</p>
-
-<p>Even though theory and application are complementary - theory inspires
-application, inspires new theory, etc. - I believe that popular culture has
-separated these two ideas by a thin bridge. This is evident even in the divide
-we understand between theory and application!</p>
-
-<p>Of course, this divide is very purposeful. You can’t do everything at once, and
-we know that the $\text{scientist}\leftrightarrow\text{engineer}$ model works well;
-it’s been alive for a very long time. The problem comes when people working on
-applications lack knowledge of theory (and do not seek to learn it!), or vice
-versa. Then, what
-is novel to an individual is not necessarily novel in general, and time is wasted approaching
-a problem from an industrial direction when theory has been developed for a
-version of the problem. Or vice versa.<span class="note"><label for="related" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="related" class="margin-toggle"><span class="sidenote">A related problem
-is effective knowledge sharing between domains and how to fill “valleys” in the N-dimensional landscape of
-popular knowledge.</span></p>
-
-<p>Here’s an example: my experience contributing to teams working on industrial
-programming languages, I have noticed that relatively few people working in this
-space in have background knowledge in programming language theory (even
-self-taught!). Generally this is not an issue, but sometimes a problem comes up
-that the team has not experienced before, and spends a lot of time “figuring
-out”, but the problem in general is well-known and solved.</p>
-
-<p>This is a hard problem – the biggest
-challenge is that you don’t know what you don’t know, and the first step is even
-learning enough to realize what you don’t know. A final example: recently I got
-into abstract rewriting systems, but for a while I didn’t even realize the
-problems I was trying to solve were well-known in the theory of rewrite systems
-until about a month in! Obviously, after that, things got a lot easier.</p>
-
-<p>All right, so maybe now you’re saying, “this is an ok observation, but so what?
-What can we do about it?” Well, I suggest the following personal steps:</p>
-
-<ol>
-  <li>Inspire the relationship between formal methods and their applications during
-education - concentrations like “Applied Mathematics” deserve a fair share of
-theory, and “Theoretical Algorithms” deserve a fair share of applications, at
-least enough so that individuals new to a field have enough of an
-understanding of the larger ecosystem to know what they don’t know, what is
-useful, and what isn’t.</li>
-  <li>Seek out answers to ideas that are novel to you - while they may be novel to
-you, they are likely not novel in general. Instead of reinventing the wheel,
-first research to discover if the problem has already been solved. As
-mentioned, figuring out how to discover whether the problem has been solved
-may not be trivial, and so some prerequisite knowledge of the domain is
-required (perhaps via (1)).</li>
-  <li>When developing novel solutions, start from formal models.</li>
-</ol>
-
-<p>It’s either that, or get very knowledgeable about everything. I’m not certain
-which is more realistic, but I have a suspicion. And as always, if you have thoughts,
-I <a href="mailto:ayaz.hafiz.1@gmail.com">would love to hear from you</a>!</p>
-
+  
+  
 </article>
 
 <section class="footer">
   
-  <a href="/articles/20/heterogeneity-in-volunteering">« Heterogeneity in Volunteering</a>
+  <a href="/articles/20/heterogeneity-in-volunteering"
+    >&laquo; Heterogeneity in Volunteering</a
+  >
   
-  <span><img class="emoji" title=":cloud:" alt=":cloud:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/2601.png" height="20" width="20"> 
-    <span>​
+  <span
+    ><img class='emoji' alt='cloud' src='https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/2601.png' height=20 width=20></img>&emsp;
+    <span
+      >&#8203;
       <script type="math/tex">
         \mathbb{Q}\cong\mathbb{Q}^+
-      </script></span>
+      </script></span
+    >
   </span>
   
-  <a href="/articles/20/pattern-matching-with-a-typechecker">Pattern Matching With a Typechecker »</a>
+  <a href="/articles/20/pattern-matching-with-a-typechecker">Pattern Matching With a Typechecker &raquo;</a>
   
 </section>
 
-<script src="https://utteranc.es/client.js" repo="ayazhafiz/gww-utterances" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+<script src="https://utteranc.es/client.js"
+        repo="ayazhafiz/gww-utterances"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 
 <script type="text/javascript">
@@ -229,11 +170,17 @@ I <a href="mailto:ayaz.hafiz.1@gmail.com">would love to hear from you</a>!</p>
     <div class="bottom-bar">
     <details>
   <summary>Analytics</summary>
-  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/">Cloudflare Analytics</a>. No identifiable information is transmitted to Cloudflare. See
+  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/"
+    >Cloudflare Analytics</a
+  >. No identifiable information is transmitted to Cloudflare. See
   <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Analytics user privacy</a>.
 </details>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'></script>
-
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'
+></script>
+</details>
 
     </div>
   </body>

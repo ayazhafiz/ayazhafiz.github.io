@@ -172,7 +172,15 @@ figcaption {
     font-size: 0.8rem; }
 
 .math {
-  outline-offset: 0.5em; }
+  outline-offset: 0.5em;
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  -webkit-margin-after: 1em;
+          margin-block-end: 1em;
+  -webkit-margin-start: 0px;
+          margin-inline-start: 0px;
+  -webkit-margin-end: 0px;
+          margin-inline-end: 0px; }
   .math.premise {
     outline: 1px dashed black; }
   .math.problem {
@@ -326,7 +334,7 @@ span.el {
 
 .emoji {
   height: 1em;
-  vertical-align: -8%;
+  vertical-align: -5%;
   width: 1em; }
 
 .color {

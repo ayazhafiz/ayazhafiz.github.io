@@ -46,6 +46,9 @@
       },
     }
   });
+  MathJax.Hub.Queue(function () {
+    document.body.setAttribute('render-done', '');
+  });
 </script>
 
 <script
@@ -53,13 +56,19 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
 ></script>
 
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/shiki.css?1627321097504450745"
+/>
+
 
 
 
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1626885286687102800"
+      href="/css/post.css?1627321097504450745"
     />
   </head>
 
@@ -70,485 +79,46 @@
       <div class="panel">
         <div class="column-right Hot Code Reloading, with libc or in the browser-main">
           <section class="nav">
-  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+  <a class="nav-link" href="/about">about</a
+  ><a class="nav-link" href="/cc">cc</a
+  ><a class="nav-link" href="/vis">vis</a
+  ><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
  <h1 class="title">Hot Code Reloading, with libc or in the browser</h1>
 <p class="byline">January 7, 2021</p>
 
 <article class="post">
-  <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h2"><a href="#the-framework-language">The framework language</a></li>
-<li class="toc-entry toc-h2"><a href="#the-native-backend">The native backend</a></li>
-<li class="toc-entry toc-h2">
-<a href="#the-browser-backend">The browser backend</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#appendix-hot-module-reloading">Appendix: Hot Module Reloading</a></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-  <p>The full source code for the framework described here is available at
-<a href="https://github.com/ayazhafiz/hotreload">gh:ayazhafiz/hotreload</a>.</p>
-</blockquote>
-
-<p>In this cc, we will develop a small framework for executing software programs
-with support for <a href="https://en.wikipedia.org/wiki/Dynamic_software_updating">hot code reloading</a>.
-Hot code reloading permits dynamic (“hot”) changes to part of a program’s implementation
-without interfering with the active state of the program or requiring a full recompilation,
-permitting faster iteration cycles during software development. As a small
-example, here is our framework hot-reloading parts of a
-simple counter program without changing its state:</p>
-
-<figure><img src="https://github.com/ayazhafiz/hotreload/blob/base/examples/demo_native.gif?raw=true"><figcaption>Demo of hot code reloading for a simple counter program with the native backend</figcaption></figure>
-<figure><img src="https://github.com/ayazhafiz/hotreload/blob/base/examples/demo_browser.gif?raw=true"><figcaption>Demo of hot code reloading for a simple counter program with the browser backend</figcaption></figure>
-
-<p>This is not just live code reloading. When <code class="language-plaintext highlighter-rouge">scale</code> or <code class="language-plaintext highlighter-rouge">shift</code> are reloaded,
-<code class="language-plaintext highlighter-rouge">i</code> is not affected.</p>
-
-<p>To show how we could implement hot code reloading for both machine-code programs
-and those running in a browser (both of which are shown in the examples above), we will
-implement two backends. One will compile
-our software to machine code and execute it in a
-two-sided runtime; this is called the native backend. The other will compile our software to JavaScript code and
-execute it in the browser with a client/server runtime; this is the browser
-backend.</p>
-
-<p>But first, it will be helpful to mention the framework language, which has been
-designed to provide a common frontend for both runtimes.</p>
-
-<h2 id="the-framework-language">
-<a class="anchor" href="#the-framework-language" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-framework-language"></a>The framework language</h2>
-
-<p>Here’s the source code of the counter example we saw above<span class="note"><label for="program" class="margin-toggle">⊕</label></span><input type="checkbox" id="program" class="margin-toggle"><span class="marginnote">The code shown in the example above is actually an earlier version of
-the framework language, but the presented code works all the same.</span>:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">hotreload</span><span class="p">,</span> <span class="nx">HotReloadProgram</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../runtime/runtime</span><span class="dl">"</span><span class="p">;</span>
-
-<span class="kd">class</span> <span class="nx">Counter</span> <span class="kd">extends</span> <span class="nx">HotReloadProgram</span> <span class="p">{</span>
-  <span class="p">@</span><span class="nd">hotreload</span>
-  <span class="nx">scale</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">a</span> <span class="o">*</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="p">@</span><span class="nd">hotreload</span>
-  <span class="nx">shift</span><span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="k">async</span> <span class="nx">main</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="kr">number</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">;</span> <span class="o">++</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">shift</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">i</span><span class="p">));</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
-      <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">sleep_seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>This is just TypeScript code, which is checked by the TypeScript compiler and
-then translated to either C++ (for the native backend) or JavaScript (for the
-browser backend).</p>
-
-<p>Each program is described by a single class that extends from
-<code class="language-plaintext highlighter-rouge">HotReloadProgram</code>; the entry point is the <code class="language-plaintext highlighter-rouge">main</code> method of that class. Some
-standard functions (<code class="language-plaintext highlighter-rouge">print</code>, <code class="language-plaintext highlighter-rouge">sleep_seconds</code>) are provided by the base class.
-The most important thing here is the <code class="language-plaintext highlighter-rouge">@hotreload</code> decorator, which marks
-methods whose implementations should be watched and reloaded as needed by the
-runtime.</p>
-
-<p>When targeting the browser runtime, the input program can contain any code
-admissible by the TypeScript compiler. When targeting the native backend,
-only a subset of TypeScript code is admissible, as I would like this to be an
-exploration of hot-code reloading rather than that of TS-&gt;C++
-code generation. Adding support for translation of more constructs should be
-trivial, but the language really isn’t the point here.</p>
-
-<p>Our choice of TypeScript as a high-level DSL works well
-because it is trivial to translate to both target languages, and all we need is
-something that we can input into either backend to check if our hot-reloading
-implementation “just works”. We could talk more about programming language interfaces
-if we were implementing some production system based on this work. In fact, I am
-of the opinion that it should be
-programming language compilers/interpreters that provide support for hot code
-reloading, not external frameworks.</p>
-
-<p>But okay, I digress. Let’s get on with what we’re really here for – hot code
-reloading! First up, the native backend and runtime.</p>
-
-<h2 id="the-native-backend">
-<a class="anchor" href="#the-native-backend" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-native-backend"></a>The native backend</h2>
-
-<p>So let’s say we have some program that we know how to compile to machine code,
-load, and execute. What extra work do we need to do to support hot code reloading
-within the executable?</p>
-
-<p>The main thing to figure out is how the executable be composed. It’s clear that in order
-to change the implementation of a function on the fly without changing the state
-of a running binary, we cannot statically link the function routine with that
-binary; otherwise, we would need to re-link (and thus restart) the entire
-binary when the function changes. So we need to be able to dynamically load, link, and unload the function
-symbol as needed. And that’s just it – we’ll compile our <code class="language-plaintext highlighter-rouge">@hotreload</code>-annotated
-functions as dynamic libraries (also known as shared libraries) and give our main program
-executable some information on how to load and link those libraries. Then, when
-a <code class="language-plaintext highlighter-rouge">@hotreload</code> function implementation changes, we recompile its dynamic
-library and instruct the main program to reload and re-link the library.</p>
-
-<p>To me, there is nothing really tricky or even interesting about this idea; it just
-makes sense! Turns out, shared libraries are how pretty much all plugin systems
-works, and thankfully <code class="language-plaintext highlighter-rouge">libc</code> has a series of functions devoted
-to loading/unloading/reading from dynamic libraries (see <code class="language-plaintext highlighter-rouge">man 6 dlopen</code>). So
-knowing the path forward, the remaining work we have is to actually set up
-the runtime in the aforementioned manner.</p>
-
-<p>First, let’s design a system to load and link dynamic libraries associated with
-<code class="language-plaintext highlighter-rouge">@hotreload</code> functions in the user program (we’ll call this the program runtime).
-For each <code class="language-plaintext highlighter-rouge">@hotreload</code> function, we’ll have the framework compiler instantiate a
-<code class="language-plaintext highlighter-rouge">HotReload</code> object to manage this work. Let’s walk through what that
-object looks like<span class="note"><label for="c" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="c" class="margin-toggle"><span class="sidenote">By the way, I use C++ as the target language
-here to make some things like memory allocation easier than would be in C, where
-a lot of boilerplate may distract from the more interesting things. Writing this
-same runtime in C would be straightforward.</span>.</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
-<span class="k">struct</span> <span class="nc">HotReload</span> <span class="p">{</span>
- <span class="nl">public:</span>
-  <span class="c1">// ...snipped constructor</span>
-
-  <span class="n">T</span><span class="o">*</span> <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">assure_loaded</span><span class="p">();</span>
-    <span class="k">return</span> <span class="n">loaded</span><span class="p">;</span>
-  <span class="p">}</span>
-</code></pre></div></div>
-
-<p>The only public API of the object is the <code class="language-plaintext highlighter-rouge">get</code> method, which retrieves the
-function pointer associated with the <code class="language-plaintext highlighter-rouge">@hotreload</code> function. The signature of the
-function is described by <code class="language-plaintext highlighter-rouge">T</code>, which we instantiate with a concrete type during
-compilation of the input program to C++ (we’ll see what that looks like in a bit).</p>
-
-<p>Before we get to <code class="language-plaintext highlighter-rouge">assure_loaded</code>, let’s take a look at the data we associate
-with each <code class="language-plaintext highlighter-rouge">HotReload</code> instance.</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
-<span class="k">struct</span> <span class="nc">HotReload</span> <span class="p">{</span>
-  <span class="c1">// ...snipped</span>
-
- <span class="nl">private:</span>
-  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">api</span><span class="p">;</span>
-  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">libpath</span><span class="p">;</span>
-  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">copypath</span><span class="p">;</span>
-  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">lockfile</span><span class="p">;</span>
-
-  <span class="kt">void</span><span class="o">*</span> <span class="n">handle</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
-  <span class="n">T</span><span class="o">*</span> <span class="n">loaded</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
-
-  <span class="kt">time_t</span> <span class="n">loadtime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>There are comments in the <a href="https://github.com/ayazhafiz/hotreload/blob/base/runtime/runtime.cpp">source code</a>
-describing what each of these members does, but for exposition let’s enumerate
-them here:</p>
-
-<ul>
-  <li>
-<code class="language-plaintext highlighter-rouge">api</code>: the name of the function symbol to be loaded from the
-shared library containing the <code class="language-plaintext highlighter-rouge">@hotreload</code> function implementation.</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">libpath</code>: the file path of the dynamic library the <code class="language-plaintext highlighter-rouge">@hotreload</code> function
-routine is defined in. When the function implementation changes, it is
-recompiled with output at this path.</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">copypath</code>: consider the case in which we go to access a function routine
-while a new implementation is being recompiled to <code class="language-plaintext highlighter-rouge">libpath</code>. If the
-compilation process touches the contents of <code class="language-plaintext highlighter-rouge">libpath</code> non-atomically (which it almost certainly does), we would have
-to spin until the compilation is finished. To avoid this,
-whenever we detect a change to <code class="language-plaintext highlighter-rouge">libpath</code> we first copy its contents to
-<code class="language-plaintext highlighter-rouge">copypath</code> and then read the function routine from there. This way, the
-user program can continue to use a stale function implementation while the
-library at <code class="language-plaintext highlighter-rouge">libpath</code> is recompiling.</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">lockfile</code>: in general we want to reload the function symbol for <code class="language-plaintext highlighter-rouge">api</code>
-whenever we detect a change to <code class="language-plaintext highlighter-rouge">libpath</code>, but <code class="language-plaintext highlighter-rouge">libpath</code> may be modified
-non-atomically during the compilation process, in which case the library contents may be incomplete and non-loadable.
-To deal with this problem, we check for the
-presence of <code class="language-plaintext highlighter-rouge">lockfile</code>, which exists on the file system when <code class="language-plaintext highlighter-rouge">libpath</code> is
-being written to and is removed once its contents are complete.</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">handle</code>: an opaque handle to the associated dynamic library provided by <code class="language-plaintext highlighter-rouge">dlopen</code>.</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">loaded</code>: a pointer to the function symbol <code class="language-plaintext highlighter-rouge">api</code> represents.</li>
-  <li>
-<code class="language-plaintext highlighter-rouge">loadtime</code>: the last time we loaded and linked the dynamic library. If the
-library object file is modified after this time, we know we should reload it
-again.</li>
-</ul>
-
-<p>Maybe you already see how the loading of symbols is going to work:</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
-<span class="k">struct</span> <span class="nc">HotReload</span> <span class="p">{</span>
-  <span class="c1">// ...snipped</span>
- <span class="nl">private:</span>
-  <span class="c1">// ...snipped</span>
-
-  <span class="kt">void</span> <span class="n">assure_loaded</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="nc">stat</span> <span class="n">lib</span><span class="p">;</span>
-    <span class="n">stat</span><span class="p">(</span><span class="n">libpath</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lib</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">loadtime</span> <span class="o">!=</span> <span class="n">lib</span><span class="p">.</span><span class="n">st_mtime</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">lockfile_exists</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">return</span><span class="p">;</span>
-      <span class="p">}</span>
-
-      <span class="k">if</span> <span class="p">(</span><span class="n">handle</span> <span class="o">!=</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">dlclose</span><span class="p">(</span><span class="n">handle</span><span class="p">))</span> <span class="p">{</span>
-          <span class="n">die</span><span class="p">(</span><span class="s">"dlclose failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">dlerror</span><span class="p">());</span>
-        <span class="p">}</span>
-        <span class="n">handle</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
-      <span class="p">}</span>
-
-      <span class="n">copy_file</span><span class="p">(</span><span class="n">libpath</span><span class="p">,</span> <span class="n">copypath</span><span class="p">);</span>
-
-      <span class="n">handle</span> <span class="o">=</span> <span class="n">dlopen</span><span class="p">(</span><span class="n">copypath</span><span class="p">,</span> <span class="n">RTLD_NOW</span> <span class="o">|</span> <span class="n">RTLD_LOCAL</span><span class="p">);</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">handle</span> <span class="o">==</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">die</span><span class="p">(</span><span class="s">"dlopen failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">dlerror</span><span class="p">());</span>
-      <span class="p">}</span>
-      <span class="n">loadtime</span> <span class="o">=</span> <span class="n">lib</span><span class="p">.</span><span class="n">st_mtime</span><span class="p">;</span>
-
-      <span class="n">dlerror</span><span class="p">();</span>  <span class="c1">// clear errors</span>
-      <span class="n">loaded</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="p">)</span><span class="n">dlsym</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">api</span><span class="p">);</span>
-      <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">err</span> <span class="o">=</span> <span class="n">dlerror</span><span class="p">();</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">err</span> <span class="o">!=</span> <span class="nb">nullptr</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">die</span><span class="p">(</span><span class="s">"dlsym failed: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">err</span><span class="p">);</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>First, we check if <code class="language-plaintext highlighter-rouge">libpath</code> has been modified since we last used the function
-symbol associated with it. If it has and the <code class="language-plaintext highlighter-rouge">lockfile</code> associated with active
-compilation is not present, we proceed with reloading the function symbol.
-We close our active handle to <code class="language-plaintext highlighter-rouge">copypath</code> (remember, this is where we actually
-read the symbols from, since a handle to <code class="language-plaintext highlighter-rouge">libpath</code> would already be
-invalidated at this point). Then we copy the shared library to our target
-<code class="language-plaintext highlighter-rouge">copypath</code> site. We call <code class="language-plaintext highlighter-rouge">dlopen</code> on the shared library which loads and links
-it, and store the returned library handle in <code class="language-plaintext highlighter-rouge">handle</code>. Finally, we grab the actual function
-routine we’re looking for by calling <code class="language-plaintext highlighter-rouge">dlsym</code> with the handle and the
-function name.</p>
-
-<p>You may be wondering, why is <code class="language-plaintext highlighter-rouge">handle</code> a data member if its state does not
-need to persist between multiple calls to <code class="language-plaintext highlighter-rouge">assure_loaded</code>? The reason is that the destructor of
-a <code class="language-plaintext highlighter-rouge">HotReload</code> instance should also call <code class="language-plaintext highlighter-rouge">dlclose</code> on the shared library handle,
-because handles to shared libraries are reference counted (when there are no
-references, the library is unloaded). Of course, since the lifetime of a
-<code class="language-plaintext highlighter-rouge">HotReload</code> instance is exactly that of the user program it’s not like we
-can introduce memory leaks this way, but hey.</p>
-
-<p>Another thing to mention is the use of the <code class="language-plaintext highlighter-rouge">RTLD_NOW</code> and <code class="language-plaintext highlighter-rouge">RTLD_LOCAL</code> flags
-in the call to <code class="language-plaintext highlighter-rouge">dlopen</code>. <code class="language-plaintext highlighter-rouge">RTLD_NOW</code> instructs libc to bind all external symbols
-in the library immediately rather than lazily on usage. Since for us, each
-shared library contains only one function routine which is about to be used,
-there’s not much point to delaying symbol resolution. <code class="language-plaintext highlighter-rouge">RTLD_LOCAL</code> means
-that symbols in the library are accessible only by the handle returned from
-<code class="language-plaintext highlighter-rouge">dlopen</code>, which is clearly what we want.</p>
-
-<p>Note that our approach here is lazy in the sense that we cache the function
-symbol address from the shared library and try to reload the library only when a call
-to <code class="language-plaintext highlighter-rouge">HotReload#get</code> is made. The expectation is that the cost of
-file copying/loading/linking is amortized across many calls to <code class="language-plaintext highlighter-rouge">get()</code>, thus
-keeping the performance and behavior of the program similar to what it would be
-without a hot reload runtime. It also avoids a bunch of complexity we might have
-introduced through background threads listening to file changes or spinning in
-place of a lockfile.</p>
-
-<p>Now, let’s take at what the counter program we showed earlier looks like when
-compiled with this runtime.</p>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// /private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/7f828395e1611cb8b3e64ee8c7536f35.cpp</span>
-<span class="k">extern</span> <span class="s">"C"</span> <span class="kt">int</span> <span class="nf">scale</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// /private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/2872612167e7943ceea64b36d17c89d4.cpp</span>
-<span class="k">extern</span> <span class="s">"C"</span> <span class="kt">int</span> <span class="nf">shift</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// /private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/fc2d242f0363b851a0b2efd6b9db7df8.cpp</span>
-<span class="cm">/* &lt;runtime snipped&gt; */</span>
-<span class="n">HotReload</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">scale</span><span class="p">(</span><span class="s">"scale"</span><span class="p">,</span> <span class="s">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/40d1e496db6a6655b65c5d73458b6373"</span><span class="p">,</span> <span class="s">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/2d8885948a7d8c9abf321e4f3f6912c1"</span><span class="p">,</span> <span class="s">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/ef5a9921ce0030c42054ec3fb658b3ad"</span><span class="p">);</span>
-<span class="n">HotReload</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">shift</span><span class="p">(</span><span class="s">"shift"</span><span class="p">,</span> <span class="s">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/fad7d0510a897b50c8f8aec4efc8155e"</span><span class="p">,</span> <span class="s">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/d02eecf94ddeb3592470ff6959fdcaba"</span><span class="p">,</span> <span class="s">"/private/var/folders/_j/4xdvs8jj5qd6nsfk8wf6jy900000gn/T/f3176b0204c187f47b4d0f1cef1a5e37"</span><span class="p">);</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">shift</span><span class="p">.</span><span class="n">get</span><span class="p">()(</span><span class="n">scale</span><span class="p">.</span><span class="n">get</span><span class="p">()(</span><span class="n">i</span><span class="p">));</span>
-    <span class="n">print</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">sleep_seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Pretty straightforward – for each <code class="language-plaintext highlighter-rouge">@hotreload</code>-annotated function (<code class="language-plaintext highlighter-rouge">scale</code> and
-<code class="language-plaintext highlighter-rouge">shift</code>) the framework runtime allocates some unique, temporary files for <code class="language-plaintext highlighter-rouge">libpath</code>, <code class="language-plaintext highlighter-rouge">copypath</code>,
-<code class="language-plaintext highlighter-rouge">lockfile</code>, and an implementation file to house the function source code. Then the
-framework writes the <code class="language-plaintext highlighter-rouge">@hotreload</code> function implementations to their implementation files, compiles those
-files as shared libraries at their <code class="language-plaintext highlighter-rouge">libpath</code>s, and generates
-<code class="language-plaintext highlighter-rouge">HotReload</code> instances referencing those functions, type-parameterized by their
-function signatures, in the main program. Finally, we rewrite the raw calls to <code class="language-plaintext highlighter-rouge">shift</code> and <code class="language-plaintext highlighter-rouge">scale</code> to
-be <code class="language-plaintext highlighter-rouge">shift.get()</code> and <code class="language-plaintext highlighter-rouge">scale.get()</code>. If you’re wondering why we label the
-definitions of <code class="language-plaintext highlighter-rouge">scale</code> and <code class="language-plaintext highlighter-rouge">shift</code> as <code class="language-plaintext highlighter-rouge">extern "C"</code>, it’s to ensure conformance
-with the C ABI as expected by <code class="language-plaintext highlighter-rouge">dlsym</code> (otherwise a C++ compiler may mangle the names).</p>
-
-<p>The presence of an additional <a href="https://github.com/ayazhafiz/hotreload/blob/base/src/runtime_native.ts">runtime on the framework side</a>
-is why I refer to the native backend as having a two-sided runtime. As well as
-compiling and executing the resulting C++ code, the framework runtime is
-responsible for listening to changes in the input program and
-recompiling the shared libraries associated with <code class="language-plaintext highlighter-rouge">@hotreload</code> functions as
-needed.</p>
-
-<p>And that’s all there is to it! We’ve implemented a DSL and framework for running
-programs with no formal dependencies other than that of libc, and in very little
-time. Get rid of the DSL, and the runtime alone can be modified to fit any
-project that doesn’t mind a dependency on libc.</p>
-
-<p>Our fun isn’t over yet – now, let’s show how to perform hot code reloading with
-programs in the browser, where program state is abound and there certainly is no
-libc, let alone the concept of machine code loading and linking.</p>
-
-<h2 id="the-browser-backend">
-<a class="anchor" href="#the-browser-backend" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#the-browser-backend"></a>The browser backend</h2>
-
-<p>Obviously, the approach we described above cannot be readily translated to the
-execution of JavaScript programs by JavaScript engines in the browser. But
-thanks to the dynamic nature of JavaScript, changing implementations arbitrarily
-during a program’s execution is startlingly easy. The key idea is that we can
-inject arbitrary JavaScript code via fresh <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> elements inserted in the
-DOM, which will immediately execute any code they contain.</p>
-
-<p>In general this is kind of arbitrary code injection is a great way to introduce security vulnerabilities, but since we expect hot
-code reloading to be used only in local development environments, we’ll wave our
-hands at that and instead accept it as a huge boon to the ease of our
-implementation.</p>
-
-<p>Since our program is defined entirely in a class, and hot-reloadable functions
-are just methods on that class, we can apply new changes just by changing the
-definition of the method on an instance of the class. And in JavaScript, class
-methods are just properties. For example:</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span>
-  <span class="c">&lt;!-- some html --&gt;</span>
-  <span class="nt">&lt;script&gt;</span>
-    <span class="kd">class</span> <span class="nx">Counter</span> <span class="p">{</span>
-      <span class="c1">// the counter example above</span>
-    <span class="p">}</span>
-    <span class="kd">const</span> <span class="nx">program</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Counter</span><span class="p">();</span>
-    <span class="nx">program</span><span class="p">.</span><span class="nx">main</span><span class="p">();</span> <span class="c1">// execute the program</span>
-  <span class="nt">&lt;/script&gt;</span>
-
-  <span class="nt">&lt;script&gt;</span>
-    <span class="nx">program</span><span class="p">.</span><span class="nx">scale</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="nx">scale</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nx">a</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="p">}).</span><span class="nx">bind</span><span class="p">(</span><span class="nx">program</span><span class="p">);</span>
-  <span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-</code></pre></div></div>
-
-<p>The second <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> element executes in the same context as the first, so it
-overwrites the <code class="language-plaintext highlighter-rouge">scale</code> method of the program with an implementation that scales
-the input variable by 2 rather than 1. Calls to <code class="language-plaintext highlighter-rouge">program.scale</code> will immediately begin referencing
-this implementation<span class="note"><label for="bind" class="margin-toggle">⊕</label></span><input type="checkbox" id="bind" class="margin-toggle"><span class="marginnote">For those unfamiliar, <code class="language-plaintext highlighter-rouge">fn.bind(obj)</code> updates
-the <code class="language-plaintext highlighter-rouge">this</code> reference in <code class="language-plaintext highlighter-rouge">fn</code> to be that of <code class="language-plaintext highlighter-rouge">obj</code>. By default, the <code class="language-plaintext highlighter-rouge">this</code>
-reference in a free function is just that function. Of course, in this example
-it doesn’t matter because <code class="language-plaintext highlighter-rouge">scale</code> does not use <code class="language-plaintext highlighter-rouge">this</code>.</span>.</p>
-
-<p>Knowing how to apply changes, the other thing we need to figure out is how to
-inform the running program of new changes. Since we have no file system access
-from the browser, it seems we need a web server. And that’s exactly what
-we’ll do – the framework runtime will spin up a web server (we’ll call this the
-server runtime) that serves a web page with the user program and a runtime for
-applying changes to <code class="language-plaintext highlighter-rouge">@hotreload</code> methods of the active program (we’ll call this
-the client runtime). The client runtime will open a websocket with the server
-runtime, over which the server will send code patches (of the form <code class="language-plaintext highlighter-rouge">program.foo = newFoo.bind(program)</code> we saw above) to the client whenever it detects changes
-to the implementation of <code class="language-plaintext highlighter-rouge">@hotreload</code> methods in the input program.</p>
-
-<p>Let’s quickly walk through the <a href="https://github.com/ayazhafiz/hotreload/blob/base/runtime/runtime.html">client runtime</a>
-to make sure we’re on the same page<span class="note"><label for="server-runtime" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="server-runtime" class="margin-toggle"><span class="sidenote">The <a href="https://github.com/ayazhafiz/hotreload/blob/base/src/runtime_browser.ts">server runtime</a>
-is not that interesting, but I have attempted to leave it well-commented if you
-are interesting in reading through it.</span>.</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">_π_reload_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">_π_resolve_reload</span> <span class="o">=</span> <span class="p">{};</span>
-<span class="k">async</span> <span class="kd">function</span> <span class="nx">πhotreload</span><span class="p">(</span><span class="nx">patch</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">script</span><span class="dl">"</span><span class="p">);</span>
-
-  <span class="kd">const</span> <span class="nx">reload_id</span> <span class="o">=</span> <span class="nx">_π_reload_id</span><span class="o">++</span><span class="p">;</span>
-  <span class="kd">const</span> <span class="nx">wait_hotreload</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">_π_resolve_reload</span><span class="p">[</span><span class="nx">reload_id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">resolve</span><span class="p">;</span>
-  <span class="p">});</span>
-
-  <span class="nx">s</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="p">[</span><span class="nx">patch</span><span class="p">,</span> <span class="s2">`_π_resolve_reload[</span><span class="p">${</span><span class="nx">reload_id</span><span class="p">}</span><span class="s2">]();`</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="dl">"</span><span class="se">\n</span><span class="dl">"</span><span class="p">);</span>
-
-  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
-  <span class="k">await</span> <span class="nx">wait_hotreload</span><span class="p">;</span>
-  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kd">const</span> <span class="nx">πrecv</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="nx">πHR_ROUTE</span><span class="p">);</span>
-<span class="nx">πrecv</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">πhotreload</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>When we receive a message over the <code class="language-plaintext highlighter-rouge">πrecv</code> websocket, we assume that the message
-is a well-formed and complete patch to the class instance containing the main
-program (the patch is <a href="https://github.com/ayazhafiz/hotreload/blob/08bff15d21d4786da4a79a4ad371f0d9072cb62d/src/compile.ts#L134-L184">assembled in the compiler</a>). We chuck the patch over to <code class="language-plaintext highlighter-rouge">πhotreload</code>,
-which will actually load it in the active session. First, we allocate a
-new <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> element to hold the patch. It’s
-polite to clean up after yourself, we also allocate a fresh <code class="language-plaintext highlighter-rouge">Promise</code> that will
-be resolved by code in the <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> element after the patch has been
-evaluated. We inject the <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> element into the DOM, await the promise, and
-then remove the <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> element.</p>
-
-<p>It’s that easy! Now we can go to work on web applications without the annoyance
-of a full recompilation, refresh, and re-navigation to the state we were at every time
-we want to make a change.</p>
-
-<h3 id="appendix-hot-module-reloading">
-<a class="anchor" href="#appendix-hot-module-reloading" aria-hidden="true"><span class="octicon octicon-link"></span></a><a class="header-anchor" href="#appendix-hot-module-reloading"></a>Appendix: Hot Module Reloading</h3>
-
-<p>Most modern JavaScript bundlers employ a hot code reloading technique called
-“hot module reloading” that is more general, but less granular than the
-per-function hot reloading we have presented here.</p>
-
-<p>Hot module reloading reloads entire modules (i.e. on the granularity of files)
-when they are changed. This provides for an even simpler runtime implementation
-than that presented here, since you can just load up a static file from the
-runtime server whenever something changes. It also doesn’t tie you down to the
-opinionated and somewhat contrived framework language we used here; all you need
-is a project that is relatively well-modularized. Of course, the downside
-is that the time and resources associated with recompilation/reloading will now
-be proportional to the number of modules in your project.</p>
-
-<p>Anyway, hope this has been fun. I doubt this is something most of us will need
-to think about, let alone implement, on a frequent basis, but it doesn’t hurt to
-know how to do it – especially when it’s so easy, and looks so nice!</p>
-
+   <ul id="toc" class="section-nav">
+</ul> 
+  
 </article>
 
 <section class="footer">
   
-  <a href="/articles/20/pattern-matching-with-a-typechecker">« Pattern Matching With a Typechecker</a>
+  <a href="/articles/20/pattern-matching-with-a-typechecker"
+    >&laquo; Pattern Matching With a Typechecker</a
+  >
   
-  <span><img class="emoji" title=":fire:" alt=":fire:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f525.png" height="20" width="20"> 
-    <span>​
+  <span
+    ><img class='emoji' alt='fire' src='https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f525.png' height=20 width=20></img>&emsp;
+    <span
+      >&#8203;
       <script type="math/tex">
         (1 1) (0 1) 10
-      </script></span>
+      </script></span
+    >
   </span>
   
-  <a href="/articles/21/hiphop-masuclinity">The Commodification of Masculinity in Hip-Hop »</a>
+  <a href="/articles/21/hiphop-masuclinity">The Commodification of Masculinity in Hip-Hop &raquo;</a>
   
 </section>
 
-<script src="https://utteranc.es/client.js" repo="ayazhafiz/gww-utterances" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+<script src="https://utteranc.es/client.js"
+        repo="ayazhafiz/gww-utterances"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 
 <script type="text/javascript">
@@ -601,11 +171,17 @@ know how to do it – especially when it’s so easy, and looks so nice!</p>
     <div class="bottom-bar">
     <details>
   <summary>Analytics</summary>
-  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/">Cloudflare Analytics</a>. No identifiable information is transmitted to Cloudflare. See
+  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/"
+    >Cloudflare Analytics</a
+  >. No identifiable information is transmitted to Cloudflare. See
   <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Analytics user privacy</a>.
 </details>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'></script>
-
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'
+></script>
+</details>
 
     </div>
   </body>

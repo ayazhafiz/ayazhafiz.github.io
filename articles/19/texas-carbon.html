@@ -46,6 +46,9 @@
       },
     }
   });
+  MathJax.Hub.Queue(function () {
+    document.body.setAttribute('render-done', '');
+  });
 </script>
 
 <script
@@ -53,13 +56,19 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
 ></script>
 
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/shiki.css?1627321097504450745"
+/>
+
 
 
 
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1626885286687102800"
+      href="/css/post.css?1627321097504450745"
     />
   </head>
 
@@ -70,95 +79,45 @@
       <div class="panel">
         <div class="column-right Texas carbon-main">
           <section class="nav">
-  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+  <a class="nav-link" href="/about">about</a
+  ><a class="nav-link" href="/cc">cc</a
+  ><a class="nav-link" href="/vis">vis</a
+  ><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
  <h1 class="title">Texas Carbon</h1>
 <p class="byline">October 26, 2019</p>
 
 <article class="post">
-  <p>A common mistake made in drawing organic compounds is exceeding the valency of a carbon atom:</p>
-
-<figure class="fullwidth"><img src="/assets/img/texas-carbon-examples.png" width="100%"><figcaption>Mistakenly-drawn carbon valencies</figcaption></figure>
-
-<p>Colloquially, carbon atoms with five covalent bonds are called <a href="http://www.chem.ucla.edu/~harding/IGOC/P/pentavalent_carbon.html">Texas Carbon</a>s<label for="texas-carbon-flag" class="margin-toggle">⊕</label><input type="checkbox" id="texas-carbon-flag" class="margin-toggle"><span class="marginnote"><img class="fullwidth" src="/assets/img/texas-carbon-flag.png"><br></span><span class="note"><label for="texas-carbon" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="texas-carbon" class="margin-toggle"><span class="sidenote">Either because the Texas star has five points or because everything is bigger in Texas.</span>.
-Formally, they are known as pentavalent carbons.</p>
-
-<p>It turns out that well-formed pentavalent carbons are much more frequent than an organic chemistry
-class may have you believe.</p>
-
-<h3 id="super5acids">
-<a class="header-anchor" href="#super5acids"></a>Super<span>​<script type="math/tex">^5</script></span>Acids</h3>
-
-<p><a href="https://en.wikipedia.org/wiki/Superacid">Superacidic</a> cationic pentavalent carbons can be formed in
-the presence of very strong acids. The simplest pentavalent carbon, <a href="https://en.wikipedia.org/wiki/Methanium">methanium</a> (<span>​<script type="math/tex">\text{CH}_5^+</script></span>),
-can be prepared from methane in the presence of <span>​<script type="math/tex">\text{SbF}_5 + \text{HF}</script></span>.</p>
-
-<p><a href="https://en.wikipedia.org/wiki/Ethanium">Ethanium</a> (<span>​<script type="math/tex">\text{C}_2\text{H}_7^+</script></span>) is a protonated
-ethane derivative, also hosting a pentavalent carbon. Ethanium is interesting partly because it is
-prepared using methanium:</p>
-
-<div class="mathblock"><script type="math/tex; mode=display">
-\text{CH}_5^+ + \text{C}_2\text{H}_6 \to \text{CH}_4 + \text{C}_2\text{H}_7^+
-</script></div>
-
-<p>and partly because it easily dissociates into ethenium, which also has pentavalent carbons:</p>
-
-<figure class="fullwidth"><img src="/assets/img/ethanium-ethenium.png" width="100%"><figcaption>$\text{C}_2\text{H}_7^+ \to \text{C}_2\text{H}_5^+ + \text{H}_2$</figcaption></figure>
-
-<p>In practice, pentavalent acids are formed as intermediate species and during thermal cracking<span class="note"><label for="pcformation" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="pcformation" class="margin-toggle"><span class="sidenote">Per a DOE <a href="https://www1.eere.energy.gov/manufacturing/resources/petroleum_refining/pdfs/bandwidth.pdf">report, page 8</a>.</span>.</p>
-
-<h3 id="both-b-and-c">
-<a class="header-anchor" href="#both-b-and-c"></a>Both <strong>B</strong> and <strong>C</strong>
-</h3>
-
-<p>Yamamotoa’s and Akibab’s 2004 <a href="https://www.jstage.jst.go.jp/article/yukigoseikyokaishi1943/62/11/62_11_1128/_pdf"><em>Synthesis of Hypervalent Pentavalent Carbon and Boron Compounds</em></a>
-describes the characteristics of larger pentavalent compounds. It appears (somewhat expectedly) that bonds
-to well-charged, larger-size atoms like those in Group 15 and 16 help stabilize pentavalent carbon
-and boron.</p>
-
-<figure class="fullwidth"><img src="/assets/img/pentavalent-cb.png" width="100%"><figcaption>Pentavalent Carbon and Boron Compounds</figcaption></figure>
-
-<p>The bond angle of the emphasized <span>​<script type="math/tex">\text{O}-\text{C}-\text{O}</script></span> is <span>​<script type="math/tex">\sim 160^\circ</script></span>, more than the
-<span>​<script type="math/tex">144^\circ</script></span> expected for a star-shaped pentavalency, and likely explained by
-the distance of the oxygens from the carbon.</p>
-
-<h3 id="are-there-star-shaped-pentavalencies">
-<a class="header-anchor" href="#are-there-star-shaped-pentavalencies"></a>Are there star-shaped pentavalencies?</h3>
-
-<p>Yes! One is stable methanium, which we have already seen. Another
-is <span>​<script type="math/tex">\text{CBe}_5^{4-}</script></span>, which is predicted to be <strong>planar</strong> and possible to prepare
-experimentally in the gas phase. <a href="https://pubs.rsc.org/en/content/articlelanding/2015/CP/C4CP05659K#!divAbstract">Grande-Aztatzi et al.</a>
-predict the lithium cluster derivatives <span>​<script type="math/tex">\text{CBe}_5{Li}_n^{n-4}, n \in [1, 5]</script></span> to also
-be planar. Both of these form beautiful five-point shapes.</p>
-
-<figure class="fullwidth"><img src="/assets/img/cbe5-derivatives.png" width="100%"><figcaption>Star-shaped pentavalent carbon derivatives</figcaption></figure>
-
-<h3 id="beyond-the-stars">
-<a class="header-anchor" href="#beyond-the-stars"></a>Beyond the stars</h3>
-
-<p>Pentavalent carbons are one of those ideas most of us won’t deal with very often. But I think
-unique patterns like these are worth knowing, at least for the sake of knowing.</p>
-
-<p>If you’re interested in hypervalencies, you may enjoy <a href="http://www.ch.imperial.ac.uk/rzepa/blog/?p=4479">hexavalent carbons and undecavalent borons</a>.</p>
-
+  
+  
 </article>
 
 <section class="footer">
   
-  <a href="/articles/19/type-folding-and-options">« Type Folding and Options</a>
+  <a href="/articles/19/type-folding-and-options"
+    >&laquo; Type Folding and Options</a
+  >
   
-  <span><img class="emoji" title=":bike:" alt=":bike:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f6b2.png" height="20" width="20"> 
-    <span>​
+  <span
+    ><img class='emoji' alt='bike' src='https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f6b2.png' height=20 width=20></img>&emsp;
+    <span
+      >&#8203;
       <script type="math/tex">
         fft(f) \sim [0, 1, \dots, {N\over2}, -{N\over2} + 1, -{N\over2} + 2, \dots, -1]
-      </script></span>
+      </script></span
+    >
   </span>
   
-  <a href="/articles/19/barycentric-interpolation">Approximation With Interpolating Polynomials »</a>
+  <a href="/articles/19/barycentric-interpolation">Approximation With Interpolating Polynomials &raquo;</a>
   
 </section>
 
-<script src="https://utteranc.es/client.js" repo="ayazhafiz/gww-utterances" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+<script src="https://utteranc.es/client.js"
+        repo="ayazhafiz/gww-utterances"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 
 <script type="text/javascript">
@@ -211,11 +170,17 @@ unique patterns like these are worth knowing, at least for the sake of knowing.<
     <div class="bottom-bar">
     <details>
   <summary>Analytics</summary>
-  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/">Cloudflare Analytics</a>. No identifiable information is transmitted to Cloudflare. See
+  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/"
+    >Cloudflare Analytics</a
+  >. No identifiable information is transmitted to Cloudflare. See
   <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Analytics user privacy</a>.
 </details>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'></script>
-
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'
+></script>
+</details>
 
     </div>
   </body>

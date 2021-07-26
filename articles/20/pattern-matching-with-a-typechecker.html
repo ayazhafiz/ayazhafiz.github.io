@@ -46,6 +46,9 @@
       },
     }
   });
+  MathJax.Hub.Queue(function () {
+    document.body.setAttribute('render-done', '');
+  });
 </script>
 
 <script
@@ -53,13 +56,19 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
 ></script>
 
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/shiki.css?1627321097504450745"
+/>
+
 
 
 
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1626885286687102800"
+      href="/css/post.css?1627321097504450745"
     />
   </head>
 
@@ -70,548 +79,45 @@
       <div class="panel">
         <div class="column-right pattern matching with a typechecker-main">
           <section class="nav">
-  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+  <a class="nav-link" href="/about">about</a
+  ><a class="nav-link" href="/cc">cc</a
+  ><a class="nav-link" href="/vis">vis</a
+  ><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
  <h1 class="title">Pattern Matching With a Typechecker</h1>
 <p class="byline">December 27, 2020</p>
 
 <article class="post">
-  <p>I’ve been doing the 2015 Advent of Code puzzles, and today I came across <a href="https://adventofcode.com/2015/day/16">Day 16 - Aunt Sue</a>.
-The premise of the problem is you have a bunch of aunts named Sue, each of which
-you know some facts about, and you are searching for the aunt that matches a
-set of predetermined facts. The second part of the problem adds additional
-constraints that make the fact matching conditional rather than singleton.</p>
-
-<p>This is a pretty simple pattern matching problem. While I was thinking about
-about it, I realized that it could be solved entirely within TypeScript’s type
-system!</p>
-
-<p>In this cc, we will cover how to do so - part 1 is pretty
-straightforward, part 2 requires some construction and is more
-interesting. The article will not attempt to assume you are previously familiar
-with TypeScript’s type system, introducing semantics where needed. Understanding
-of subtyping is assumed.</p>
-
-<p>The basis for this construction is TypeScript’s treatment of
-primitive literals as subtypes of their primitive type (i.e. <code class="language-plaintext highlighter-rouge">1 &lt;: number</code>), a
-feature I am not aware any other mainstream programming languages have<span class="note"><label for="number" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="number" class="margin-toggle"><span class="sidenote">This feature is not strictly needed (i.e. you could form a
-similar construction in other languages by creating fresh types for the natural
-numbers), but it makes application of the approach much easier.</span>.</p>
-
-<h3 id="prelude">
-<a class="header-anchor" href="#prelude"></a>Prelude</h3>
-
-<p>As a quick note on notation, we use <code class="language-plaintext highlighter-rouge">S &lt;: T</code> to mean <code class="language-plaintext highlighter-rouge">S</code>
-is a subtype of <code class="language-plaintext highlighter-rouge">T</code> and <code class="language-plaintext highlighter-rouge">S &lt;/: T</code> to mean <code class="language-plaintext highlighter-rouge">S</code> is not a subtype of <code class="language-plaintext highlighter-rouge">T</code>.</p>
-
-<p>TypeScript union types are of the form <code class="language-plaintext highlighter-rouge">T|U</code> and are inhabited by values that
-have type <code class="language-plaintext highlighter-rouge">T</code> or <code class="language-plaintext highlighter-rouge">U</code>. For example, <code class="language-plaintext highlighter-rouge">number|string</code> is inhabited by all string
-and numbers. Clearly, <code class="language-plaintext highlighter-rouge">T &lt;: T|U, U &lt;: T|U</code>, and <code class="language-plaintext highlighter-rouge">T|U &lt;/: T</code> and <code class="language-plaintext highlighter-rouge">T|U &lt;/: U</code>.</p>
-
-<p>TypeScript intersection types are of the form <code class="language-plaintext highlighter-rouge">T&amp;U</code> and are inhabited by values that
-have type <code class="language-plaintext highlighter-rouge">T</code> and <code class="language-plaintext highlighter-rouge">U</code>. For example, <code class="language-plaintext highlighter-rouge">{a: number}&amp;{b: number}</code> is inhabited by
-all records with fields <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code>, each of which is a <code class="language-plaintext highlighter-rouge">number</code>.
-<code class="language-plaintext highlighter-rouge">T&amp;U &lt;: T, T&amp;U &lt;: U</code>, and <code class="language-plaintext highlighter-rouge">T &lt;/: T&amp;U</code> and <code class="language-plaintext highlighter-rouge">U &lt;/: T&amp;U</code>.</p>
-
-<h2 id="part-1">
-<a class="header-anchor" href="#part-1"></a>Part 1</h2>
-
-<blockquote>
-  <p>If you would like to follow along with this solution, I have provided a
-<a href="https://www.typescriptlang.org/play?#code/C4TwDgpgBAKgFhAygV2gXigbwFBSgYzgEsAbAEwCcIA7ALigGYAaXAgQ2AGd6B2FvTmwC2AexAQy3KACZ+UMCKEQKbakVVTmrNgGsiwNlIAMcgG5EAXpxKH6J1gHMR5AGZFOcegFY5wKhE05fDYKKVlWSAoXZCUpAEYWAF8AbmxsUEgoFACAdX04ADlhAKgMHDwoAG1EKCJqKB0IEBEXLNROAF16TGpi+kREgDJszmqO1JT08GgAQRISeCR20rbc-KLYysbm1pG84ELiztSM6ABZDkI6h2yVgFEADz82fGAAHjmFhBGmKAAFELAdQkN6LbIAPnBlQA5L0lNDxmlTqtOCtylA4t0nK53J4oABOZLsUJ2ImCUTiST0fGTPDSbqRaKxbxEvwQAL0AAcROxZDcHi5tMYDMUylU6moYSJun0tgxrP8Ui8QoALFjnHzcfQ4kZpXoDFL5MomRyCUKvN1giSoF4iYyYqaAGx62VSGmpPCO9U4gUY3XsLjUolWqScoU8bps03SMnCMQSKQ8Hka-l4nVCzmWkKhu3Gh1SZ1QXmp7VC-FZwNQFV20UqNQaUlQKPGIU6yOK+gxgjEchUOh+2MUhPaoytzFYGUGke5qL5+jVqDmKw2eKt+kT-VyuIK9nGZM+vEMVsMBl55lQQvFrUD4mh1tqrDBSvcqCTuW2xeWaxy0cejEWx9sy5HdTQYQd4ypG1Wy9LAl2-Atgw4BD5FrcUGz9VsIw3V16ELJ9DXtc93VYOJM0fHtKBoIMixTa8uzfeJfxI8ssGbegwKNWdz39K9fUdIVpCMbo4JXdiXSnKB-TYjEBPHTARLlDiQ14cTFIE9dMEI00k27UhKP7bcUKUOsJUTAST1Yjsb2UglVMYgSH0wBiWRog9cKJBSCwEgDMHJCDNBAnNP2Xd8BJg+Sv1Eqsa2MtDJU7QLSz-aQsMwGzCVczVfS7aSVQEsiIpC5DeLTf0tLM5KWMK+D3KMsV63ixg7NwoUGCEyzd0bPzKSVZqzT-Bg5M87UZxNPcmys-iBo0mydOG+VdN7KiMIGizqqiwybMM8reFaxz5oy6SdT64i8AYHznKa4KaptRDrXTAbwvwsTFv06juuHRhWtS+aPwUWKGsTO6vIGgqtv9S6P3msMBqqyHEts16+07VV2vWn9EMrHTLqYvAVTk9KEeOzixsFP8VQ0y6F2krsSvY1U1rphbnoWy6YdYFVHKZl9Loy+a8vJnydqupnqas3Gq3C6SdOFwzudVVL-vq0zp1vFSJs6mRVQKmm+s2oCq1VKqmb+s9tL69m8C8NHeY8yK5UOqzpHNAmDf9D7IP9aHzQ06SyrN5ClZM9CBdYLw1vm-XK0LS6jz-LxHI9oLLsM-nzR8pnieFrsg7i+z46lqyMuFjiTfNVLY9GudJMxsJzQK4WF354GybD43aN9HSriW-s-tQwHW89NGtqJqvzwe1hHTk3LwJ6+cW4vIVHUpzdGIRrt5qmyfGY7w8x-N66Nolx1HNzgfbqR5biZs4+fMj-0bJfEul6eijkYv5vX1Xkcl9S7u3ovPvIGasvp-kdAVbmC88JvyvkvKqv0gEvXSuGNGTMH5IVqsLCWPBp5O1np9JSBs4jhhmhgq6bM7ZFV2n+Hga1K6HzlLTXeLUaGn37irG8SdqIs0tlAHgd97bANmnrbBr89Lv0IdHShN046sB4KlJmMt2HoWJn7cMBUDrBhgf2HSR1sFVWkoWM+HCXxcJkn+TkaMEGX37EY5RjVlQWNdtaPmgjqK8wzBpeahDrQ82-uY1gnII5uOihraMtckqBMcv-CRfUvYhOIRYnyLNCzWMus7CxT0DYcUujpeWFjUpmJfN4-cWU8S8M5BokJC4YnLXQVjDM7c3KI2MSo92cY56STLGjQxfUfEVVYPiOSZicn+JlgHH+f58SkOtEogGHDVFOzLGtMxm1tFIOyWWROHTPp+Jwnw6RUUJb4gzswg5NiEogK3ngfEWTrQcWFhlFOxyK7+IyuDQ5W5jk6ysguSBdVg6NR4GWKqZi7HzPQvEqhfDWxGBtmMxBUBikhNkXgHUzjeok2roZNRf4dQr32eC5WbSEYSx1GtaSDyJkXxZqdP0XMzlZ2pXsiSZKjCnOaakkJH4aawvCq0xqGVVn+y4qaCeaKjB-wNsi6FC50mwrBmQniZzdHi1hVVGyDz7HIV5XitsWBG6lJLBfZ5Y4MUvUNQCvO84xykMrEw5pxMcZjjWiza+6ya5hNXHqxyzzPkBUysaslcQfIjKNdeLl0LEkkTiHcgNwseWTTHK8-ZQqdmQRfPkmNDdtUuVllJKy0a0VxCaWUzB1KlIeqLRiQS7ZNZrPEctLVELGrXJrXJXJC9iYHTXL7X5Ft8GQXFTW11ZCanSv9dSNc0SiEPyraStcHKy0XwFZi3VJFpDhUzpOpFIi1w-WqQvJ5-jq1xGkBAs5T8K1HrXKW41xdc0tOpaetqdaxU7uLhW48BMPWFmkjKm6vC4gMBmfEHdlbG06OPKO2ZWjIMjSxeeNtwHHL-vA4OuueLzoVjdIihcq7qEkQYPy6lEN-EAaishhgCizmJs1lCm6wKsM-PrYirs4NjygvTUFf5uKSIqisQkkVpNEZoPvHJYWXcDbvLIY4-jfbNZdjMext294YNgcQ++r++zT2c2EiEmTsGrXn2HXEFUQtH1Ke4+rWpUG8UqnCpvI94bO73lSrrBhGnaX3gbtSx2mt8OPrk2ilUXGhwZrgz3BDPa8XWxwy9DzadYtyUUSIhGqL-waUtfNKT1pQ5ovDiKFtUg5X+IY1FDLIbtnhaColoTrYvACOhVJrGMViUOIa1uxlZVH2pwSQ1qV1ojHUtVZrOlIaWOmg-GYjKTNKteCqgR0Jl1I2AegqglVkWAH1JbHiqe+noUfhxhhlGe2CUSRqR68rak9srOszIRFyrmnjZPlmFxO6WVymQ46UN93XHQs-aKpU0E415sfQuIp0FBtr00wGsF0Ec3FeAoG68-nTQvfgSE7G-iOJmPyxiHgw8yEOuXddkrmEJPXpR76a+ZDKs8A0ql7TEk8KqbxbQt7uHqd4mx-s4LBOGWcoiZ6727OhYjeF7T+6ZKeDhRmzuwLSOVokXkaeIHjY-Zdpl1U6F0D4PnNWZhTH0KXy2dqnxtFljOfRZCX+wtrZORDSE4i-pkTLcKdNKYv7C8mMkSCdbwBnnLmSYd6hqy03vfM5-A75JE7ufI9yg7uX93LyMvXg7xWz7159V95bgqZiPw2WG+rrWeLORhf8sjubiL+clvhfslTlZDKG7xUMt9mKU4uZ562aZB2ZGkrwz39TFrqWlf2ZV-Ep9R8fa2+-fHJams3Wb-d13i9W+g5XdS1bUUMnMQPSbgdAYQbMUVe9qPBFH254xPiDVZDj2Eq1wJOFfej5tcBYaJmdLBJO4Byd5bOOn9zt3xhcN4QkJZBI1pZZZ8m091kojAw8Asd1ecJIv92V29kdHku0n8ushcvUXJH4n8U0JIOJoYEZeFBIdcbp8MJdz9JlWBBJb8z9JMu8p1kp9V0ZDQWZ6IT1wC4gO0T10sF5d86Qz1vRl06NTQydCMRC6EcdEU+tDtZIp8S9m12tkIb5ZIl1jUo4udNVZIcDl0H0ldCwzFeDodzc8FYdTt6DSIX9FIWDd1aCoI2Db9KxAcRNctgdkpa0DUgsFdhd+dpBpBcF6Mc8HDh0gigDODskd1AjpAd5mkqUS9kC5R8cgjqtK8HsQEm4sd1IfJpJC83ZHt1JC5FNwjhNq420gjzDHDpJ78Wd1IL1HUC160KjuJ1INUPUdI8cHCqjX1YIDN5DoCDJwDBo7Datw8TpzIoiXJP8iZzJgloUOIPMzd+p6CGAMjOkr0S8ds7BzJxcS8cili+pAjiMis1CXISknCv9qN4sFppZYjzIwYPVCjKwId7tTiDErJRkG9eiHINtntR4rCAk6R8YA8c5es-9hCZAKZuh0lBDsiHJFiboY5-ErMatpCYSEDJCa8fcHItDrwmUS8oYQlyCHM4SytHssDkoVRCl7tM0zl0EhsHJfMdjhjVY9EHJFst8TiAjvJBNms+px1KxAivBhl7sx8JIcUrJyCvAstmU39rUaUiFvJZCdMWjTRhTNBvJlCRNG8P8zkv9GsA8xZWMnC0ivBk8MTRNGSpjkovB98bp3Dq4SdjVoTpAvBWSRN9Yz8W96CFt0DPU0E-8MtN00ZmCQE5ZGSwpzVPUCi-jkpl4KT9k5oUVFTz5AjHQKVC10N49QF6DXtsIJJUzZV2SulEzftrSJDxoqYwoSMS9ZtDSF5yDHQajxkS8s5H0WzT8ayEVgS0jHRFtH0mSud80BJCduhhV5CRzWD6CcFkyJJQCD8j9vBxyZirpVi01rSIiOcDVqUVNpcHDyCeAZ17kyyiTvTwD+E7j6jgC8Dyy5zwoVsyylyl9xzFZH07dWiQzxyez1Z815jkoeBGDA4uz09kordfClcZNKw2jtJ8of8l8ntDD0yOFAjOR5TDi-9PDZy6R-dAIz8nN7z0LTzgEjoFd8pKzMi-luthc0jOQrTMiyN9lLt9d0L3MczgTS5ut8pEcLibx6EbJ3Ty9Ay5l+KaLmiBJ8Q0YpzgSZy1i6Q28iyMZjMOESyqCpK7VDRSC8zAj8RkTKNUL0JnT2jKpfV-FWcjNfopKCTfRmKUDhdwDbkxDtCB8rkpLM8S9WdnwjLW0pLFVYLei2MpKQL54nDl9tyJY2oASUKoAwU+SBojBYypDzkLdGAjBGcmy4r7sG0os19WA2ph9A8IzIdErsSeMsrNzWo0C9y2SQEPxRZqqslKxV91Koor82oPyldqCvKhDqq-zEZny8z8c2ohyldXzX88zh1Bph4rs6Kc9Wo+DLQq17K5QKNGFFqZoXiF4UqRrgM1dLyESls6VBpNiCEHCcoi5FrY9rR9SwcldprY07iiV39aoqqBo4gpV7VczZZFqCpO8uKd1HrQrzksEF1poYrjUTCU9fLydpoQjwk8y9c8qoqgiXLrwNTDQ2ZWp4jzjXqsj5cg8QTGBpByqwqmYXqlS20QN8jLCltuLHUcb6yRMJLl0vypscaiD7CQFTdiccaArkJ5pVrMMCrpBuSVDyi+lWp+jMBq8ibDIVtpbKcsL7yozml+cGAQN0bO4P09ZpbXUPVebfEEYRqNiA8FCUTwaCrsMsAmYDysaT1paDDjUjt-FqzcLGBbiCLMUiKKbpaBb3E5C8yTqGA4Yg6uCyyOqBNta8QesldtiRMTqwSOocTVKVEHCNbYTbbaL7ySDqk9pR0Wq-9cqAFqa9NaqRMIM8r3jrToSNjklf1s8pq9pSjEb6aM69ouaYcctAKCqVQvTq5JTGEkC9pxaRMGTEjHiBo4sU6StYaXJTVp7laRNCiz80rzp1zkaAEXxOTp67trSUjBb87p7okPVGzml2yV7WpjTZ6ENLUtpr7GLOltpp807GpeFzoOLNY8kc7nVp7-qBCibLKBkzoAyBjji8yd7flWpHR68pSUrLrNYMtiNxTrTKaTNijHoNIw1IyrazoszxjGxjqhSYHdTq4jD+L1q3QYHF92qF4erLyYGN92kqzyiYG-4PUjibpXaWKYH89I9stbcYGx7q5V657sqqzvo4Hub5oc5n1vpYzebWsLlnCCqGdCGn0S9uD1Tvpszvy36uc5tvpT79dx1DzgS67rzyJ9duiPjHLvonyeC-8STFCBpVds7mkoGkGXdvomjl1u0wDgq3GvizSe6DGbVQYZL6Tcz10zpHcY7g9qUI9rSTqMK7i86o1hbVzQYiqf71aLZWpOQTG8rU9mje64nY9vqnDoaD7CmN93VTGLrCmvrxoE07SCrKk8alTD6uo-tCmQnU7bYiaP7pKA9MbVZHlWolK0o79JbgTpre9vaXoiKWZkH9KNGLzB6O7YYyHzwh6YdYnGATkumMz6GfHYZ+VH1-tuG+o678QajiZeMllYYB7zwu4z6HCTqb8FyvsQCHCr8BNIbUcqSQFoSBMf1GmibxnS8OYMqfnxHH557DZyYjADK1rEU8n-HUZBd-GWHMi2qbtYWLpAGiLhY20BNLn46gqVz8y8ZJUEmsjP5clUYBrNnx4UqMsBNjdGMkWGHB7VR2DRYkCEZ+d8ZFG3LGryZRClnHC2mib8d8Y0WA1O0JHMjyWzNAy4L1DZ0BWLNuqgSyWBX6mtXap5UpXPKRMammK4kBXnj9cX6GzwMBW71gXVXOkkjx7VQfDZazkzHu7cjyZgjJz7sCWhE+bA2PcNN-ksEvWiqPWXT0svWzrIJt8VLFbA3abvGnDMXtCvWN80cNMY3A2ur+K502LEVeEKYBqTXA9ViFWxb4X-yrnhdyWZaUkgSNDyYxjrG8rPtMVJmu3MKV60t7y6UVRNbG3QkAKiaAWzbb6NyVq-8FWbaODZizltHFyGYn7zr7z7aWEOYva0oPmnC47+LOWGBXmxUsmsjZoGYRH2W-9USdHyZo7wGkKm7saX3l7q4+3g9L9VQs6Znjbc6EyOZx3zaM6p6wP9oQkN2vkl2APaHh7wqa2x3yTlKA0dLM4APHS6HwmL5d6wOA7irn0y2SmAOBnojrQGrL1VQZ7MBNckafzBZv3uJmzymqw5TJ3TTPdEUx3CsPH-GMW+pyWE4NHV8HXLW6PM2tMVXM4JZzNt3IIuGd8b1BYLXsUyOAFpTNZK3PSDrq4UrDM7xBZXDxpVjRtQJVRYGNGtTy0tHrOEaA1VixHB5JZMqL7hWVHRWCGZWeHiDtmOZCzV3PUltXOHy8YfsGX9nGwWYfON93aFo-byZWyDOH37yjbvUgvL3xHBK2cgvuWKsfckXq1aTwys8Z2CnyZ5zBPtC8Xn7T38bRX1HauI03Ki2OZdyfX8moWyzmvSLlmsdpyFYkO10i4jyFZHHfimOVGAX3HfJ7sa3togsFZJsDTASoWFZ72tMi9PntZwzH143zxEux34nAIi6T2PttYstetr2vGObyZ8Luu2aR3s5tYZ1Aq8ytP35TuG7IW-VhntZHM0zg7zyFPOQOH9clGj7MntYBqenOEPjtZCuHYRPwKOZRm32op-Otw+ujZEKooJ7l0junQjZI2XpVkkXyX1mMObdDtmyjZzKWKzmiax3jmsfcenC7qYW8ZnL53Q2F6LKjYu6E86at8jYAGdMgS8cjYQbr2XGZFzRn9zv1vYrVj2YUggA">TypeScript playground</a> with all the code. To see what types have been
-instantiated, simply hover over their name; for example, hovering on <code class="language-plaintext highlighter-rouge">MatchingSue</code>
-should yield <code class="language-plaintext highlighter-rouge">40</code>.</p>
-</blockquote>
-
-<p>For the full problem statement, please refer to the AoC (not <a href="https://en.wikipedia.org/wiki/Alexandria_Ocasio-Cortez">AOC</a>)
-link above. In short, we have a list of facts about the exact aunt Sue we are
-looking for, which we can express a record type:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">TheSue</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">children</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="na">cats</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-  <span class="na">samoyeds</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="na">pomeranians</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="na">akitas</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="na">vizslas</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="na">goldfish</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-  <span class="na">trees</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="na">cars</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="na">perfumes</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>Observe that in <code class="language-plaintext highlighter-rouge">children: 3</code>, <code class="language-plaintext highlighter-rouge">3</code> is a type, not a value.
-It is a subtype of <code class="language-plaintext highlighter-rouge">number</code> inhabited by exactly one value, namely the number <code class="language-plaintext highlighter-rouge">3</code>.</p>
-
-<p>We also have a bunch of candidate aunt Sues, each of which we know a subset of facts about.</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Sues</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="na">goldfish</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="na">cars</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">samoyeds</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
-  <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="na">perfumes</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="na">trees</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="na">goldfish</span><span class="p">:</span> <span class="mi">8</span><span class="p">},</span>
-  <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="na">pomeranians</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">akitas</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">trees</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
-  <span class="mi">4</span><span class="p">:</span> <span class="p">{</span><span class="na">goldfish</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="na">akitas</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">perfumes</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
-  <span class="mi">5</span><span class="p">:</span> <span class="p">{</span><span class="na">cars</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="na">perfumes</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="na">akitas</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
-  <span class="c1">/// 495 more Sues</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>The record of facts for each aunt Sue is indexed by a numeric reference (Sue 1,
-Sue 2), etc. Observe that the fields of facts known for each Sue is a subset of
-facts we know about the <code class="language-plaintext highlighter-rouge">TheSue</code>. Only one of these candidates’ facts exactly
-match the corresponding facts associated with <code class="language-plaintext highlighter-rouge">TheSue</code>.</p>
-
-<p>This means that not every Sue is a supertype of <code class="language-plaintext highlighter-rouge">TheSue</code>; for example, <code class="language-plaintext highlighter-rouge">Sues[1]</code>,
-which has type <code class="language-plaintext highlighter-rouge">{goldfish: 9, cars: 0, samoyeds: 9}</code>, is not a subtype of <code class="language-plaintext highlighter-rouge">TheSue</code>
-because (for one) <code class="language-plaintext highlighter-rouge">TheSue['goldfish'] = 5 &lt;/: 9 = Sues[1]['goldfish']</code>. Remember, the number literals are types in themselves!</p>
-
-<p>Here’s how we’re going to do this pattern matching: if there is an Sue
-that matches <code class="language-plaintext highlighter-rouge">TheSue</code>, their facts will be a supertype of <code class="language-plaintext highlighter-rouge">TheSue</code>, or said
-another way, their facts will be a subtype of <code class="language-plaintext highlighter-rouge">TheSue</code> with respect to only those
-facts (in fact, when only common fields are considered the types must be equal).
-So, for each Sue <code class="language-plaintext highlighter-rouge">CandSue</code>, we’re going to “pick out” fields from <code class="language-plaintext highlighter-rouge">TheSue</code> just
-enough to match the fields of <code class="language-plaintext highlighter-rouge">CandSue</code>, producing a new type <code class="language-plaintext highlighter-rouge">TheSueMatcher</code>.
-Then, we check the subtype relation <code class="language-plaintext highlighter-rouge">CandSue &lt;: TheSueMatcher</code>, and if it holds,
-<code class="language-plaintext highlighter-rouge">CandSue</code> is the Sue we seek.</p>
-
-<p>What does this subtype check look like? Thanks to TypeScript’s optional field
-syntax, wherein <code class="language-plaintext highlighter-rouge">{a?: number}</code> means “a record with field <code class="language-plaintext highlighter-rouge">a</code> of type string, or
-no field <code class="language-plaintext highlighter-rouge">a</code> at all”, we can write a <code class="language-plaintext highlighter-rouge">Partial</code> type constructor<span class="note"><label for="partial" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="partial" class="margin-toggle"><span class="sidenote"><code class="language-plaintext highlighter-rouge">Partial</code> is generally provided directly by the TypeScript standard library.</span> that given a
-record type <code class="language-plaintext highlighter-rouge">T</code>, will yield a supertype of <code class="language-plaintext highlighter-rouge">T</code> where all fields are optional:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="p">[</span><span class="nx">F</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">F</span><span class="p">];</span>
-<span class="p">};</span>
-<span class="kd">type</span> <span class="nx">PartialAnimal</span> <span class="o">=</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="p">{</span><span class="na">noise</span><span class="p">:</span> <span class="kr">string</span><span class="p">}</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// yields {noise?: string}</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">[F in keyof T]?: T[F]</code> is a mapped type that means “for every key <code class="language-plaintext highlighter-rouge">K</code> of
-(the record type) <code class="language-plaintext highlighter-rouge">T</code>, make it an optional field whose value pair has the same
-type the value pair corresponding to <code class="language-plaintext highlighter-rouge">K</code> had in <code class="language-plaintext highlighter-rouge">T</code>”.</p>
-
-<p>Now, we can check if a candidate Sue is the one that we are looking for by
-checking whether it is a subtype of <code class="language-plaintext highlighter-rouge">Partial&lt;TheSue&gt;</code>. For example, we will have
-that</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{trees: 9, cars: 4} &lt;: Partial&lt;{trees: 9, cars: 4, akitas: 2}&gt;
-</code></pre></div></div>
-
-<p>because
-all fields of the subtype match the fields of the supertype, and the
-unmatched fields of the supertype (namely <code class="language-plaintext highlighter-rouge">akitas</code>) are optional, so they do not have to be
-present in the subtype<span class="note"><label for="type" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="type" class="margin-toggle"><span class="sidenote">Notice that it is also the case that <code class="language-plaintext highlighter-rouge">Partial&lt;{trees: 9, cars: 4, akitas: 2}&gt; &lt;: {trees: 9, cars: 4}</code>.
-What does this say about the set properties of the TypeScript type system?</span>. Moreover<span class="note"><label for="trees" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="trees" class="margin-toggle"><span class="sidenote">A natural question is,
-why is <code class="language-plaintext highlighter-rouge">trees</code> not completely elided during the subtype comparison, forcing
-<code class="language-plaintext highlighter-rouge">{trees: 1} &lt;: {}</code>? The reason is that the optional syntax (<a href="https://github.com/ayazhafiz/rats#lossy-type-downcasting">tries to be</a>)
-structure preserving; informally, the checking algorithm for <code class="language-plaintext highlighter-rouge">{a?: T}</code> is “if
-<code class="language-plaintext highlighter-rouge">a</code> is not present, OK; else the type of <code class="language-plaintext highlighter-rouge">a</code> present must match <code class="language-plaintext highlighter-rouge">T</code>”. Note that
-this is distinct from <code class="language-plaintext highlighter-rouge">{a: T|undefined}</code>, which has no type relationship with <code class="language-plaintext highlighter-rouge">{a?: T}</code>.</span>,</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{trees: 1, cars: 4} &lt;/: Partial&lt;{trees: 9, cars: 4, akitas: 2}&gt;
-</code></pre></div></div>
-
-<p>because</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{trees: 1} &lt;/: {trees?: 9}
-</code></pre></div></div>
-
-<p>To actually check the subtype relation, we can query TypeScript’s typechecker via
-<a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types">conditional types</a>.
-The conditional type</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">S</span> <span class="kd">extends</span> <span class="nx">T</span> <span class="p">?</span> <span class="nx">A</span> <span class="p">:</span> <span class="nx">B</span>
-</code></pre></div></div>
-
-<p>Means if <code class="language-plaintext highlighter-rouge">S</code> is a subtype of (extends) <code class="language-plaintext highlighter-rouge">T</code> yield <code class="language-plaintext highlighter-rouge">A</code>; else, yield <code class="language-plaintext highlighter-rouge">B</code>. For
-example:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span> <span class="kd">extends</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// true</span>
-<span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span> <span class="kd">extends</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// false</span>
-</code></pre></div></div>
-
-<p>So for a single Sue, we can define a type constructor</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type IsTheSue&lt;Sue&gt; = Sue extends Partial&lt;TheSue&gt; ? true : false;
-</code></pre></div></div>
-
-<p>that will yield <code class="language-plaintext highlighter-rouge">true</code> when passed the Sue we’re looking for.</p>
-
-<p>But we need a way to perform this check over 500 (!)
-candidates, so some control flow or parallel evaluation mechanism is required.
-We can get the latter using TypeScript’s <a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types">distributive conditional
-types</a>.
-The idea is that when using a union type in a conditional type, the typechecker
-will distribute the conditional type over the union’s variants. For example<span class="note"><label for="unknownnever" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="unknownnever" class="margin-toggle"><span class="sidenote"><code class="language-plaintext highlighter-rouge">unknown</code> is TypeScript’s <a href="https://en.wikipedia.org/wiki/Top_type">Top type</a> - the
-type inhabited by every value. <code class="language-plaintext highlighter-rouge">never</code> is TypeScript’s <a href="https://en.wikipedia.org/wiki/Bottom_type">Bottom type</a> - the type
-inhabited by no value. <code class="language-plaintext highlighter-rouge">T|never = T</code> because nothing can fit in <code class="language-plaintext highlighter-rouge">never</code>, so
-the values inhabited in <code class="language-plaintext highlighter-rouge">T|never</code> are only those inhabited in <code class="language-plaintext highlighter-rouge">T</code>.</span>,</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">PickFieldA</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="nx">unknown</span><span class="p">}</span> <span class="p">?</span> <span class="nx">T</span><span class="p">[</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">]</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
-
-<span class="kd">type</span> <span class="nx">AFields</span> <span class="o">=</span> <span class="nx">PickFieldA</span><span class="o">&lt;</span><span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span><span class="o">|</span><span class="p">{</span><span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span><span class="o">|</span><span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="dl">'</span><span class="s1">s</span><span class="dl">'</span><span class="p">}</span><span class="o">&gt;</span><span class="p">;</span>
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AFields = (1 | 's') due to the expansion:
-    PickFieldA&lt;{a: 1}|{b: 2}|{a: 's'}&gt;
-  =   ({a: 1} extends {a: unknown} ? {a: 1}['a'] : never)
-    | ({b: 2} extends {a: unknown} ? {b: 2}['a'] : never)
-    | ({a: 's'} extends {a: unknown} ? {a: 's'}['a'] : never)
-  = 1 | never | 's'
-  = 1 | 's'
-</code></pre></div></div>
-
-<p>So we just need to feed a union of the 500 Sues into a conditional subtype check
-against <code class="language-plaintext highlighter-rouge">Partial&lt;TheSue&gt;</code> (for example, the <code class="language-plaintext highlighter-rouge">IsTheSue</code> constructor above), and
-we’ll get the Sue we’re looking for!</p>
-
-<p>We can extract such a union from our <code class="language-plaintext highlighter-rouge">Sues</code> record type by mapping over all the keys of
-<code class="language-plaintext highlighter-rouge">Sues</code>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type SueCandidates = Sues[keyof Sues];
-</code></pre></div></div>
-
-<p>This says “index <code class="language-plaintext highlighter-rouge">Sues</code> by every key of <code class="language-plaintext highlighter-rouge">Sues</code>, and give be back all of those
-results”. Clearly, this must be a union type, since we are extracting all of 500
-individual types.</p>
-
-<p>To understand how this works, let’s perform a small expansion. Recall <code class="language-plaintext highlighter-rouge">Sues</code> is
-of the form</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Sues</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="na">goldfish</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="na">cars</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">samoyeds</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
-  <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="na">perfumes</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="na">trees</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="na">goldfish</span><span class="p">:</span> <span class="mi">8</span><span class="p">},</span>
-  <span class="c1">/// 498 more Sues</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>Now, <code class="language-plaintext highlighter-rouge">Sues[keyof Sues]</code> becomes</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">Sues</span><span class="p">[</span><span class="mi">1</span><span class="o">|</span><span class="mi">2</span><span class="o">|</span><span class="p">...</span><span class="o">|</span><span class="mi">500</span><span class="p">]</span>
-<span class="o">=</span>   <span class="p">{</span><span class="na">goldfish</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="na">cars</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">samoyeds</span><span class="p">:</span> <span class="mi">9</span><span class="p">}</span>
-  <span class="o">|</span> <span class="p">{</span><span class="na">perfumes</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="na">trees</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="na">goldfish</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span>
-  <span class="o">|</span> <span class="p">...</span>
-  <span class="o">|</span> <span class="nx">Sues</span><span class="p">[</span><span class="mi">500</span><span class="p">]</span>
-</code></pre></div></div>
-
-<p>We could immediately do <code class="language-plaintext highlighter-rouge">IsTheSue&lt;Sues[keyof Sues]&gt;</code>, but this actually is not
-very useful! Thanks to distributive conditional types, <code class="language-plaintext highlighter-rouge">IsTheSue&lt;Sues[keyof Sues]&gt;</code> would yield <code class="language-plaintext highlighter-rouge">false | false | ... | true | ... | false =
-boolean</code>, and this gives us no information about who the actual Sue we were
-looking for is.</p>
-
-<p>What we can do is something like this:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Extract</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="nx">U</span> <span class="p">?</span> <span class="nx">T</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
-
-<span class="kd">type</span> <span class="nx">AllTheSues</span> <span class="o">=</span> <span class="nx">Sues</span><span class="p">[</span><span class="kr">keyof</span> <span class="nx">Sues</span><span class="p">];</span>
-<span class="kd">type</span> <span class="nx">MatchingSue</span> <span class="o">=</span> <span class="nx">Extract</span><span class="o">&lt;</span><span class="nx">AllTheSues</span><span class="p">,</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">TheSue</span><span class="o">&gt;&gt;</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>and <code class="language-plaintext highlighter-rouge">MatchingSue</code> would be a union of all Sues whose fields match corresponding
-ones in <code class="language-plaintext highlighter-rouge">TheSue</code>. To see why, let’s expand this a bit:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Extract</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="nx">U</span> <span class="p">?</span> <span class="nx">T</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
-
-<span class="kd">type</span> <span class="nx">AllTheSues</span> <span class="o">=</span> <span class="nx">Sues</span><span class="p">[</span><span class="kr">keyof</span> <span class="nx">Sues</span><span class="p">];</span>
-                <span class="o">=</span> <span class="p">{</span><span class="na">goldfish</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="na">cars</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">samoyeds</span><span class="p">:</span> <span class="mi">9</span><span class="p">}</span><span class="o">|</span><span class="p">{</span><span class="na">perfumes</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="na">trees</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="na">goldfish</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span><span class="o">|</span><span class="p">...</span>
-<span class="kd">type</span> <span class="nx">MatchingSue</span> <span class="o">=</span> <span class="nx">Extract</span><span class="o">&lt;</span><span class="nx">AllTheSues</span><span class="p">,</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">TheSue</span><span class="o">&gt;&gt;</span><span class="p">;</span>
-                 <span class="o">=</span> <span class="nx">never</span><span class="o">|</span><span class="nx">never</span><span class="o">|</span><span class="p">...</span><span class="o">|</span><span class="p">{</span><span class="cm">/* some sue that matches */</span><span class="p">}</span><span class="o">|</span><span class="p">...</span><span class="o">|</span><span class="nx">never</span><span class="o">|</span><span class="nx">never</span>
-                 <span class="o">=</span> <span class="p">{</span><span class="cm">/* some sue that matches */</span><span class="p">}</span>
-</code></pre></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">never</code>s all collapse because they cannot be inhabited by a value and hence
-do not contribute to the union type; in the end we have just the Sue(s) we’re looking for.</p>
-
-<p>Well actually, we’re not quite done, because part 1 of the problem asks us for
-the index number of the Sue in <code class="language-plaintext highlighter-rouge">Sues</code> that <code class="language-plaintext highlighter-rouge">MatchingSue</code> corresponds to. I am not aware of a way of
-to perform an inverse lookup of a non-primitive type in a record type, so we
-can’t find the index of a Sue in <code class="language-plaintext highlighter-rouge">Sues</code> after it’s been extracted.
-However, we can propagate the index of each Sue by adding it as an extra
-field on the info we know about each Sue before constructing their union and
-performing the matching:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">SuesWithNames</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="p">[</span><span class="nx">S</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">Sues</span><span class="p">]:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="nx">S</span><span class="p">}</span><span class="o">&amp;</span><span class="nx">Sues</span><span class="p">[</span><span class="nx">S</span><span class="p">];</span>
-   <span class="c1">// produces rows of form "1: {name: 1, cats: 10, goldfish: 5, ...}"</span>
-<span class="p">};</span>
-<span class="kd">type</span> <span class="nx">AllTheSues</span> <span class="o">=</span> <span class="nx">SuesWithNames</span><span class="p">[</span><span class="kr">keyof</span> <span class="nx">SuesWithNames</span><span class="p">];</span>
-<span class="kd">type</span> <span class="nx">MatchingSue</span> <span class="o">=</span> <span class="nx">Extract</span><span class="o">&lt;</span><span class="nx">AllTheSues</span><span class="p">,</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">TheSue</span><span class="o">&gt;&gt;</span><span class="p">[</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">];</span>
-</code></pre></div></div>
-
-<p>Finally, we have the name of the Sue we were looking for!</p>
-
-<h2 id="part-2">
-<a class="header-anchor" href="#part-2"></a>Part 2</h2>
-
-<blockquote>
-  <p>If you would like to follow along with this solution, I have provided a
-<a href="https://www.typescriptlang.org/play?ssl=34&amp;ssc=6&amp;pln=34&amp;pc=14#code/C4TwDgpgBAKgFhAygV2gXigbwFBSgYzgEsAbAEwCcIA7ALigGYAaXAgQ2AGd6B2FvTmwC2AexAQy3KACZ+UMCKEQKbakVVTmrNgGsiwNlIAMcgG5EAXpxKH6J1gHMR5AGZFOcegFY5wKhE05fDYKKVlWSAoXZCUpAEYWAF8AbmxsUEgoACERZxgA4AAeGCgIAA9gGkkoACNckghVJigAUVKKqs5a+sbqAD4oDBLyyupqtoB+KAByAHkAaWmoemmAMQBBAEkAGWnU9PBoGGQwGBEAORji9tHq5GodahEAd2oAbQBdAaGbzqwG6gOYCeKBEaguZRQc6JKBTc7LKDUCCmZSpDLQNiDWAnM6XISFN7TNjTZp+VDNIwAOi8X2SUAA9PTGGl0VCYmdjmBCvCRn9qDEaspmpzfmMuvdHi93h8sZ9vqw8CLeWL-jQgSDobDsWAEXiOSduc03pSTZzmhKnq9aQdMlksXqRJzCgw+vtWSgan42PgiutRdV+UJBRRmnblQGBcp5Xg8A6nesBuGusaTWCIRQoAARIguFzNE2UuMGrJ9GVTTm4q7Z3N9ehIlEUN2HKAAcSoHGU8FUhT9ScRkZD2X9XUDwe+UF7HRVRlhCqgLjYJE40Foc7DU+qM6mZJXrfblQoXeohQ9Xp9PeacT6zVPKnPWUvfVdLObLZg+U4wDiWJyeQKhTbRoDyPQpZCgK9SQoVBn1ZN8P2AaQf3qeCAP3Ts4G7BJwOvedF2XGDX3fAoGCQv9P1QoD0Mw5ppBwhclwgZ8bWgbYAk4EDJ1uEcB1DYd+yDKMfz4rc53o5dljnTi-i3KAdwRVjOHYjDj1vb1fUfG9kE9O8igfbCmNZbYiM-b8MF-EgUIUpTqJkHCdwIzIjPgxCzOQ-8rJArCINwhiHJY4zgBI1yyKKDzlNAjSfPwptMgAYQQfAdEAjtD3C1Y+J0CAQBEFxYAQFAIGFPjMDeXKwSgVYPgmOsB0SaMYxgN5Kr40dISmEqyuoCqPnoZLgPCxrKuFfLUCar5EgAMlmIR9GKZpVj6OcY2WlbVrwegYBi6B4ogRKwu7dK+0y7LcvgJByVgYrStBLrKuq-jgzqwY50GmU+1ajN2uu8rKvofbj1e4bzogMa+km6bZpgebFrW2G4Y2raoAABRCYB1BIABVah8BEahPxUMEJGKcccDwN4kZuqBjpy2AqvoVQQFSFJmKgAqdsS1YiAgchOD65Rrj7FGKDRxcsZxvGvUJshihGxj6rwdmkrQ1Lu2mPwIACEkoEVvmVePaZgi4LWYCfNFmzZhKdE57nJCs-nhg3LohZFzHsdx-G2ClmXgafZ7lsV-7CmmBQlBUNQNC1gO2JA6YnFcdw4GN02X0yC3dqtrmeYFx3kdR9GxfdyWkWls6Ct9tA5zTjnM9ttj+arjObd55XiYM5tFYka2eaxNX-E4aYAB8DY4fuh5D5RVHUPHB9j5wyDcDw9hZ0vUA7sgsQhooV8K7XLc7mvOD6CaOspteu8kHrZKgiBmZZgrODXgB1fQ4HOYQAixUmoDeRBKep3L76X0wNQd+9BECTQbufTgJ5UCcB-taZmrJ1gkAsrLLoGB75Pxfm-WIbx-6s1gVg4EOCAgfDNpkAAshwQgYIHAFSxC0CoOkewoO3pwZozt0bewbhIJ8hIQFKGmGQlO0B76f1YHEegmA47zwTvQAAnHSYIoQ7B0kEKIcQkgFHMzwNIKRkRoixG8HSdWAR6AAA46QyIXiCcxOjGD6MUBPcOeN6DSDpLofQthwImL7t4exAAWKR1i5HgSMB4vQBgwh0gMTEMxUB5H2K8FI5RUgvAxOUIY+JAA2CJXipCJNSHgbJwS542PoHEcJ7AuAKKUSEKQdiilQB4FI0x0SoDqLEBIKQPArFlNCZU+x5iUn1IsRkqIcSpC5KgCEjwFT7HyJGTUqAASYlOLDlPYwviNbGHsZU1pfiZBKOIOQKgdAwlqOEF0rRYS9mSKwJ4qJFSqmxKMSsuk5grA2HiHsvRDzIneLiNs+JVTZkggYHshg+jMmTPoNMsFzy6kqKgI0iRQSsCGwaXkp5UB0lQE+dYbxRg9nJIxaMlFwLNCXI0d0-xTS4glKwAS75cK6nLOmePDZGhnl7Jaf8-JrLqntNefEwpEjhkYpOZQGgtSZn9LmUcqAjzAXEvpYsrAbT6AMHGVkrZcr44KuyfY6QRgpHMu8dqpVAK9WavAsa+5mBzVUvYMi3pVqBWMGNX8zAIqenHNINK85QL5DrMnty5pxqoUasOZUpFBTsUquNeizAyq0l9INSCaZTq4XGtJZgTpmjnW2ssfiywhK0nGsZY6stLL3khtDmG1xirbVxGNXyzAqTZUIubYcgJxqJXVq+d4+F8qQSxvkDCt5PBjXqsHeWwVnLG3OtTTmppDBTXRp2aojpVzC3GPdTisVeAGAOuzT4idEy3lVNtUatd3rO3NI+TWwF-rTkytuWuqNc7a3BofcG31vB7EMGTWexRV8t0XIPd4o9jA80rsYE+odaaXXxFVawBgVbMVatfYG2VBbaWerXe2s9eLF0uL9Sh1d6GB1-qqfBvFZ7UXHtnfRylsqaFvvOdIQJG7v1ErZRR+DaG8ABIdQ+sDLaXmTviUxlZ3r4OrPA-E9x+rZEKohU0gJX7u2-pHhUhNDTAnJu7SW+DYGz19s03mgDCHVPlLrba4TKyq22rdTZ4NJnAntrI5sxFlHH1KbCIEgdtqVPwd08iyzrAAmzu7aR6TgnrUWKSbxsziH50JLYzIJJYnyVVPwzcqpjGknesczq2FUAOWhvI-QKLeAvBfrPbp9lBmtVJOTQVrFUH4jpdrXV3FeadNScvcptZDaasftYF4FzhywM2ctXFpJ7b4OWps1UrD2WmleAHTZxTFm43Ja27F0dvAcNnP3T58Nsnsm8b-Vl-9CWeVNOyQ621inOu1YO5V+x2T5NJcg6F3rw6fvaZO7ZmzbqmtOeycmy7Ta8Ucdw5Bh90O81Q6+yW+bP3MNSvO7ioHUhFPheh+2xHeOOWPYCw+jTrBskDpM196ZZP32tue7Okj5W3mWvE-YngvHu3rb05VznILeevcOSpj7tm-28-vULy18GS1nunU0ngX6VsE7cemtTmbeew+q75yDUuwMbdkzwNHz6KMPrdcT3nOOA14+50LrNlu2uq-bd2tzBvw3jsc7zgdoGzvvrdZJ3ns6b1jecYbktUvWesHMbxjnBBcfvqq+Nw3Xghm5eReZ13mXuvaKaeY71Z6nfItM-9uPeBzGNbz4pwHQr5lF+Tcz85Cv-tFbz1XlFeaNsu6Q-u+D3Gi+YfJe3j1brPNF-bVLpXeeFtg9k+YgPdeg-nMF8slX8fjsZtlXD1D1Lrm7KafI3jEeC-S-JVvvA8iHVS-HzitzlPBkn7l66yPXKm2+4lwsr9se1-Yb+Y0434da7oEYV4T6a5QBObyKDZg5uqt5a7+a3qsDyKj7IqraU5ga24n7Lb-Ym7krjpQ4LIha9ra72aY7e5NrX4JKzpS5p5R7hqd4D4Rr0pGCpb-ZP4jZdal57JGDZ7IbuZZZOaVJ-YeoMGf4H6BZ2B8Ffq2qYHcH7obYwaVLGZg7jo2YQE4oiFGBwG77C6losF4qhZ8FVr754ZgE3IaHP46Gk7kpz4sFE7-bD4SJGA0ZC6grwHCF8GzrU4f5LqComH0r7JYC7bkGhJ4o4ESJxACGAFhH1qMFNr9YxFy7LIqZDatbQF3JfobbjqIHQH3Z3LJrE5QEL76EiFxB5r37hGGpQHd4xHoHOo2bGGHIoF4AxF4Eepgaz41G2J3I7ZUGCE2GFHBE7464LqU7c4p5Bq-Jn4xoAHg6DFUbtHSAOrwYIGEHMEZYqHSClZkEX4x6WGoa-I5FC6KYPoOHbG-It6bELHBp+70rSB6HjH44JGSH7pBESLSBVo6ZQFaGJqPHEar7+bYGV6-L06L4i7Oo86PFjH2ZzZLH57uaQpzEQbBqB4Xq6pu4SInopLTGBGHKXG1qyZxAMBv49aGEZZTEO7B6QqnHv7J40lBpQnLHgTAYHIQZEkWqH57qbY4m95C5zaU6KbmGsE4lmGU50b-ZclTKQoe5g4tEQZbG1o0GkmkFoksmKq0aQp0FHFjJ2ahIloPFoqJ5d7DZYn54C57KibQqKFU7koEHLKZ70oBJ7EQaS56lal5bWn0kUlCEX71EBIgZ54EEMmikv5orWaIkek0o3IIH4lintEBJVpnpM4Om9GAYuntoN5NYCaF5oo7ZYFZYimInOloq6mxldb5Hokhkkq3by5ZYqYWYkoOqe6ZHf4QbAHgReDerxHK5fbJENaOLp7hpOEerKkWokqgGVn6k5lmkkoW4sEbGb7+ETZlntHTalL6EaGIk1ksH1FeB2HIoU52kh6zYkrqnxJ4rG4ZmEYSJeCzqiljk4r94ZYkk3ZbkvHxlMnbobYiEvZmp56REd48kEYuHtG-ZSIKYLETmaB7LZJ-6ekqZra3kqEw4jI55-GZFtHgTZJVGem54sFCl2nrm4WNEXaInvaenvlHlSHzagU3I4UMoDEjlNolrdoSbnn0rZLs55427-aWpS7JF85LLtIC5QHCUOr0UGkKp5Hy68reptkX5pnIoiFq4YXxoyUgj8UeqkVxA8BqH6FpnLKwWHYSLm62kWnLlSHan0o8BVo3mUl9armG4RntE8DeaSnCFfZuXgQ8Ar4sFM4Jluqx68q8UsElr5HTLGntEJ4aX6ZOXDojHiqnpmmall4-L0rF4ckyYMWaXW57I17xUGFnrIWU6qnmLJq2rXkEWZEiHmICnl63lGm9qFUOWekjrbmNmFWeV2n3ES6ZEVUDpS4I7konkWngXgTmIVlH76ndoKEWl6Wn5QXOF5nnqhVqri4QbAUeoebwF7LyIl7z7eWYkVbJHyK+lxHCmZFdlxDyKw7XWJVVkJnnWLkZbBrVHIEHXkWvE2avm1qTV3VAkRWZGRXO4HXuGYUX7IWImqnyK+GCnYU+VOYmqmn7kvLRmoXGr8GAVEV5WfYX5dkmpiE4qjVpFQEo1GBfr+n5EP4AmsAmpVX7H9kX4wYmp5rFqamhmZUM1GA-Fg7RWHKjXl7Y2dE4qWqMZZayYmoBUZYinlXtmU0I1Q0Q5Y1NKrFo0ZYqYbZhaV4o0xErW7VZYZVuL2qKUKknXK72rq4CWal7kZakWrEPV2mraIkqXH4M2VGfn2bNb5Vj72r836EImsVTL41ZHq36XFWC3umamTWrGy21plEvH-EVoR0I3LLEVWVfaO0mrDmJHIb7aN64pepbUgqDW3m+W7Ek3eLa1j5QE52g76ELUVY6U4r9a7HTmzVemRZQE0G7Ec1C1fbmkVYo3fE5ViXqHD1vI4W7G0WzmzbYVeoQnbnXoxpT2i7q3SC+HBVh2Kbdoz3rq43bF213Eo24lMp54tXbWZFs1kmG2k2oXJW6IMC14sGWoN75G32d28mY5eVF1n3WaPWl6ZGO0YZ53vGvHAOs2Rp2HLL9UQaQ5AWRo0YJlk2E5h2gPh6HJ00T1GVJr85g6cUamnVvLd7SA2lkrIow0h0JVS5x2un3013G0DlJqv0ZbTJD5h191Bnj3brNFfbcPPE+3r0F2X1JpVpCaamC7IpkMBIz7UW3nSOynq0BKFl2nrYJkdnxKV0xaWUVYcP-ZoN0oM1eCa0qmZHnFC6O1eB36enPkvrSEoq5q9mU6UE0OvEy7q1Dn8o4paPoNF1E1eDO0TVrXpGEO5qNX+MtoWO5rtUzmWlg5SldG5rA3H0kOjZaWm1eNqMWkRaaUbUmNYNKmKNh1E0fmhEK3+Z7XlGVqxEFGON4r72VrV0UZQOimO0IW8PnpQPzWVrFGcESUwWVr4XxOKll0X7t3ZISl2lgYcUY6Vpz0BbuYY3uPS107FVJOP6amTOPmIlKN742Ftq8ax4iN+YwkM08BrGrVPX6kbaO08AtOAGf1h2V3qUVN2m10yOeH6HS0GXFXUmcZ+bLNtoCkZ0gPeHq32WMOh2MmAuKpNZtreZu33b5aelE3+XFVcG5Or1oltrK0wuilX3Kb9q8aimOl6oQ79qpXo2P1vEBHF3q3ZXvMWlUXxMbE579qXX56plZaO2VWYv3YSX9ojNd172T1rXt3mJxNd2bPeLnGoP9rZnzHpPOpDb9osX51+Ya7+Zx3TVdNe7uNisr0zrHOenWHqNfZs237Qt8Ow1Cvq2HWiVIGS2ZMMsM0XVH21oSH0uZ0j0zr9PiECP10zpCOhKyt+0mUzqB0vHwPjMPoz3yK9UWnGVdaikJvuEmW3njUVZx3w3FX2MUknNAbsHe2hLdEdVrWkXrp1OmUBYxWMBGDm1B0vMLE4XrpcvZtTph2ybrpM2cm0uf3FuAMWv+aNNg79brqj7LIm0BZW1rpGBIuGuanu1ZPoZuHFWgmBuusTtGC7PuNNlpWuu+Unq3YJkb7+PrFAYG2So-mQaK5QGTUnr3qoND32voakl6OkM4vxKu3uMwYnrf0EZJ32Yqa2r-te2UPtJ3MuU+5OYnpTsEvIuwtI7gewPtJtPP5XsDrhbpV1Fwd3UCsqvbr1tkkENGVh3esTYTurFdNhPkfId45we7GlsKrfvtKK5AbSDU2Y07rxOEXvWcd9vxJGsvGUeG5ttPG0cwdNrAcDKcfTMstZu8ucdi3cn+Zg1pGccZswtnrhurvHpb2fs-sV16d3nHqH1YDzV1GL2fpSWPXROutVt32WdeE3P57hZAYv14m3tg1NWOMTvsmQcJU8uONwcMChsKqfPsdgmfrRv2Y7UP2OP-sMCLMMZ56dWieefaeyrascWecsa21F3a3BVAYBJkcvErOasUpEcJKlel0Uu7m3lVsMMucr3MNucTtaZOu2b-4Mep6lfBMVYAtI6std2PsBK94JnR0ZM6alczYx10sTaycKrNeqdSEs0tqlc5NnWZEHtLmlePmuO3kS1INrqmNdMlnuMJf03Ho2NGfIbiYQvoY9k2sGH5FEvHFneIVstI0ddAZBPedwuzOufNH-cD3EPxGePPfSu8kPZ2mXdVc9uHn6smd1X-fYeV5QEruJmwbhVUnNXFlAblMpp60PvG1E+2PxNic+5SNE-eqfV3ahdE9sO1qVcQObtt1E+DdvLB2I9QH-t4WeveLsv+PAtrpTMbMYMmdE+k4vX10xPi-DW1U1d7bpdE+HckUDkYNAYiU+NqelV20691MadW4KtEZHV401e627VwdvOYCSbSeaW9NEYt5y9VOnN8nHoWU3twshWelGPh3oZQt69SEjXBtEbyk-PtdY5EbL0xu1se+Ps8BFPaO92O+1ZAZxVYA9Fufv0-5rrmKtlg5lWa+8dd3-tMsdoNlufjr0aZ9cuT4W0HGZ+u+3sZfCNP2MANXdfW8vlcOZ8-V5Fu-dqPvmJod8OU7XcFKZ8asQOt38Zl+8kV8p96ppZuc9vLVBf1MO81f-vWtkpgtHse-HuOtb8neBVrVdkMAesX00sq9NdAb3X3cE0lGOOPuwHgP0vC2i+TGP9mGIn8da0U-fTowETbFVx0DON-o-225ds+u5yYHkHUf4Fct2OtW8jQTK7ld4SUjL7JNTK5iY3eunbqppkbavdLGfnJ8jxhZ7eJf6p5CujxkMrx8uGpRHjHBkx5udO2OSHjP-1WZKcAmPGSPi8T25y1BqPGSGnRWGK58eMePcxot0Nzy14egSEItInHZp8Gmig43idW7T9ZRM5JfUvwz+6aYP2t-fHhfj95U9FBQnClpTmx6+VRMUZJdo4zh7JtFBg-D3gYw9S4DI6zLfRmHVM5OZRMKDW9k4IqyADJyhguEmW1KaalZMrpTAaEjIHrc+KgSGjtn09KIMlyoTZIW6VT6usaBFpfwVx3+ax1yemmchlInoIU0bO0WSTpumM6mC6BpQn6kQxyFrZkhi7Krho1vbxY7SMQ6QGIIn52kgqt7bQYZxD6nZZB4aclqyS0z1kWsjgoeoEnPodoEyKdC7FgUWEuNS+r-MDosJtoep5B2LXuosMsFPNNGqLeJtoPC5C9kMI-XbosJh5AdGyjORYbL1vYc8F+opLslphgHaNTOUXTMtFmv7P8jcFbAMv4LK7XC-MDeDjppgoY+oju0NdPjjyDK6Dqu8hLNkZi5bVMXiaXIwkZmDIsFe+KqXekZjeoA1FaXNIzBI0K4utZusI1JjIPaYosjM2XAwss1bZGYV+SBB9GOx+aBJzutQvVPvVKb8i7OI7C4p3wm6PMHMhJSkVZkboxtNS8-ZRtFgB7GDE6PlZdvyPB45D1i0vKzA8JuSq9CRlrfkUmwqxD8ghUtfkT8L1QYkLi-I9OnqnyJnlOygSYnoXT7yx13R9XU4V0PmaaZIKrXL8qoPyKkVkyXLYAbZkWyBiCRGWNnl-wWGBiIuIIAtr+SsbuifqYzCkk00DHmiv2UtHyu6NtEv9CuKOd0dILU7W4kR3eORqS2fyqCYR0WS5ixzHTnCu6O5K7l5ibaicTqrQzTHbziyVC4BxjETH8zP6qCxezYskd4mzFdpF8XmakR4N4EuivM8jeJsfyRHhiMWgopAnMzc7+Dk+wIvJoKjy6aYs+PqREs3TeRzjau543LNOzqp-FgsvZXcqZw+6jiVkRVYMfZncG+NE+wWG4pm1dadCgewWSbsMIpHr9gsKZY6q6xNxnDgsrwuFib0FTEFzx-QgLK-xGrBZKxmleDNNyCyaZN+fGZDDhxHFusRM+-UiXNTBzXjOBxE7Ic6l65ptAkN-EnkbTc7f8zKVEgNm3S15ucYMMWGcRSU4ZFc2J83eJOkIdpVCqJa3eegtz+psSMenEhzkJTYn4tt0rGSQVthLYH9cGLxBCT52ZgpAgAA">TypeScript playground</a> with all the code. To see what types have been
-instantiated, simply hover over their name; for example, hovering on <code class="language-plaintext highlighter-rouge">MatchingSue</code>
-should yield <code class="language-plaintext highlighter-rouge">241</code>.</p>
-</blockquote>
-
-<p>Hopefully Part 1 gave you a feel for the power and expressiveness of
-TypeScript’s type system, and the relative ease by which we can perform
-singleton pattern matching with the TypeScript typechecker.</p>
-
-<p>Part 2 of the problem is a bit more complicated<span class="note"><label for="part2" class="margin-toggle">⊕</label></span><input type="checkbox" id="part2" class="margin-toggle"><span class="marginnote">Having built familiarity with the type system and with more work to do in this
-part, we will move faster in our constructions.</span>.
-Copying <a href="https://adventofcode.com/2015/day/16">the problem statement</a>
-(not visible unless you have correctly answered Part 1):</p>
-
-<blockquote>
-  <p>the <code class="language-plaintext highlighter-rouge">cats</code> and <code class="language-plaintext highlighter-rouge">trees</code> readings indicates that there are greater than that
-many …, while the <code class="language-plaintext highlighter-rouge">pomeranians</code> and <code class="language-plaintext highlighter-rouge">goldfish</code> readings indicate that there
-are fewer than that many …</p>
-</blockquote>
-
-<p>Clearly, we can’t compare singularly-inhabited primitive types anymore, as,
-for example, the value of <code class="language-plaintext highlighter-rouge">cats</code> in the Sue we wish to find can be any value
-greater than the value inhabited by <code class="language-plaintext highlighter-rouge">TheSue['cats'] = 7</code>.
-There is no way to formulate a type <code class="language-plaintext highlighter-rouge">GT_N &lt;: number</code> where <code class="language-plaintext highlighter-rouge">GT_N</code> is inhabited only by <code class="language-plaintext highlighter-rouge">number</code>s greater than some <code class="language-plaintext highlighter-rouge">N</code>
-– not directly, anyway. Our approach will be to find a way to mark relevant
-fields (e.g. <code class="language-plaintext highlighter-rouge">cats</code>, <code class="language-plaintext highlighter-rouge">pomeranians</code>) in information known about each Sue as
-greater or less than the corresponding field in <code class="language-plaintext highlighter-rouge">TheSue</code>, and then perform the
-same subtype comparison as we did in Part 1 to find the matching Sue(s).</p>
-
-<p>First, let’s think about how we could perform greater/less than comparisons in
-the type system. In general, this comparison can be done between two integers by
-subtracting them and comparing the result to 0. There is no idea of numeric
-subtraction in the TypeScript type system itself, so we need to find some
-encoding for numbers on which we can perform an operation corresponding to
-subtraction.</p>
-
-<p>With some thought, the most natural idea is to encode natural numbers with
-tuples. In TypeScript, a tuple type of the form <code class="language-plaintext highlighter-rouge">[T_1, T_2, ..., T_N]</code> holds <code class="language-plaintext highlighter-rouge">N</code>
-values where the <code class="language-plaintext highlighter-rouge">t_i</code><sup>th</sup> value has type <code class="language-plaintext highlighter-rouge">T_i</code>. Each tuple type has a <code class="language-plaintext highlighter-rouge">length</code>
-property whose type the number of type fields; in this case, <code class="language-plaintext highlighter-rouge">N</code>.
-We will use the <code class="language-plaintext highlighter-rouge">length</code> property to encode natural numbers;
-shortly, we will see how to exploit tuples for arithmetic operations.</p>
-
-<p>To extract the natural number encoded in a tuple’s <code class="language-plaintext highlighter-rouge">length</code> property, we define
-a type constructor:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">TupToNum</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">unknown</span><span class="p">[]</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">{</span><span class="na">length</span><span class="p">:</span> <span class="nx">infer</span> <span class="nx">N</span><span class="p">}</span> <span class="p">?</span> <span class="nx">N</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
-<span class="nx">TupToNum</span><span class="o">&lt;</span><span class="p">[</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// 3</span>
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">infer</code> is arguably the most powerful construct provided by the TypeScript
-typechecker; it instructs the typechecker to construct a constraint to resolve
-an uninstantiated type (in this case, <code class="language-plaintext highlighter-rouge">N</code>), and to solve the constraint
-transparently. The typechecker is basically solving the type of <code class="language-plaintext highlighter-rouge">N</code> “for us”;
-it’s like type reflection inside the type system!
-<code class="language-plaintext highlighter-rouge">infer</code> will be our best friend for this part.</p>
-
-<p>To encode a number in a tuple, we can define a recursive type constructor that
-builds up a tuple until its length is that of the number we wish to encode:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">NumToTup</span><span class="o">&lt;</span><span class="nx">N</span> <span class="kd">extends</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">Tup</span> <span class="kd">extends</span> <span class="nx">unknown</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[]</span><span class="o">&gt;</span> <span class="o">=</span>
-    <span class="nx">Tup</span> <span class="kd">extends</span> <span class="p">{</span><span class="na">length</span><span class="p">:</span> <span class="nx">N</span><span class="p">}</span> <span class="p">?</span> <span class="nx">Tup</span> <span class="p">:</span> <span class="nx">NumToTup</span><span class="o">&lt;</span><span class="nx">N</span><span class="p">,</span> <span class="p">[...</span><span class="nx">Tup</span><span class="p">,</span> <span class="nx">unknown</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="nx">NumToTup</span><span class="o">&lt;</span><span class="mi">3</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// [unknown, unknown, unknown]</span>
-</code></pre></div></div>
-
-<p>Now, we can define subtraction between <code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">B</code> via a type constructor
-that queries the typechecker for the elements missing between the elements of
-<code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">B</code> (let’s call this <code class="language-plaintext highlighter-rouge">Diff</code>), and returns the length of <code class="language-plaintext highlighter-rouge">Diff</code>:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Subtract</span><span class="o">&lt;</span><span class="nx">A</span> <span class="kd">extends</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">B</span> <span class="kd">extends</span> <span class="kr">number</span><span class="o">&gt;</span> <span class="o">=</span>
-    <span class="nx">NumToTup</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="p">[...</span><span class="nx">infer</span> <span class="nx">Diff</span><span class="p">,</span> <span class="p">...</span><span class="nx">NumToTup</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">?</span> <span class="nx">TupToNum</span><span class="o">&lt;</span><span class="nx">Diff</span><span class="o">&gt;</span><span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
-<span class="nx">Subtract</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// 3</span>
-</code></pre></div></div>
-
-<p>Clearly, this only works with natural numbers and when <code class="language-plaintext highlighter-rouge">A &gt;= B</code>, but that is
-good enough for our purposes of building greater than/less than comparators.
-Let’s do that now, in both cases performing the comparison between two numbers
-by “walking them down” until one hits 0.</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">BoolTest</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">boolean</span><span class="p">,</span> <span class="nx">E</span> <span class="kd">extends</span> <span class="nx">boolean</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="nx">E</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">OK</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">FAIL</span><span class="dl">'</span><span class="p">;</span>
-
-<span class="kd">type</span> <span class="nx">GreaterThan</span><span class="o">&lt;</span><span class="nx">A</span> <span class="kd">extends</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">B</span> <span class="kd">extends</span> <span class="kr">number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">A</span> <span class="kd">extends</span> <span class="mi">0</span> <span class="p">?</span>
-    <span class="kc">false</span> <span class="p">:</span>
-    <span class="nx">B</span> <span class="kd">extends</span> <span class="mi">0</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="nx">GreaterThan</span><span class="o">&lt;</span><span class="nx">Subtract</span><span class="o">&lt;</span><span class="nx">A</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">Subtract</span><span class="o">&lt;</span><span class="nx">B</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;&gt;</span><span class="p">;</span>
-
-<span class="kd">type</span> <span class="nx">GTTest1</span> <span class="o">=</span> <span class="nx">BoolTest</span><span class="o">&lt;</span><span class="nx">GreaterThan</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">,</span> <span class="kc">true</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// 'OK'</span>
-<span class="kd">type</span> <span class="nx">GTTest2</span> <span class="o">=</span> <span class="nx">BoolTest</span><span class="o">&lt;</span><span class="nx">GreaterThan</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">,</span> <span class="kc">false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// 'OK'</span>
-<span class="kd">type</span> <span class="nx">GTTest3</span> <span class="o">=</span> <span class="nx">BoolTest</span><span class="o">&lt;</span><span class="nx">GreaterThan</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">,</span> <span class="kc">false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// 'OK'</span>
-
-<span class="kd">type</span> <span class="nx">LessThan</span><span class="o">&lt;</span><span class="nx">A</span> <span class="kd">extends</span> <span class="kr">number</span><span class="p">,</span> <span class="nx">B</span> <span class="kd">extends</span> <span class="kr">number</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">B</span> <span class="kd">extends</span> <span class="mi">0</span> <span class="p">?</span>
-    <span class="kc">false</span> <span class="p">:</span>
-    <span class="nx">A</span> <span class="kd">extends</span> <span class="mi">0</span> <span class="p">?</span> <span class="kc">true</span> <span class="p">:</span> <span class="nx">LessThan</span><span class="o">&lt;</span><span class="nx">Subtract</span><span class="o">&lt;</span><span class="nx">A</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">,</span> <span class="nx">Subtract</span><span class="o">&lt;</span><span class="nx">B</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;&gt;</span><span class="p">;</span>
-
-<span class="kd">type</span> <span class="nx">LTTest1</span> <span class="o">=</span> <span class="nx">BoolTest</span><span class="o">&lt;</span><span class="nx">LessThan</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">,</span> <span class="kc">true</span><span class="o">&gt;</span><span class="p">;</span>  <span class="c1">// 'OK'</span>
-<span class="kd">type</span> <span class="nx">LTTest2</span> <span class="o">=</span> <span class="nx">BoolTest</span><span class="o">&lt;</span><span class="nx">LessThan</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">,</span> <span class="kc">false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// 'OK'</span>
-<span class="kd">type</span> <span class="nx">LTTest3</span> <span class="o">=</span> <span class="nx">BoolTest</span><span class="o">&lt;</span><span class="nx">LessThan</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">,</span> <span class="kc">false</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// 'OK'</span>
-</code></pre></div></div>
-
-<p>Okay, now we’re ready to apply all this to the problem. First, let’s define type
-constructors that take a record type of facts we know about a Sue, a field to
-verify is greater than/less than that of the corresponding field in <code class="language-plaintext highlighter-rouge">TheSue</code>, and
-yield an updated record type with a boolean flag indicating the result of the
-verification on the checked field name.
-If the field we wish to verify against <code class="language-plaintext highlighter-rouge">TheSue</code>
-isn’t present on the Sue record type we pass, we can just return the record type
-as it is, since that field can’t be matched against <code class="language-plaintext highlighter-rouge">TheSue</code> for this Sue anyway.</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">CheckGreaterThan</span><span class="o">&lt;</span><span class="nx">F</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">TheSue</span><span class="p">,</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">{[</span><span class="nx">f</span> <span class="k">in</span> <span class="nx">F</span><span class="p">]?:</span> <span class="kr">number</span><span class="p">}</span><span class="o">&gt;</span> <span class="o">=</span>
-    <span class="nx">T</span><span class="p">[</span><span class="nx">F</span><span class="p">]</span> <span class="kd">extends</span> <span class="kr">number</span> <span class="p">?</span> <span class="p">{[</span><span class="nx">f</span> <span class="k">in</span> <span class="nx">F</span><span class="p">]:</span> <span class="nx">GreaterThan</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">F</span><span class="p">],</span> <span class="nx">TheSue</span><span class="p">[</span><span class="nx">F</span><span class="p">]</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&amp;</span><span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">F</span><span class="o">&gt;</span>
-                        <span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
-
-<span class="kd">type</span> <span class="nx">CheckLessThan</span><span class="o">&lt;</span><span class="nx">F</span> <span class="kd">extends</span> <span class="kr">keyof</span> <span class="nx">TheSue</span><span class="p">,</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">{[</span><span class="nx">f</span> <span class="k">in</span> <span class="nx">F</span><span class="p">]?:</span> <span class="kr">number</span><span class="p">}</span><span class="o">&gt;</span> <span class="o">=</span>
-    <span class="nx">T</span><span class="p">[</span><span class="nx">F</span><span class="p">]</span> <span class="kd">extends</span> <span class="kr">number</span> <span class="p">?</span> <span class="p">{[</span><span class="nx">f</span> <span class="k">in</span> <span class="nx">F</span><span class="p">]:</span> <span class="nx">LessThan</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="nx">F</span><span class="p">],</span> <span class="nx">TheSue</span><span class="p">[</span><span class="nx">F</span><span class="p">]</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&amp;</span><span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">F</span><span class="o">&gt;</span>
-                        <span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>We use <code class="language-plaintext highlighter-rouge">[f in F]</code> to extract the properties we want to compare against <code class="language-plaintext highlighter-rouge">TheSue</code>.
-Since <code class="language-plaintext highlighter-rouge">F &lt;: keyof TheSue</code>, in theory we could pass in a union type as <code class="language-plaintext highlighter-rouge">F</code> and
-get multiple fields to match against (e.g. if <code class="language-plaintext highlighter-rouge">F = 'a'|'b'</code>, we have <code class="language-plaintext highlighter-rouge">T extends
-{1?: number, 2?: number}</code>), but in practice we will use single-union types here
-(like just one string variant). We cannot say <code class="language-plaintext highlighter-rouge">{F?: number}</code> directly, as then
-the field we are trying to match would be named <code class="language-plaintext highlighter-rouge">F</code> rather than the instantiated
-type of <code class="language-plaintext highlighter-rouge">F</code>.</p>
-
-<p><code class="language-plaintext highlighter-rouge">Omit&lt;T, U&gt;</code> is a type constructor that removes from the record type <code class="language-plaintext highlighter-rouge">T</code> those
-fields that are a subtype of <code class="language-plaintext highlighter-rouge">U</code>. Formally,</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Exclude</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="nx">U</span> <span class="p">?</span> <span class="nx">never</span> <span class="p">:</span> <span class="nx">T</span><span class="p">;</span>
-<span class="kd">type</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="p">[</span><span class="nx">F</span> <span class="k">in</span> <span class="nx">Exclude</span><span class="o">&lt;</span><span class="p">(</span><span class="kr">keyof</span> <span class="nx">T</span><span class="p">),</span> <span class="nx">U</span><span class="o">&gt;</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">F</span><span class="p">];</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">Omit</code> provided by the TypeScript standard library has a differently-written
-definition, but the behavior is the same.</p>
-
-<p>We perform <code class="language-plaintext highlighter-rouge">{[f in F]: LessThan&lt;T[F], TheSue[F]&gt;}&amp;Omit&lt;T, F&gt;</code> (and similarly
-for <code class="language-plaintext highlighter-rouge">GreaterThan</code>) because once we have determined whether the checked field is
-indeed <code class="language-plaintext highlighter-rouge">LessThan</code> that of <code class="language-plaintext highlighter-rouge">TheSue</code>, we would like to return a fresh type with
-that data and all other data we already know about this Sue, sans the exact
-numeric type we knew about the field we just checked. In constructing
-<code class="language-plaintext highlighter-rouge">CheckLessThan&lt;'cats', {trees: 2, cats: 5}&gt;</code>, if the less than check yields
-<code class="language-plaintext highlighter-rouge">false</code>, the constructor yields <code class="language-plaintext highlighter-rouge">{cats: false}&amp;{trees: 2}</code> (a type equivalent to
-<code class="language-plaintext highlighter-rouge">{cats: false, trees: 2}</code>). Keeping the checked field’s numeric type
-would yield <code class="language-plaintext highlighter-rouge">{cats: false}&amp;{trees: 2, cats: 5} = never</code>, as there is no value
-that can have a field <code class="language-plaintext highlighter-rouge">cats</code> whose value inhabits both <code class="language-plaintext highlighter-rouge">false</code> and <code class="language-plaintext highlighter-rouge">5</code>.</p>
-
-<p>Next, we define type constructors to take a record type of some Sue facts,
-compare its fields against those of <code class="language-plaintext highlighter-rouge">TheSue</code> for which we need to know
-greater than/less than relations, and yield a record type with that data.</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">PartialUnconstrained</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">T</span><span class="p">]?:</span> <span class="kr">any</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="kd">type</span> <span class="nx">SueCheckFieldsGreater</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">PartialUnconstrained</span><span class="o">&lt;</span><span class="nx">TheSue</span><span class="o">&gt;&gt;</span> <span class="o">=</span>
-    <span class="nx">CheckGreaterThan</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">trees</span><span class="dl">'</span><span class="p">,</span> <span class="nx">CheckGreaterThan</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">cats</span><span class="dl">'</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;&gt;</span><span class="p">;</span>
-<span class="kd">type</span> <span class="nx">SueCheckFieldsLesser</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">PartialUnconstrained</span><span class="o">&lt;</span><span class="nx">TheSue</span><span class="o">&gt;&gt;</span> <span class="o">=</span>
-    <span class="nx">CheckLessThan</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">pomeranians</span><span class="dl">'</span><span class="p">,</span> <span class="nx">CheckLessThan</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">goldfish</span><span class="dl">'</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;&gt;</span><span class="p">;</span>
-
-<span class="kd">type</span> <span class="nx">SueCheckFields</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">PartialUnconstrained</span><span class="o">&lt;</span><span class="nx">TheSue</span><span class="o">&gt;&gt;</span> <span class="o">=</span>
-    <span class="nx">SueCheckFieldsLesser</span><span class="o">&lt;</span><span class="nx">SueCheckFieldsGreater</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">any</code> type is inhabited by all values, but is more flexible than the
-<code class="language-plaintext highlighter-rouge">unknown</code> type in that values of <code class="language-plaintext highlighter-rouge">any</code> also inhabit every <em>other</em> type<span class="note"><label for="whyany" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="whyany" class="margin-toggle"><span class="sidenote"><code class="language-plaintext highlighter-rouge">any</code> is an “escape hatch” from the type system, usually used
-to deal with the fact that variables are untyped in JavaScript. Here, our
-purpose is a little more sinister.</span>.</p>
-
-<p>I leave as an exercise to the reader why the <code class="language-plaintext highlighter-rouge">PartialUnconstrained</code> bound is
-needed for the above type constructors, and why <code class="language-plaintext highlighter-rouge">SueCheckFieldsGreater</code> cannot
-be defined as</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">SueCheckFieldsGreater</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">PartialUnconstrained</span><span class="o">&lt;</span><span class="nx">TheSue</span><span class="o">&gt;&gt;</span> <span class="o">=</span>
-    <span class="nx">CheckGreaterThan</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">trees</span><span class="dl">'</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;&amp;</span><span class="nx">CheckGreaterThan</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">cats</span><span class="dl">'</span><span class="p">,</span> <span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>and what extra work would need to be done in order to define it in this way.</p>
-
-<p>Next, we need to rewrite <code class="language-plaintext highlighter-rouge">TheSue</code> in a manner that it can be matched against the
-greater than/less than field constraints we recorded on each Sue record type via
-the <code class="language-plaintext highlighter-rouge">SueCheckFields</code> constructor. Since for the Sue that we want to find those
-greater than/less than field constraints should all be typed as <code class="language-plaintext highlighter-rouge">true</code>, let’s
-redefine <code class="language-plaintext highlighter-rouge">TheSue</code> that way:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">CheckedFields</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">trees</span><span class="dl">'</span><span class="o">|</span><span class="dl">'</span><span class="s1">cats</span><span class="dl">'</span><span class="o">|</span><span class="dl">'</span><span class="s1">pomeranians</span><span class="dl">'</span><span class="o">|</span><span class="dl">'</span><span class="s1">goldfish</span><span class="dl">'</span><span class="p">;</span>
-<span class="kd">type</span> <span class="nx">TheSueChecked</span> <span class="o">=</span> <span class="nx">Omit</span><span class="o">&lt;</span><span class="nx">TheSue</span><span class="p">,</span> <span class="nx">CheckedFields</span><span class="o">&gt;&amp;</span><span class="p">{[</span><span class="nx">f</span> <span class="k">in</span> <span class="nx">CheckedFields</span><span class="p">]:</span> <span class="kc">true</span><span class="p">};</span>
-</code></pre></div></div>
-
-<p>Finally, we perform the checking on each Sue, extract a union of them all, and
-yield a subtype comparison against <code class="language-plaintext highlighter-rouge">TheSueChecked</code> as in Part 1.</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">SuesCheckedWithNames</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="p">[</span><span class="nx">S</span> <span class="k">in</span> <span class="kr">keyof</span> <span class="nx">Sues</span><span class="p">]:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="nx">S</span><span class="p">}</span><span class="o">&amp;</span><span class="nx">SueCheckFields</span><span class="o">&lt;</span><span class="nx">Sues</span><span class="p">[</span><span class="nx">S</span><span class="p">]</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="kd">type</span> <span class="nx">AllTheSues</span> <span class="o">=</span> <span class="nx">SuesCheckedWithNames</span><span class="p">[</span><span class="kr">keyof</span> <span class="nx">SuesCheckedWithNames</span><span class="p">];</span>
-<span class="kd">type</span> <span class="nx">MatchingSue</span> <span class="o">=</span> <span class="nx">Extract</span><span class="o">&lt;</span><span class="nx">AllTheSues</span><span class="p">,</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">TheSueChecked</span><span class="o">&gt;&gt;</span><span class="p">[</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">];</span>
-</code></pre></div></div>
-
-<p>All done, and in exactly 0 lines of runtime code!</p>
-
-<h2 id="epilogue">
-<a class="header-anchor" href="#epilogue"></a>Epilogue</h2>
-
-<p>I hope this cc provided you with a demonstration of the power of TypeScript’s
-type system, and maybe gave you some ideas of how to exploit it in your own
-work.</p>
-
-<p>I am not aware of other type systems in popular programming languages similar to
-those of TypeScript’s in terms of reflection and the typing of primitive
-literals. Our treatment of tuples above was nice for encoding naturals, and can
-also give way to a weak kind of dependent typing:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Init</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">unknown</span><span class="p">[]</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">[...</span><span class="nx">infer</span> <span class="nx">Prev</span><span class="p">,</span> <span class="nx">infer</span> <span class="nx">M</span><span class="p">]</span> <span class="p">?</span> <span class="nx">Prev</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
-
-<span class="kd">function</span> <span class="nx">init</span><span class="o">&lt;</span><span class="nx">T</span> <span class="kd">extends</span> <span class="nx">unknown</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arr</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">Init</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&amp;</span><span class="p">{</span><span class="na">length</span><span class="p">:</span> <span class="nx">Subtract</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">[</span><span class="dl">'</span><span class="s1">length</span><span class="dl">'</span><span class="p">],</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">}</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="kr">any</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">const</span> <span class="nx">arr</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="dl">'</span><span class="s1">d</span><span class="dl">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="dl">'</span><span class="s1">d</span><span class="dl">'</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">initArr</span> <span class="o">=</span> <span class="nx">init</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
-<span class="kd">type</span> <span class="nx">InitArr</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">initArr</span><span class="p">;</span> <span class="c1">// [1, "b", 3] &amp; {length: 3}</span>
-</code></pre></div></div>
-
-<p>Notice that this is not strictly type safe due to the <code class="language-plaintext highlighter-rouge">any</code> cast and requires a
-formal type annotation, but the idea is intriguing. It is unlikely, however,
-that this kind of use case will ever make it as a first-class citizen in the
-type system.</p>
-
-<p>The behavior of distributive conditional types may appear to be a little bit
-odd, as raw union types certainly don’t distribute over type
-operations<span class="note"><label for="obj" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="obj" class="margin-toggle"><span class="sidenote">Values inhabited by <code class="language-plaintext highlighter-rouge">Obj</code> include <code class="language-plaintext highlighter-rouge">{b: 2}</code>, so <code class="language-plaintext highlighter-rouge">Obj</code>
-cannot have a property <code class="language-plaintext highlighter-rouge">a</code>. In fact, values of type <code class="language-plaintext highlighter-rouge">Obj</code> have no typed
-properties until narrowed to know they have a field <code class="language-plaintext highlighter-rouge">a</code> or <code class="language-plaintext highlighter-rouge">b</code>.</span>:</p>
-
-<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">Obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span><span class="o">|</span><span class="p">{</span><span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span><span class="o">|</span><span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="mi">3</span><span class="p">};</span>
-<span class="kd">type</span> <span class="nx">AsFromRaw</span> <span class="o">=</span> <span class="nx">O</span><span class="p">[</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">];</span> <span class="c1">// error: Property 'a' does not exist on type 'Obj'.</span>
-
-<span class="kd">type</span> <span class="nx">PickA</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">}</span> <span class="p">?</span> <span class="nx">T</span><span class="p">[</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">]</span> <span class="p">:</span> <span class="nx">never</span><span class="p">;</span>
-<span class="kd">type</span> <span class="nx">AsFromPick</span> <span class="o">=</span> <span class="nx">PickA</span><span class="o">&lt;</span><span class="nx">O</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// 1|3</span>
-</code></pre></div></div>
-
-<p>There are ways to get around this distributive behavior in conditional types,
-but they are outside the scope of this cc. Just know they are out there, and
-check them out if you’re interested <img class="emoji" title=":slightly_smiling_face:" alt=":slightly_smiling_face:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f642.png" height="20" width="20">.</p>
-
-<p>And don’t worry – as all good things do, the TypeScript type system has holes. See
-<a href="https://github.com/ayazhafiz/rats">raTS!</a> for some; see the <a href="https://github.com/microsoft/TypeScript/issues">TypeScript issue
-tracker</a> for many more.</p>
-
-<p>Anyway, I hope you enjoyed this. Please email me if you have any comments.</p>
-
+  
+  
 </article>
 
 <section class="footer">
   
-  <a href="/articles/20/impact-vs-innovation">« Impact vs Innovation &amp; Industry vs Academia</a>
+  <a href="/articles/20/impact-vs-innovation"
+    >&laquo; Impact vs Innovation & Industry vs Academia</a
+  >
   
-  <span><img class="emoji" title=":baby_chick:" alt=":baby_chick:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f424.png" height="20" width="20"> 
-    <span>​
+  <span
+    ><img class='emoji' alt='baby_chick' src='https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f424.png' height=20 width=20></img>&emsp;
+    <span
+      >&#8203;
       <script type="math/tex">
         S_1\lt\colon\ S_2,\ T_1\lt\colon\ T_2 \implies S_2\to T_1\lt\colon\ S_1\to T_2
-      </script></span>
+      </script></span
+    >
   </span>
   
-  <a href="/articles/21/hot-code-reloading">Hot Code Reloading, With Libc or in the Browser »</a>
+  <a href="/articles/21/hot-code-reloading">Hot Code Reloading, With Libc or in the Browser &raquo;</a>
   
 </section>
 
-<script src="https://utteranc.es/client.js" repo="ayazhafiz/gww-utterances" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+<script src="https://utteranc.es/client.js"
+        repo="ayazhafiz/gww-utterances"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 
 <script type="text/javascript">
@@ -664,11 +170,17 @@ tracker</a> for many more.</p>
     <div class="bottom-bar">
     <details>
   <summary>Analytics</summary>
-  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/">Cloudflare Analytics</a>. No identifiable information is transmitted to Cloudflare. See
+  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/"
+    >Cloudflare Analytics</a
+  >. No identifiable information is transmitted to Cloudflare. See
   <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Analytics user privacy</a>.
 </details>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'></script>
-
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'
+></script>
+</details>
 
     </div>
   </body>

@@ -46,6 +46,9 @@
       },
     }
   });
+  MathJax.Hub.Queue(function () {
+    document.body.setAttribute('render-done', '');
+  });
 </script>
 
 <script
@@ -53,13 +56,19 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
 ></script>
 
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/shiki.css?1627321097504450745"
+/>
+
 
 
 
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1626885286687102800"
+      href="/css/post.css?1627321097504450745"
     />
   </head>
 
@@ -70,183 +79,45 @@
       <div class="panel">
         <div class="column-right on understanding-main">
           <section class="nav">
-  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+  <a class="nav-link" href="/about">about</a
+  ><a class="nav-link" href="/cc">cc</a
+  ><a class="nav-link" href="/vis">vis</a
+  ><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
  <h1 class="title">On Understanding</h1>
 <p class="byline">May 16, 2020</p>
 
 <article class="post">
-  <p>A juice diet is a fad. If it is to be ubiquitous, equity is not. Neither is the elimination of
-racism, or the distribution of healthcare, or the raising of millions out of poverty, or the safety
-or artificial intelligence, or the protection of endangered species, or any number of other things
-you or I may wish to see succeed.</p>
-
-<p>Let’s call these <strong>hard problems</strong>. These are problems large communities are passionate about, and
-cannot be solved in five, twenty, or even fifty years.</p>
-
-<p>In most cases, the general population’s commitment to these problems seems to follow that of a
-fad<span class="note"><label for="feels-fad" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="feels-fad" class="margin-toggle"><span class="sidenote">I am not saying this distribution is anywhere near representative; it is simply how it feels to me.</span>:</p>
-
-<figure class="fullwidth"><img src="/assets/img/exp_of_exp.png" width="100%"><figcaption>time vs perceived number of people committed to an issue</figcaption></figure>
-
-<p>On the tail end, the number of people involved in resolving an issue converges to a value determined
-by a function of how many communities want resolution of the issue, how many don’t, and how many are
-indifferent. Note that only the first factor necessarily increases the convergent value.</p>
-
-<p>This convergence is expected – the world can’t dedicate all of its resources to one thing, and it’s
-the whole reason for specialization. But if you are invested in an issue, and you want to see it
-succeed, be committed to it. Not doing so is <a href="#on-nomenclature">dangerous</a>; because these kinds of
-issues take a very long time to solve, an initial high investment in a topic may cause workstreams
-in that domain to continue expecting a similar investment. If the investment suddenly declines,
-projects quickly fail.</p>
-
-<h2 id="prelude">
-<a class="header-anchor" href="#prelude"></a>Prelude</h2>
-
-<p>My hope is this cc will encourage you to consider your world in a larger scope, ask more questions
-about it, and recalculate your reality. It’s nice to sit around, sharing fundraisers and correcting
-misinformation, believing there are a well-defined set of steps we all can take to solve a common
-problem. But this is naive and unrealistic; if it were so easy, no problem would be hard.</p>
-
-<p>These ideas apply to many things, but the context of this cc is social problems. To that end, it
-doesn’t matter how many anti-racism protests you attend or how much money you donate towards
-eliminating homelessness if you can’t empathize with affected communities. Without empathy, you will
-quickly reach a barrier in your understanding another’s needs<span class="note"><label for="russia" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="russia" class="margin-toggle"><span class="sidenote">This comes from my experience in
-Russia – a white person who has only ever known other whites may not be a racist, but there is also
-no way for them to stand up for a black person (or any minority) in an effective manner.</span>.</p>
-
-<p>I hope the perspectives in this cc are of some use to you. At the same time, they are the thoughts
-of a single individual and should be scrutinized.</p>
-
-<h2 id="on-perspective">
-<a class="header-anchor" href="#on-perspective"></a>On perspective</h2>
-
-<p>It’s important for you and I to understand the roles we play in the problems we are invested in.
-Failing to understand this unsyncs our expectations with others’, which derailing priorities and
-causing internal conflicts. Understanding this is one part of <a href="#on-the-big-picture">the big picture</a>.</p>
-
-<p>The experiences of one individual will never be exactly like that of another.
-Commonalities can be found, but claiming lived experience of another’s life is absurd. This is why
-empathy and <a href="#on-research">research</a> become pivotal skills to master; you will never live
-another’s experience, but you can learn to empathize and try to understand another’s perspective.</p>
-
-<p>We must learn others’ perspectives if we are committed to solving problems together. There is a
-common mantra here that goes something like</p>
-
-<blockquote>
-  <p>Give people the help that they need, not the help you think they need.</p>
-</blockquote>
-
-<p>because if we only give the help we think others need, at best we’ve fallen out of sync, and at
-worst we’ve derailed the mission.</p>
-
-<p>There as a second, more subtle point to the above statement – hard problems are not about any one
-individual, and there are very rarely single heroes in their solutions. A good solution requires
-understanding the needs of hundreds of millions of people, which one individual can rarely do.</p>
-
-<p>Furthermore, though every individual has a contribution to make, the solutions to such problems are
-moonshots. And because nothing is perfect, an actions of an individual to help one group may be
-regressive to another group (see <a href="#on-intersectionality">intersectionality</a> below).</p>
-
-<h3 id="go">
-<a class="header-anchor" href="#go"></a>go!</h3>
-
-<p>Maybe this seems romantic. If that’s case, do <a href="#on-research">research</a> and speak to people involved
-in the things you care about. Keep sharing instagram stories and correcting ignorant statements, but
-recognize that without deeply understanding an issue, one’s actions are limited and often naive.</p>
-
-<h2 id="on-intersectionality">
-<a class="header-anchor" href="#on-intersectionality"></a>On intersectionality</h2>
-
-<p>Because no two individuals have the same lived experiences or perspectives, it’s impossible to
-design an exhaustive solution to an issue<span class="note"><label for="full-employment" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="full-employment" class="margin-toggle"><span class="sidenote">In mathematics, this is the
-<a href="https://en.wikipedia.org/wiki/Full_employment_theorem">full employment theorem</a>.</span>. I’m not
-saying we shouldn’t shoot for solutions that solve problems for everyone, but what I am saying is
-that we can’t spend all our time just looking for the “perfect” one because then nothing ever gets
-done, and no one is better off.</p>
-
-<p>So what is much more important is to shoot for milestones - maybe solutions that cover 90% of the
-problem, then 95%, then 99%, then 99.9%, and so on. Milestones prove that things are getting done,
-which is useful for morale and future investment.</p>
-
-<p>We also shouldn’t pretend that a 100% solution is ever readily available. It’s difficult to know the
-needs of everyone because the most relevant solutions will always focus on the needs of the majority
-of affected populations. No one can ever come out and say, “okay, I’ve solved X hard problem,” because
-they’ve certainly failed to consider an intersectionality<span class="note"><label for="intersectionality" class="margin-toggle">⊕</label></span><input type="checkbox" id="intersectionality" class="margin-toggle"><span class="marginnote"><a href="https://en.wikipedia.org/wiki/Intersectionality">Intersectionality</a> is the
-idea that some issues faced by an individual are formed by a combination of identities rather than
-a single one. For example, some issues faced a black woman are because they are black <em>and</em> a woman,
-rather than because they or black or a woman.</span>.</p>
-
-<p>Because of intersectionalities, the 90% solution may be orthogonal to solutions for the other 10%.
-As an example:</p>
-
-<blockquote>
-  <p>Consider ten people sleeping in a room. The room gets very hot, so one person turns on the cooler.
-But one person in the room is sleeping below the AC vent, and wakes up sick the next day. Despite
-the person being hot, simply turning on the AC did not fix all of their problems; the best solution
-for them is to move away from the vent.</p>
-</blockquote>
-
-<p>It’s pivotal that milestones don’t regress on the status quo. Of course, this itself is a hard problem.</p>
-
-<h2 id="on-the-big-picture">
-<a class="header-anchor" href="#on-the-big-picture"></a>On the big picture</h2>
-
-<p>It’s always important to step back and look at the big picture<span class="note"><label for="big-picture" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="big-picture" class="margin-toggle"><span class="sidenote">This is a vague term; for me the big picture is
-every level above the one currently being looked from.</span>. There are at least two reasons for this:</p>
-
-<ol>
-  <li>It forces one to consider the goal in the context of an environment with more stakeholders. As an
-example related to the previous section, maybe the problem can’t be wholly solved right now, but
-getting a smaller win proves progress is being made, raising interest and laying the foundation
-for future work.</li>
-  <li>Not everyone in the picture is aligned with your goals; maybe not even those you collaborate with.
-Failing to recognize the motivations of others is dangerous because it pushes you further out of
-understanding the context you are working in, and makes it more difficult to react to unexpected
-events. Taking help and trusting others is pivotal to achieving your goals, but such trust can’t
-be ignorant.</li>
-</ol>
-
-<h2 id="on-research">
-<a class="header-anchor" href="#on-research"></a>On research</h2>
-
-<p>Today, most answers to questions are designed to get the reader to take a specific perspective (this
-post is no different). So how do you find a definitive answer to something? In some sense, you
-can’t – at most, you can take samples of a number of different answers and aggregate them into
-your own understanding.</p>
-
-<p>Trust is difficult. Bill Gates found it difficult, so he started his own foundation instead of
-donating all his money to existing funds. So before you convince yourself you understand something,
-make sure you do research and are confident in your interpretation.</p>
-
-<h2 id="on-nomenclature">
-<a class="header-anchor" href="#on-nomenclature"></a>On nomenclature</h2>
-
-<p>The canonical usage of “problematic” is dangerous. Without a description of why something is
-“problematic”, saying something is “problematic” is equivalent to saying, “this statement says
-something bad, but I’m not going to tell you what it is or why it’s bad”. In that context,
-everything can be described as “problematic”, which is useless.</p>
-
-<p>To me, it is much more useful to describe an idea as dangerous, and explain why it is so.</p>
-
+  
+  
 </article>
 
 <section class="footer">
   
-  <a href="/articles/20/beauty">« Beauty</a>
+  <a href="/articles/20/beauty"
+    >&laquo; Beauty</a
+  >
   
-  <span><img class="emoji" title=":fog:" alt=":fog:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f32b.png" height="20" width="20"> 
-    <span>​
+  <span
+    ><img class='emoji' alt='fog' src='https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f32b.png' height=20 width=20></img>&emsp;
+    <span
+      >&#8203;
       <script type="math/tex">
         \omega = \left(\lambda x.\ x\ x \right)\left(\lambda x.\ x\ x\right)
-      </script></span>
+      </script></span
+    >
   </span>
   
-  <a href="/articles/20/heterogeneity-in-volunteering">Heterogeneity in Volunteering »</a>
+  <a href="/articles/20/heterogeneity-in-volunteering">Heterogeneity in Volunteering &raquo;</a>
   
 </section>
 
-<script src="https://utteranc.es/client.js" repo="ayazhafiz/gww-utterances" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+<script src="https://utteranc.es/client.js"
+        repo="ayazhafiz/gww-utterances"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 
 <script type="text/javascript">
@@ -299,11 +170,17 @@ everything can be described as “problematic”, which is useless.</p>
     <div class="bottom-bar">
     <details>
   <summary>Analytics</summary>
-  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/">Cloudflare Analytics</a>. No identifiable information is transmitted to Cloudflare. See
+  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/"
+    >Cloudflare Analytics</a
+  >. No identifiable information is transmitted to Cloudflare. See
   <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Analytics user privacy</a>.
 </details>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'></script>
-
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'
+></script>
+</details>
 
     </div>
   </body>

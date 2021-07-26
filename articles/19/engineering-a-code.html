@@ -46,6 +46,9 @@
       },
     }
   });
+  MathJax.Hub.Queue(function () {
+    document.body.setAttribute('render-done', '');
+  });
 </script>
 
 <script
@@ -53,13 +56,19 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
 ></script>
 
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/shiki.css?1627321097504450745"
+/>
+
 
 
 
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1626885286687102800"
+      href="/css/post.css?1627321097504450745"
     />
   </head>
 
@@ -70,100 +79,45 @@
       <div class="panel">
         <div class="column-right over-engineering a code-main">
           <section class="nav">
-  <a class="nav-link" href="/about">about</a><a class="nav-link" href="/cc">cc</a><a class="nav-link" href="/vis">vis</a><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
+  <a class="nav-link" href="/about">about</a
+  ><a class="nav-link" href="/cc">cc</a
+  ><a class="nav-link" href="/vis">vis</a
+  ><a class="nav-link" href="https://forms.gle/RhcifB1j5aecMPFA8">feedback</a>
 </section>
  <h1 class="title">Over-Engineering a Code</h1>
 <p class="byline">February 28, 2019</p>
 
 <article class="post">
-  <p>Say you are a software engineer, or developer, or whatever other abstracted
-word for <em>programmer</em> that has some meaning to you. Say you have also been given
-some scientific computation problem, like estimating the value of <span>​<script type="math/tex"> \pi </script></span> with the
-<a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo</a> method.</p>
-
-<blockquote>
-  <p>Inscribe a circle of radius <span>​<script type="math/tex"> \frac{1}{2} </script></span> in a square of length
-<span>​<script type="math/tex"> 1 </script></span>. Then the probability a random point generated in the
-square is also inside the circle is equal to the ratio of the circle’s area to the
-square’s, which is <span>​<script type="math/tex"> \frac{\pi}{4} </script></span>.</p>
-
-  <p>We now have a method for approximating <span>​<script type="math/tex"> \frac{\pi}{4} </script></span> by generating a set of
-random points in the square and finding the ratio of those points also inside the circle.
-This value multiplied by 4 gives us an estimate of <span>​<script type="math/tex"> \pi </script></span>, which becomes more
-precise with an increasing volume of generated points.</p>
-</blockquote>
-
-<p>Your friend is an electrical engineer, and knows how to program in JavaScript. She quickly codes a simple, easily-understandable procedure:</p>
-
-<noscript><pre>400: Invalid request</pre></noscript>
-<script src="https://gist.github.com/7eea1f8f18000c6ccdc3920cf2fd5076.js"> </script>
-
-<p>You<span class="note"><label for="actually-you" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="actually-you" class="margin-toggle"><span class="sidenote">perhaps vicariously through another</span>, having already taken on some abstracted title for yourself, chose instead to over-engineer her perfectly good solution to be <em>TheBestCode</em>™</p>
-
-<h2 id="1--everything-functional">
-<a class="header-anchor" href="#1--everything-functional"></a><span class="el">1:</span>  Everything Functional</h2>
-
-<p>Since the only operations done here are on an array, all the loops can be eliminated in favor of immutable function calls on the original array. Even the instantiation of random points in the array can be sugared into the initializer.</p>
-
-<noscript><pre>400: Invalid request</pre></noscript>
-<script src="https://gist.github.com/40fea356a4e4c0d305db57babac4120d.js"> </script>
-
-<h2 id="2--on-incircle">
-<a class="header-anchor" href="#2--on-incircle"></a><span class="el">2:</span>  On <code class="language-plaintext highlighter-rouge">inCircle</code>
-</h2>
-
-<p>~Idiomatic~<span class="note"><label for="new-age" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="new-age" class="margin-toggle"><span class="sidenote">read: new age</span> JavaScript calls for arrow notation on small functions, so that’s what we’ll do. We can also allow for a variable circle radius - of course, that’s totally useless for this example, but makes the function more ~scalable~. Finally, there is a marginal cost reduction in comparing the square of the euclidean distance to the square of the radius rather than computing a square root.</p>
-
-<p>This gives an artisanally-crafted code:</p>
-
-<noscript><pre>400: Invalid request</pre></noscript>
-<script src="https://gist.github.com/506d11f17b7b54cd5c027f0df809d013.js"> </script>
-
-<p>We’re not done yet. If we take a quarter circle of radius 1 inscribed in the square instead, the ratio of quarter-circle-to-square area remains <span>​<script type="math/tex"> {\pi\over4} </script></span>, but now the center of the circle is at the origin, which eliminates two subtractions in the function call. The code is made even more idiomatic with JavaScript’s exponentiation operator.</p>
-
-<p>For now, this will be our final form:</p>
-
-<noscript><pre>400: Invalid request</pre></noscript>
-<script src="https://gist.github.com/559d68654cf90acf049dd5abdcdb7ad0.js"> </script>
-
-<h2 id="3--defining-and-objectifying">
-<a class="header-anchor" href="#3--defining-and-objectifying"></a><span class="el">3:</span>  Defining and Objectifying</h2>
-
-<p>But what <em>is</em> a point? In this case, a pair of <span>​<script type="math/tex"> (x, y) </script></span> coordinates. Let’s define the points as named tuples:</p>
-
-<noscript><pre>400: Invalid request</pre></noscript>
-<script src="https://gist.github.com/85e4c911e098091730f50e3516fe8047.js"> </script>
-
-<p>We abstracted <code class="language-plaintext highlighter-rouge">inCircle</code> to be of any radius earlier, but of course that’s kind of useless since the function is specifically designed for measuring <span>​<script type="math/tex"> \pi </script></span>. What we should do is wrap our estimation script into one experimentation procedure that accepts a variable point sample size. This is the <strong>ultimate abstraction</strong> we could ask for.</p>
-
-<p>After a multitude of revisions and totally misaligned priorities, we arrive to modular paradise.</p>
-
-<noscript><pre>400: Invalid request</pre></noscript>
-<script src="https://gist.github.com/603d939e1038673380eb5b1892169c2c.js"> </script>
-
-<h2 id="4--why">
-<a class="header-anchor" href="#4--why"></a><span class="el">4:</span>  Why?</h2>
-
-<p>I’m not sure. I would love to give a practical reason to over-engineering small codes besides as an exercise in program design, but I’m not sure there is one. If you think of one, please <a href="mailto:ayaz.hafiz.1@gmail.com?subject=A%20good%20reason%20for%20over-engineering">let me know</a>. Otherwise, perhaps the only lesson here is that I have some kind of compulsion for modularizing codes to my liking.</p>
-
+  
+  
 </article>
 
 <section class="footer">
   
-  <a href="/articles/18/where-im-going">« Where I'm Going</a>
+  <a href="/articles/18/the-case-of-the-missing-alcohol"
+    >&laquo; The Case of the Missing Alcohol Proton</a
+  >
   
-  <span><img class="emoji" title=":strawberry:" alt=":strawberry:" src="https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f353.png" height="20" width="20"> 
-    <span>​
+  <span
+    ><img class='emoji' alt='strawberry' src='https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f353.png' height=20 width=20></img>&emsp;
+    <span
+      >&#8203;
       <script type="math/tex">
         \Gamma\left({1\over2}\right) = \sqrt{\pi}
-      </script></span>
+      </script></span
+    >
   </span>
   
-  <a href="/articles/19/tiling-wm-macos">A macOS Workspace With a Tiling WM »</a>
+  <a href="/articles/19/tiling-wm-macos">A macOS Workspace With a Tiling WM &raquo;</a>
   
 </section>
 
-<script src="https://utteranc.es/client.js" repo="ayazhafiz/gww-utterances" issue-term="title" theme="github-light" crossorigin="anonymous" async>
+<script src="https://utteranc.es/client.js"
+        repo="ayazhafiz/gww-utterances"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 
 <script type="text/javascript">
@@ -216,11 +170,17 @@ precise with an increasing volume of generated points.</p>
     <div class="bottom-bar">
     <details>
   <summary>Analytics</summary>
-  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/">Cloudflare Analytics</a>. No identifiable information is transmitted to Cloudflare. See
+  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/"
+    >Cloudflare Analytics</a
+  >. No identifiable information is transmitted to Cloudflare. See
   <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Analytics user privacy</a>.
 </details>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'></script>
-
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "b05fc9afcf934102b63abb987d29e9b4"}'
+></script>
+</details>
 
     </div>
   </body>
