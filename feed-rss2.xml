@@ -7,6 +7,14 @@
 		<atom:link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Emulating the Lambda Calculus in TypeScript's Type System</title>
+				<description>We show that the TypeScript type system can emulate the lambda calculus, thereby providing a proof that the type system is Turing-complete.</description>
+				<pubDate>Wed, 28 Jul 2021 03:00:00 -0500</pubDate>
+				<link>https://ayazhafiz.com/articles/21/typescript-type-system-lambda-calculus</link>
+				<guid isPermaLink="true">https://ayazhafiz.com/articles/21/typescript-type-system-lambda-calculus</guid>
+			</item>
+		
+			<item>
 				<title>Type Inference for &lt;em&gt;Sound and Complete Flow Typing&lt;/em&gt;</title>
 				<description>We design a type inference algorithm for the FT calculus of &quot;Sound and Complete Flow Typing with Unions, Intersections, and Negations&quot; (Pearce 2012), proving that it infers minimal types where they are expressible and infers all minimal user-typable types.</description>
 				<pubDate>Mon, 28 Jun 2021 03:00:00 -0500</pubDate>
@@ -76,14 +84,6 @@
 				<pubDate>Tue, 01 Dec 2020 02:00:00 -0600</pubDate>
 				<link>https://ayazhafiz.com/articles/20/impact-vs-innovation</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/impact-vs-innovation</guid>
-			</item>
-		
-			<item>
-				<title>Heterogeneity in Volunteering</title>
-				<description>Some notes on differing motivations for volunteering and social impact.</description>
-				<pubDate>Mon, 21 Sep 2020 03:00:00 -0500</pubDate>
-				<link>https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering</link>
-				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/heterogeneity-in-volunteering</guid>
 			</item>
 		
 	</channel>
