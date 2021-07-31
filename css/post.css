@@ -787,12 +787,9 @@ pre {
 
 .byline {
   color: rgba(0, 0, 0, 0.5);
-  margin: 1rem 0 2rem; }
+  margin: 1rem 0 1rem; }
   .byline + * {
     margin-top: 0; }
-  @media only screen and (max-width: 760px) {
-    .byline {
-      margin-top: 0; } }
 
 @media only screen and (max-width: 760px) {
   .post-group h1,
