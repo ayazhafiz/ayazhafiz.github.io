@@ -169,6 +169,61 @@ section.nav {
   .bottom-bar details > summary::-webkit-details-marker {
     display: none; }
 
+img {
+  max-width: 100%; }
+
+figure {
+  -webkit-margin-end: 0;
+  -webkit-margin-start: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  padding: 0;
+  vertical-align: baseline;
+  text-align: center; }
+
+figcaption {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-left: 10%;
+  position: relative;
+  text-align: center;
+  vertical-align: baseline;
+  width: 80%; }
+  figcaption code {
+    font-size: 0.8rem; }
+
+.math {
+  outline-offset: 0.5em;
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  -webkit-margin-after: 1em;
+          margin-block-end: 1em;
+  -webkit-margin-start: 0px;
+          margin-inline-start: 0px;
+  -webkit-margin-end: 0px;
+          margin-inline-end: 0px; }
+  .math.premise {
+    outline: 1px dashed black; }
+  .math.problem {
+    outline: 1px solid black; }
+  .math.prop, .math.lemma, .math.cor {
+    position: relative; }
+    .math.prop::after, .math.lemma::after, .math.cor::after {
+      font-size: 1.8em;
+      content: "\25FB";
+      position: absolute;
+      bottom: 0;
+      right: 0; }
+  .math.algorithm {
+    overflow: scroll; }
+    .math.algorithm blockquote {
+      opacity: 1; }
+    .math.algorithm li {
+      font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
+
 span.newthought {
   font-size: 1.2em;
   font-variant: small-caps;
@@ -220,6 +275,49 @@ span.el {
     background-color: #ccc; }
   .color.ts {
     background-color: #2b7489; }
+
+.gist {
+  margin-left: -2em; }
+  @media only screen and (max-width: 760px) {
+    .gist {
+      margin-left: 0;
+      width: 100%; } }
+  .gist table.highlight {
+    margin: 0.5em 0; }
+  .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
+    font-size: 11px; }
+    @media screen and (min-width: 350px) {
+      .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
+        font-size: 12px; } }
+    @media screen and (min-width: 600px) {
+      .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
+        font-size: 13px; } }
+    @media screen and (min-width: 900px) {
+      .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
+        font-size: 14px; } }
+  .gist .gist-meta {
+    display: none; }
+  .gist .gist-data {
+    border-bottom: none !important; }
+
+.mathblock {
+  overflow-x: scroll; }
+  @media only screen and (max-width: 760px) {
+    .mathblock {
+      width: 100%; } }
+
+.resp-iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%; }
+
+.resp-iframe-container {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative; }
 
 @media only screen and (max-width: 960px) {
   section.self {
@@ -294,6 +392,9 @@ section.self-image {
       content: "nme";
       left: unset;
       right: 1em; }
+
+h2 {
+  margin-bottom: 1em; }
 
 .vis-img {
   line-height: 0;
