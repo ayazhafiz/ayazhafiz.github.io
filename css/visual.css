@@ -396,7 +396,7 @@ section.self-image {
 h2 {
   margin-bottom: 1em; }
 
-.vis-img {
+.visual-img {
   line-height: 0;
   -moz-column-count: 3;
        column-count: 3;
@@ -406,9 +406,9 @@ h2 {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none; }
-  .vis-img p {
+  .visual-img p {
     margin: 0; }
-  .vis-img img {
+  .visual-img img {
     width: 100%;
     height: auto;
     margin: 0 0 2em; }
