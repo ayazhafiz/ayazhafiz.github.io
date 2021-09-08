@@ -82,7 +82,6 @@ pre .code-container:hover a {
   opacity: 1; }
 
 pre code {
-  font-size: 15px;
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
   white-space: pre;
   -webkit-overflow-scrolling: touch; }
