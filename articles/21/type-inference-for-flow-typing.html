@@ -131,7 +131,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1646529358157101282"
+  href="/css/shiki.css?1648918404483982330"
 />
 
 
@@ -140,7 +140,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1646529358157101282"
+      href="/css/post.css?1648918404483982330"
     />
   </head>
 
@@ -239,8 +239,7 @@ computing a universal return type once.</p>
   if x is int|(int, int)
   then 9
   else x
-in (f 1, f (1, 2, 3))
-</span></div></code></div></pre>
+in (f 1, f (1, 2, 3))</span></div></code></div></pre>
 <p>First we check the declaration <code>f</code>, where <code>x</code> will be typed as $\int\lor(\int,\int)$ in the <code>then</code> branch, and $\any\land\lnot(\int\lor(\int,\int))$ in the
 the <code>else</code> branch. When checking the application <code>f 1</code>, we
 first check if $\typeof\ \mathtt{1}$ is a subtype of $\any$ (using a subtyping operator $\st$, described below), then check the body
@@ -488,15 +487,13 @@ solvable variables, this definition of $\infer$ is not complete for program shap
 <p>As an example of a program shape for which the definition above is incomplete, consider</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn f(x: infer 1) = x in
 fn g(y: infer 2) = f y in
-g (f 1)
-</span></div></code></div></pre>
+g (f 1)</span></div></code></div></pre>
 <p>we have that $\LB(x, \PS) = \left\{y^?,\int\right\}$ and $\LB(y, \PS) =
 \left\{x^?\right\}$, so no variable is solvable. But $[x^?\to\int,
 y^?\to\int]\PS$ yields the following well-typed program</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn f(x: int) = x in
 fn g(y: int) = f y in
-g (f 1)
-</span></div></code></div></pre>
+g (f 1)</span></div></code></div></pre>
 <p>Throughout the rest of this section, we describe how to resolve inference variables in
 the presence of cycles, and prove that our updated method is complete. Our roadmap will be to</p>
 <ul>

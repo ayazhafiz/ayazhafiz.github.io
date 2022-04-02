@@ -1,427 +1,203 @@
-html {
-  font-size: 12px;
-  height: 100%; }
-  @media screen and (min-width: 350px) {
-    html {
-      font-size: 13px; } }
-  @media screen and (min-width: 600px) {
-    html {
-      font-size: 14px; } }
-  @media screen and (min-width: 900px) {
-    html {
-      font-size: 15px; } }
-  @media screen and (min-width: 1000px) {
-    html {
-      font-size: 16px; } }
+html { font-size: 12px; height: 100%; }
 
-body,
-html {
-  margin: 0;
-  width: 100%; }
+@media screen and (min-width: 350px) { html { font-size: 13px; } }
 
-body {
-  -webkit-text-size-adjust: 100%;
-  -ms-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-  background-color: white;
-  color: #172b4c;
-  counter-reset: sidenote-counter;
-  font-family: -apple-system-font, BlinkMacSystemFont, Helvetica, Helvetica Neue, Segoe UI, Roboto, Arial, sans-serif;
-  font-weight: 300;
-  line-height: 2em;
-  margin: auto;
-  min-height: 100%;
-  text-align: justify;
-  overflow-x: hidden;
-  position: relative; }
+@media screen and (min-width: 600px) { html { font-size: 14px; } }
 
-h1,
-h2,
-h3 {
-  font-weight: 400;
-  line-height: 1;
-  margin: 1.5em 0;
-  text-align: left; }
+@media screen and (min-width: 900px) { html { font-size: 15px; } }
 
-h2,
-h3 {
-  margin-bottom: 0; }
+@media screen and (min-width: 1000px) { html { font-size: 16px; } }
 
-h1 {
-  font-size: 3.2rem;
-  margin-bottom: 1.5rem;
-  margin-top: 0; }
+body, html { margin: 0; width: 100%; }
 
-h2 {
-  font-size: 2.4rem; }
+body { -webkit-text-size-adjust: 100%; -ms-hyphens: auto; -webkit-hyphens: auto; hyphens: auto; background-color: white; color: #172b4c; counter-reset: sidenote-counter; font-family: -apple-system-font, BlinkMacSystemFont, Helvetica, Helvetica Neue, Segoe UI, Roboto, Arial, sans-serif; font-weight: 300; line-height: 2em; margin: auto; min-height: 100%; text-align: justify; overflow-x: hidden; position: relative; }
 
-h3 {
-  font-size: 1.7rem; }
+h1, h2, h3 { font-weight: 400; line-height: 1; margin: 1.5em 0; text-align: left; }
 
-a {
-  font-weight: 400;
-  text-decoration: none; }
-  a, a:hover, a:active {
-    color: #0366d6; }
-  a:hover {
-    text-decoration: underline; }
+h2, h3 { margin-bottom: 0; }
 
-code {
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
+h1 { font-size: 3.2rem; margin-bottom: 1.5rem; margin-top: 0; }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-left: -1em;
-  padding-left: 1em;
-  position: relative; }
-  h1:hover .header-anchor,
-  h2:hover .header-anchor,
-  h3:hover .header-anchor,
-  h4:hover .header-anchor,
-  h5:hover .header-anchor,
-  h6:hover .header-anchor {
-    display: block; }
-    h1:hover .header-anchor:before,
-    h2:hover .header-anchor:before,
-    h3:hover .header-anchor:before,
-    h4:hover .header-anchor:before,
-    h5:hover .header-anchor:before,
-    h6:hover .header-anchor:before {
-      left: 0;
-      top: 0;
-      content: "#"; }
+h2 { font-size: 2.4rem; }
 
-a.header-anchor {
-  top: 0;
-  color: #777777;
-  display: none;
-  font-style: normal;
-  left: 0.2em;
-  position: absolute; }
-  a.header-anchor:hover, a.header-anchor:active {
-    color: #0366d6;
-    display: block; }
+h3 { font-size: 1.7rem; }
 
-.container {
-  padding: 9em 3em;
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  max-width: 800px;
-  position: relative; }
-  @media only screen and (max-width: 760px) {
-    .container {
-      padding: 2em 7.5%; } }
+a { font-weight: 400; text-decoration: none; }
 
-.panel {
-  display: flex;
-  flex-flow: row wrap-reverse;
-  width: 100%; }
-  @media only screen and (max-width: 960px) {
-    .panel {
-      flex-flow: column-reverse; } }
+a, a:hover, a:active { color: #0366d6; }
 
-.column-left {
-  display: flex;
-  flex: 1 0;
-  justify-content: center;
-  margin: 5em 2em 0 0;
-  max-width: 100%; }
-  @media only screen and (max-width: 760px) {
-    .column-left {
-      margin: 2em 0; } }
+a:hover { text-decoration: underline; }
 
-.column-right {
-  flex: 3 0;
-  max-width: 100%;
-  margin: auto; }
+code { font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
 
-section.nav {
-  margin-bottom: 2em; }
+h1, h2, h3, h4, h5, h6 { margin-left: -1em; padding-left: 1em; position: relative; }
 
-.nav-link {
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 1.2em; }
-  .nav-link:not(.no-margin) {
-    margin-right: 2em; }
-  .nav-link:not(*) {
-    color: #0366d6; }
+h1:hover .header-anchor, h2:hover .header-anchor, h3:hover .header-anchor, h4:hover .header-anchor, h5:hover .header-anchor, h6:hover .header-anchor { display: block; }
 
-.bottom-bar {
-  padding: 0 1em;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  font-size: 0.7em; }
-  .bottom-bar details[open] > summary {
-    font-weight: bold; }
-  .bottom-bar details > summary {
-    color: rgba(0, 0, 0, 0.6);
-    cursor: help;
-    list-style-type: none;
-    outline: none; }
-  .bottom-bar details > summary::-webkit-details-marker {
-    display: none; }
+h1:hover .header-anchor:before, h2:hover .header-anchor:before, h3:hover .header-anchor:before, h4:hover .header-anchor:before, h5:hover .header-anchor:before, h6:hover .header-anchor:before { left: 0; top: 0; content: "#"; }
 
-img {
-  max-width: 100%; }
+a.header-anchor { top: 0; color: #777777; display: none; font-style: normal; left: 0.2em; position: absolute; }
 
-figure {
-  -webkit-margin-end: 0;
-  -webkit-margin-start: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  padding: 0;
-  vertical-align: baseline;
-  text-align: center; }
+a.header-anchor:hover, a.header-anchor:active { color: #0366d6; display: block; }
 
-figcaption {
-  font-size: 0.8rem;
-  line-height: 1.5;
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-left: 10%;
-  position: relative;
-  text-align: center;
-  vertical-align: baseline;
-  width: 80%; }
-  figcaption code {
-    font-size: 0.8rem; }
+.container { padding: 9em 3em; display: flex; justify-content: center; margin: auto; max-width: 800px; position: relative; }
 
-.math {
-  outline-offset: 0.5em;
-  -webkit-margin-before: 1em;
-          margin-block-start: 1em;
-  -webkit-margin-after: 1em;
-          margin-block-end: 1em;
-  -webkit-margin-start: 0px;
-          margin-inline-start: 0px;
-  -webkit-margin-end: 0px;
-          margin-inline-end: 0px; }
-  .math.premise {
-    outline: 1px dashed black; }
-  .math.problem {
-    outline: 1px solid black; }
-  .math.prop, .math.lemma, .math.cor {
-    position: relative; }
-    .math.prop::after, .math.lemma::after, .math.cor::after {
-      font-size: 1.8em;
-      content: "\25FB";
-      position: absolute;
-      bottom: 0;
-      right: 0; }
-  .math.algorithm {
-    overflow: scroll; }
-    .math.algorithm blockquote {
-      opacity: 1; }
-    .math.algorithm li {
-      font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
+@media only screen and (max-width: 760px) { .container { padding: 2em 7.5%; } }
 
-span.newthought {
-  font-size: 1.2em;
-  font-variant: small-caps;
-  letter-spacing: 0.05rem; }
-span.tag, span.croissant {
-  color: rgba(0, 0, 0, 0.5);
-  display: inline-block;
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
-  margin-left: 1em; }
-span.el {
-  color: rgba(0, 0, 0, 0.5); }
+.panel { display: flex; flex-flow: row wrap-reverse; width: 100%; }
 
-.emoji {
-  height: 1em;
-  vertical-align: -5%;
-  width: 1em; }
+@media only screen and (max-width: 960px) { .panel { flex-flow: column-reverse; } }
 
-.color {
-  border-radius: 50%;
-  display: inline-block;
-  height: 1.5rem;
-  margin-right: 0.5em;
-  position: relative;
-  width: 1.5rem;
-  vertical-align: bottom; }
-  .color.c {
-    background-color: #555; }
-  .color.cpp {
-    background-color: #f34b7d; }
-  .color.cr {
-    background-color: #000100; }
-  .color.css {
-    background-color: #563d7c; }
-  .color.html {
-    background-color: #e34c26; }
-  .color.java {
-    background-color: #b07219; }
-  .color.js {
-    background-color: #f1e05a; }
-  .color.py {
-    background-color: #3572a5; }
-  .color.r {
-    background-color: #198ce7; }
-  .color.rb {
-    background-color: #701516; }
-  .color.rs {
-    background-color: #dea584; }
-  .color.sql {
-    background-color: #ccc; }
-  .color.ts {
-    background-color: #2b7489; }
+.column-left { display: flex; flex: 1 0; justify-content: center; margin: 5em 2em 0 0; max-width: 100%; }
 
-.gist {
-  margin-left: -2em; }
-  @media only screen and (max-width: 760px) {
-    .gist {
-      margin-left: 0;
-      width: 100%; } }
-  .gist table.highlight {
-    margin: 0.5em 0; }
-  .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
-    font-size: 11px; }
-    @media screen and (min-width: 350px) {
-      .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
-        font-size: 12px; } }
-    @media screen and (min-width: 600px) {
-      .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
-        font-size: 13px; } }
-    @media screen and (min-width: 900px) {
-      .gist tbody tr td.blob-num, .gist tbody tr td.blob-code {
-        font-size: 14px; } }
-  .gist .gist-meta {
-    display: none; }
-  .gist .gist-data {
-    border-bottom: none !important; }
+@media only screen and (max-width: 760px) { .column-left { margin: 2em 0; } }
 
-.mathblock {
-  overflow-x: scroll; }
-  @media only screen and (max-width: 760px) {
-    .mathblock {
-      width: 100%; } }
+.column-right { flex: 3 0; max-width: 100%; margin: auto; }
 
-.resp-iframe {
-  border: 0;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%; }
+section.nav { margin-bottom: 2em; }
 
-.resp-iframe-container {
-  overflow: hidden;
-  padding-top: 56.25%;
-  position: relative; }
+.nav-link { color: rgba(0, 0, 0, 0.6); font-size: 1.2em; }
 
-@media only screen and (max-width: 960px) {
-  section.self {
-    align-items: flex-end;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%; } }
+.nav-link:not(.no-margin) { margin-right: 2em; }
 
-section.self-links .link-container:last-of-type {
-  margin-bottom: 0; }
-section.self-links .link-title {
-  display: block;
-  line-height: 1em; }
+.nav-link:not(*) { color: #0366d6; }
 
-section.self-image {
-  background-image: url("/assets/img/self.jpg");
-  background-size: contain;
-  -webkit-clip-path: polygon(0% 100%, 100.09% 99.91%, 100.09% 62.3%, 99.73% 60.88%, 99.29% 57.88%, 98.58% 54.78%, 97.96% 51.59%, 97.08% 48.41%, 95.93% 46.55%, 95.84% 45.75%, 95.49% 44.78%, 94.42% 43.63%, 93.1% 42.21%, 91.5% 40.62%, 90.18% 39.91%, 89.2% 39.38%, 87.79% 38.76%, 85.31% 38.41%, 83.81% 38.41%, 82.57% 38.76%, 81.33% 39.38%, 80.27% 39.29%, 78.94% 39.56%, 77.43% 40.62%, 75.84% 41.86%, 74.78% 43.54%, 73.98% 44.51%, 72.92% 46.19%, 72.04% 48.32%, 71.42% 50.44%, 71.59% 52.83%, 71.33% 53.81%, 71.33% 56.37%, 70.97% 58.23%, 70.97% 59.82%, 71.15% 62.74%, 71.42% 64.87%, 71.42% 66.64%, 71.33% 68.23%, 71.06% 69.12%, 70.35% 69.56%, 69.56% 69.73%, 68.14% 70%, 66.19% 70.62%, 64.87% 70.88%, 63.98% 70.62%, 63.27% 70.62%, 62.21% 70.88%, 61.59% 71.15%, 60.27% 72.3%, 60.18% 73.89%, 60.8% 75.04%, 59.56% 76.37%, 58.76% 77.7%, 58.05% 79.47%, 57.61% 81.24%, 57.61% 83.45%, 57.43% 85.58%, 58.14% 99.91%, 57.7% 100%, 53.45% 90.8%, 53.01% 87.52%, 51.42% 84.16%, 49.47% 81.77%, 47.35% 79.29%, 45.66% 77.08%, 44.34% 76.19%, 38.58% 73.63%, 35.04% 72.21%, 27.17% 70.53%, 29.56% 66.11%, 30.44% 62.3%, 30.71% 61.15%, 30.62% 59.03%, 30.62% 57.17%, 31.59% 55.58%, 31.06% 54.69%, 31.06% 52.12%, 31.24% 50.09%, 30.44% 46.28%, 29.2% 43.36%, 27.96% 40.09%, 26.19% 38.32%, 24.25% 37.35%, 21.5% 35.93%, 20.27% 35.93%, 19.29% 35.22%, 17.43% 35.22%, 16.81% 34.6%, 15.49% 34.25%, 14.25% 34.25%, 13.72% 34.87%, 13.19% 34.51%, 12.12% 34.51%, 10.8% 34.87%, 10.09% 34.6%, 10.18% 35.84%, 10% 37.7%, 9.2% 38.76%, 8.14% 40.09%, 6.9% 41.5%, 5.4% 43.54%, 3.81% 46.19%, 3.1% 49.91%, 2.83% 53.45%, 2.48% 56.02%, 2.39% 58.23%, 2.83% 60.53%, 4.07% 62.39%, 5.49% 63.36%, 6.64% 63.54%, 7.08% 67.26%, 2.92% 72.21%, 0% 74.69%);
-          clip-path: polygon(0% 100%, 100.09% 99.91%, 100.09% 62.3%, 99.73% 60.88%, 99.29% 57.88%, 98.58% 54.78%, 97.96% 51.59%, 97.08% 48.41%, 95.93% 46.55%, 95.84% 45.75%, 95.49% 44.78%, 94.42% 43.63%, 93.1% 42.21%, 91.5% 40.62%, 90.18% 39.91%, 89.2% 39.38%, 87.79% 38.76%, 85.31% 38.41%, 83.81% 38.41%, 82.57% 38.76%, 81.33% 39.38%, 80.27% 39.29%, 78.94% 39.56%, 77.43% 40.62%, 75.84% 41.86%, 74.78% 43.54%, 73.98% 44.51%, 72.92% 46.19%, 72.04% 48.32%, 71.42% 50.44%, 71.59% 52.83%, 71.33% 53.81%, 71.33% 56.37%, 70.97% 58.23%, 70.97% 59.82%, 71.15% 62.74%, 71.42% 64.87%, 71.42% 66.64%, 71.33% 68.23%, 71.06% 69.12%, 70.35% 69.56%, 69.56% 69.73%, 68.14% 70%, 66.19% 70.62%, 64.87% 70.88%, 63.98% 70.62%, 63.27% 70.62%, 62.21% 70.88%, 61.59% 71.15%, 60.27% 72.3%, 60.18% 73.89%, 60.8% 75.04%, 59.56% 76.37%, 58.76% 77.7%, 58.05% 79.47%, 57.61% 81.24%, 57.61% 83.45%, 57.43% 85.58%, 58.14% 99.91%, 57.7% 100%, 53.45% 90.8%, 53.01% 87.52%, 51.42% 84.16%, 49.47% 81.77%, 47.35% 79.29%, 45.66% 77.08%, 44.34% 76.19%, 38.58% 73.63%, 35.04% 72.21%, 27.17% 70.53%, 29.56% 66.11%, 30.44% 62.3%, 30.71% 61.15%, 30.62% 59.03%, 30.62% 57.17%, 31.59% 55.58%, 31.06% 54.69%, 31.06% 52.12%, 31.24% 50.09%, 30.44% 46.28%, 29.2% 43.36%, 27.96% 40.09%, 26.19% 38.32%, 24.25% 37.35%, 21.5% 35.93%, 20.27% 35.93%, 19.29% 35.22%, 17.43% 35.22%, 16.81% 34.6%, 15.49% 34.25%, 14.25% 34.25%, 13.72% 34.87%, 13.19% 34.51%, 12.12% 34.51%, 10.8% 34.87%, 10.09% 34.6%, 10.18% 35.84%, 10% 37.7%, 9.2% 38.76%, 8.14% 40.09%, 6.9% 41.5%, 5.4% 43.54%, 3.81% 46.19%, 3.1% 49.91%, 2.83% 53.45%, 2.48% 56.02%, 2.39% 58.23%, 2.83% 60.53%, 4.07% 62.39%, 5.49% 63.36%, 6.64% 63.54%, 7.08% 67.26%, 2.92% 72.21%, 0% 74.69%);
-  height: 10em;
-  margin: -3em 0 1.5em;
-  min-width: 10em;
-  opacity: 0.7;
-  position: relative;
-  width: 10em; }
-  @media only screen and (max-width: 760px) {
-    section.self-image {
-      margin-right: 2em;
-      margin-bottom: 0; } }
-  section.self-image:hover {
-    opacity: 0.85; }
-  section.self-image .self-clip,
-  section.self-image .other-clip {
-    height: 100%;
-    position: absolute;
-    width: 100%; }
-    section.self-image .self-clip:hover::before, section.self-image .self-clip:hover::after,
-    section.self-image .other-clip:hover::before,
-    section.self-image .other-clip:hover::after {
-      display: block; }
-    section.self-image .self-clip::before, section.self-image .self-clip::after,
-    section.self-image .other-clip::before,
-    section.self-image .other-clip::after {
-      display: none; }
-    section.self-image .self-clip::before,
-    section.self-image .other-clip::before {
-      content: "";
-      height: 100%;
-      position: absolute;
-      width: 100%; }
-    section.self-image .self-clip::after,
-    section.self-image .other-clip::after {
-      bottom: 0.2em;
-      color: white;
-      left: 15%;
-      position: absolute; }
-  section.self-image .self-clip {
-    -webkit-clip-path: polygon(0% 100%, 57.7% 100%, 53.45% 90.8%, 53.01% 87.52%, 51.42% 84.16%, 49.47% 81.77%, 47.35% 79.29%, 45.66% 77.08%, 44.34% 76.19%, 38.58% 73.63%, 35.04% 72.21%, 27.17% 70.53%, 29.56% 66.11%, 30.44% 62.3%, 30.71% 61.15%, 30.62% 59.03%, 30.62% 57.17%, 31.59% 55.58%, 31.06% 54.69%, 31.06% 52.12%, 31.24% 50.09%, 30.44% 46.28%, 29.2% 43.36%, 27.96% 40.09%, 26.19% 38.32%, 24.25% 37.35%, 21.5% 35.93%, 20.27% 35.93%, 19.29% 35.22%, 17.43% 35.22%, 16.81% 34.6%, 15.49% 34.25%, 14.25% 34.25%, 13.72% 34.87%, 13.19% 34.51%, 12.12% 34.51%, 10.8% 34.87%, 10.09% 34.6%, 10.18% 35.84%, 10% 37.7%, 9.2% 38.76%, 8.14% 40.09%, 6.9% 41.5%, 5.4% 43.54%, 3.81% 46.19%, 3.1% 49.91%, 2.83% 53.45%, 2.48% 56.02%, 2.39% 58.23%, 2.83% 60.53%, 4.07% 62.39%, 5.49% 63.36%, 6.64% 63.54%, 7.08% 67.26%, 2.92% 72.21%, 0% 74.69%);
-            clip-path: polygon(0% 100%, 57.7% 100%, 53.45% 90.8%, 53.01% 87.52%, 51.42% 84.16%, 49.47% 81.77%, 47.35% 79.29%, 45.66% 77.08%, 44.34% 76.19%, 38.58% 73.63%, 35.04% 72.21%, 27.17% 70.53%, 29.56% 66.11%, 30.44% 62.3%, 30.71% 61.15%, 30.62% 59.03%, 30.62% 57.17%, 31.59% 55.58%, 31.06% 54.69%, 31.06% 52.12%, 31.24% 50.09%, 30.44% 46.28%, 29.2% 43.36%, 27.96% 40.09%, 26.19% 38.32%, 24.25% 37.35%, 21.5% 35.93%, 20.27% 35.93%, 19.29% 35.22%, 17.43% 35.22%, 16.81% 34.6%, 15.49% 34.25%, 14.25% 34.25%, 13.72% 34.87%, 13.19% 34.51%, 12.12% 34.51%, 10.8% 34.87%, 10.09% 34.6%, 10.18% 35.84%, 10% 37.7%, 9.2% 38.76%, 8.14% 40.09%, 6.9% 41.5%, 5.4% 43.54%, 3.81% 46.19%, 3.1% 49.91%, 2.83% 53.45%, 2.48% 56.02%, 2.39% 58.23%, 2.83% 60.53%, 4.07% 62.39%, 5.49% 63.36%, 6.64% 63.54%, 7.08% 67.26%, 2.92% 72.21%, 0% 74.69%); }
-    section.self-image .self-clip::before {
-      background: rgba(255, 128, 0, 0.5); }
-    section.self-image .self-clip::after {
-      content: "me"; }
-  section.self-image .other-clip {
-    -webkit-clip-path: polygon(0% 100%, 100.09% 99.91%, 100.09% 62.3%, 99.73% 60.88%, 99.29% 57.88%, 98.58% 54.78%, 97.96% 51.59%, 97.08% 48.41%, 95.93% 46.55%, 95.84% 45.75%, 95.49% 44.78%, 94.42% 43.63%, 93.1% 42.21%, 91.5% 40.62%, 90.18% 39.91%, 89.2% 39.38%, 87.79% 38.76%, 85.31% 38.41%, 83.81% 38.41%, 82.57% 38.76%, 81.33% 39.38%, 80.27% 39.29%, 78.94% 39.56%, 77.43% 40.62%, 75.84% 41.86%, 74.78% 43.54%, 73.98% 44.51%, 72.92% 46.19%, 72.04% 48.32%, 71.42% 50.44%, 71.59% 52.83%, 71.33% 53.81%, 71.33% 56.37%, 70.97% 58.23%, 70.97% 59.82%, 71.15% 62.74%, 71.42% 64.87%, 71.42% 66.64%, 71.33% 68.23%, 71.06% 69.12%, 70.35% 69.56%, 69.56% 69.73%, 68.14% 70%, 66.19% 70.62%, 64.87% 70.88%, 63.98% 70.62%, 63.27% 70.62%, 62.21% 70.88%, 61.59% 71.15%, 60.27% 72.3%, 60.18% 73.89%, 60.8% 75.04%, 59.56% 76.37%, 58.76% 77.7%, 58.05% 79.47%, 57.61% 81.24%, 57.61% 83.45%, 57.43% 85.58%, 58.14% 99.91%, 57.7% 100%);
-            clip-path: polygon(0% 100%, 100.09% 99.91%, 100.09% 62.3%, 99.73% 60.88%, 99.29% 57.88%, 98.58% 54.78%, 97.96% 51.59%, 97.08% 48.41%, 95.93% 46.55%, 95.84% 45.75%, 95.49% 44.78%, 94.42% 43.63%, 93.1% 42.21%, 91.5% 40.62%, 90.18% 39.91%, 89.2% 39.38%, 87.79% 38.76%, 85.31% 38.41%, 83.81% 38.41%, 82.57% 38.76%, 81.33% 39.38%, 80.27% 39.29%, 78.94% 39.56%, 77.43% 40.62%, 75.84% 41.86%, 74.78% 43.54%, 73.98% 44.51%, 72.92% 46.19%, 72.04% 48.32%, 71.42% 50.44%, 71.59% 52.83%, 71.33% 53.81%, 71.33% 56.37%, 70.97% 58.23%, 70.97% 59.82%, 71.15% 62.74%, 71.42% 64.87%, 71.42% 66.64%, 71.33% 68.23%, 71.06% 69.12%, 70.35% 69.56%, 69.56% 69.73%, 68.14% 70%, 66.19% 70.62%, 64.87% 70.88%, 63.98% 70.62%, 63.27% 70.62%, 62.21% 70.88%, 61.59% 71.15%, 60.27% 72.3%, 60.18% 73.89%, 60.8% 75.04%, 59.56% 76.37%, 58.76% 77.7%, 58.05% 79.47%, 57.61% 81.24%, 57.61% 83.45%, 57.43% 85.58%, 58.14% 99.91%, 57.7% 100%); }
-    section.self-image .other-clip::before {
-      background: rgba(225, 45, 190, 0.5); }
-    section.self-image .other-clip::after {
-      content: "nme";
-      left: unset;
-      right: 1em; }
+.bottom-bar { padding: 0 1em; position: absolute; left: 0; right: 0; bottom: 0; font-size: 0.7em; }
 
-h2 {
-  margin-bottom: 1em; }
+.bottom-bar details[open] > summary { font-weight: bold; }
 
-.visual-img {
-  line-height: 0;
-  -moz-column-count: 3;
-       column-count: 3;
-  -moz-column-gap: 2em;
-       column-gap: 2em;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none; }
-  .visual-img p {
-    margin: 0; }
-  .visual-img img {
-    width: 100%;
-    height: auto;
-    margin: 0 0 2em; }
+.bottom-bar details > summary { color: rgba(0, 0, 0, 0.6); cursor: help; list-style-type: none; outline: none; }
 
-.color-list {
-  padding: 9em 3em;
-  margin-top: -2em;
-  padding-bottom: 0;
-  text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none; }
-  @media only screen and (max-width: 760px) {
-    .color-list {
-      padding: 2em 7.5%; } }
+.bottom-bar details > summary::-webkit-details-marker { display: none; }
+
+img { max-width: 100%; }
+
+figure { -webkit-margin-end: 0; -webkit-margin-start: 0; border: 0; font: inherit; font-size: 100%; padding: 0; vertical-align: baseline; text-align: center; }
+
+figcaption { font-size: 0.8rem; line-height: 1.5; margin-bottom: 0; margin-top: 0; padding-left: 10%; position: relative; text-align: center; vertical-align: baseline; width: 80%; }
+
+figcaption code { font-size: 0.8rem; }
+
+.math { outline-offset: 0.5em; -webkit-margin-before: 1em; margin-block-start: 1em; -webkit-margin-after: 1em; margin-block-end: 1em; -webkit-margin-start: 0px; margin-inline-start: 0px; -webkit-margin-end: 0px; margin-inline-end: 0px; }
+
+.math.premise { outline: 1px dashed black; }
+
+.math.problem { outline: 1px solid black; }
+
+.math.prop, .math.lemma, .math.cor { position: relative; }
+
+.math.prop::after, .math.lemma::after, .math.cor::after { font-size: 1.8em; content: "\25FB"; position: absolute; bottom: 0; right: 0; }
+
+.math.algorithm { overflow: scroll; }
+
+.math.algorithm blockquote { opacity: 1; }
+
+.math.algorithm li { font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
+
+span.newthought { font-size: 1.2em; font-variant: small-caps; letter-spacing: 0.05rem; }
+
+span.tag, span.croissant { color: rgba(0, 0, 0, 0.5); display: inline-block; font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; margin-left: 1em; }
+
+span.el { color: rgba(0, 0, 0, 0.5); }
+
+.emoji { height: 1em; vertical-align: -5%; width: 1em; }
+
+.color { border-radius: 50%; display: inline-block; height: 1.5rem; margin-right: 0.5em; position: relative; width: 1.5rem; vertical-align: bottom; }
+
+.color.c { background-color: #555; }
+
+.color.cpp { background-color: #f34b7d; }
+
+.color.cr { background-color: #000100; }
+
+.color.css { background-color: #563d7c; }
+
+.color.html { background-color: #e34c26; }
+
+.color.java { background-color: #b07219; }
+
+.color.js { background-color: #f1e05a; }
+
+.color.py { background-color: #3572a5; }
+
+.color.r { background-color: #198ce7; }
+
+.color.rb { background-color: #701516; }
+
+.color.rs { background-color: #dea584; }
+
+.color.sql { background-color: #ccc; }
+
+.color.ts { background-color: #2b7489; }
+
+.gist { margin-left: -2em; }
+
+@media only screen and (max-width: 760px) { .gist { margin-left: 0; width: 100%; } }
+
+.gist table.highlight { margin: 0.5em 0; }
+
+.gist tbody tr td.blob-num, .gist tbody tr td.blob-code { font-size: 11px; }
+
+@media screen and (min-width: 350px) { .gist tbody tr td.blob-num, .gist tbody tr td.blob-code { font-size: 12px; } }
+
+@media screen and (min-width: 600px) { .gist tbody tr td.blob-num, .gist tbody tr td.blob-code { font-size: 13px; } }
+
+@media screen and (min-width: 900px) { .gist tbody tr td.blob-num, .gist tbody tr td.blob-code { font-size: 14px; } }
+
+.gist .gist-meta { display: none; }
+
+.gist .gist-data { border-bottom: none !important; }
+
+.mathblock { overflow-x: scroll; }
+
+@media only screen and (max-width: 760px) { .mathblock { width: 100%; } }
+
+.resp-iframe { border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%; }
+
+.resp-iframe-container { overflow: hidden; padding-top: 56.25%; position: relative; }
+
+@media only screen and (max-width: 960px) { section.self { align-items: flex-end; display: flex; flex-flow: row wrap; justify-content: space-evenly; align-items: center; width: 100%; } }
+
+section.self-links .link-container:last-of-type { margin-bottom: 0; }
+
+section.self-links .link-title { display: block; line-height: 1em; }
+
+section.self-image { background-image: url("/assets/img/self.jpg"); background-size: contain; -webkit-clip-path: polygon(0% 100%, 100.09% 99.91%, 100.09% 62.3%, 99.73% 60.88%, 99.29% 57.88%, 98.58% 54.78%, 97.96% 51.59%, 97.08% 48.41%, 95.93% 46.55%, 95.84% 45.75%, 95.49% 44.78%, 94.42% 43.63%, 93.1% 42.21%, 91.5% 40.62%, 90.18% 39.91%, 89.2% 39.38%, 87.79% 38.76%, 85.31% 38.41%, 83.81% 38.41%, 82.57% 38.76%, 81.33% 39.38%, 80.27% 39.29%, 78.94% 39.56%, 77.43% 40.62%, 75.84% 41.86%, 74.78% 43.54%, 73.98% 44.51%, 72.92% 46.19%, 72.04% 48.32%, 71.42% 50.44%, 71.59% 52.83%, 71.33% 53.81%, 71.33% 56.37%, 70.97% 58.23%, 70.97% 59.82%, 71.15% 62.74%, 71.42% 64.87%, 71.42% 66.64%, 71.33% 68.23%, 71.06% 69.12%, 70.35% 69.56%, 69.56% 69.73%, 68.14% 70%, 66.19% 70.62%, 64.87% 70.88%, 63.98% 70.62%, 63.27% 70.62%, 62.21% 70.88%, 61.59% 71.15%, 60.27% 72.3%, 60.18% 73.89%, 60.8% 75.04%, 59.56% 76.37%, 58.76% 77.7%, 58.05% 79.47%, 57.61% 81.24%, 57.61% 83.45%, 57.43% 85.58%, 58.14% 99.91%, 57.7% 100%, 53.45% 90.8%, 53.01% 87.52%, 51.42% 84.16%, 49.47% 81.77%, 47.35% 79.29%, 45.66% 77.08%, 44.34% 76.19%, 38.58% 73.63%, 35.04% 72.21%, 27.17% 70.53%, 29.56% 66.11%, 30.44% 62.3%, 30.71% 61.15%, 30.62% 59.03%, 30.62% 57.17%, 31.59% 55.58%, 31.06% 54.69%, 31.06% 52.12%, 31.24% 50.09%, 30.44% 46.28%, 29.2% 43.36%, 27.96% 40.09%, 26.19% 38.32%, 24.25% 37.35%, 21.5% 35.93%, 20.27% 35.93%, 19.29% 35.22%, 17.43% 35.22%, 16.81% 34.6%, 15.49% 34.25%, 14.25% 34.25%, 13.72% 34.87%, 13.19% 34.51%, 12.12% 34.51%, 10.8% 34.87%, 10.09% 34.6%, 10.18% 35.84%, 10% 37.7%, 9.2% 38.76%, 8.14% 40.09%, 6.9% 41.5%, 5.4% 43.54%, 3.81% 46.19%, 3.1% 49.91%, 2.83% 53.45%, 2.48% 56.02%, 2.39% 58.23%, 2.83% 60.53%, 4.07% 62.39%, 5.49% 63.36%, 6.64% 63.54%, 7.08% 67.26%, 2.92% 72.21%, 0% 74.69%); clip-path: polygon(0% 100%, 100.09% 99.91%, 100.09% 62.3%, 99.73% 60.88%, 99.29% 57.88%, 98.58% 54.78%, 97.96% 51.59%, 97.08% 48.41%, 95.93% 46.55%, 95.84% 45.75%, 95.49% 44.78%, 94.42% 43.63%, 93.1% 42.21%, 91.5% 40.62%, 90.18% 39.91%, 89.2% 39.38%, 87.79% 38.76%, 85.31% 38.41%, 83.81% 38.41%, 82.57% 38.76%, 81.33% 39.38%, 80.27% 39.29%, 78.94% 39.56%, 77.43% 40.62%, 75.84% 41.86%, 74.78% 43.54%, 73.98% 44.51%, 72.92% 46.19%, 72.04% 48.32%, 71.42% 50.44%, 71.59% 52.83%, 71.33% 53.81%, 71.33% 56.37%, 70.97% 58.23%, 70.97% 59.82%, 71.15% 62.74%, 71.42% 64.87%, 71.42% 66.64%, 71.33% 68.23%, 71.06% 69.12%, 70.35% 69.56%, 69.56% 69.73%, 68.14% 70%, 66.19% 70.62%, 64.87% 70.88%, 63.98% 70.62%, 63.27% 70.62%, 62.21% 70.88%, 61.59% 71.15%, 60.27% 72.3%, 60.18% 73.89%, 60.8% 75.04%, 59.56% 76.37%, 58.76% 77.7%, 58.05% 79.47%, 57.61% 81.24%, 57.61% 83.45%, 57.43% 85.58%, 58.14% 99.91%, 57.7% 100%, 53.45% 90.8%, 53.01% 87.52%, 51.42% 84.16%, 49.47% 81.77%, 47.35% 79.29%, 45.66% 77.08%, 44.34% 76.19%, 38.58% 73.63%, 35.04% 72.21%, 27.17% 70.53%, 29.56% 66.11%, 30.44% 62.3%, 30.71% 61.15%, 30.62% 59.03%, 30.62% 57.17%, 31.59% 55.58%, 31.06% 54.69%, 31.06% 52.12%, 31.24% 50.09%, 30.44% 46.28%, 29.2% 43.36%, 27.96% 40.09%, 26.19% 38.32%, 24.25% 37.35%, 21.5% 35.93%, 20.27% 35.93%, 19.29% 35.22%, 17.43% 35.22%, 16.81% 34.6%, 15.49% 34.25%, 14.25% 34.25%, 13.72% 34.87%, 13.19% 34.51%, 12.12% 34.51%, 10.8% 34.87%, 10.09% 34.6%, 10.18% 35.84%, 10% 37.7%, 9.2% 38.76%, 8.14% 40.09%, 6.9% 41.5%, 5.4% 43.54%, 3.81% 46.19%, 3.1% 49.91%, 2.83% 53.45%, 2.48% 56.02%, 2.39% 58.23%, 2.83% 60.53%, 4.07% 62.39%, 5.49% 63.36%, 6.64% 63.54%, 7.08% 67.26%, 2.92% 72.21%, 0% 74.69%); height: 10em; margin: -3em 0 1.5em; min-width: 10em; opacity: 0.7; position: relative; width: 10em; }
+
+@media only screen and (max-width: 760px) { section.self-image { margin-right: 2em; margin-bottom: 0; } }
+
+section.self-image:hover { opacity: 0.85; }
+
+section.self-image .self-clip, section.self-image .other-clip { height: 100%; position: absolute; width: 100%; }
+
+section.self-image .self-clip:hover::before, section.self-image .self-clip:hover::after, section.self-image .other-clip:hover::before, section.self-image .other-clip:hover::after { display: block; }
+
+section.self-image .self-clip::before, section.self-image .self-clip::after, section.self-image .other-clip::before, section.self-image .other-clip::after { display: none; }
+
+section.self-image .self-clip::before, section.self-image .other-clip::before { content: ""; height: 100%; position: absolute; width: 100%; }
+
+section.self-image .self-clip::after, section.self-image .other-clip::after { bottom: 0.2em; color: white; left: 15%; position: absolute; }
+
+section.self-image .self-clip { -webkit-clip-path: polygon(0% 100%, 57.7% 100%, 53.45% 90.8%, 53.01% 87.52%, 51.42% 84.16%, 49.47% 81.77%, 47.35% 79.29%, 45.66% 77.08%, 44.34% 76.19%, 38.58% 73.63%, 35.04% 72.21%, 27.17% 70.53%, 29.56% 66.11%, 30.44% 62.3%, 30.71% 61.15%, 30.62% 59.03%, 30.62% 57.17%, 31.59% 55.58%, 31.06% 54.69%, 31.06% 52.12%, 31.24% 50.09%, 30.44% 46.28%, 29.2% 43.36%, 27.96% 40.09%, 26.19% 38.32%, 24.25% 37.35%, 21.5% 35.93%, 20.27% 35.93%, 19.29% 35.22%, 17.43% 35.22%, 16.81% 34.6%, 15.49% 34.25%, 14.25% 34.25%, 13.72% 34.87%, 13.19% 34.51%, 12.12% 34.51%, 10.8% 34.87%, 10.09% 34.6%, 10.18% 35.84%, 10% 37.7%, 9.2% 38.76%, 8.14% 40.09%, 6.9% 41.5%, 5.4% 43.54%, 3.81% 46.19%, 3.1% 49.91%, 2.83% 53.45%, 2.48% 56.02%, 2.39% 58.23%, 2.83% 60.53%, 4.07% 62.39%, 5.49% 63.36%, 6.64% 63.54%, 7.08% 67.26%, 2.92% 72.21%, 0% 74.69%); clip-path: polygon(0% 100%, 57.7% 100%, 53.45% 90.8%, 53.01% 87.52%, 51.42% 84.16%, 49.47% 81.77%, 47.35% 79.29%, 45.66% 77.08%, 44.34% 76.19%, 38.58% 73.63%, 35.04% 72.21%, 27.17% 70.53%, 29.56% 66.11%, 30.44% 62.3%, 30.71% 61.15%, 30.62% 59.03%, 30.62% 57.17%, 31.59% 55.58%, 31.06% 54.69%, 31.06% 52.12%, 31.24% 50.09%, 30.44% 46.28%, 29.2% 43.36%, 27.96% 40.09%, 26.19% 38.32%, 24.25% 37.35%, 21.5% 35.93%, 20.27% 35.93%, 19.29% 35.22%, 17.43% 35.22%, 16.81% 34.6%, 15.49% 34.25%, 14.25% 34.25%, 13.72% 34.87%, 13.19% 34.51%, 12.12% 34.51%, 10.8% 34.87%, 10.09% 34.6%, 10.18% 35.84%, 10% 37.7%, 9.2% 38.76%, 8.14% 40.09%, 6.9% 41.5%, 5.4% 43.54%, 3.81% 46.19%, 3.1% 49.91%, 2.83% 53.45%, 2.48% 56.02%, 2.39% 58.23%, 2.83% 60.53%, 4.07% 62.39%, 5.49% 63.36%, 6.64% 63.54%, 7.08% 67.26%, 2.92% 72.21%, 0% 74.69%); }
+
+section.self-image .self-clip::before { background: rgba(255, 128, 0, 0.5); }
+
+section.self-image .self-clip::after { content: "me"; }
+
+section.self-image .other-clip { -webkit-clip-path: polygon(0% 100%, 100.09% 99.91%, 100.09% 62.3%, 99.73% 60.88%, 99.29% 57.88%, 98.58% 54.78%, 97.96% 51.59%, 97.08% 48.41%, 95.93% 46.55%, 95.84% 45.75%, 95.49% 44.78%, 94.42% 43.63%, 93.1% 42.21%, 91.5% 40.62%, 90.18% 39.91%, 89.2% 39.38%, 87.79% 38.76%, 85.31% 38.41%, 83.81% 38.41%, 82.57% 38.76%, 81.33% 39.38%, 80.27% 39.29%, 78.94% 39.56%, 77.43% 40.62%, 75.84% 41.86%, 74.78% 43.54%, 73.98% 44.51%, 72.92% 46.19%, 72.04% 48.32%, 71.42% 50.44%, 71.59% 52.83%, 71.33% 53.81%, 71.33% 56.37%, 70.97% 58.23%, 70.97% 59.82%, 71.15% 62.74%, 71.42% 64.87%, 71.42% 66.64%, 71.33% 68.23%, 71.06% 69.12%, 70.35% 69.56%, 69.56% 69.73%, 68.14% 70%, 66.19% 70.62%, 64.87% 70.88%, 63.98% 70.62%, 63.27% 70.62%, 62.21% 70.88%, 61.59% 71.15%, 60.27% 72.3%, 60.18% 73.89%, 60.8% 75.04%, 59.56% 76.37%, 58.76% 77.7%, 58.05% 79.47%, 57.61% 81.24%, 57.61% 83.45%, 57.43% 85.58%, 58.14% 99.91%, 57.7% 100%); clip-path: polygon(0% 100%, 100.09% 99.91%, 100.09% 62.3%, 99.73% 60.88%, 99.29% 57.88%, 98.58% 54.78%, 97.96% 51.59%, 97.08% 48.41%, 95.93% 46.55%, 95.84% 45.75%, 95.49% 44.78%, 94.42% 43.63%, 93.1% 42.21%, 91.5% 40.62%, 90.18% 39.91%, 89.2% 39.38%, 87.79% 38.76%, 85.31% 38.41%, 83.81% 38.41%, 82.57% 38.76%, 81.33% 39.38%, 80.27% 39.29%, 78.94% 39.56%, 77.43% 40.62%, 75.84% 41.86%, 74.78% 43.54%, 73.98% 44.51%, 72.92% 46.19%, 72.04% 48.32%, 71.42% 50.44%, 71.59% 52.83%, 71.33% 53.81%, 71.33% 56.37%, 70.97% 58.23%, 70.97% 59.82%, 71.15% 62.74%, 71.42% 64.87%, 71.42% 66.64%, 71.33% 68.23%, 71.06% 69.12%, 70.35% 69.56%, 69.56% 69.73%, 68.14% 70%, 66.19% 70.62%, 64.87% 70.88%, 63.98% 70.62%, 63.27% 70.62%, 62.21% 70.88%, 61.59% 71.15%, 60.27% 72.3%, 60.18% 73.89%, 60.8% 75.04%, 59.56% 76.37%, 58.76% 77.7%, 58.05% 79.47%, 57.61% 81.24%, 57.61% 83.45%, 57.43% 85.58%, 58.14% 99.91%, 57.7% 100%); }
+
+section.self-image .other-clip::before { background: rgba(225, 45, 190, 0.5); }
+
+section.self-image .other-clip::after { content: "nme"; left: unset; right: 1em; }
+
+h2 { margin-bottom: 1em; }
+
+.visual-img { line-height: 0; -moz-column-count: 3; column-count: 3; -moz-column-gap: 2em; column-gap: 2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+
+.visual-img p { margin: 0; }
+
+.visual-img img { width: 100%; height: auto; margin: 0 0 2em; }
+
+.color-list { padding: 9em 3em; margin-top: -2em; padding-bottom: 0; text-align: center; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+
+@media only screen and (max-width: 760px) { .color-list { padding: 2em 7.5%; } }

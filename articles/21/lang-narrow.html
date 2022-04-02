@@ -59,7 +59,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1646529358157101282"
+  href="/css/shiki.css?1648918404483982330"
 />
 
 
@@ -68,7 +68,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1646529358157101282"
+      href="/css/post.css?1648918404483982330"
     />
   </head>
 
@@ -157,8 +157,7 @@ fn narrowBToNat(p: nat|{a: bool, b: nat}|{b: string, c: nat}): nat {
 
 // narrowBToNat(10) // =&gt; 10
 // narrowBToNat({a: true, b: 20}) // =&gt; 20
-// narrowBToNat({b: "not a nat" , c: 9}) // =&gt; 1729
-</span></div></code></div></pre>
+// narrowBToNat({b: "not a nat" , c: 9}) // =&gt; 1729</span></div></code></div></pre>
 <p>The union type <code>T|U</code> denotes a type that is either <code>T</code> or <code>U</code>, and the
 <code>is</code> and <code>in</code> expressions introduce a condition that constrains a union type to
 a subtype in either branch. Hopefully it's easy to get an idea of what is
@@ -204,8 +203,7 @@ convert between the separate types without writing even more code (at least
 if the ADTs are treated nominally, as they generally are).</p>
 <p>On the other hand, with union types this is easy:</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn getSound(a: Cat|Dog|Zebra): string { /* impl */ }
-fn getSound(a: Cat|Dog): string { /* impl */ }
-</span></div></code></div></pre>
+fn getSound(a: Cat|Dog): string { /* impl */ }</span></div></code></div></pre>
 <p>Since the variants of the union are types in themselves, we can
 include and exclude them freely. Furthermore, <code>Cat|Dog</code> can be subsumed by
 <code>Cat|Dog|Zebra</code> immediately<span class="note"><label for="subsumed-nominal" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="subsumed-nominal" class="margin-toggle" /><span class="sidenote">As long as union types
@@ -283,8 +281,7 @@ inhabited by all values; it is the supertype of all types.</span>), and <code>ne
 (the bottom type<span class="note"><label for="bottom" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="bottom" class="margin-toggle" /><span class="sidenote">The bottom type is inhabited by no values; it is the
 subtype of all types.</span>).</p>
 <p><code>lang_narrow</code> supports functions and types them; for example,</p>
-<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn add(a: nat, b: nat): nat { /* impl */ }
-</span></div></code></div></pre>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn add(a: nat, b: nat): nat { /* impl */ }</span></div></code></div></pre>
 <p>has the type <code>(nat, nat): nat</code>. However, this syntactic representation
 of function types is not admitted by the <a href="https://github.com/ayazhafiz/lang_narrow/blob/base/src/parser.mlyhttps://github.com/ayazhafiz/lang_narrow/blob/base/src/parser.mly">language front-end</a>;
 that is, no value
@@ -355,8 +352,7 @@ certainly prefer to type the literal <code>1</code> as a <code>nat</code>, rathe
 number of union types - indeed, the only two reasonable choices here are <code>nat</code> or <code>top</code>.
 Nevertheless, we would like to express the fact that a <code>nat</code> is a <code>nat|string</code>; for example</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">fn id(a: nat|string): nat|string { a }
-id(1)
-</span></div></code></div></pre>
+id(1)</span></div></code></div></pre>
 <p>should be well-typed. Thus, we have the following subtyping rule for unions:</p>
 <div class="mathblock"><script type="math/tex; mode=display">
 \begin{equation}\label{Subtype-Union}\tag{Subtype-Union}
@@ -423,8 +419,7 @@ idea might look something like</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">// suppose Γ = {a: T}
 if &lt;some check to see if a is a U&gt;
   then ... // a is a subtype of U in this branch
-  else ... // a is a subtype of (T "without" U) in this branch
-</span></div></code></div></pre>
+  else ... // a is a subtype of (T "without" U) in this branch</span></div></code></div></pre>
 <p>We'll use a type constructor called <code>Narrowed</code> to encapsulate the relationship
 between an expression and its narrowed types in left and right branches. In the
 example above, the <code>&lt;some check&gt;</code> condition would yield the type
@@ -518,8 +513,7 @@ implementation significantly.</p>
 <p>In our language, the <code>is</code> expression constructs a <code>Narrowed</code> type from an
 expression and a subtype of the expression type. For example, the expression</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">// suppose Γ = {a: string|nat|bool}
-a is string|bool
-</span></div></code></div></pre>
+a is string|bool</span></div></code></div></pre>
 <p>has the type <code>Narrowed⟨a, string|bool, nat⟩</code>. We define the derivation rule for
 <code>is</code> expressions the following way:</p>
 <div class="mathblock"><script type="math/tex; mode=display">
@@ -570,8 +564,7 @@ that one may later want to narrow.</p>
   if obj is {a: nat, b: nat}|{b: nat, d: nat}
      then obj.b
      else obj.c
-}
-</span></div></code></div></pre>
+}</span></div></code></div></pre>
 <p>This works, but is a bit bulky; we don't care that <code>obj</code> is a union of records
 possibly containing <code>a</code> or <code>d</code>, we just care whether or not it's a subtype of
 <code>{b: nat}</code>. Because <span>​<script type="math/tex">\ref{Union-subtract}</script></span> excludes types by
@@ -583,11 +576,9 @@ a special case for records, as we will do here with the <code>in</code> expressi
 constructing a <code>Narrowed</code> instance with subtypes of <code>T</code> that are records containing <code>f</code> on the left
 and all other subtypes of <code>T</code> on the right. For example,</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">// suppose: obj :: {a: nat, b: nat}|{a: nat, c: nat}|{b: nat, d: nat}|{c: nat, d: nat}
-b in obj
-</span></div></code></div></pre>
+b in obj</span></div></code></div></pre>
 <p>has the type</p>
-<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">Narrowed⟨obj, {a: nat, b: nat}|{b: nat, d: nat}, {a: nat, c: nat}|{c: nat, d: nat}⟩
-</span></div></code></div></pre>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">Narrowed⟨obj, {a: nat, b: nat}|{b: nat, d: nat}, {a: nat, c: nat}|{c: nat, d: nat}⟩</span></div></code></div></pre>
 <p>We define the derivation rule for <code>in</code> expressions the following way:</p>
 <div class="mathblock"><script type="math/tex; mode=display">
 \require{bbox}
@@ -636,7 +627,7 @@ runtime functions, and <code>val</code> field that contains the raw, type-safe v
 <code>print</code>:<span class="note"><label for="print" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="print" class="margin-toggle" /><span class="sidenote"><code>_print</code> writes values without a newline, and is useful for recurring when
 printing a record. <code>print</code> is a user-facing entry point that terminates a printed
 value with a newline.</span></p>
-<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">c</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">void</span><span style="color: #000000"> </span><span style="color: #795E26">_print</span><span style="color: #000000">(tagged_any </span><span style="color: #001080">any</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">is</span><span style="color: #000000">(any, NAT)) {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"%d"</span><span style="color: #000000">, </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">val</span><span style="color: #000000">.</span><span style="color: #001080">nat</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">is</span><span style="color: #000000">(any, STRING)) {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"%s"</span><span style="color: #000000">, </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">val</span><span style="color: #000000">.</span><span style="color: #001080">string</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">is</span><span style="color: #000000">(any, BOOL)) {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"%s"</span><span style="color: #000000">, </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">val</span><span style="color: #000000">.</span><span style="color: #0000FF">bool</span><span style="color: #000000"> == </span><span style="color: #098658">1</span><span style="color: #000000"> ? </span><span style="color: #A31515">"true"</span><span style="color: #000000"> : </span><span style="color: #A31515">"false"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">is</span><span style="color: #000000">(any, RECORD)) {</span></div><div class='line'><span style="color: #000000">    record r = </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">val</span><span style="color: #000000">.</span><span style="color: #001080">record</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"{"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">int</span><span style="color: #000000"> i = </span><span style="color: #098658">0</span><span style="color: #000000">; i &lt; </span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">numFields</span><span style="color: #000000">; ++i) {</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"%s: "</span><span style="color: #000000">, </span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">fields</span><span style="color: #000000">[i]);</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #795E26">_print</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">values</span><span style="color: #000000">[i]);</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (i != </span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">numFields</span><span style="color: #000000"> - </span><span style="color: #098658">1</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">        </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">", "</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">      }</span></div><div class='line'><span style="color: #000000">    }</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"}"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">fprintf</span><span style="color: #000000">(stderr, </span><span style="color: #A31515">"Runtime error: no matching tag %s</span><span style="color: #EE0000">\n</span><span style="color: #A31515">"</span><span style="color: #000000">, </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">tag</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">exit</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  }</span></div><div class='line'><span style="color: #000000">}</span></div><div class='line'><span style="color: #0000FF">void</span><span style="color: #000000"> </span><span style="color: #795E26">print</span><span style="color: #000000">(tagged_any </span><span style="color: #001080">any</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #795E26">_print</span><span style="color: #000000">(any);</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"</span><span style="color: #EE0000">\n</span><span style="color: #A31515">"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">}</span></div></code></div></pre>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">c</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">void</span><span style="color: #000000"> </span><span style="color: #795E26">_print</span><span style="color: #000000">(tagged_any </span><span style="color: #001080">any</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">is</span><span style="color: #000000">(any, NAT)) {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"</span><span style="color: #001080">%d</span><span style="color: #A31515">"</span><span style="color: #000000">, </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">val</span><span style="color: #000000">.</span><span style="color: #001080">nat</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">is</span><span style="color: #000000">(any, STRING)) {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"</span><span style="color: #001080">%s</span><span style="color: #A31515">"</span><span style="color: #000000">, </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">val</span><span style="color: #000000">.</span><span style="color: #001080">string</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">is</span><span style="color: #000000">(any, BOOL)) {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"</span><span style="color: #001080">%s</span><span style="color: #A31515">"</span><span style="color: #000000">, </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">val</span><span style="color: #000000">.</span><span style="color: #0000FF">bool</span><span style="color: #000000"> == </span><span style="color: #098658">1</span><span style="color: #000000"> ? </span><span style="color: #A31515">"true"</span><span style="color: #000000"> : </span><span style="color: #A31515">"false"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #795E26">is</span><span style="color: #000000">(any, RECORD)) {</span></div><div class='line'><span style="color: #000000">    record r = </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">val</span><span style="color: #000000">.</span><span style="color: #001080">record</span><span style="color: #000000">;</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"{"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">int</span><span style="color: #000000"> i = </span><span style="color: #098658">0</span><span style="color: #000000">; i &lt; </span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">numFields</span><span style="color: #000000">; ++i) {</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"</span><span style="color: #001080">%s</span><span style="color: #A31515">: "</span><span style="color: #000000">, </span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">fields</span><span style="color: #000000">[i]);</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #795E26">_print</span><span style="color: #000000">(</span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">values</span><span style="color: #000000">[i]);</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (i != </span><span style="color: #001080">r</span><span style="color: #000000">.</span><span style="color: #001080">numFields</span><span style="color: #000000"> - </span><span style="color: #098658">1</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">        </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">", "</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">      }</span></div><div class='line'><span style="color: #000000">    }</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"}"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> {</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">fprintf</span><span style="color: #000000">(stderr, </span><span style="color: #A31515">"Runtime error: no matching tag </span><span style="color: #001080">%s</span><span style="color: #EE0000">\n</span><span style="color: #A31515">"</span><span style="color: #000000">, </span><span style="color: #001080">any</span><span style="color: #000000">.</span><span style="color: #001080">tag</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">exit</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">  }</span></div><div class='line'><span style="color: #000000">}</span></div><div class='line'><span style="color: #0000FF">void</span><span style="color: #000000"> </span><span style="color: #795E26">print</span><span style="color: #000000">(tagged_any </span><span style="color: #001080">any</span><span style="color: #000000">) {</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #795E26">_print</span><span style="color: #000000">(any);</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #795E26">printf</span><span style="color: #000000">(</span><span style="color: #A31515">"</span><span style="color: #EE0000">\n</span><span style="color: #A31515">"</span><span style="color: #000000">);</span></div><div class='line'><span style="color: #000000">}</span></div></code></div></pre>
 <p>Having encoded all values as <code>tagged_any</code>s, performing <code>is</code> and <code>in</code> checks
 becomes trivial. In the case of <code>is</code>, we take an array of type tags
 (constituting a union) and check if a value's type tag is in that array. If we
@@ -706,8 +697,7 @@ way:</p>
      else if p extends bool
           then if p then 1 else 0
           else p
-}
-</span></div></code></div></pre>
+}</span></div></code></div></pre>
 <p>using a single <code>extends</code> expression where we would have had to use a combination
 of <code>in</code> and <code>is</code> expressions in <code>lang_narrow</code>.</p>
 <h3 id="performance-concerns%2C-and-what-to-do-about-them-1" tabindex="-1"><a class="header-anchor" href="#performance-concerns%2C-and-what-to-do-about-them-1" aria-hidden="true"></a>Performance concerns, and what to do about them</h3>
@@ -748,8 +738,7 @@ context) we are currently in. Contrast this to an imperative version of
    } else {
       String.regex_matches(RE_NUMBER, p) // (3)
    };
-}
-</span></div></code></div></pre>
+}</span></div></code></div></pre>
 <p>At <code>(1)</code> we would like the typing context to associate <code>p: {numberish: nat|string}|nat|string</code>,
 at <code>(2)</code> associate <code>p: number</code>, and at <code>(3)</code> associate <code>p: string</code>.</p>
 <p>It may not be obvious how to design an efficient algorithm to update

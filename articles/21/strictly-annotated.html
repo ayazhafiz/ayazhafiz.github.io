@@ -69,7 +69,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1646529358157101282"
+  href="/css/shiki.css?1648918404483982330"
 />
 
 
@@ -78,7 +78,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1646529358157101282"
+      href="/css/post.css?1648918404483982330"
     />
   </head>
 
@@ -156,9 +156,9 @@ L1:
    inc   ecx       ; ++i
    jmp   L1
 L2:
-   ret             ; return nth</code></div></pre><!-- Note from shiki-twoslash: the language nasm was not set up for Shiki to use, and so there is no code highlighting --!>
+   ret             ; return nth</code></div></pre><!-- Note from shiki-twoslash: the language nasm was not set up for Shiki to use, and so there is no code highlighting -->
 <p>or a computer algebra system that communicates rewrite steps:</p>
-<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">latex</div><div class='code-container'><code><div class='line'><span style="color: #000000">d/dx [x^3 + 6x^2 + 12x - 2]</span></div><div class='line'><span style="color: #000000">  =    3x^2     %(by the power rule)</span></div><div class='line'><span style="color: #000000">    + 12x       %(by the power rule)</span></div><div class='line'><span style="color: #000000">    + 12        %(by d/dx x = 1)</span></div><div class='line'><span style="color: #000000">    - 0         %(by d/dx c = 0   when c is independent of x)</span></div><div class='line'><span style="color: #000000">  = 3x^2 + 12x + 12  %(by simplification)</span></div><div class='line'><span style="color: #000000">  = 3(x^2 + 4x + 4)  %(by gcd(3, 12, 12) = 3)</span></div><div class='line'><span style="color: #000000">  = 3(x + 2)^2       %(by factorization in \Z)</span></div></code></div></pre>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">latex</div><div class='code-container'><code><div class='line'><span style="color: #000000">d/dx [x^3 + 6x^2 + 12x - 2]</span></div><div class='line'><span style="color: #000000">  =    3x^2     </span><span style="color: #008000">%(by the power rule)</span></div><div class='line'><span style="color: #000000">    + 12x       </span><span style="color: #008000">%(by the power rule)</span></div><div class='line'><span style="color: #000000">    + 12        </span><span style="color: #008000">%(by d/dx x = 1)</span></div><div class='line'><span style="color: #000000">    - 0         </span><span style="color: #008000">%(by d/dx c = 0   when c is independent of x)</span></div><div class='line'><span style="color: #000000">  = 3x^2 + 12x + 12  </span><span style="color: #008000">%(by simplification)</span></div><div class='line'><span style="color: #000000">  = 3(x^2 + 4x + 4)  </span><span style="color: #008000">%(by gcd(3, 12, 12) = 3)</span></div><div class='line'><span style="color: #000000">  = 3(x + 2)^2       </span><span style="color: #008000">%(by factorization in \Z)</span></div></code></div></pre>
 <p>Indeed such applications are common. It is not too difficult to imagine how we
 might implement the pedagogical C compiler's printer. The semantic structure of
 the computer algebra system's output is more involved, but an ad-hoc design for
@@ -176,7 +176,7 @@ to layout.</p>
 <p>I think that Strictly Annotated does a pretty good job; here is an example of
 a research language source code with typechecker annotations, printed by the
 library:</p>
-<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">latex</div><div class='code-container'><code><div class='line'><span style="color: #000000">fn f(x: any) =  % =&gt; int | (int, int)</span></div><div class='line'><span style="color: #000000">  if x is int   % if .. ~&gt; int | (int, int)</span></div><div class='line'><span style="color: #000000">  then 1</span></div><div class='line'><span style="color: #000000">  else (0, 0)   % (int, int)</span></div><div class='line'><span style="color: #000000">in</span></div><div class='line'><span style="color: #000000">  (f 1,         % f .. ~&gt; int</span></div><div class='line'><span style="color: #000000">   f            % f .. ~&gt; (int, int)</span></div><div class='line'><span style="color: #000000">     (1, 2)     % (int, int)</span></div><div class='line'><span style="color: #000000">  )             % (int, (int, int))</span></div></code></div></pre>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">latex</div><div class='code-container'><code><div class='line'><span style="color: #000000">fn f(x: any) =  </span><span style="color: #008000">% =&gt; int | (int, int)</span></div><div class='line'><span style="color: #000000">  if x is int   </span><span style="color: #008000">% if .. ~&gt; int | (int, int)</span></div><div class='line'><span style="color: #000000">  then 1</span></div><div class='line'><span style="color: #000000">  else (0, 0)   </span><span style="color: #008000">% (int, int)</span></div><div class='line'><span style="color: #000000">in</span></div><div class='line'><span style="color: #000000">  (f 1,         </span><span style="color: #008000">% f .. ~&gt; int</span></div><div class='line'><span style="color: #000000">   f            </span><span style="color: #008000">% f .. ~&gt; (int, int)</span></div><div class='line'><span style="color: #000000">     (1, 2)     </span><span style="color: #008000">% (int, int)</span></div><div class='line'><span style="color: #000000">  )             </span><span style="color: #008000">% (int, (int, int))</span></div></code></div></pre>
 <h3 id="opinions-we-will-make" tabindex="-1"><a class="header-anchor" href="#opinions-we-will-make" aria-hidden="true"></a>Opinions we will make</h3>
 <p>It is important to note that our library distinguishes annotations from any
 other kind of term in a document. As mentioned above, we are saying
@@ -233,8 +233,7 @@ the document</p>
                                         else neg()        then
                                                             pos()
                                                           else
-                                                            neg()
-</span></div></code></div></pre>
+                                                            neg()</span></div></code></div></pre>
 <p>The principal decision to be made in the pretty-printing process is whether a
 group should be laid out horizontally or vertically. Unsurprisingly, Lindig
 proposes that this decision be made by first checking if a group can be laid
@@ -258,8 +257,7 @@ printed as</p>
   maybe
     x then
   pos() else
-  neg()
-</span></div></code></div></pre>
+  neg()</span></div></code></div></pre>
 <p>While cascading printers are more expressive than waterfalling printers, they
 are also more complex:</p>
 <ul>
@@ -305,8 +303,7 @@ example may yield the printed document</p>
 then       // true branch          or      else neg()  // false branch
   pos()
 else       // false branch
-  neg()
-</span></div></code></div></pre>
+  neg()</span></div></code></div></pre>
 <p>as demonstrated above, we may align annotations as well - either with
 nearby annotations, or with all annotations in the document.</p>
 <p>Dealing with multi-line annotations is straightforward. When printing a line, we
@@ -319,8 +316,7 @@ the printed document</p>
 then       // true branch
   pos()
 else       // false branch
-  neg()
-</span></div></code></div></pre>
+  neg()</span></div></code></div></pre>
 <h4 id="annotations-and-layout-decisions" tabindex="-1"><a class="header-anchor" href="#annotations-and-layout-decisions" aria-hidden="true"></a>Annotations and layout decisions</h4>
 <p>Unfortunately, we cannot make all layout decisions independently of annotations.
 Consider if $\tt maybe$, $\tt pos()$, and $\tt neg()$ were also given annotations.
@@ -331,8 +327,7 @@ reasonably:</p>
 then       // true branch
   pos()    // -&gt; T
 else       // false branch
-  neg()    // -&gt; U
-</span></div></code></div></pre>
+  neg()    // -&gt; U</span></div></code></div></pre>
 <p>but how are we to print these annotations in three-line layout we saw earlier?
 One option is to push all annotations to the end of the printed line and treat
 them as a multi-line annotation:</p>
@@ -341,8 +336,7 @@ them as a multi-line annotation:</p>
 then pos()  // true branch
             // -&gt; T
 else neg()  // false branch
-            // -&gt; U
-</span></div></code></div></pre>
+            // -&gt; U</span></div></code></div></pre>
 <p>but the problem with this is we lose some information about the terms
 annotations are attached to, and indeed we may expect that the document be split
 across 6 lines as in the most compact layout to better preserve term-annotation
@@ -370,8 +364,7 @@ indentation, the layout mode of the current group, and the document itself. As
 part of the layout process, we lower a document to a simpler <code>doc_ir</code> form:</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">type doc_ir = IrDone
             | IrText    of string * annotation list * doc_ir
-            | IrNewline of int * doc_ir
-</span></div></code></div></pre>
+            | IrNewline of int * doc_ir</span></div></code></div></pre>
 <p><code>IrDone</code> marks the end of a document. <code>IrText</code> denotes some text, with
 annotations attached to it, and the rest of the document. <code>IrNewline</code> denotes a
 newline with some indentation, and the rest of the document.</p>

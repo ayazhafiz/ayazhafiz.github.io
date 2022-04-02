@@ -2,12 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title></title>
-		<description>Ayaz Hafiz's website.</description>		
+		<description>Ayaz Hafiz&apos;s website.</description>		
 		<link>https://ayazhafiz.com</link>
 		<atom:link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>Emulating the Lambda Calculus in TypeScript's Type System</title>
+				<title>Why Don&apos;t More Languages Offer Flow Typing?</title>
+				<description>A brief survey of where flow typing does and doesn&apos;t fit, and when it may play a role in other languages.</description>
+				<pubDate>Fri, 01 Apr 2022 19:00:00 -0500</pubDate>
+				<link>https://ayazhafiz.com/articles/22/why-dont-more-languages-offer-flow-typing</link>
+				<guid isPermaLink="true">https://ayazhafiz.com/articles/22/why-dont-more-languages-offer-flow-typing</guid>
+			</item>
+		
+			<item>
+				<title>Emulating the Lambda Calculus in TypeScript&apos;s Type System</title>
 				<description>We show that the TypeScript type system can emulate the lambda calculus, thereby providing a proof that the type system is Turing-complete.</description>
 				<pubDate>Wed, 28 Jul 2021 03:00:00 -0500</pubDate>
 				<link>https://ayazhafiz.com/articles/21/typescript-type-system-lambda-calculus</link>
@@ -24,7 +32,7 @@
 		
 			<item>
 				<title>Strictly Annotated: A Pretty-Printer With Support for Annotations</title>
-				<description>We present an extension of Lindig's Strictly Prettier (2000) pretty-printer with support for harmoniously formatting a document and arbitrary annotations attached to its terms.</description>
+				<description>We present an extension of Lindig&apos;s Strictly Prettier (2000) pretty-printer with support for harmoniously formatting a document and arbitrary annotations attached to its terms.</description>
 				<pubDate>Thu, 17 Jun 2021 03:00:00 -0500</pubDate>
 				<link>https://ayazhafiz.com/articles/21/strictly-annotated</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/21/strictly-annotated</guid>
@@ -40,7 +48,7 @@
 		
 			<item>
 				<title>Representability, Coproducts, and Reflective Subcategories</title>
-				<description>Write-ups of interesting problems from Riehl's Category Theory in Context, sections 4.5 and 4.6.</description>
+				<description>Write-ups of interesting problems from Riehl&apos;s Category Theory in Context, sections 4.5 and 4.6.</description>
 				<pubDate>Fri, 02 Apr 2021 03:00:00 -0500</pubDate>
 				<link>https://ayazhafiz.com/articles/21/representability-coproducts-reflective-subcategories</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/21/representability-coproducts-reflective-subcategories</guid>
@@ -76,14 +84,6 @@
 				<pubDate>Sun, 27 Dec 2020 02:00:00 -0600</pubDate>
 				<link>https://ayazhafiz.com/articles/20/pattern-matching-with-a-typechecker</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/pattern-matching-with-a-typechecker</guid>
-			</item>
-		
-			<item>
-				<title>Impact vs Innovation &amp; Industry vs Academia</title>
-				<description>In popular industry, I often see discontinuities between 'impactful' and 'innovative' work. I describe how these discontinuities arise, and what we can do about them.</description>
-				<pubDate>Tue, 01 Dec 2020 02:00:00 -0600</pubDate>
-				<link>https://ayazhafiz.com/articles/20/impact-vs-innovation</link>
-				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/impact-vs-innovation</guid>
 			</item>
 		
 	</channel>
