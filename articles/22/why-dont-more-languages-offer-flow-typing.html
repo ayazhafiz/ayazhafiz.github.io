@@ -59,7 +59,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1648918404483982330"
+  href="/css/shiki.css?1649093542086765321"
 />
 
 
@@ -68,7 +68,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1648918404483982330"
+      href="/css/post.css?1649093542086765321"
     />
   </head>
 
@@ -157,7 +157,7 @@ Python's type hints
 were built for languages where the runtime shapes of values can vary arbitrarily.
 This means that if you want
 someone using JavaScript or unannotated Python to start using your typechecker,
-you have to meet them where there programs are. That may include being able to
+you have to meet them where their programs are. That may include being able to
 specify the type of a single value that might be a string, an integer, a
 dictionary with five keys, or a set. In time your users may refine their types,
 even enough so that they can be statically type checked,
@@ -297,7 +297,7 @@ languages. I'll outline two reasons I am aware of.</p>
 <h4 id="inconsistencies-with-closed-sum-types" tabindex="-1"><a class="header-anchor" href="#inconsistencies-with-closed-sum-types" aria-hidden="true"></a>Inconsistencies with closed sum types</h4>
 <p>Most ML-style languages have ADTs that are nominal, not structural. This means
 that, for example in Rust, I can have two sum types</p>
-<pre class="shiki light-plus twoslash lsp" style="background-color: #FFFFFF; color: #000000"><div class="language-id">rust</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">enum</span><span style="color: #000000"> </span><span style="color: #267F99"><data-lsp lsp='cc&#10;&#10;enum Number' >Number</data-lsp></span><span style="color: #000000"> { </span><span style="color: #267F99"><data-lsp lsp='cc::Number&#10;&#10;One' >One</data-lsp></span><span style="color: #000000">, </span><span style="color: #267F99"><data-lsp lsp='cc::Number&#10;&#10;OrMore' >OrMore</data-lsp></span><span style="color: #000000"> }</span></div><div class='line'><span style="color: #0000FF">enum</span><span style="color: #000000"> </span><span style="color: #267F99">Age</span><span style="color: #000000">    { </span><span style="color: #267F99">One</span><span style="color: #000000">, </span><span style="color: #267F99">OrMore</span><span style="color: #000000"> }</span></div></code></div></pre>
+<pre class="shiki light-plus twoslash lsp" style="background-color: #FFFFFF; color: #000000"><div class="language-id">rust</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">enum</span><span style="color: #000000"> </span><span style="color: #267F99"><data-lsp lsp='cc&#10;&#10;enum Number' >Number</data-lsp></span><span style="color: #000000"> { </span><span style="color: #267F99"><data-lsp lsp='cc::Number&#10;&#10;One' >One</data-lsp></span><span style="color: #000000">, </span><span style="color: #267F99"><data-lsp lsp='cc::Number&#10;&#10;OrMore' >OrMore</data-lsp></span><span style="color: #000000"> }</span></div><div class='line'><span style="color: #0000FF">enum</span><span style="color: #000000"> </span><span style="color: #267F99"><data-lsp lsp='cc&#10;&#10;enum Age' >Age</data-lsp></span><span style="color: #000000">    { </span><span style="color: #267F99"><data-lsp lsp='cc::Age&#10;&#10;One' >One</data-lsp></span><span style="color: #000000">, </span><span style="color: #267F99"><data-lsp lsp='cc::Age&#10;&#10;OrMore' >OrMore</data-lsp></span><span style="color: #000000"> }</span></div></code></div></pre>
 <p>Where <code>Number::One</code> and <code>Age::One</code> are not the same type because their
 qualified names are different, even though their
 structure (and even generated code layout) are the same!</p>
