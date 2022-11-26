@@ -63,14 +63,6 @@
 			</item>
 		
 			<item>
-				<title>The Commodification of Masculinity in Hip-Hop</title>
-				<description>New-age hybrid masculinities displayed by hip-hop artists are more a consequence of growing brand influence, rather than a shift towards progressivism.</description>
-				<pubDate>Wed, 20 Jan 2021 02:00:00 -0600</pubDate>
-				<link>https://ayazhafiz.com/articles/21/hiphop-masuclinity</link>
-				<guid isPermaLink="true">https://ayazhafiz.com/articles/21/hiphop-masuclinity</guid>
-			</item>
-		
-			<item>
 				<title>Hot Code Reloading, with libc or in the browser</title>
 				<description>A small framework for writing programs with support for hot code reloading. Discusses runtimes that execute machine code or JavaScript in the browser.</description>
 				<pubDate>Thu, 07 Jan 2021 02:00:00 -0600</pubDate>
@@ -84,6 +76,14 @@
 				<pubDate>Sun, 27 Dec 2020 02:00:00 -0600</pubDate>
 				<link>https://ayazhafiz.com/articles/20/pattern-matching-with-a-typechecker</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/pattern-matching-with-a-typechecker</guid>
+			</item>
+		
+			<item>
+				<title>Impact vs Innovation &amp; Industry vs Academia</title>
+				<description>In popular industry, I often see discontinuities between &apos;impactful&apos; and &apos;innovative&apos; work. I describe how these discontinuities arise, and what we can do about them.</description>
+				<pubDate>Tue, 01 Dec 2020 02:00:00 -0600</pubDate>
+				<link>https://ayazhafiz.com/articles/20/impact-vs-innovation</link>
+				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/impact-vs-innovation</guid>
 			</item>
 		
 	</channel>
