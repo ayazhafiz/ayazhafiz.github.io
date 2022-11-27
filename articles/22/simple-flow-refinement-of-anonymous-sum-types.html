@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+
+<link rel="alternate" type="application/atom+xml" title="cc - Ayaz Hafiz" href="/feed-rrs2.xml">
+
+
+<title>
+  
+    Simple Refinement of Anonymous Sum Types in Pattern Matches
+  
+</title>
+<meta name="description" content="I describe a simple, &quot;zero-cost&quot; system for adding flow-typing-like refinement of anonymous sum types to a language, with a model of compilation that supports unboxed, non-uniform representations. The system extends naturally to also support type expansion (the opposite of refinement) thanks to its reliance on unification." />
+
+<link
+  rel="canonical"
+  href="/articles/22/simple-flow-refinement-of-anonymous-sum-types"
+/>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    TeX: {
+      Macros: {
+        co: "\\colon",
+        msf: "\\mathsf",
+        Ra: "\\Rightarrow",
+        Def: "\\text{Definition.}",
+        Thm: "\\text{Theorem.}",
+        Pf: "\\text{Proof.}",
+        eps: "\\epsilon",
+        lam: "\\lambda",
+        lt: "<",
+        
+        1: "\\unicode{x1D7D9}",
+        
+        2: "\\unicode{x1D7DA}",
+        
+      },
+    }
+  });
+  MathJax.Hub.Queue(function () {
+    document.body.setAttribute('render-done', '');
+  });
+</script>
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"
+></script>
+
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="/css/shiki.css?1669510897980763391"
+/>
+
+
+
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/post.css?1669510897980763391"
+    />
+  </head>
+
+  <style></style>
+
+  <body>
+    <div class="container post">
+      <div class="panel">
+        <div class="column-right Simple refinement of anonymous sum types in pattern matches-main">
+          <section class="nav">
+  <a class="nav-link" href="/about">about</a
+  ><a class="nav-link" href="/cc">cc</a
+  ><a class="nav-link" href="/visual">visual</a>
+</section>
+ <h1 class="title">Simple Refinement of Anonymous Sum Types in Pattern Matches</h1>
+<p class="byline">November 26, 2022</p>
+
+<article class="post">
+   <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#premise">Premise</a></li>
+<li class="toc-entry toc-h2"><a href="#definitions">Definitions</a></li>
+<li class="toc-entry toc-h2"><a href="#our-source-language">Our source language</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#variants">Variants</a></li>
+<li class="toc-entry toc-h3"><a href="#match-expressions">Match expressions</a></li>
+<li class="toc-entry toc-h3"><a href="#stuff-left-out">Stuff left out</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#inference-rules-for-patterns-and-match-expressions">Inference rules for patterns and match expressions</a></li>
+<li class="toc-entry toc-h2"><a href="#compilation-model">Compilation model</a></li>
+<li class="toc-entry toc-h2"><a href="#adding-support-for-type-refinement">Adding support for type refinement</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#inference-rules">Inference rules</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#type-expansion">Type expansion</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#generating-transformations">Generating transformations</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#playgound-%26-implementation">Playgound &amp; Implementation</a></li>
+<li class="toc-entry toc-h2"><a href="#ad%3A-are-you-interested-in-compiling-structural-subtypes%3F">Ad: Are you interested in compiling structural subtypes?</a></li>
+</ul> 
+  <h2 id="premise" tabindex="-1"><a class="header-anchor" href="#premise" aria-hidden="true"></a>Premise</h2>
+<p>Today I want to share a simple method to achieve type refinement, a-la
+flow typing, in a language with anonymous sum types and pattern matching.<span class="note"><label for="flow-typing-kick" class="margin-toggle">⊕</label></span><input type="checkbox" id="flow-typing-kick" class="margin-toggle" /><span class="marginnote">If you follow my posts, I know the existing set suggests that I've been on a
+<a href="https://ayazhafiz.com/articles/21/lang-narrow">flow</a> <a href="https://ayazhafiz.com/articles/21/type-inference-for-flow-typing">typing</a> <a href="https://ayazhafiz.com/articles/22/why-dont-more-languages-offer-flow-typing">kick</a> for the past
+couple years. I promise I've been doing other stuff too -
+and there will be more about it soon!</span>
+The method I'll share</p>
+<ul>
+<li>relies on straightforward, syntax-directed rules</li>
+<li>supports compilation to either uniform representations of sum types, or non-uniform representations</li>
+<li>compiling the type refinements to non-uniform representations of sum types
+requires a zero-cost<span class="note"><label for="zero-cost" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="zero-cost" class="margin-toggle" /><span class="sidenote">in the sense that a user-written transformation in the source language would be
+no more efficient</span>,
+mechanical value transformation.</li>
+</ul>
+<p>You may want to take a quick look at the <a href="#playgound-%26-implementation">playground</a> to see what we'll end up with.</p>
+<p>In this cc, I won't elaborate on why you might want control-flow based typing in
+a language, or what you can do with it. For more on that, consider reading my
+<a href="https://ayazhafiz.com/articles/22/why-dont-more-languages-offer-flow-typing">last post on this topic</a>.</p>
+<p>I'm going to keep formalizations light and introduction of definitions heavy,
+without really attempting to state or prove certain semantic properties you might expect me to prove here -
+I hope you'll agree with me that the construction is not all that complicated, and
+such statements would clutter the discussion.<span class="note"><label for="disappointment" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="disappointment" class="margin-toggle" /><span class="sidenote">I mean
+no disappointment - as always, this is left to the reader :)</span></p>
+<p>The method is derived from <a href="https://v2.ocaml.org/manual/patterns.html#sss:pat-polyvar">OCaml's conversion bindings of polymorphic
+variants</a>, and
+differs only in that it supports compilation of anonymous sums to non-uniform
+memory layouts, which differs from OCaml's standard compilation of polymorphic
+variants.</p>
+<p>Okay, hopefully I've whet your appetite. Let's get started!</p>
+<h2 id="definitions" tabindex="-1"><a class="header-anchor" href="#definitions" aria-hidden="true"></a>Definitions</h2>
+<p>To clarify exactly what we're going to do,</p>
+<ul>
+<li>
+<p>By <strong>anonymous sum types</strong>, I mean <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">sum types</a>
+that do not have to be defined via nominal type declarations, and can be composed on-the-fly based on value usages.
+OCaml's <a href="https://v2.ocaml.org/manual/polyvariant.html">polymorphic variants</a> and
+TypeScript's <a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types">union types</a>
+fit this premise. In our language,</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">haskell</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> operation : [Add, Sub, Mul, Div] = Mul</span></div></code></div></pre>
+<p>defines a variable whose type consists of any of the four arithmetic
+operations <code>Add</code>, <code>Sub</code>, <code>Mul</code>, or <code>Div</code>, and its concrete value is <code>Mul</code>.</p>
+<p>The &quot;composed on-the-fly&quot; bit comes from the fact idea values without explicit
+annotations are inferred based on usages, for example</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> op = </span><span style="color: #267F99">Add</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #008000"># op : [Add]</span></div><div class='line'></div><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x: [A, B] = A </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> y = </span><span style="color: #795E26">match x </span><span style="color: #000000">with </span><span style="color: #008000"># y : [M, N]</span></div><div class='line'><span style="color: #000000">  | A -&gt; M</span></div><div class='line'><span style="color: #000000">  | B -&gt; N</span></div></code></div></pre>
+<p>Importantly, we will be discussing a language with unification-based inference
+and without subtyping semantics, so it is possible for the same variant
+literal to have different types.
+For example, in the program</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x1: [A, B] = A </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x2: [A, B, C] = A </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #000000">x2</span></div></code></div></pre>
+<p>the first <code>A</code> is given type <code>[A, B]</code>, while the second is given <code>[A, B, C]</code>.</p>
+</li>
+<li>
+<p><strong>type refinement</strong> refers to the narrowing of a value's type based on the
+control flow of a program. In our language,</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x: [A, B, C] = A </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #795E26">match x </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">| C -&gt; A</span></div><div class='line'><span style="color: #000000">| A | </span><span style="color: #795E26">B </span><span style="color: #0000FF">as</span><span style="color: #000000"> y -&gt; y</span></div></code></div></pre>
+<p>the second branch in the match binds a variable <code>y</code> that refines <code>x</code> from the
+type <code>[A, B, C]</code> to <code>[A, B]</code>.</p>
+<p>As we'll see later, our system also allows type expansion, so you can bind a
+variable in a pattern that has a more general type than the matched value.</p>
+</li>
+<li>
+<p>A <strong>uniform representation</strong> of anonymous sum types means that all values of
+differently-shaped sum types have the same memory layout. For example, in
+OCaml, polymorphic variants are compiled in part by hasing the variant name,
+which in our language would mean that a <code>B</code> of type <code>[A, B]</code> would have the same
+runtime representation as a <code>B</code> of type <code>[B, C, D]</code>.
+Moreover, if a variants has arguments, then its representation
+of the arguments is also uniform (perhaps via boxing).</p>
+</li>
+<li>
+<p>A <strong>non-uniform representation</strong> of anonymous sum types means that
+differently-shaped sum types are compiled to different memory layouts.
+For example, the runtime representation of <code>A</code> in <code>[A, B]</code> need only be
+expressed via 1 bit to differentiate the variant, while <code>A</code> in <code>[A, B, C, D]</code>
+is differentiated via 2 bits.
+Compiling to non-uniform representations can generate more efficient and
+memory-compact code than uniform representations, since the memory layout
+generated for a type need only consider the data of that type.
+It does also mean that
+conversion of values between different types (for example <code>A</code> in the example
+above) may incur non-zero runtime cost, when the memory layouts are materially
+different.</p>
+</li>
+</ul>
+<h2 id="our-source-language" tabindex="-1"><a class="header-anchor" href="#our-source-language" aria-hidden="true"></a>Our source language</h2>
+<p>The language we'll work with is first-order with only let bindings, ground
+anonymous variants, and match expressions. Let-bindings are immutable, and all
+constructs are defined in the standard way, as exemplified in the
+<a href="#Definitions">definitions</a> above.</p>
+<h3 id="variants" tabindex="-1"><a class="header-anchor" href="#variants" aria-hidden="true"></a>Variants</h3>
+<p>A variant expression is of the form $\tt{V}\ \tt{arg_1}\ \dots\ \tt{arg_n}$,
+where zero or more arguments to the variant constitute the payload of the
+argument. For example, <code>A</code> is a variant with no arguments, typed as <code>[A]</code>.
+<code>Mul One Two</code> is a variant with two arguments, each of which is a zero-argument
+variant, typed as <code>[Mul [One] [Two]]</code>. Application of arguments are
+disambiguated with parentheses; for example, <code>Mul (Add One Two) (Sub One Zero)</code>
+is typed as <code>[Mul [Add [One] [Two]] [Sub [One] [Zero]]]</code>. As such, the
+type inference rule for a variant expression is the natural one.</p>
+<h3 id="match-expressions" tabindex="-1"><a class="header-anchor" href="#match-expressions" aria-hidden="true"></a>Match expressions</h3>
+<p>A match expression pattern-matches a value over its variants, dispatching
+computation to the appropriately-matched branch. Match expressions must be
+exhaustive. For example,</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x : [A, B] = A </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #795E26">match x </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">| A -&gt; C</span></div><div class='line'><span style="color: #000000">| B -&gt; D</span></div></code></div></pre>
+<p>would evaluate to <code>A</code>, since the runtime value of <code>x</code> would match the first branch.
+Top-level patterns in a branch are defined by the grammar</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\renewcommand{\sfdefault}{lmtt}
+\begin{align*}
+\texttt{top-pattern} ::&=          &&\textbf{top-level pattern}\\
+  &|~\tt p                &&\textit{pattern}\\
+  &|~\tt p \msf{\ as\ }\tt x  &&\textit{refinement-pattern}
+\end{align*}
+</script></div>
+<p>where the second rule introduces a binding to a variable <code>x</code> that refines the
+value being matched<span class="note"><label for="extending-refinement" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="extending-refinement" class="margin-toggle" /><span class="sidenote">To keep things simple, we won't support nested refinement patterns here. It's doable, and may be enjoyable to do so!</span>.
+This is of course the key of our
+discussion today, and we'll talk about it more in the next section.</p>
+<p>The grammar for $\tt p$ is defined by</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\renewcommand{\sfdefault}{lmtt}
+\begin{align*}
+\tt p ::&=                                &&\textbf{pattern}\\
+  &|~\tt \_                               &&\textit{any-discard-pattern}\\
+  &|~\tt x                                &&\textit{any-bind-pattern}\\
+  &|~\tt{V}\ \tt{p_1}\ \dots\ \tt{p_n}    &&\textit{variant-pattern}\\
+  &|~\texttt{p_1} \msf{~|~} \texttt{p_2}                &&\textit{or-pattern}\\
+  &|~\msf{(}\texttt{p}\msf{)}                          &&\textit{paren-pattern}
+\end{align*}
+</script></div>
+<p>Here are some examples:</p>
+<ul>
+<li><code>x</code> - matches any pattern and binds it to the variable x</li>
+<li><code>_</code> - matches any pattern without binding to a variable</li>
+<li><code>A</code> - matches a zero-argument variant <code>A</code></li>
+<li><code>A (B C) (D E)</code> - matches a two-argument variant <code>A</code> with the arguments
+matching <code>B C</code> and <code>D E</code>, respectively</li>
+<li><code>A B | B C</code> - an or-pattern that matches either <code>A B</code> or <code>B C</code></li>
+<li><code>A B | B C as x</code> - matches either <code>A B</code> or <code>B C</code>, and binds the refined type
+constituted in part by <code>[A [B], B [C]]</code> to <code>x</code>.</li>
+</ul>
+<h3 id="stuff-left-out" tabindex="-1"><a class="header-anchor" href="#stuff-left-out" aria-hidden="true"></a>Stuff left out</h3>
+<p>Function abstractions, type polymorphism, recursive types, and many other
+common language features have been left out, because they're not key to the
+idea of refinement discussed here.</p>
+<p>Since our refinement is very localized
+to pattern matching, it is possible to both extend existing languages containing
+those features with the refinement described here, and extend our working language with those other features.</p>
+<h2 id="inference-rules-for-patterns-and-match-expressions" tabindex="-1"><a class="header-anchor" href="#inference-rules-for-patterns-and-match-expressions" aria-hidden="true"></a>Inference rules for patterns and match expressions</h2>
+<p>The most interesting parts of match expressions are the inference rules for both
+branch patterns and the resulting value type of the branches, since this is
+the only place the &quot;sum&quot; aspect of our sum types play a role.</p>
+<p>Type inference for both is standard - to get the resulting type of a match
+expression, we take the union of the sum types each branch returns. In
+short, if
+branches $\tt{b_1},\ \dots,\ \tt{b_n}$ yield values of type $\tt{t_1},\ \dots,<br>
+\tt{t_n}$, then the resulting type of the match expression is the unification
+$\tt{t_1} ~\sim~ \dots ~\sim~ \tt{t_n}$, and moreover the type of each branch is
+determined to be this unification, rather than each component type $\tt{t_i}$.</p>
+<p>For example,</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x : [A, B] = A </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #795E26">match x </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">  | A -&gt; C  </span><span style="color: #008000"># C is typed as [C, D]</span></div><div class='line'><span style="color: #000000">  | B -&gt; D  </span><span style="color: #008000"># D is typed as [C, D]</span></div><div class='line'><span style="color: #008000"># =&gt; the result of this expression has type [C, D]</span></div></code></div></pre>
+<p>Don't worry, I would never leave you without the definition for unification:</p>
+<div class="mathblock"><script type="math/tex; mode=display">
+\begin{align*}
+&\left[\tt{V_1} \tt{t_{11}}\ \dots\ \tt{t_{1{l_1}}},\ \dots,\ \tt{V_n} \tt{t_{n1}}\ \dots\ \tt{t_{n{l_n}}}\right] \sim
+\left[\tt{Q_1} \tt{u_{11}}\ \dots\ \tt{u_{1{k_1}}},\ \dots,\ \tt{Q_m} \tt{u_{m1}}\ \dots\ \tt{u_{m{k_m}}}\right]\\
+\Rightarrow&\\
+&\left[ \tt{V_i} (\tt{t_{i1}} \sim \tt{u_{j1}})\ \dots\ (\tt{t_{i{l_i}}} \sim \tt{u_{j{l_j}}}) ~|~ \tt{V_i} = \tt{Q_j} \land \msf{assert(}\tt{l}_i \msf{=} \tt{k}_j\msf{)} ~|~ (i,j) \in (1\dots n, 1\dots m)\right]\\
+++&\left[ \tt{V_i} \tt{t_{i1}}\ \dots\ \tt{t_{i{l_i}}} ~|~ \forall j \in 1\dots m. V_i \neq Q_j  ~|~ i \in 1\dots n\right]\\
+++&\left[ \tt{Q_j} \tt{t_{j1}}\ \dots\ \tt{t_{j{k_j}}} ~|~ \forall j \in 1\dots n. Q_j \neq V_i  ~|~ j \in 1\dots m\right]\\
+\end{align*}
+</script></div>
+<p>Alright, that's a monster, I know. Something something a thousand words right?
+Anyway, the idea is that when we unify two types, we recursively unify the
+arguments of shared variants, where a variant is shared if it has the same name.
+For variants that differ in name between the two types, simply add them to the
+resulting unified type without modification.</p>
+<p>At this point you might either totally get this or totally be sick of the notation, so
+let me show you a few examples.</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">[A] ~ [A]                       =&gt; [A]
+[A, B] ~ [A, C]                 =&gt; [A, B, C]
+[A [B]] ~ [A [C]]               =&gt; [A [B, C]]
+[A [B], D [E]] ~ [A [C], G [H]] =&gt; [A [B, C], D [E], G [H]]</span></div></code></div></pre>
+<p>Our unification is not total - for example, we cannot unify
+<code>[A [B]]</code> with <code>[A [B] [C]]</code>, since the number of arguments to <code>A</code> differ. For
+simplicity's sake we'll ignore this case in the rest of our discussion, and the
+$\msf{assert}$ clause in the definition above pretends that type errors
+cannot happen.</p>
+<p>This unification is also what we'll use in $\textit{or-patterns}$ to determine
+the type of a variable bound in $\textit{refinement-pattern}$, and can be used
+to determine the type matched by all the branches in a match
+expression<span class="note"><label for="bidirectional-exhaustiveness-checking" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="bidirectional-exhaustiveness-checking" class="margin-toggle" /><span class="sidenote">As an aside, this
+brings up an interesting idea of &quot;bidirectional exhaustiveness checking&quot;.
+Typically, exhaustiveness checking makes sure that there enough branches to
+cover all the possible constructors of the value being <code>match</code>ed on. This is
+good enough when the constructors belong to a nominal type, but in the presence
+of anonymous sum types, we might also want to make sure not to match too
+much - this is a <a href="https://v2.ocaml.org/manual/polyvariant.html#s:polyvariant-weaknesses">common pitfall</a> with such sum types. To this end, we can infer
+the type that the branches in a <code>match</code> expression expect, and then check whether the
+value being matched on is exhaustive relative to the branch types!</span>.</p>
+<h2 id="compilation-model" tabindex="-1"><a class="header-anchor" href="#compilation-model" aria-hidden="true"></a>Compilation model</h2>
+<p>Feel free to choose your own adventure for compiling match expressions. I'm
+a fan of flowcharts so I always turn to compiling <code>match</code> expressions via switch-based
+<a href="http://moscova.inria.fr/~maranget/papers/ml05e-maranget.pdf">decision trees a-la Maranget</a>. There
+are many good resources for compiling pattern matches to decision trees,
+foremost Maranget's resources, so I'll just talk about the compilation model
+for sum-typed values.</p>
+<p>As promised, we'll compile our anonymous sum types to compact, non-uniform, unboxed
+memory layouts on a per-type basis. A sum type can be represented as a
+struct consisting of</p>
+<ul>
+<li>a minimally-sized integer to distinguish its variants</li>
+<li>a C-style union of structs representing each variant's arguments' memory
+layouts</li>
+</ul>
+<p>For a sum type with multiple variants, each of which has at least one argument,
+this scheme minimizes the required runtime representation. As some examples,</p>
+<ul>
+<li><code>[A, B]</code> can be compiled to a one-bit representation. One bit is used to
+distinguish the variants, and the variants' arguments are zero-sized.</li>
+<li><code>[A, B, C, D]</code> can be compiled to a two-bit representation. Two bits are used
+to distinguish the variants, and the variants' arguments are zero-sized.</li>
+<li><code>[A [B, C] [B, C], D [E, F, G, H] [I, J]]</code> can be compiled to a four-bit representation, of
+the shape<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class='code-container'><code><div class='line'><span style="color: undefined">{ tag_id: 1 bit,
+  argument_union:
+    union { { 1 bit, 1 bit },
+            { 2 bit, 1 bit } }
+}</span></div></code></div></pre>
+where
+the <code>argument_union</code> consists of the compiled representations of <code>[B, C] [B, C]</code>
+and <code>[E, F, G, H] [I, J]</code>, respectively.
+So, one bit is used to distinguish the variants, and the largest component
+of the union is three bits.</li>
+</ul>
+<p>Of course, in practice, you'd likely want to compile all of these things sized
+as at least one byte, but the general idea still holds and scales for values
+that aren't as small-sized as the variants in this language.</p>
+<p>There are many further optimizations you could imagine here! For example, one is
+that the singleton sum type <code>[A]</code> need not any material memory representation at
+runtime, and can be compiled to a zero-sized struct. There are others; feel free
+to come up with some!<span class="note"><label for="memory-optimizations" class="margin-toggle">⊕</label></span><input type="checkbox" id="memory-optimizations" class="margin-toggle" /><span class="marginnote">If you are interested
+in this, check out <a href="https://frehberg.com/2022/01/rust-memory-layout-optimization/">Rust's</a> and <a href="https://github.com/roc-lang/roc/blob/e8d8ce3b08b1676b65af5d54f61269ab581f14a4/crates/compiler/mono/src/layout.rs#L679-L721">Roc's</a> optimizations for sum types.</span></p>
+<h2 id="adding-support-for-type-refinement" tabindex="-1"><a class="header-anchor" href="#adding-support-for-type-refinement" aria-hidden="true"></a>Adding support for type refinement</h2>
+<p>To add support for type refinement, we need to do two things:</p>
+<ol>
+<li>Add type inference rules to determine what type a refined variable should
+take on</li>
+<li>When compiling to non-uniform memory representations, the compiler needs to
+generate code to transform the value being matched on into the refined value,
+since they may have different memory layouts.
+<ul>
+<li>If we're compiling to a uniform memory representation, this step
+isn't necessary, and we just need to emit code to bind the refined
+variable to the matched value. But that's not interesting so we'll talk
+about the non-uniform case.</li>
+</ul>
+</li>
+</ol>
+<h3 id="inference-rules" tabindex="-1"><a class="header-anchor" href="#inference-rules" aria-hidden="true"></a>Inference rules</h3>
+<p>When we see a $\textit{refinement-pattern}$ $|~\tt p \msf{\ as\ }\tt x$, we
+introduce the type binding $\tt{x} \colon \msf{typeof}\left( \tt p \right)$ to our type
+environment, where $\msf{typeof}$ infers the type of the (possibly-or-patterned)
+pattern $\tt p$ following the type inference rules we <a href="#inference-rules-for-patterns-and-match-expressions">described previously</a>.</p>
+<p>Usages of $\tt x$ in the branch body add additional unification constraints as
+standard, which means that the refined type may end up larger than $\msf{typeof}\left(\tt p\right)$.
+This means that we can perform &quot;type expansion&quot;, not only type refinement - more
+on that below.</p>
+<p>That's it for typing. I know, maybe not so interesting right? But it composes with other language features
+quite nicely, allowing you to refine types without needing control-flow-based markers or variables
+like flow-typing schemes use. As mentioned in the beginning, Ocaml supports this
+feature to <a href="https://v2.ocaml.org/manual/patterns.html#sss:pat-polyvar">refine polymorphic variants</a>, and the standard
+compiler <a href="https://github.com/ocaml/ocaml/blob/410a7a25a7bc3dbfd58e19f64daf5782b3c250ca/typing/typecore.ml#L535-L614">uses the same inference scheme</a>.</p>
+<h4 id="type-expansion" tabindex="-1"><a class="header-anchor" href="#type-expansion" aria-hidden="true"></a>Type expansion</h4>
+<p>Type expansion means we can write a program</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x : [A, B, C] = A </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #795E26">match x </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">| A | </span><span style="color: #795E26">B </span><span style="color: #0000FF">as</span><span style="color: #000000"> y -&gt;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #0000FF">let</span><span style="color: #000000"> z : [D, E] = D </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #795E26">match z </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">  | D -&gt; y</span></div><div class='line'><span style="color: #000000">  | E -&gt; F</span></div><div class='line'><span style="color: #000000">| C -&gt; C</span></div></code></div></pre>
+<p>where the inferred type of <code>y</code> (and then <code>z</code>) will be resolved to <code>[A, B, C, F]</code>.
+When is this useful? Well, here's a real example I've encountered in Roc.
+Suppose I have the following program, in some fictional language that hopefully
+resembles one you're familiar with:</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #000000">parseJsonItem : </span><span style="color: #267F99">String</span><span style="color: #000000"> -&gt; { result: [</span><span style="color: #267F99">Ok</span><span style="color: #000000"> </span><span style="color: #267F99">Json</span><span style="color: #000000">, </span><span style="color: #267F99">Error</span><span style="color: #000000"> [</span><span style="color: #267F99">TooShort</span><span style="color: #000000">]], rest: </span><span style="color: #267F99">String</span><span style="color: #000000"> }</span></div><div class='line'></div><div class='line'><span style="color: #000000">parseStringToJsonCompletely : </span><span style="color: #267F99">String</span><span style="color: #000000"> -&gt; [</span><span style="color: #267F99">Ok</span><span style="color: #000000"> </span><span style="color: #267F99">Json</span><span style="color: #000000">, </span><span style="color: #267F99">Error</span><span style="color: #000000"> [</span><span style="color: #267F99">TooShort</span><span style="color: #000000">, </span><span style="color: #267F99">Leftover</span><span style="color: #000000"> </span><span style="color: #267F99">String</span><span style="color: #000000">]]</span></div><div class='line'><span style="color: #795E26">parseStringToJsonCompletely</span><span style="color: #000000">(bytes, parser) =</span></div><div class='line'><span style="color: #000000">  {result, rest} = </span><span style="color: #795E26">parseJsonItem bytes </span><span style="color: #000000">parser</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> rest.</span><span style="color: #795E26">isEmpty </span><span style="color: #000000">then</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #795E26">match result </span><span style="color: #000000">with                  </span><span style="color: #008000"># &lt;&lt;</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #267F99">Ok</span><span style="color: #000000"> json -&gt; </span><span style="color: #267F99">Ok</span><span style="color: #000000"> json               </span><span style="color: #008000"># &lt;&lt;</span></div><div class='line'><span style="color: #000000">      </span><span style="color: #267F99">Error</span><span style="color: #000000"> </span><span style="color: #267F99">TooShort</span><span style="color: #000000"> -&gt; </span><span style="color: #267F99">Error</span><span style="color: #000000"> </span><span style="color: #267F99">TooShort</span><span style="color: #000000"> </span><span style="color: #008000"># &lt;&lt;</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #AF00DB">else</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #267F99">Error</span><span style="color: #000000"> (</span><span style="color: #267F99">Leftover</span><span style="color: #000000"> rest)</span></div></code></div></pre>
+<p>The lines annotated with <code># &lt;&lt;</code> might feel a bit redundant, right? In a language
+with no subtyping semantics, implicit row polymorphism, or non-uniform memory
+layout coercions, we'd need to do this unwrapping and re-wrapping because the sum type of
+<code>Error</code>'s argument returned by <code>parseJsonItem</code>, <code>[TooShort]</code>, is not the same as
+the sum type expected to be returned by as <code>Error</code>'s argument from
+<code>parseStringToJsonCompletely</code>.</p>
+<p>Wouldn't it be nice if we could emulate subtyping-like semantics here, and have
+the compiler do the mechanical transformation instead? Type expansion provides
+one solution, allowing us to write instead</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">diff</div><div class='code-container'><code><div class='line'><span style="color: #000000">  parseStringToJsonCompletely : String -&gt; [Ok Json, Error [TooShort, Leftover String]]</span></div><div class='line'><span style="color: #000000">  parseStringToJsonCompletely(bytes, parser) =</span></div><div class='line'><span style="color: #000000">    {result, rest} = parseJsonItem bytes parser</span></div><div class='line'><span style="color: #000000">    if rest.isEmpty then</span></div><div class='line'><span style="color: #000000">      match result with</span></div><div class='line'><span style="color: #A31515">-      Ok json -&gt; Ok json</span></div><div class='line'><span style="color: #A31515">-      Error TooShort -&gt; Error TooShort</span></div><div class='line'><span style="color: #098658">+      _ as expandedResult -&gt; expandedResult</span></div><div class='line'><span style="color: #000000">    else</span></div><div class='line'><span style="color: #000000">      Error (Leftover rest)</span></div></code></div></pre>
+<p>Of course, this has its own set of tradeoffs - for one, it might not be
+immediately obvious exactly what this does. There are many other solutions,
+including implicit conversions or using a subtyping semantics instead. Nevertheless, I
+think this idea of type expansion is a useful tool to consider for languages
+that have anonymous sum types and whose values are frequently translated into
+superset sums.</p>
+<h3 id="generating-transformations" tabindex="-1"><a class="header-anchor" href="#generating-transformations" aria-hidden="true"></a>Generating transformations</h3>
+<p>As a running example, we'll consider the program</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x : [A1 [B, C], A2 [B], A3 [B, C, D]] = A1 B </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> z = </span><span style="color: #795E26">match x </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #008000"># Keep only the values that have `B` as the argument</span></div><div class='line'><span style="color: #000000">  | A1 B | A2 B | A3 </span><span style="color: #795E26">B </span><span style="color: #0000FF">as</span><span style="color: #000000"> y -&gt; y</span></div><div class='line'><span style="color: #000000">  | A1 C | A3 C | A3 D -&gt; </span><span style="color: #267F99">NoB</span></div><div class='line'><span style="color: #0000FF">in</span><span style="color: #000000"> z</span></div></code></div></pre>
+<p>where <code>y</code> is transformed to the partially-refined <code>[A1 [B], A2 [B], A3 [B], NoB]</code>.</p>
+<p>Let's say we refine or expand a matched value of type $\msf{T}$ to
+a variable of type $\msf{R}$.
+Assuming that the program has no type errors, I claim that the set of the values
+of type $\msf{T}$ that we need to transform into values of type $\msf{R}$ is
+determined entirely by the set of values that inhabit the type $\msf{T} \cap
+\msf{R}$, where the intersection of the two types forms a sum type recursively
+keeping only shared variants.</p>
+<p>I hope that you can see, perhaps through considering the example above or
+drawing some others, that this holds for both the case of refinement and expansion.
+If you are interested in doing so, this would be a good point to formalize and
+prove this property.</p>
+<p>Looking at the running example, there are a few ways one could perform the
+target transformation in the source language directly. I'll show one very
+explicit one that performs the transformation under the matched branch.</p>
+<pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">nim</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> x : [A1 [B, C], A2 [B], A3 [B, C, D]] = A1 B </span><span style="color: #0000FF">in</span></div><div class='line'><span style="color: #0000FF">let</span><span style="color: #000000"> z = </span><span style="color: #795E26">match x </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">  | A1 B | A2 B | A3 B -&gt;</span></div><div class='line'><span style="color: #000000">    </span><span style="color: #0000FF">let</span><span style="color: #000000"> y : [A1 [B], A2 [B], A3 [B], </span><span style="color: #267F99">NoB</span><span style="color: #000000">] = </span><span style="color: #795E26">match x </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">      | A1 arg -&gt; </span><span style="color: #795E26">match arg </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">        | B -&gt; A1 B</span></div><div class='line'><span style="color: #000000">        | C -&gt; @unreachable</span></div><div class='line'></div><div class='line'><span style="color: #000000">      | A2 arg -&gt; A2 arg</span></div><div class='line'><span style="color: #000000">      </span></div><div class='line'><span style="color: #000000">      | A3 arg -&gt; </span><span style="color: #795E26">match arg </span><span style="color: #000000">with</span></div><div class='line'><span style="color: #000000">        | B -&gt; A3 B</span></div><div class='line'><span style="color: #000000">        | C -&gt; @unreachable</span></div><div class='line'><span style="color: #000000">        | D -&gt; @unreachable</span></div><div class='line'></div><div class='line'><span style="color: #000000">    y</span></div><div class='line'></div><div class='line'><span style="color: #000000">  | A1 C | A3 C | A3 D -&gt; </span><span style="color: #267F99">NoB</span></div><div class='line'><span style="color: #0000FF">in</span><span style="color: #000000"> z</span></div></code></div></pre>
+<p>The key part of the transformation is that we need to nestedly unpack and repack
+all the sum types of the matched type $\msf{T}$ that are not equal to the
+corresponding sum type in $\msf{R}$. Said another way, the only nested sums
+that we do not need to unpack and repack are those whose shape in $\msf{T} \cap
+\msf R$ is equal to the shape in both $\msf T$ and $\msf R$. That's because
+those sum types are the only ones whose values will have the same memory layouts
+in both the matched and refined value.</p>
+<p>In the example transformation above, the only value we do not need to unpack and
+repack is the <code>arg</code> matched in the innermost <code>A2</code> branch, since it has type
+<code>[B]</code> in both the source and target type.</p>
+<p>This transformation is straightforward to generate for our source language. And,
+since the transformation can be entirely compiler-directed, we do not
+need to expose a marker like <code>@unreachable</code> in the source language.</p>
+<p><a href="https://github.com/ayazhafiz/cor/blob/base/experiments/refine/as_conv.ml">Here's a sample implementation</a>
+of the transformation. Oh yeah, let me let you play with the language!</p>
+<h2 id="playgound-%26-implementation" tabindex="-1"><a class="header-anchor" href="#playgound-%26-implementation" aria-hidden="true"></a>Playgound &amp; Implementation</h2>
+<p>I've made a <a href="https://ayazhafiz.com/plts/playground/cor/refine/?input=DYUwLgBAHhBcEG0CCBGRAhANBAwgXWyQCYMCIkBmDbHbAETzwgF5y10IBLAOwChRIALxYQAtgEMwAYwAW0CAHdOYGbwgQAxBADSIEAAcIAe27AAnhBUgIAN3HAAriADOlmZIjub1gAbofEOKuVoEATgDmDqIg3GBqEAA%2BbBAcScQpieRUHEEQFgC0AHx58WloOJmUuJVUdBBFEAByRui8PBCCvFoQAHqeRt6hxoNi1mBGEM56YhZgZvogAIRAA&amp;backend=ir&amp;options=NohEFMFsEsBdQDQG9QDcCGAbAruUAuUABwCdoA7eBUAeyNmhvIGcDhizLEJN0AjUAF0AvoLFA">playground</a>
+for a concrete implementation of this language, which you can also find embedded
+below! The playground links to the source code and includes</p>
+<ul>
+<li>a type checker</li>
+<li>a compiler to the intermediate representation (which should be natural to
+translate to machine code for your favorite ISA)</li>
+<li>an evaluator of the IR emulating a heap with the compact memory representation we described above</li>
+</ul>
+<p>You can hover over types in the input buffer of the playground to see inferred
+types.</p>
+<p>I hope you have fun with it, and that this cc has been enjoyable!</p>
+<figure class="fullwidth notes-fullwidth resp-iframe-container" style="margin-top:2em;height:10vh">
+  <iframe class="resp-iframe" src="https://ayazhafiz.com/plts/playground/cor/refine/?input=DYUwLgBAHhBcEG0CCBGRAhANBAwgXWyQCYMCIkBmDbHbAETzwgF5y10IBLAOwChRIALxYQAtgEMwAYwAW0CAHdOYGbwgQAxBADSIEAAcIAe27AAnhBUgIAN3HAAriADOlmZIjub1gAbofEOKuVoEATgDmDqIg3GBqEAA%2BbBAcScQpieRUHEEQFgC0AHx58WloOJmUuJVUdBBFEAByRui8PBCCvFoQAHqeRt6hxoNi1mBGEM56YhZgZvogAIRAA&backend=ir&options=NohEFMFsEsBdQDQG9QDcCGAbAruUAuUABwCdoA7eBUAeyNmhvIGcDhizLEJN0AjUAF0AvoLFA" allowtransparency="true" frameborder="0"></iframe>
+</figure>
+<h2 id="ad%3A-are-you-interested-in-compiling-structural-subtypes%3F" tabindex="-1"><a class="header-anchor" href="#ad%3A-are-you-interested-in-compiling-structural-subtypes%3F" aria-hidden="true"></a>Ad: Are you interested in compiling structural subtypes?</h2>
+<p>If you know of ways, or are interested in, compiling languages based on
+structural subtyping to non-uniform representations,
+please <a href="mailto:ayaz.hafiz.1@gmail.com?subject=Compiling%20structural%20subtyping%20to%20non-uniform%20representations">email me</a>! This has been an ongoing project of mine
+and I hope to write about it soon, and would love to chat through with others
+interested.</p>
+<p>In particular, the idea here is to combine</p>
+<ul>
+<li>the programming flexibility of structural subtyping</li>
+<li>(non-principal, possibly incomplete) type inference,
+a-la unification or supremum-based inference (maybe even ML Sub)</li>
+<li>row polymorphism and polymorphic variants</li>
+</ul>
+<p>to design subtyping-based source languages with compilation to target languages
+that</p>
+<ul>
+<li>have non-uniform, unboxed representations</li>
+<li>does not require introducing implicit conversions at re-binding or usage sites</li>
+</ul>
+
+
+</article>
+
+<section class="footer">
+  
+  <a href="/articles/22/why-dont-more-languages-offer-flow-typing"
+    >&laquo; Why Don't More Languages Offer Flow Typing?</a
+  >
+  
+  <span
+    ><img class='emoji' alt='carrot' src='https://gitlab.com/ayazhafiz/emoji-img/raw/master/public/emoji/unicode/1f955.png' height=20 width=20></img>&emsp;
+    <span
+      >&#8203;
+      <script type="math/tex">
+        \iota\co \1\hookrightarrow\bar\2
+      </script></span
+    >
+  </span>
+  
+</section>
+
+<script src="https://utteranc.es/client.js"
+        repo="ayazhafiz/gww-utterances"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<script type="text/javascript">
+  function $(query) {
+    return document.querySelector(query);
+  }
+
+  function $$(query) {
+    return Array.from(document.querySelectorAll(query));
+  }
+
+  function isFullWidth() {
+    return $(".post").classList.contains("full");
+  }
+
+  function toggleFullWidth() {
+    const isFull = isFullWidth();
+    isFull
+      ? $(".post").classList.remove("full")
+      : $(".post").classList.add("full");
+    toggleShowHideNotes(!isFull);
+    toggleShowHideNotesSwitch(!isFull);
+    return !isFull;
+  }
+
+  function toggleShowHideNotes(isFullWidth) {
+    const notes = $$(".marginnote").concat($$(".sidenote"));
+    notes.forEach(note => {
+      isFullWidth
+        ? note.classList.add("maybe-hide")
+        : note.classList.remove("maybe-hide");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $$(".note").forEach(toggle =>
+      toggle.addEventListener("click", () => {
+        if (isFullWidth()) {
+          toggleFullWidth();
+        }
+      })
+    );
+  });
+</script>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+    <details>
+  <summary>Analytics</summary>
+  By visiting this site, you agree to its use of <a href="https://www.cloudflare.com/analytics/"
+    >Cloudflare Analytics</a
+  >. No identifiable information is transmitted to Cloudflare. See
+  <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Analytics user privacy</a>.
+</details>
+
+</details>
+
+    </div>
+  </body>
+</html>

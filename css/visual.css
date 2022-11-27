@@ -156,6 +156,10 @@ span.el { color: rgba(0, 0, 0, 0.5); }
 
 .resp-iframe-container { overflow: hidden; padding-top: 56.25%; position: relative; }
 
+.notes-fullwidth { width: 150%; }
+
+@media only screen and (max-width: 1300px) { .notes-fullwidth { width: 100% !important; } }
+
 @media only screen and (max-width: 960px) { section.self { align-items: flex-end; display: flex; flex-flow: row wrap; justify-content: space-evenly; align-items: center; width: 100%; } }
 
 section.self-links .link-container:last-of-type { margin-bottom: 0; }

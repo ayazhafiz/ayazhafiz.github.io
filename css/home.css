@@ -131,6 +131,10 @@ section.nav { margin-bottom: 2em; }
 
 .resp-iframe-container { overflow: hidden; padding-top: 56.25%; position: relative; }
 
+.notes-fullwidth { width: 150%; }
+
+@media only screen and (max-width: 1300px) { .notes-fullwidth { width: 100% !important; } }
+
 .post-options .filter-section { display: inline-block; }
 
 @media screen and (max-width: 600px) { .post-options .domains { display: inline-flex; flex-direction: column; } }

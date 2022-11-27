@@ -7,6 +7,14 @@
 		<atom:link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Simple Refinement of Anonymous Sum Types in Pattern Matches</title>
+				<description>I describe a simple, &quot;zero-cost&quot; system for adding flow-typing-like refinement of anonymous sum types to a language, with a model of compilation that supports unboxed, non-uniform representations. The system extends naturally to also support type expansion (the opposite of refinement) thanks to its reliance on unification.</description>
+				<pubDate>Sat, 26 Nov 2022 00:00:00 -0600</pubDate>
+				<link>https://ayazhafiz.com/articles/22/simple-flow-refinement-of-anonymous-sum-types</link>
+				<guid isPermaLink="true">https://ayazhafiz.com/articles/22/simple-flow-refinement-of-anonymous-sum-types</guid>
+			</item>
+		
+			<item>
 				<title>Why Don&apos;t More Languages Offer Flow Typing?</title>
 				<description>A brief survey of where flow typing does and doesn&apos;t fit, and when it may play a role in other languages.</description>
 				<pubDate>Fri, 01 Apr 2022 19:00:00 -0500</pubDate>
@@ -76,14 +84,6 @@
 				<pubDate>Sun, 27 Dec 2020 02:00:00 -0600</pubDate>
 				<link>https://ayazhafiz.com/articles/20/pattern-matching-with-a-typechecker</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/pattern-matching-with-a-typechecker</guid>
-			</item>
-		
-			<item>
-				<title>Impact vs Innovation &amp; Industry vs Academia</title>
-				<description>In popular industry, I often see discontinuities between &apos;impactful&apos; and &apos;innovative&apos; work. I describe how these discontinuities arise, and what we can do about them.</description>
-				<pubDate>Tue, 01 Dec 2020 02:00:00 -0600</pubDate>
-				<link>https://ayazhafiz.com/articles/20/impact-vs-innovation</link>
-				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/impact-vs-innovation</guid>
 			</item>
 		
 	</channel>
