@@ -7,6 +7,14 @@
 		<atom:link href="https://ayazhafiz.com/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>A Lambda Calculus With Coroutines and Heapless, Directly-Called Closures</title>
+				<description>co_lc is a lambda calculus extended with stackful coroutines. An efficient implementation for the compilation and virtual machine execution of co_lc is presented. The implementation supports tail-call optimization and eliminates all indirect calls by defunctionalizing closures.</description>
+				<pubDate>Sat, 18 Feb 2023 00:00:00 -0600</pubDate>
+				<link>https://ayazhafiz.com/articles/23/a-lambda-calculus-with-coroutines-and-heapless-closures</link>
+				<guid isPermaLink="true">https://ayazhafiz.com/articles/23/a-lambda-calculus-with-coroutines-and-heapless-closures</guid>
+			</item>
+		
+			<item>
 				<title>Simple Refinement of Anonymous Sum Types in Pattern Matches</title>
 				<description>I describe a simple, &quot;zero-cost&quot; system for adding flow-typing-like refinement of anonymous sum types to a language, with a model of compilation that supports unboxed, non-uniform representations. The system extends naturally to also support type expansion (the opposite of refinement) thanks to its reliance on unification.</description>
 				<pubDate>Sat, 26 Nov 2022 00:00:00 -0600</pubDate>
@@ -76,14 +84,6 @@
 				<pubDate>Thu, 07 Jan 2021 02:00:00 -0600</pubDate>
 				<link>https://ayazhafiz.com/articles/21/hot-code-reloading</link>
 				<guid isPermaLink="true">https://ayazhafiz.com/articles/21/hot-code-reloading</guid>
-			</item>
-		
-			<item>
-				<title>Pattern Matching With a Typechecker</title>
-				<description>Solving problems without leaving the TypeScript type system.</description>
-				<pubDate>Sun, 27 Dec 2020 02:00:00 -0600</pubDate>
-				<link>https://ayazhafiz.com/articles/20/pattern-matching-with-a-typechecker</link>
-				<guid isPermaLink="true">https://ayazhafiz.com/articles/20/pattern-matching-with-a-typechecker</guid>
 			</item>
 		
 	</channel>
