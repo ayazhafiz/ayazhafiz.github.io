@@ -63,7 +63,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1676942111815487774"
+  href="/css/shiki.css?1676942273668462732"
 />
 
 
@@ -72,7 +72,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1676942111815487774"
+      href="/css/post.css?1676942273668462732"
     />
   </head>
 
@@ -545,9 +545,9 @@ tuples. The question has to do with an expression like</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">ocaml</div><div class='code-container'><code><div class='line'><span style="color: #AF00DB">let</span><span style="color: #000000"> </span><span style="color: #795E26">f</span><span style="color: #000000"> </span><span style="color: #267F99">=</span><span style="color: #000000"> \t </span><span style="color: #811F3F">-&gt;</span></div><div class='line'><span style="color: #000000">  t</span><span style="color: #0000FF">.</span><span style="color: #000000">1 == 10</span></div></code></div></pre>
 <p>Clearly, <code>t</code> is a tuple with an arity of at least two, where the second element
 is an int. But the precise arity of the tuple, and its other elements' types,
-cannot be well-known at this point.</p>
+cannot be known at this point.</p>
 <p>One solution is to have both dense representations of tuple types (for when
-a tuple literal is seen), and a sparse representation for cases like the both.
+a tuple literal is seen), and a sparse representation for cases like the above.
 That is, our type definition might look like</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">ocaml</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #795E26">ty</span><span style="color: #000000"> </span><span style="color: #267F99">=</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #811F3F">..</span><span style="color: #811F3F">.</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #267F99">|</span><span style="color: #000000"> </span><span style="color: #800000">TupleDense</span><span style="color: #000000"> </span><span style="color: #800000">of</span><span style="color: #000000"> ty </span><span style="color: #795E26">list</span><span style="color: #000000">  </span><span style="color: #811F3F">(*</span><span style="color: #811F3F"> list of element types </span><span style="color: #811F3F">*)</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #267F99">|</span><span style="color: #000000"> </span><span style="color: #800000">TupleSparse</span><span style="color: #000000"> </span><span style="color: #800000">of</span><span style="color: #000000"> </span><span style="color: #800000">(</span><span style="color: #000000">int </span><span style="color: #811F3F">*</span><span style="color: #000000"> ty</span><span style="color: #800000">)</span><span style="color: #000000"> </span><span style="color: #795E26">list</span><span style="color: #000000">  </span><span style="color: #811F3F">(*</span><span style="color: #811F3F"> list of known indices' types </span><span style="color: #811F3F">*)</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #811F3F">...</span></div></code></div></pre>
 <p>When a <code>TupleSparse</code> unifies with a <code>TupleDense</code>, its respective elements (and
