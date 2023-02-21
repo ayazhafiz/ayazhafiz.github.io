@@ -63,7 +63,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1676942555221326589"
+  href="/css/shiki.css?1676942644450136078"
 />
 
 
@@ -72,7 +72,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1676942555221326589"
+      href="/css/post.css?1676942644450136078"
     />
   </head>
 
@@ -671,9 +671,9 @@ vs their branch target predictors<span class="note"><label for="branch-predictor
 there is <a href="https://blog.cloudflare.com/branch-predictor/">this nice analysis by Cloudflare</a>.</span> -
 <a href="mailto:ayaz.hafiz.1+co_lc@gmail.com?subject=Efficacy%20of%20branch%20target%20predictors%20vs%20branch%20predictors">please let me know</a> if you know of any!</p>
 <h4 id="eliminating-heap-allocated-captures" tabindex="-1"><a class="header-anchor" href="#eliminating-heap-allocated-captures" aria-hidden="true"></a>Eliminating heap-allocated captures</h4>
-<p>We'll see that lambda sets also yield a natural way to eliminate the heap
+<p>Lambda sets also enable a natural way to eliminate heap
 allocation of closure captures. This is pretty nice, especially in functional
-languages where closures are common, and are often determined conditionally.</p>
+paradigms where closures are common.</p>
 <p>Let's consider the program</p>
 <figure class="fullwidth notes-fullwidth resp-iframe-container" style="margin-top:2em;height:10vh">
   <iframe class="resp-iframe" src="https://ayazhafiz.com/plts/playground/co_lc/?input=DYUwLgBAHhC8EFYIEsB2FSQJ5wgNhXUwgC9cB2QgKGIDNcAddAWgD4qIV71Z4BGDhDAALEOgYB3CGwhSA1NEEhgAZxCDOybnHgAmDUNHipM%2BdAgKsB5WoiTprWRfOXnJKmioBvenwi6AGgh6XX8g%2BgBmCAiAXyA&backend=ir&options=NohEFMFsEsBdQDQG9QDcCGAbAruUAuUABwCdoA7eBUAeyNmhvIGcDhizLEJN0AjUAF0AvoMEIwUOIhQYceQqQpVa9RizYdl3cLwEixgoA" allowtransparency="true" frameborder="0"></iframe>
