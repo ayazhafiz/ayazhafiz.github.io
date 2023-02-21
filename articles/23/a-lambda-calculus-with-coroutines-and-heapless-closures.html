@@ -63,7 +63,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1676942257776948804"
+  href="/css/shiki.css?1676942555221326589"
 />
 
 
@@ -72,7 +72,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1676942257776948804"
+      href="/css/post.css?1676942555221326589"
     />
   </head>
 
@@ -547,7 +547,7 @@ tuples. The question has to do with an expression like</p>
 is an int. But the precise arity of the tuple, and its other elements' types,
 cannot be known at this point.</p>
 <p>One solution is to have both dense representations of tuple types (for when
-a tuple literal is seen), and a sparse representation for cases like the both.
+a tuple literal is seen), and a sparse representation for cases like the above.
 That is, our type definition might look like</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">ocaml</div><div class='code-container'><code><div class='line'><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #795E26">ty</span><span style="color: #000000"> </span><span style="color: #267F99">=</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #811F3F">..</span><span style="color: #811F3F">.</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #267F99">|</span><span style="color: #000000"> </span><span style="color: #800000">TupleDense</span><span style="color: #000000"> </span><span style="color: #800000">of</span><span style="color: #000000"> ty </span><span style="color: #795E26">list</span><span style="color: #000000">  </span><span style="color: #811F3F">(*</span><span style="color: #811F3F"> list of element types </span><span style="color: #811F3F">*)</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #267F99">|</span><span style="color: #000000"> </span><span style="color: #800000">TupleSparse</span><span style="color: #000000"> </span><span style="color: #800000">of</span><span style="color: #000000"> </span><span style="color: #800000">(</span><span style="color: #000000">int </span><span style="color: #811F3F">*</span><span style="color: #000000"> ty</span><span style="color: #800000">)</span><span style="color: #000000"> </span><span style="color: #795E26">list</span><span style="color: #000000">  </span><span style="color: #811F3F">(*</span><span style="color: #811F3F"> list of known indices' types </span><span style="color: #811F3F">*)</span></div><div class='line'><span style="color: #000000">  </span><span style="color: #811F3F">...</span></div></code></div></pre>
 <p>When a <code>TupleSparse</code> unifies with a <code>TupleDense</code>, its respective elements (and
@@ -608,7 +608,7 @@ with multiple times with unique functions,</p>
 </ul>
 <p>Speaking of jump tables -</p>
 <h5 id="conditionally-determined-functions" tabindex="-1"><a class="header-anchor" href="#conditionally-determined-functions" aria-hidden="true"></a>Conditionally-determined functions</h5>
-<p>A second case has to do with the representation conditionally-determined
+<p>A second case has to do with the representation of conditionally-determined
 functions. Let's extend our previous example to</p>
 <pre class="shiki light-plus" style="background-color: #FFFFFF; color: #000000"><div class="language-id">ocaml</div><div class='code-container'><code><div class='line'><span style="color: #AF00DB">let</span><span style="color: #000000"> </span><span style="color: #795E26">caller</span><span style="color: #000000"> </span><span style="color: #267F99">=</span><span style="color: #000000"> \f </span><span style="color: #811F3F">-&gt;</span><span style="color: #000000"> f </span><span style="color: #098658">1</span><span style="color: #000000"> in</span></div><div class='line'></div><div class='line'><span style="color: #AF00DB">let</span><span style="color: #000000"> </span><span style="color: #795E26">id</span><span style="color: #000000"> </span><span style="color: #267F99">=</span><span style="color: #000000"> \x </span><span style="color: #811F3F">-&gt;</span><span style="color: #000000"> x in</span></div><div class='line'><span style="color: #AF00DB">let</span><span style="color: #000000"> </span><span style="color: #795E26">mul2</span><span style="color: #000000"> </span><span style="color: #267F99">=</span><span style="color: #000000"> \x </span><span style="color: #811F3F">-&gt;</span><span style="color: #000000"> x </span><span style="color: #811F3F">*</span><span style="color: #000000"> </span><span style="color: #098658">2</span></div><div class='line'><span style="color: #000000">caller </span><span style="color: #800000">(</span><span style="color: #AF00DB">if</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000"> </span><span style="color: #811F3F">==</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000"> </span><span style="color: #AF00DB">then</span><span style="color: #000000"> id </span><span style="color: #AF00DB">else</span><span style="color: #000000"> mul2</span><span style="color: #800000">)</span></div></code></div></pre>
 <p>Again, a direct compilation of this code might produce bytecode like</p>
@@ -654,16 +654,16 @@ main:
   call caller
   ret</span></div></code></div></pre>
 <p>The advantage here is that we've eliminated one source of indirection - we still
-need a conditional, but as before, there are no more function pointers. This
+need a conditional, but we've gotten rid of function pointers. This
 may make inline analyses more fruitful, and places less pressure on a CPU's
 branch target predictor.</p>
-<p>One thing I'm not sure about is the efficacy of the latter <code>caller</code>
-implementation relative to the former when <code>caller</code>'s argument is static. In
+<p>One thing I'm not sure about is the efficacy of the jump-table-based <code>caller</code>
+implementation relative to the function-pointer-based one, when <code>caller</code>'s argument is static. In
 that case, the main performance consideration would be</p>
 <ul>
-<li>for the former <code>caller</code>, how long a dereference takes, and how well
+<li>for the function-pointer-based <code>caller</code>, how long a dereference takes, and how well
 branch target prediction works on a CPU</li>
-<li>for the latter <code>caller</code>, how long a conditional and jump takes, and how well
+<li>for the jump-table-based <code>caller</code>, how long a conditional and jump takes, and how well
 branch prediction works on a CPU</li>
 </ul>
 <p>I am not aware of any empirical studies on the efficacy of CPU's branch predictors
