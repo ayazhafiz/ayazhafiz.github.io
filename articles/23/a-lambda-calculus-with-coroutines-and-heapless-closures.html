@@ -63,7 +63,7 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="/css/shiki.css?1676920156898144842"
+  href="/css/shiki.css?1676942111815487774"
 />
 
 
@@ -72,7 +72,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/post.css?1676920156898144842"
+      href="/css/post.css?1676942111815487774"
     />
   </head>
 
@@ -226,9 +226,9 @@ and recent projects like <a href="https://cyberscript.dev">Cyber</a> and
 I'd like to present a small model and implementation of coroutines
 against a virtual machine target, which may be a nice base for launching more
 experiments without designing a programming language intended for general use.</p>
-<p><a href="https://abhinavsarkar.net/posts/implementing-co-1/">Co</a> implements coroutines as continuations - which I actually believe
-is the most promising technique for an efficient implementation of stackful
-coroutines, but I won't expand on that here. Continuations often go hand-in-hand
+<p><a href="https://abhinavsarkar.net/posts/implementing-co-1/">Co</a> implements coroutines as continuations - which I believe
+is also the most promising technique for an efficient implementation of
+effect handlers, but I won't expand on that here. Continuations often go hand-in-hand
 with closures, which are typically heap-allocated and called
 indirectly. To show off something interesting, we'll also have our implementation
 compile closures unboxed, and eliminate all indirect calls via
